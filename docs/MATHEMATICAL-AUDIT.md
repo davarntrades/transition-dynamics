@@ -14,6 +14,11 @@
 
 ---
 
+> **v1 document, still current.** This file records the audit and literature review that produced the v2 demotions and remains the authoritative record for both. See [`../README.md`](../README.md) for the v2 index.
+
+---
+
+
 *"Repairing an equation quietly is how a field dies. Name the break. Then decide, in the open, whether to work around it."*
 
 *— Davarn Morrison, 2026*

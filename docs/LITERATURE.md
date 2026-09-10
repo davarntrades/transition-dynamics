@@ -14,6 +14,11 @@
 
 ---
 
+> **v1 document, still current.** This file records the audit and literature review that produced the v2 demotions and remains the authoritative record for both. See [`../README.md`](../README.md) for the v2 index.
+
+---
+
+
 *"A field that only reads the papers agreeing with it has not read the literature. It has read a mirror."*
 
 *— Davarn Morrison, 2026*

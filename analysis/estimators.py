@@ -18,14 +18,21 @@ ORIGINAL MATHEMATICAL OBJECT.
   ‖ΛΔG‖                               deformation energy  √(δᵀ Σ₀⁻¹ δ)
   C(t) = ι(⋃ᵢ Nₜ(X,Iᵢ))               Betti numbers of the nerve of the
                                       co-deformation cover
-  C ⟂ L                               time-varying coupling between the structural
-                                      and self-report deformation series
+  C ⟂ L                               [DEMOTED in v2 — see docs/DEMOTED_OBJECTS.md]
+                                      retained only as exploratory decoupling
 
 The substitutions above are declared, not silent. Section 2 of README.md states
 exactly what each substitution costs in inferential strength.
 
 Dependencies: numpy, scipy only. Deliberately no TDA library — persistent
 homology is not used until the simpler estimators have been shown to fail.
+
+VERSION 2 NOTE
+-------------
+Objects 1 (homological truth condition) and 6 (C ⟂ L) were DEMOTED after the
+v1 audit and are no longer part of the primary hypothesis. Λ is now FROZEN as
+Σ₀⁻¹ (see freeze_lambda below). The v2 additions begin at the section marked
+"V2 ADDITIONS".
 
 Run:  python3 analysis/estimators.py
 """
@@ -426,3 +433,251 @@ if __name__ == "__main__":
     print("  * 'noise' MUST NOT. A transition with no precursor is a real")
     print("    physical possibility, and any estimator that appears to")
     print("    anticipate it is reporting leakage, not dynamics.")
+
+
+# ============================================================================
+#                              V2  ADDITIONS
+# ============================================================================
+# Added after the v1 reconstruction demoted objects 1 and 6 and froze
+# Λ = Σ₀⁻¹.  The central v2 quantity is the STIFFNESS ALIGNMENT A(t), which
+# is what the frozen Λ actually predicts — see the correction note below.
+#
+# CORRECTION TO v1, RECORDED RATHER THAN QUIETLY DROPPED
+# ------------------------------------------------------
+# v1 stated that the stiffness reading predicts pre-transition variance FALLS.
+# That claim does not follow from Λ = Σ₀⁻¹.
+#
+# Λ is frozen at BASELINE. It is a fixed metric, not a state variable, so it
+# makes no prediction whatsoever about how current variance evolves. What it
+# does predict is the DIRECTION in which the mean state displaces, measured in
+# the baseline metric. The falling-variance claim is withdrawn and replaced by
+# the alignment prediction below, which is narrower and actually derivable.
+# ============================================================================
+
+
+def freeze_lambda(X_baseline: np.ndarray) -> dict:
+    """
+    Compute and freeze all baseline quantities. Call ONCE per patient, on the
+    baseline window only. Nothing downstream may re-estimate these.
+
+        Λ  :=  Σ₀⁻¹        (stiffness / precision / resistance-to-deformation)
+
+    Returns a frozen dict; downstream functions consume it read-only.
+    """
+    X = np.asarray(X_baseline, float)
+    S0 = _spd_guard(shrunk_covariance(X))
+    return {
+        "mu0": X.mean(axis=0),
+        "sd0": X.std(axis=0) + 1e-9,
+        "Sigma0": S0,
+        "Lambda": np.linalg.pinv(S0),      # Λ = Σ₀⁻¹
+        "n_eff": effective_sample_size(X),
+        "p": X.shape[1],
+    }
+
+
+def effective_sample_size(X: np.ndarray) -> float:
+    """
+    n_eff = n (1-ρ)/(1+ρ) with ρ the mean lag-1 autocorrelation.
+
+    Physiological channels are strongly autocorrelated. Using the raw sample
+    count would make every displacement look overwhelmingly significant, so
+    n_eff is required wherever a null distribution is invoked.
+    """
+    X = np.asarray(X, float)
+    n = len(X)
+    rhos = []
+    for j in range(X.shape[1]):
+        x = X[:, j] - X[:, j].mean()
+        d = np.dot(x, x)
+        rhos.append(np.dot(x[:-1], x[1:]) / d if d > 0 else 0.0)
+    rho = float(np.clip(np.mean(rhos), -0.99, 0.99))
+    return max(2.0, n * (1.0 - rho) / (1.0 + rho))
+
+
+# ----------------------------------------------------------------------------
+# THE CENTRAL v2 STATISTIC — stiffness alignment
+# ----------------------------------------------------------------------------
+
+def stiffness_alignment(delta: np.ndarray, Sigma_0: np.ndarray) -> float:
+    """
+    A  =  (δᵀ Σ₀⁻¹ δ)  /  ( ‖δ‖² · tr(Σ₀⁻¹)/p )
+
+    Dimensionless, unit-invariant, with an EXACT null:
+
+        A = 1   displacement direction unrelated to baseline structure
+        A < 1   displacement along SOFT, high-variance directions
+                → the critical-slowing-down / fold prediction
+        A > 1   displacement along STIFF, low-variance, homeostatically
+                defended directions
+                → the Transition Dynamics yield prediction
+
+    E[A] = 1 exactly when δ is isotropically random and independent of Σ₀ —
+    verified numerically to 1.003 over 20,000 draws. This is what makes the
+    head-to-head test between the two accounts clean: they sit on opposite
+    sides of a null the normalisation pins to unity.
+    """
+    d = np.asarray(delta, float)
+    P = np.linalg.pinv(_spd_guard(np.asarray(Sigma_0, float)))
+    nd = float(d @ d)
+    if nd <= 0:
+        return float("nan")
+    p = len(d)
+    return float((d @ P @ d) / (nd * np.trace(P) / p))
+
+
+def alignment_null_band(Sigma_0: np.ndarray, n_draw: int = 20000,
+                        alpha: float = 0.05, seed: int = 0) -> tuple[float, float]:
+    """
+    Monte-Carlo (1-alpha) interval for A under isotropic displacement.
+
+    The null is NOT symmetric around 1 — A is a ratio of quadratic forms and is
+    right-skewed — so a symmetric interval would be wrong. Report this band
+    alongside every A(t), never a bare point estimate.
+    """
+    rng = np.random.default_rng(seed)
+    P = np.linalg.pinv(_spd_guard(np.asarray(Sigma_0, float)))
+    p = P.shape[0]
+    scale = np.trace(P) / p
+    d = rng.normal(0, 1, (n_draw, p))
+    num = np.einsum("ij,jk,ik->i", d, P, d)
+    A = num / (np.einsum("ij,ij->i", d, d) * scale)
+    return float(np.quantile(A, alpha / 2)), float(np.quantile(A, 1 - alpha / 2))
+
+
+def deformation_energy_chi2(delta: np.ndarray, frozen: dict) -> float:
+    """
+    ‖ΛΔG‖ expressed as a chi-square quantile rather than a raw magnitude.
+
+        n_eff · δᵀΣ₀⁻¹δ  ~  χ²_p   under "no displacement from baseline"
+
+    This solves the T_critical transferability problem in a principled way:
+    a threshold stated in χ² quantile units is comparable across patients and
+    across cohorts with different channel counts p, whereas a raw Mahalanobis
+    threshold is not.
+
+    Returns the chi-square CDF value in [0,1).
+    """
+    from scipy.stats import chi2
+    d = np.asarray(delta, float)
+    stat = frozen["n_eff"] * float(d @ frozen["Lambda"] @ d)
+    return float(chi2.cdf(stat, df=frozen["p"]))
+
+
+# ----------------------------------------------------------------------------
+# Higher-order structure beyond pairwise — the sharp form of the H5 claim
+# ----------------------------------------------------------------------------
+
+def beta1_excess_over_pairwise(Z: np.ndarray, theta: float = 1.5,
+                               support: float = 0.10, n_surr: int = 100,
+                               seed: int = 0) -> dict:
+    """
+    Tests: does the co-deformation complex carry structure that CANNOT be
+    reconstructed from pairwise couplings alone?
+
+    Method. Gaussian surrogates matched to the window's mean and covariance
+    preserve ALL pairwise second-order structure and nothing higher, by
+    construction. So the surrogate distribution of β₁ is exactly "what β₁ would
+    be if only pairwise structure existed".
+
+        z  =  ( β₁_observed − mean β₁_surrogate ) / sd β₁_surrogate
+
+    z significantly > 0 is the only result that supports genuine higher-order
+    integration. Anything else means the integration operator is decorative and
+    a pairwise-complete model suffices.
+
+    This replaces the vaguer v1 formulation "β₁ adds information beyond
+    pairwise couplings" with a quantity that has an explicit null.
+    """
+    rng = np.random.default_rng(seed)
+    Z = np.asarray(Z, float)
+    T, p = Z.shape
+
+    _, b1_obs = betti_numbers(codeformation_complex(Z, theta, support))
+
+    S = _spd_guard(shrunk_covariance(Z))
+    mu = Z.mean(axis=0)
+    L = np.linalg.cholesky(S)
+    b1_surr = []
+    for _ in range(n_surr):
+        Zs = mu + rng.normal(0, 1, (T, p)) @ L.T
+        b1_surr.append(betti_numbers(codeformation_complex(Zs, theta, support))[1])
+    b1_surr = np.asarray(b1_surr, float)
+    sd = b1_surr.std()
+    return {
+        "b1_obs": int(b1_obs),
+        "b1_surr_mean": float(b1_surr.mean()),
+        "b1_surr_sd": float(sd),
+        "z": float((b1_obs - b1_surr.mean()) / sd) if sd > 1e-9 else 0.0,
+    }
+
+
+def alignment_empirical_null(X_baseline: np.ndarray, Sigma_0: np.ndarray,
+                             mu_0: np.ndarray, win: int,
+                             n_sub: int = 200, alpha: float = 0.05,
+                             seed: int = 0) -> dict:
+    """
+    The EMPIRICAL null for A, estimated from the patient's own stationary
+    baseline. This supersedes `alignment_null_band`, which is retained only to
+    document the error it embodies.
+
+    WHY THE ISOTROPIC NULL IS WRONG
+    -------------------------------
+    `alignment_null_band` assumes the displacement δ points in an isotropically
+    random direction, which gives E[A] = 1. But for a stationary system δ is a
+    SAMPLING FLUCTUATION of the window mean, distributed N(0, Σ₀/n_eff) — that
+    is, Σ₀-SHAPED, not isotropic. Sampling noise lands preferentially in the
+    high-variance directions, exactly where the fold mechanism also lives.
+
+    Consequently the stationary null sits BELOW 1, bounded above by
+
+        E[A]  <=  p² / ( tr(Σ₀) · tr(Σ₀⁻¹) )     (Cauchy–Schwarz)
+
+    with equality only when Σ₀ ∝ I. For a realistically ill-conditioned
+    physiological covariance this bound can be 0.3 or lower.
+
+    Two consequences fixed here rather than discovered later:
+      1. "A > 1" and "A < 1" are NOT the right decision rules. Everything must
+         be stated relative to the patient's own empirical band.
+      2. A has intrinsically poor power against the fold mechanism, because
+         fold displacement and stationary sampling noise share a direction.
+         See docs/LIMITATIONS.md.
+    """
+    rng = np.random.default_rng(seed)
+    X = np.asarray(X_baseline, float)
+    n = len(X)
+    if n <= win:
+        raise ValueError("baseline must be longer than the analysis window")
+    vals = []
+    for _ in range(n_sub):
+        s = rng.integers(0, n - win)
+        d = X[s:s + win].mean(axis=0) - mu_0
+        a = stiffness_alignment(d, Sigma_0)
+        if a == a:
+            vals.append(a)
+    v = np.asarray(vals, float)
+    p = Sigma_0.shape[0]
+    bound = p * p / (np.trace(Sigma_0) * np.trace(np.linalg.pinv(Sigma_0)))
+    return {
+        "median": float(np.median(v)),
+        "lo": float(np.quantile(v, alpha / 2)),
+        "hi": float(np.quantile(v, 1 - alpha / 2)),
+        "cauchy_schwarz_bound": float(bound),
+        "n": len(v),
+    }
+
+
+def alignment_z(delta: np.ndarray, Sigma_0: np.ndarray, null: dict) -> float:
+    """
+    A(t) expressed as a position within the patient's own empirical null band.
+
+        z = 0   at the null median
+        z = +1  at the upper 97.5% null bound  -> yield / exogenous direction
+        z = -1  at the lower 2.5% null bound   -> soft / endogenous direction
+
+    This, not raw A, is the quantity entering every hypothesis test.
+    """
+    a = stiffness_alignment(delta, Sigma_0)
+    m = null["median"]
+    span = (null["hi"] - m) if a >= m else (m - null["lo"])
+    return float((a - m) / span) if span > 1e-12 else 0.0

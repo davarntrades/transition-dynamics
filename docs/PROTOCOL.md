@@ -15,6 +15,22 @@
 
 ---
 
+> ## ⚠ SUPERSEDED — v1 ARCHIVE
+>
+> This document is the **version 1** record. It is preserved because the
+> reasoning it contains produced the v2 demotions and corrections, and that
+> reasoning must remain inspectable.
+>
+> **Superseded by:** docs/DATASET_REQUIREMENTS.md, docs/COMPETING_MODELS.md and docs/PREREGISTRATION.md
+>
+> Claims in this file that v2 withdrew — notably the prediction that
+> pre-transition variance falls, and the framing of Transition Dynamics as a
+> competitor to critical slowing down — are recorded as withdrawn in
+> `docs/LIMITATIONS.md`. **Do not cite this file for current claims.**
+
+---
+
+
 *"Choose the endpoint before you choose the estimator. Otherwise the estimator will choose the endpoint for you."*
 
 *— Davarn Morrison, 2026*

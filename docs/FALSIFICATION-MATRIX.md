@@ -14,6 +14,22 @@
 
 ---
 
+> ## ⚠ SUPERSEDED — v1 ARCHIVE
+>
+> This document is the **version 1** record. It is preserved because the
+> reasoning it contains produced the v2 demotions and corrections, and that
+> reasoning must remain inspectable.
+>
+> **Superseded by:** docs/FALSIFICATION_CRITERIA.md
+>
+> Claims in this file that v2 withdrew — notably the prediction that
+> pre-transition variance falls, and the framing of Transition Dynamics as a
+> competitor to critical slowing down — are recorded as withdrawn in
+> `docs/LIMITATIONS.md`. **Do not cite this file for current claims.**
+
+---
+
+
 *"Write the kill condition before the data arrives. Afterwards, every threshold is a negotiation with your own hope."*
 
 *— Davarn Morrison, 2026*

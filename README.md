@@ -2,13 +2,14 @@
 
 # TRANSITION DYNAMICS
 
-**A Preregistered Falsification Framework**
+**A Preregistered Falsification Framework · Version 2**
 
 ![Field](https://img.shields.io/badge/Field-Transition_Dynamics-1f2937?style=flat-square)
-![Object](https://img.shields.io/badge/Object-Structural_Deformation-4c1d95?style=flat-square)
-![Contrast](https://img.shields.io/badge/Contrast-Critical_Slowing_Down-b91c1c?style=flat-square)
-![Method](https://img.shields.io/badge/Method-Preregistered_Falsification-047857?style=flat-square)
-![Verdict](https://img.shields.io/badge/Provisional_Verdict-B-ca8a04?style=flat-square)
+![Lambda](https://img.shields.io/badge/Λ-FROZEN_=_Σ₀⁻¹-047857?style=flat-square)
+![Claim](https://img.shields.io/badge/Claim-Mechanism_Identification-4c1d95?style=flat-square)
+![Demoted](https://img.shields.io/badge/Demoted-Objects_1_&_6-b91c1c?style=flat-square)
+![Level](https://img.shields.io/badge/Claim_Level-0-ca8a04?style=flat-square)
+![Grade](https://img.shields.io/badge/Grade-B-ca8a04?style=flat-square)
 ![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 ![Rights](https://img.shields.io/badge/©-Davarn_Morrison-555555?style=flat-square)
 
@@ -16,9 +17,185 @@
 
 ---
 
-*"A framework that cannot be killed is not a framework. It is a decoration. Pick the interpretation first. Write it down. Then let reality decide which half of you was wrong."*
+*"Find the smallest version of the claim that reality cannot currently kill. Then publish that, and nothing larger."*
 
 *— Davarn Morrison, 2026*
+
+---
+
+## Version 2 — What Changed
+
+v1 constructed the framework and audited it. v2 **revises it in response to
+what the audit and the synthetic benchmark found**. Four things changed, and
+none of them by post-hoc reinterpretation.
+
+╔══════════════════════════════════════════════════════════════════════╗
+║  1  TWO OBJECTS DEMOTED                                              ║
+║     The homological truth condition and literal C ⟂ L are removed    ║
+║     from the primary biomedical hypothesis. Preserved with their     ║
+║     reasoning; barred from supporting any biomedical claim.          ║
+║                                                                      ║
+║  2  Λ FROZEN AS Σ₀⁻¹                                                 ║
+║     The equations did not determine Λ. It is now fixed as the        ║
+║     baseline precision operator. The resilience reading becomes a    ║
+║     separate competing model, not an alternative reading.            ║
+║                                                                      ║
+║  3  THE v1 VARIANCE PREDICTION IS WITHDRAWN                          ║
+║     "Stiffness predicts falling variance" does not follow from a     ║
+║     baseline-frozen Λ. Withdrawn, not adjusted.                      ║
+║                                                                      ║
+║  4  THE CLAIM IS NARROWED TO MECHANISM IDENTIFICATION                ║
+║     Plain covariance drift already detects at AUC 1.00. Detection    ║
+║     is not the contribution and novelty is not claimed for it.       ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+---
+
+## The Surviving Claim, in Full
+
+> **Transition Dynamics is not a claim about detection performance.**
+> Covariance drift — published as Dynamical Network Biomarker theory in 2012 —
+> already detects, and detects at least as well.
+>
+> The claim is that the **direction** of constrained deformation under the
+> frozen operator Λ = Σ₀⁻¹ identifies **which mechanism** produced a
+> transition, independently of the deformation's **magnitude**. Covariance
+> drift cannot do this.
+
+Established on synthetic systems with known ground truth: at matched
+deformation magnitude, covariance drift collapses to AUC 0.56 while the
+alignment statistic holds at 1.00.
+
+```
+════════════════════════════════════════════════════════════════════
+  The framework is permitted — and required — to conclude
+
+                    NO DETECTABLE PRECURSOR
+
+  for a transition class, a cohort, or the hypothesis as a whole.
+  Noise-induced and abrupt transitions remain live failure classes,
+  and the estimator suite is demonstrably blind to them.
+════════════════════════════════════════════════════════════════════
+```
+
+---
+
+## Evidence Generated So Far
+
+Synthetic only. **This is Claim Level 0** — no real physiological data has been
+analysed, and the benchmark establishes estimator behaviour, not biology.
+
+| Finding | Result |
+|---|---|
+| Alignment detects exogenous, homeostatically constrained displacement | AUC **1.00** |
+| Alignment **fails** on endogenous fold instability | AUC **0.30** — structural, not a tuning failure |
+| Everything is blind to noise-induced transition | AUC ~0.51 across all statistics |
+| Covariance drift detects both mechanisms | AUC **1.00** — so detection is not novel |
+| At matched magnitude, drift collapses and alignment holds | 0.56 vs **1.00** |
+| Alignment is a cohort statistic, not a bedside alarm | null band [0.21, 2.49] at p=8 |
+
+Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
+
+### Corrections found by running the code
+
+| Error | Correction |
+|---|---|
+| Null for alignment assumed to be A = 1 | Wrong for stationary data — displacement is Σ₀-shaped, so the null sits near 0.17. All inference now uses the patient's own **empirical** null |
+| Framed as competing with critical slowing down | They are **complementary** — each detects the mechanism the other misses |
+| Simulation used a fine integrator without thinning | n_eff was 4.5; the covariance was unestimable. Produced the design rule **n_eff ≥ 10p** |
+
+---
+
+## Repository Map
+
+| Document | Contents |
+|---|---|
+| [`docs/HYPOTHESIS.md`](docs/HYPOTHESIS.md) | Revised hypothesis, physiological state model, transition pipeline |
+| [`docs/MATHEMATICAL_OBJECTS.md`](docs/MATHEMATICAL_OBJECTS.md) | Surviving objects, fully specified |
+| [`docs/PHYSICAL_INTERPRETATION.md`](docs/PHYSICAL_INTERPRETATION.md) | The frozen Λ, the withdrawn prediction, the narrowed claim |
+| [`docs/DEMOTED_OBJECTS.md`](docs/DEMOTED_OBJECTS.md) | Objects 1 and 6, with reasons |
+| [`docs/COMPETING_MODELS.md`](docs/COMPETING_MODELS.md) | M0–M4, M_null, negative controls |
+| [`docs/TRANSITION_TAXONOMY.md`](docs/TRANSITION_TAXONOMY.md) | T1–T6, outcomes A–E |
+| [`docs/CLAIM_LADDER.md`](docs/CLAIM_LADDER.md) | Levels 0–6, promotion rules |
+| [`docs/DATASET_REQUIREMENTS.md`](docs/DATASET_REQUIREMENTS.md) | Resolution arithmetic, temporal value, base rates |
+| [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) | Withdrawn claims and blind spots, preserved |
+| [`docs/FALSIFICATION_CRITERIA.md`](docs/FALSIFICATION_CRITERIA.md) | **Canonical claim map** — C1–C7 |
+| [`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md) | Frozen commitments, amendment log |
+| [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md) | Ten questions, the grade |
+| [`docs/MATHEMATICAL-AUDIT.md`](docs/MATHEMATICAL-AUDIT.md) | v1 audit — still current, produced the demotions |
+| [`docs/LITERATURE.md`](docs/LITERATURE.md) | v1 literature review — still current |
+| [`docs/PROTOCOL.md`](docs/PROTOCOL.md) · [`docs/FALSIFICATION-MATRIX.md`](docs/FALSIFICATION-MATRIX.md) | **v1 archive, superseded** |
+
+| Code | Purpose |
+|---|---|
+| [`analysis/estimators.py`](analysis/estimators.py) | All estimators, v1 and v2, with corrections documented in place |
+| [`analysis/synthetic/generators.py`](analysis/synthetic/generators.py) | Five transition mechanisms with known ground truth |
+| [`analysis/controls/timestamp_only.py`](analysis/controls/timestamp_only.py) | M0 acquisition gate, preregistered verdicts |
+| [`analysis/experiments/mechanism_benchmark.py`](analysis/experiments/mechanism_benchmark.py) | The benchmark above |
+| [`analysis/base_rates.py`](analysis/base_rates.py) | PPV and alarm-burden arithmetic |
+
+---
+
+## The Kill Experiment
+
+╔══════════════════════════════════════════════════════════════════════╗
+║  HiRID. Stratify by transition class. Within strata matched on       ║
+║  deformation magnitude ‖ΔG‖, compute mean z(t) per class with        ║
+║  cluster-bootstrap CIs. Run the class-stratified M0 gate first.      ║
+║                                                                      ║
+║  KILLS IT: mean z CI includes 0 in all powered classes; or signs     ║
+║  do not track class; or z is as large in the abrupt class as in      ║
+║  the exogenous ones; or class-stratified M0 reproduces the pattern.  ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+One retrospective analysis on existing public data. No new collection.
+
+---
+
+## Grade — B
+
+**Coherent but requires better operationalisation.** Unchanged in letter from
+v1, substantially improved in substance: Λ is frozen with an argument, the
+decision rule is fixed against an empirical null, and directional predictions
+are stated per transition class in advance.
+
+Three things block A: the load-bearing claim rests on an **untested
+physiological premise**; the primary statistic has a **demonstrated blind spot**
+and weak power at realistic channel counts; and **no real data has been
+touched** — falsifiability has been designed, not exercised.
+
+Full reasoning: [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md).
+
+---
+
+<div align="center">
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║   Λ = Σ₀⁻¹ predicts WHERE the system is pushed,                      ║
+║   not how hard, and not how its variance changes.                    ║
+║                                                                      ║
+║   Frozen. If it fails, it is abandoned — not adjusted.               ║
+║                                                                      ║
+║                    GB2600765.8                                       ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+**Transition Dynamics** · Morrison Framework™ · *Preregistered Falsification Framework v2*
+
+GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
+
+© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
+
+</div>
+
+---
+
+# APPENDIX — Version 1 Preregistration
+
+> Preserved in full. Claims withdrawn in v2 are recorded in
+> [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md). **Sections below marked with
+> withdrawn claims must not be cited for current positions.**
 
 ---
 
