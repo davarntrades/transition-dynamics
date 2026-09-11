@@ -127,6 +127,34 @@ documents and in the commit history.
 
 ---
 
+## 9. Real-data transfer — attempted, blocked by resolution
+
+Two real datasets were obtained through legitimate open channels and both were
+rejected by the frozen Stage A rules. **Stage B and Stage C have never been
+run on real data.**
+
+| Dataset | Admissible |
+|---|:--:|
+| MIMIC-III demo, 11 ICU stays, up to 367 h | **0 / 11** |
+| NeuroKit human ECG/RSP/EDA, 100 Hz | **0 / 2** |
+
+At hourly charting resolution the effective-sample-size rule and the
+stationarity screen are **jointly unsatisfiable**: 0 of 55 stay × baseline-window
+combinations satisfied both. Short baselines fail on sample size; baselines long
+enough to pass are no longer stationary because real ICU patients drift.
+
+**This does not falsify the exponential-approach model.** It establishes that
+hourly-charted ICU databases cannot supply the data the test needs. The model
+remains untested on real physiology, and no mechanism or early-detection claim
+may proceed. See [`REAL_DATA_ACQUISITION.md`](REAL_DATA_ACQUISITION.md).
+
+The 0.5 SD stationarity screen rejected 100% of real ICU baselines. That may
+mean the screen is too strict rather than the data unusable, but it is **not
+changed**, because altering a preregistered threshold after seeing the result
+is the move this programme forbids.
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail
