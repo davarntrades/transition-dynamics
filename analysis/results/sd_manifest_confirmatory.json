@@ -4709,7 +4709,22 @@
   ]
  },
  "932": {
-  "error": "ContentTooShortError: <urlopen error retrieval incomplete: got only 16979 out of 8873683 bytes>"
+  "sha256": "c3a88f311b8a69e6debb3a7db4e943dcc71a6118b3ee7de0f692374e205cc76a",
+  "shape": [
+   3457,
+   8
+  ],
+  "present": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "note": "refetched after a truncated download; inadmissible (hypotension in baseline)"
  },
  "933": {
   "sha256": "ea73499bc3286bbeee741a5a7714648db80c05b9a6ee552d7edda6c7989ee08c",

@@ -106,15 +106,21 @@ produced confident wrong answers.
 | 5 | Guard aborted a correct stratum | Guard compared realised severity to a nominal target lying below the noise floor | Guard now checks cross-condition agreement, which is the assumption the analysis rests on |
 | 6 | Rate recovery reported >100% error | Estimated rates compared against descending-sorted truth while the simulator orders ascending | Corrected; true per-channel error 3% |
 | 7 | Masked scenario returned AUC exactly 0.000 | Naive comparison scored group B as positive while oracle and stratified scored group A | Orientation unified |
+| 8 | Onset estimator never declined, including on stationary data | Interleaved cross-fitting does not control overfitting at lag-1 autocorrelation 0.76 | Null-calibrated threshold from stationary trajectories; declines 80–95% |
+| 9 | Stage C appeared to validate the onset model | Baseline rates recomputed from the first half of the very segment being tested — circular | `k_base` made a required argument |
+| 10 | Stage C correlations undefined | Rate grid capped at 1/h while real rates are ~1000/h, so every fit pinned to the boundary; and rates faster than the sampling interval are unidentifiable | Grid spans 10⁻²–10⁴; baseline estimated at matched resolution; identifiability band enforced |
+| 11 | Every fitted model sat at AUROC 0.48–0.52 while unfitted raw scores reached 0.60–0.63 | Out-of-fold **probabilities** pooled across folds. One fold had test prevalence 0.014 against 0.129 in training, so its intercept and standardisation placed its predictions on a different scale and the pooled ranking inverted — despite every fold ranking correctly on its own | Discrimination, false-alert rate and lead time use within-fold rank-normalised scores; calibration keeps untransformed probabilities. Regression test: a single-feature model must reproduce its own feature's AUROC |
 
 **Why they were dangerous.** Each produced a confident, plausible-looking
-answer. Bugs 1, 4 and 7 produced *falsifications* — the flattering direction
-would have been to accept them, since a null result looks rigorous.
+answer. Bugs 1, 4, 7 and 11 produced *falsifications* — the flattering
+direction would have been to accept them, since a null result looks rigorous.
+Bugs 8 and 9 pointed the other way and would have produced a false positive.
 
 **What caught them.** Constraints on the *shape* of a result, not its
 direction: an AUC that cannot occur, a variance too small to be real,
-conditions bit-identical to machine precision. Directional plausibility checks
-would have passed all seven.
+conditions bit-identical to machine precision, a single-feature model whose
+AUROC is neither its feature's nor its complement. Directional plausibility
+checks would have passed all eleven.
 
 ---
 
@@ -202,6 +208,35 @@ empirical support at any tested timescale.** It is demoted to a whitening
 metric, whose operational value is untested. The source equations are not
 falsified by this; the physical reading frozen for them is.
 See [`RESULT_SHORT_TIMESCALE.md`](RESULT_SHORT_TIMESCALE.md).
+
+---
+
+## 12. Structural displacement prediction — NOT SUPPORTED (2026-09-11)
+
+$S(t)=\lVert\Sigma_0^{-1}\delta(t)\rVert$, with $\Sigma_0^{-1}$ treated as a
+bare whitening metric and no interpretation attached, adds **no** out-of-sample
+predictive information about intraoperative hypotension beyond marginal
+features. 166 fresh arterial-line patients, 21,590 windows, 103–110
+event-patients per horizon, prediction only from currently non-hypotensive
+states.
+
+| horizon | AUROC M9 (marginals) | ΔAUROC (M10 − M9) | ΔAUPRC |
+|:--:|:--:|:--:|:--:|
+| 5 min | 0.6904 | +0.0035 [−0.0029, +0.0104] | −0.0005 [−0.0038, +0.0021] |
+| 10 min | 0.6467 | −0.0029 [−0.0158, +0.0100] | −0.0039 [−0.0120, +0.0034] |
+| 15 min | 0.6165 | +0.0019 [−0.0107, +0.0153] | +0.0064 [−0.0030, +0.0213] |
+
+Every interval spans zero and the sign flips across horizons. Replacing the
+patient's covariance with **randomly permuted off-diagonals** changes AUROC by
+at most 0.003; replacing it with the **identity** costs at most 0.007.
+Patient-specific geometry never beats diagonal rescaling or a population
+covariance. $S$ alone reaches 0.535–0.570.
+
+**Consequence: the last empirical claim attached to $\Lambda$ is gone.** The
+stiffness reading was already demoted; the bare metric now has no incremental
+predictive value either. Cross-channel structure generally fails here — the
+covariance-drift/DNB comparator adds nothing to the marginal baseline.
+See [`RESULT_STRUCTURAL_PREDICTION.md`](RESULT_STRUCTURAL_PREDICTION.md).
 
 ---
 

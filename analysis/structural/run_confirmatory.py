@@ -23,14 +23,19 @@ FAR_LEVELS = (0.05, 0.10)
 COV_KINDS = ("patient", "diagonal", "identity", "shuffled",
              "subject", "population")
 
+# Additive only. None reproduces the primary run exactly; set to MAP_SEVERE to
+# run the prespecified secondary endpoint. No primary code path is touched.
+THRESH_OVERRIDE = None
+
 
 # --------------------------------------------------------------------- loading
 def load_all(which="confirmatory"):
     ids = json.load(open(os.path.join(RESULTS, "sd_split.json")))[which]
+    thresh = W.MAP_THRESH if THRESH_OVERRIDE is None else THRESH_OVERRIDE
     cases, excl = [], {}
     for c in ids:
         try:
-            res, why = case_rows(c)
+            res, why = case_rows(c, thresh)
         except Exception as e:
             excl[c] = f"error: {type(e).__name__}"
             continue
@@ -315,7 +320,8 @@ def main(which="confirmatory"):
               f"[{d['dAUPRC'][1]:+.5f},{d['dAUPRC'][2]:+.5f}]", flush=True)
 
     report["elapsed_s"] = time.time() - t_start
-    out = os.path.join(RESULTS, f"sd_{which}.json")
+    tag = which if THRESH_OVERRIDE is None else f"{which}_severe"
+    out = os.path.join(RESULTS, f"sd_{tag}.json")
     json.dump(report, open(out, "w"), indent=1, default=float)
     print(f"\n-> {out}   ({report['elapsed_s']/60:.1f} min)")
     return report
