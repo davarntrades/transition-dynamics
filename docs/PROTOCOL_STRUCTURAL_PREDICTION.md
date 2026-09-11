@@ -270,3 +270,103 @@ utility, or any broader framework claim.
 ---
 
 © 2026 Davarn Morrison · Transition Dynamics
+
+---
+
+## Amendment A1 — 2026-09-11, on calibration evidence only
+
+Recorded **before the confirmatory set was examined**. Changes no threshold,
+no decision rule, and no model.
+
+1. **Time base corrected.** VitalDB `anestart` is routinely *negative*:
+   anaesthesia begins before the recorder starts. "Times relative to
+   `anestart`" in §3 is therefore replaced by times relative to the start of
+   the **analysable interval**, defined on the recording axis as
+   $[\max(0,\texttt{anestart}),\ \min(\texttt{aneend},\texttt{caseend},
+   n\Delta t)]$. The metadata span $\texttt{aneend}-\texttt{anestart}$
+   over-counts by the pre-recording induction time and is used only for the
+   frozen eligibility screen, which is **not** re-drawn.
+
+2. **Minimum analysable span** added as a signal-level exclusion, applied
+   uniformly to every arm exactly like the existing coverage rule: a case is
+   excluded if its analysable interval is shorter than 60 min, which is the
+   least that can yield a 30 min baseline plus any evaluated point at the
+   longest horizon. Excluded cases are counted and reported.
+
+3. **Comparator M11 = M9 + M7 added** (marginals-only baseline plus the
+   covariance-drift/DNB features). It can only make the test *harder* for
+   $S(t)$, never easier: it separates "cross-channel information helps" from
+   "this particular whitening metric helps". The decision rule remains
+   M10 vs **M9**.
+
+## Amendment A2 — 2026-09-11, on calibration evidence only
+
+Recorded **before the confirmatory set was examined**. Changes no threshold,
+no decision rule, no model, and no split.
+
+**Analysis panel reduced from eight channels to six.** On the 80 calibration
+cases, applying the prespecified $\ge 80\%$ baseline-coverage rule:
+
+| channel | absent | present but < 80% coverage |
+|---|:--:|:--:|
+| ART_SBP / ART_DBP / ART_MBP | 38 | 1 / 1 / 0 |
+| HR | 0 | 0 |
+| PLETH_SPO2 | 0 | 1 |
+| ETCO2 | 0 | 9 |
+| **BT** | 1 | **42** |
+| **RR_CO2** | 0 | **11** |
+
+Body temperature fails because the probe is sampled intermittently early in
+the case; capnography-derived respiratory rate drops out during airway
+manipulation. Both are instrumentation artefacts with no bearing on the
+hypothesis, and between them they reduced usable cases to 9/80. Removing them
+gives 37/80 on coverage.
+
+Analysis panel, $p=6$: `ART_SBP, ART_DBP, ART_MBP, HR, PLETH_SPO2, ETCO2`.
+The pressure triple is retained deliberately — it is precisely where a
+whitening metric can express geometry (pulse-pressure structure) that marginal
+features cannot.
+
+The decision used coverage counts only. **No outcome, label, or model result
+was examined.** All eight columns remain in the `.npz` cache, so the reduction
+is documented and reversible.
+
+**Population restriction, declared.** Requiring invasive arterial pressure
+restricts the cohort to arterial-line cases (38/80 calibration cases have no
+A-line). This is higher-acuity surgery than the VitalDB average. The endpoint
+requires invasive MAP, so the restriction is unavoidable; it bounds
+generalisation and is not a bias between arms.
+
+## Amendment A3 — 2026-09-11, on calibration evidence only
+
+Recorded **before the confirmatory set was examined**. Changes no threshold,
+no decision rule, no model, and no split.
+
+**Baseline window moved from [10, 30] min to [30, 50] min**; first evaluation
+point moves from 35 min to 55 min.
+
+The original window sits inside the post-induction hypotension period, when
+induction agents routinely drop MAP. It therefore violated the protocol's own
+*event-free baseline* requirement in 21 of the 42 calibration cases that had
+an arterial line — and, where it did not, described a state that is not a
+quiet baseline.
+
+Usable calibration cases by window position (usable-count only; **no outcome,
+label, or model result examined**):
+
+| baseline window | usable | coverage fail | event in baseline | median observation |
+|---|:--:|:--:|:--:|:--:|
+| [10, 30] | 16 | 43 | 21 | 183 min |
+| [15, 35] | 18 | 40 | 22 | 167 min |
+| [20, 40] | 19 | 40 | 21 | 168 min |
+| [25, 45] | 20 | 39 | 21 | 163 min |
+| **[30, 50]** | **24** | 39 | 17 | 159 min |
+
+The dominant exclusion throughout is coverage (~39–43), which is the absence of
+an arterial line and cannot be recovered by moving the window. The window is
+set to [30, 50] min: the highest yield tested, and the furthest from induction,
+at a cost of 24 min of median observation time.
+
+Also fixed: an all-NaN median slice could raise a numpy warning before the
+existing finiteness check dropped the window. The window was always dropped;
+the guard now runs first. No labelled window changes.

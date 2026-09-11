@@ -58,8 +58,20 @@ CHANNELS = [
     "Solar8000/BT",
     "Solar8000/RR_CO2",
 ]
-SHORT = [c.split("/")[1] for c in CHANNELS]
-MAP_IDX = SHORT.index("ART_MBP")
+FETCHED = [c.split("/")[1] for c in CHANNELS]
+
+# Amendment A2 (2026-09-11, calibration evidence only): BT and RR_CO2 are
+# stored but excluded from analysis. Both fail the PRESPECIFIED >= 80% baseline
+# coverage rule in a large fraction of cases for instrumentation reasons --
+# the temperature probe is sampled intermittently early in the case, and
+# capnography-derived RR drops out during airway manipulation. Neither has any
+# bearing on the hypothesis. Decided from coverage counts alone, with no
+# outcome examined. The .npz cache keeps all eight columns, so provenance is
+# unchanged and the decision is reversible.
+PANEL = ["ART_SBP", "ART_DBP", "ART_MBP", "HR", "PLETH_SPO2", "ETCO2"]
+PANEL_IDX = [FETCHED.index(c) for c in PANEL]
+SHORT = PANEL
+MAP_IDX = PANEL.index("ART_MBP")
 
 INTERVAL_S = 2
 MIN_ANE_HOURS = 2.0
