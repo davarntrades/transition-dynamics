@@ -1,0 +1,521 @@
+{
+ "12": {
+  "sha256": "dd19d72d1d1c01bd8e106d2de81f89fb19dc90660358a3d22464f480ec82c4b7",
+  "shape": [
+   15602,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "19": {
+  "sha256": "7374307e55fad22eeb0f786fea26a1021ee0d0fe52315147f30bfede75b6fae4",
+  "shape": [
+   13788,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "20": {
+  "sha256": "2514af799b736f717d77ea699d173b0d6e44c10b578217cc6030a273c5f789b0",
+  "shape": [
+   13238,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "28": {
+  "sha256": "ecc671adf9905dd46be28524eb1ff1efa78ee12682e7019564dae20d79091554",
+  "shape": [
+   13452,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "34": {
+  "sha256": "cf9a754a3e1a5e8f32d34a6b28669a9b8ec132adcbc4bad09584e233cc72f665",
+  "shape": [
+   11887,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "56": {
+  "sha256": "e0aa19077563238f5b11052133698f69aed445224d484b1334af1a43ac8a0cc6",
+  "shape": [
+   14581,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "75": {
+  "sha256": "ce7c653ffc21abdab1fa72887af16b59188c9bf348012b373257784a2cced347",
+  "shape": [
+   12563,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "94": {
+  "sha256": "c51407cdf92baa666d4040c7ee8676df8fb216116acfbbb8b329b13089235c96",
+  "shape": [
+   14456,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "96": {
+  "sha256": "eca8d74edddf15ae89a1f18e72e803a34a0f816ac5a63c29ee0be1d65584e55a",
+  "shape": [
+   18990,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "113": {
+  "sha256": "e6a3edc69cb4f7368877b52f3c3036c6898e5a7676dda71846ac41037bfa0a3c",
+  "shape": [
+   17801,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "118": {
+  "sha256": "2e77eea737a984fa4fa3725270aa6a3e7ad9f5a934eb63b416397f380d85efd4",
+  "shape": [
+   14915,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "156": {
+  "sha256": "df8a0b161a26f99aa693930a49137c66f74feb5facca32587879e7e9c41e55b0",
+  "shape": [
+   13650,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "158": {
+  "sha256": "890325fd296088b762d40dfad7c41e78665c77f68cac93a2e7abb6ff21899031",
+  "shape": [
+   12815,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "184": {
+  "sha256": "92313abaa0912d3ab234a0c003c10c1e9822a1802036e7b5b030620ad8f727da",
+  "shape": [
+   17325,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "202": {
+  "sha256": "a60aaa93bafe9528a0f376261c9a4d4ccbd99675c32618c5c27b814a4dc521c1",
+  "shape": [
+   15470,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "230": {
+  "sha256": "e6c41f6bc562e5aae37c82e876606496430f7f3e86819c4008869648cbc10783",
+  "shape": [
+   13045,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "241": {
+  "sha256": "cb168553bd171e67c330430412664236a281b8efb168d38387eb8537e4218feb",
+  "shape": [
+   17828,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "251": {
+  "sha256": "f080f1a33ce44673cb12d26a1d1e6e893ae0751ded676483d6ab61f9c7304baf",
+  "shape": [
+   12768,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "264": {
+  "sha256": "122abb161ef94c6c636e9dd36e2a5add2d906dca8263d5ca5c10acad02cf7705",
+  "shape": [
+   18263,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "280": {
+  "sha256": "384be9f7451cd2915fa9d4b534adc426a8324048bac61fd5a5d839f84d8dbaab",
+  "shape": [
+   16285,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "342": {
+  "sha256": "900b6ca6bcd2bf5807d1b14bb573f65cc884e812c4cac7d0c7218d7c60364e6d",
+  "shape": [
+   11959,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "349": {
+  "sha256": "0b031a53b634b90c64ac87b7e59725a31b8933b32c1b6f0d3b00a22d4f826bd3",
+  "shape": [
+   12196,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "359": {
+  "sha256": "b0754554b66e9c563a7b432b5cb6da8a0b3c130dd1747eb534ace45ad0741281",
+  "shape": [
+   14317,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "391": {
+  "sha256": "d96fd4472079ad429c676b6047747c7194ba6a2ffdc02a12f9c6eca31ba54553",
+  "shape": [
+   22036,
+   3
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "397": {
+  "sha256": "595a2aa2bd74b3d7902dcb22f771c4390b6599360df1146dbe95622a975f4b46",
+  "shape": [
+   12106,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "472": {
+  "sha256": "950c10faea0b480618a485694c5bddf3ebfa21f65cc1d1b6e6aca434ab53c065",
+  "shape": [
+   12686,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "474": {
+  "sha256": "8602ae5f19a323d0d2a1d84ad3e23dd76efcdc0042bcfbcc4787225211a54999",
+  "shape": [
+   17584,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "492": {
+  "sha256": "13a0104a071cfc30c2fb730b428af68cb744463e8b188602ee103de5edaacede",
+  "shape": [
+   13089,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "497": {
+  "sha256": "23d1a376ac5f87d2dd34646be370263554422903be5868e67a609f530aaa5839",
+  "shape": [
+   14308,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "603": {
+  "sha256": "40494e45d152ed19b2982f398cba2de7cd09a887f2f25db576b10782a6e94d23",
+  "shape": [
+   22942,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "626": {
+  "sha256": "6bb05288a47a23b724d121546ac3f0c7c32a11632bf95a6e6b00f4a6ffdf4cd2",
+  "shape": [
+   15892,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "628": {
+  "sha256": "e9b63af23ae2b2246e3a856a02131bdf5ca97cc810f6ddd081b1ca0c45413f46",
+  "shape": [
+   15448,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "629": {
+  "sha256": "a8d3b5424627bdda9218701a3c6e8714aa119889bf4de71855dadfe2d6bdace9",
+  "shape": [
+   15045,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "669": {
+  "sha256": "2081172216709d58907b5e856c650065ec313a04f6fffe614b9c67be749d5b09",
+  "shape": [
+   17982,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "741": {
+  "sha256": "fcdfd72c10f2c1b18beacc2c4741c37eba991dcf9990669b66b8b3bf09fd1908",
+  "shape": [
+   15286,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "750": {
+  "sha256": "8afc51baba464b2b0b9dd5cc49c79534af008b543855a519dc9d5e604cd859c2",
+  "shape": [
+   23242,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "763": {
+  "sha256": "47ce5b2b198d6608423af5fd54be3e186ed36215e494ba9b228c4b3a59693201",
+  "shape": [
+   11893,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "765": {
+  "sha256": "53d50083339aafe4e98f407625d3c2dd996c5162c23c60f2a3b956dd69297d68",
+  "shape": [
+   20976,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "775": {
+  "sha256": "011f6a8ee16a82f1ebd991a8e7544e4adeec306b49bc44da493bc4fd6876647c",
+  "shape": [
+   12058,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ },
+ "777": {
+  "sha256": "6c2e371bb8d05491a23a7681d550b6de173cd6b47f041689c3da85de47cc4ebb",
+  "shape": [
+   14439,
+   4
+  ],
+  "channels": [
+   "Solar8000/HR",
+   "Solar8000/ART_MBP",
+   "Solar8000/PLETH_SPO2",
+   "Solar8000/ETCO2"
+  ]
+ }
+}

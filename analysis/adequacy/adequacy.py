@@ -178,43 +178,65 @@ def stage_b(X, h, k_base, n_grid=25):
     return out
 
 
-def stage_c(X, h, base_frac=0.5):
+def stage_c(X, h, k_base, base_frac=None):
     """
-    Rate consistency with TEMPORAL SEPARATION: rates from the baseline window,
-    curvature-derived rates from the later window. Never the same samples.
+    Rate consistency: do rates estimated INDEPENDENTLY from the baseline window
+    predict the curvature of the later trajectory?
+
+    `k_base` must come from the frozen baseline window and is REQUIRED. An
+    earlier version recomputed it from the first half of the segment being
+    tested, which compared two quantities estimated from the same data -- the
+    exact circularity the protocol forbids. It is now passed in, and this
+    function never sees the baseline.
+
+    The curvature grid must also span the plausible range of k in the same
+    units; an earlier grid capped at 1/hour while real baseline rates reach
+    1000/hour, so every channel pinned to the boundary and the correlation was
+    undefined.
+
+    RESOLUTION NOTE. An autocorrelation-derived rate is resolution dependent. A
+    rate whose relaxation time is shorter than the sampling interval of the
+    later segment is not identifiable from its curvature. The caller must
+    estimate k_base at the SAME resolution as the segment passed here.
     """
     X = np.asarray(X, float)
-    nb = int(base_frac * len(X))
-    k_base = baseline_rates(X[:nb], h)
-    late = X[nb:]
-    t = np.arange(len(late)) * h
+    t = np.arange(len(X)) * h
+    k_grid = np.geomspace(1e-2, 1e4, 80)
     k_curv = np.empty(X.shape[1])
     for j in range(X.shape[1]):
-        y = late[:, j] - late[:, j].mean()
+        y = X[:, j] - X[:, j].mean()
         be, bk = np.inf, np.nan
-        for kf in np.geomspace(1e-3, 1.0, 30):
+        for kf in k_grid:
             g = 1.0 - np.exp(-kf * t)
-            c = np.dot(g, y) / max(np.dot(g, g), 1e-12)
+            g = g - g.mean()
+            d = np.dot(g, g)
+            if d <= 1e-12:
+                continue
+            c = np.dot(g, y) / d
             v = np.mean((y - c * g) ** 2)
             if v < be:
                 be, bk = v, kf
         k_curv[j] = bk
     from scipy.stats import spearmanr
-    rc = spearmanr(k_base, k_curv).statistic if X.shape[1] > 2 else np.nan
-    return {"k_base": k_base, "k_curv": k_curv,
-            "rank_corr": float(rc) if rc == rc else float("nan"),
-            "log_bias": float(np.mean(np.log(k_curv / k_base)))}
+    kb = np.asarray(k_base, float)
+    ok = np.isfinite(kb) & np.isfinite(k_curv)
+    if ok.sum() > 2 and np.ptp(kb[ok]) > 0 and np.ptp(k_curv[ok]) > 0:
+        rc = float(spearmanr(kb[ok], k_curv[ok]).statistic)
+    else:
+        rc = float("nan")
+    with np.errstate(divide="ignore", invalid="ignore"):
+        lb = float(np.nanmean(np.log(k_curv[ok] / kb[ok]))) if ok.sum() else float("nan")
+    return {"k_base": kb, "k_curv": k_curv, "rank_corr": rc, "log_bias": lb}
 
 
 def phase_surrogate(X, seed=0):
     """
     Phase-randomised surrogate: preserves each channel's power spectrum, and
-    hence its autocorrelation, while destroying any deterministic onset
-    structure. This is the null the selection rate must be compared against.
-
-    Needed because M-exp is selected on roughly half of purely stationary
-    autocorrelated series -- it absorbs slow drift. A fixed selection-rate
-    threshold is therefore not interpretable on its own.
+    hence its autocorrelation, while destroying deterministic onset structure.
+    This is the null the selection rate must be compared against, because
+    M-exp is selected on roughly half of purely stationary autocorrelated
+    series -- it absorbs slow drift -- so a raw selection rate is not
+    interpretable on its own.
     """
     rng = np.random.default_rng(seed)
     X = np.asarray(X, float)
@@ -222,9 +244,9 @@ def phase_surrogate(X, seed=0):
     for j in range(X.shape[1]):
         f = np.fft.rfft(X[:, j] - X[:, j].mean())
         ph = rng.uniform(0, 2 * np.pi, len(f))
-        ph[0] = 0
+        ph[0] = 0.0
         if len(X) % 2 == 0:
-            ph[-1] = 0
+            ph[-1] = 0.0
         out[:, j] = np.fft.irfft(np.abs(f) * np.exp(1j * ph), n=len(X)) \
             + X[:, j].mean()
     return out
@@ -234,8 +256,7 @@ def surrogate_selection_rate(X, h, k_base, n_surr=20, seed=0):
     """Fraction of phase-randomised surrogates on which M-exp is selected."""
     hits = 0
     for s in range(n_surr):
-        Xs = phase_surrogate(X, seed + s)
-        r = stage_b(Xs, h, k_base)
+        r = stage_b(phase_surrogate(X, seed + s), h, k_base)
         hits += (min(MODELS, key=lambda m: r[m]) == "M-exp")
     return hits / n_surr
 
