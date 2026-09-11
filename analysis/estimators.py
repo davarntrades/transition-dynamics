@@ -516,26 +516,28 @@ def effective_sample_size(X: np.ndarray) -> float:
 # THE CENTRAL v2 STATISTIC — stiffness alignment
 # ----------------------------------------------------------------------------
 
-def stiffness_alignment(delta: np.ndarray, Sigma_0: np.ndarray) -> float:
+def stiffness_alignment(delta: np.ndarray, Sigma_0: np.ndarray,
+                        precision: np.ndarray | None = None) -> float:
     """
-    A  =  (δᵀ Σ₀⁻¹ δ)  /  ( ‖δ‖² · tr(Σ₀⁻¹)/p )
+    A  =  (delta^T Sigma_0^-1 delta) / ( ||delta||^2 * tr(Sigma_0^-1)/p )
 
-    Dimensionless, unit-invariant, with an EXACT null:
+    Dimensionless, unit-invariant, and invariant to the MAGNITUDE of delta.
+    It measures WHERE the state is displaced, not how far.
 
-        A = 1   displacement direction unrelated to baseline structure
-        A < 1   displacement along SOFT, high-variance directions
-                → the critical-slowing-down / fold prediction
-        A > 1   displacement along STIFF, low-variance, homeostatically
-                defended directions
-                → the Transition Dynamics yield prediction
+    THE NULL IS NOT 1. E[A] = 1 holds only when delta points in an
+    isotropically random direction. For a stationary system delta is a
+    sampling fluctuation distributed N(0, Sigma_0/n_eff) -- Sigma_0-shaped,
+    not isotropic -- so the stationary null sits well BELOW 1, bounded by
+    p^2 / (tr(Sigma_0) tr(Sigma_0^-1)). Use alignment_empirical_null and
+    alignment_z for any decision; never compare A against 1.
 
-    E[A] = 1 exactly when δ is isotropically random and independent of Σ₀ —
-    verified numerically to 1.003 over 20,000 draws. This is what makes the
-    head-to-head test between the two accounts clean: they sit on opposite
-    sides of a null the normalisation pins to unity.
+    `precision` lets a caller pass a precomputed Sigma_0^-1 so that repeated
+    evaluations against one baseline do not recompute it. Pure performance;
+    the returned value is unchanged.
     """
     d = np.asarray(delta, float)
-    P = np.linalg.pinv(_spd_guard(np.asarray(Sigma_0, float)))
+    P = (np.linalg.pinv(_spd_guard(np.asarray(Sigma_0, float)))
+         if precision is None else precision)
     nd = float(d @ d)
     if nd <= 0:
         return float("nan")
@@ -665,22 +667,24 @@ def alignment_empirical_null(X_baseline: np.ndarray, Sigma_0: np.ndarray,
     n = len(X)
     if n <= win:
         raise ValueError("baseline must be longer than the analysis window")
-    vals = []
-    for _ in range(n_sub):
-        s = rng.integers(0, n - win)
-        d = X[s:s + win].mean(axis=0) - mu_0
-        a = stiffness_alignment(d, Sigma_0)
-        if a == a:
-            vals.append(a)
-    v = np.asarray(vals, float)
-    p = Sigma_0.shape[0]
-    bound = p * p / (np.trace(Sigma_0) * np.trace(np.linalg.pinv(Sigma_0)))
+    S = _spd_guard(np.asarray(Sigma_0, float))
+    Pm = np.linalg.pinv(S)
+    p = S.shape[0]
+    scale = np.trace(Pm) / p
+    starts = rng.integers(0, n - win, size=n_sub)
+    csum = np.vstack([np.zeros(p), np.cumsum(X, axis=0)])
+    means = (csum[starts + win] - csum[starts]) / win
+    D = means - np.asarray(mu_0, float)
+    num = np.einsum("ij,jk,ik->i", D, Pm, D)
+    den = np.einsum("ij,ij->i", D, D) * scale
+    v = num[den > 0] / den[den > 0]
+    bound = p * p / (np.trace(S) * np.trace(Pm))
     return {
         "median": float(np.median(v)),
         "lo": float(np.quantile(v, alpha / 2)),
         "hi": float(np.quantile(v, 1 - alpha / 2)),
         "cauchy_schwarz_bound": float(bound),
-        "n": len(v),
+        "n": int(len(v)),
     }
 
 
