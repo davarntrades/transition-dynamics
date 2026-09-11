@@ -161,6 +161,14 @@ pushed, not *how hard*.
 
 ### 3.1 The physiological premise, stated separately
 
+> **TESTED 2026-09-11 — UNRESOLVED.** The premise was put to a falsification
+> test as an instrument question. Alignment is not redundant with existing
+> methods, but it is **not identifiable** as a targeting measure without
+> exposure control. The class-stratified sign prediction is withdrawn. See
+> [`RESULT_HOMEOSTATIC_PREMISE.md`](RESULT_HOMEOSTATIC_PREMISE.md) and
+> [`DERIVATION_ALIGNMENT.md`](DERIVATION_ALIGNMENT.md).
+
+
 A(t) alone is a geometric quantity. Turning it into a prediction requires one
 additional, explicitly separate, empirical premise:
 

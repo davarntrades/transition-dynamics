@@ -213,7 +213,7 @@ establishes estimator behaviour only; it is not evidence about physiology.
 |---|---|---|
 | Structural deformation | Active | Falsifiable |
 | Deformation persistence | Active | Falsifiable |
-| Constraint / stiffness | Active, preregistered | Requires empirical validation |
+| Constraint / stiffness | Active, preregistered | Instrument tested; not identifiable without exposure control |
 | Critical threshold | Active, load-bearing | Must show threshold-like behaviour |
 | Higher-order integration | Active | Tested against pairwise-matched null |
 | Reach / homology condition | Demoted | Not operationalised |
@@ -231,8 +231,14 @@ Nothing here is proven. Reasoning: [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARI
 | Plain covariance drift detects both | AUC 1.00 |
 
 The last row matters: for **detection**, an established covariance method
-performs at least as well. What may be new is discriminating *which mechanism*
-produced a deformation, independent of its magnitude.
+performs at least as well.
+
+A follow-up test ([`docs/RESULT_HOMEOSTATIC_PREMISE.md`](docs/RESULT_HOMEOSTATIC_PREMISE.md))
+found that alignment **does** carry information neither conventional univariate
+monitoring nor covariance drift carries, above a ~0.5 baseline-SD displacement
+floor — but that it **cannot** be read as a mechanism measure, because exposure
+duration alone reproduces almost the whole effect. The mechanism claim is
+demoted; the independence-from-existing-methods claim survives.
 
 Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 

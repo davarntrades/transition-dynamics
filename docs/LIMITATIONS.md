@@ -28,6 +28,8 @@ Preserved with their reasoning, not deleted.
 | "Transition Dynamics and critical slowing down compete; one must lose" | v1 §4.1 | **WITHDRAWN** | The benchmark shows they are complementary. z detects the exogenous mechanism (AUC 1.00) and fails the endogenous one (0.30); the variance channel does the reverse |
 | "The contribution is detection with lead time" | v1 H1 | **NARROWED** | Plain covariance drift scores AUC 1.00 on both detectable mechanisms. Detection adds nothing over methods published in 2012 |
 | "A = 1 is the null for stiffness alignment" | v2 draft | **CORRECTED** | True only for isotropic displacement. For stationary data δ is Σ₀-shaped, so the null sits well below 1 — measured at 0.17 against a Cauchy–Schwarz bound of 0.29 |
+| "Alignment identifies transition mechanism" | v2 | **DEMOTED** | Exposure duration alone reaches AUC 0.84 vs 0.91 for targeting. Not identifiable without time-since-onset |
+| Per-class alignment sign predictions (z>0 sepsis, z≈0 abrupt) | v2 | **WITHDRAWN** | Confounded by insult kinetics, and the kinetic ordering is inverted |
 | "Rate-induced tipping is detected only weakly" | v2 draft | **CORRECTED** | The numbers say otherwise: variance ratio 8.23, dG 5.29. It is detected strongly, but trivially — the sweep inflates variance everywhere |
 
 ---

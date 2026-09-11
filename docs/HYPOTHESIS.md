@@ -43,14 +43,21 @@ precursor" is an explicitly permitted outcome.
 hypothesis.** It is exploratory and lives in
 [`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md).
 
-### 1.0 The distinguishing sub-claim
+### 1.0 The distinguishing sub-claim — DEMOTED 2026-09-11
 
-Where structural change does exist, the **direction** of constrained
-deformation is hypothesised to identify which mechanism produced it,
-independently of the deformation's magnitude. This is the part that is not
-already covered by established covariance methods, and it is what
-[`FALSIFICATION_CRITERIA.md`](FALSIFICATION_CRITERIA.md) treats as
-load-bearing.
+Previously load-bearing: that the **direction** of constrained deformation
+identifies which mechanism produced a transition.
+
+**Demoted.** The instrument test showed that exposure duration alone reproduces
+almost the whole effect (AUC 0.84, versus 0.91 for genuine targeting) in the
+operating regime. Without time-since-onset, an observed alignment cannot be
+attributed to mechanism. See
+[`RESULT_HOMEOSTATIC_PREMISE.md`](RESULT_HOMEOSTATIC_PREMISE.md).
+
+What survives is weaker and descriptive: alignment carries information that
+neither conventional univariate monitoring nor covariance drift carries, above
+a displacement floor of roughly 0.5 baseline SD. That is a statement about
+independence from existing methods, **not** about mechanism.
 
 ### 1.1 What changed from v1, and why
 

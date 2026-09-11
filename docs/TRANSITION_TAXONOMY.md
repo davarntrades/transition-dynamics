@@ -18,6 +18,14 @@
 
 ---
 
+> **Sign predictions withdrawn 2026-09-11.** The per-class alignment sign
+> predictions below are struck through. Displacement under a step force is
+> $\delta_i=(f_i/k_i)(1-e^{-k_iT})$, so recent abrupt insults give high
+> alignment and slowly developing sepsis gives low alignment — the opposite of
+> what was predicted, with no physiology involved. The class structure is kept;
+> the sign predictions attached to it are not. See
+> [`RESULT_HOMEOSTATIC_PREMISE.md`](RESULT_HOMEOSTATIC_PREMISE.md).
+
 ## 1. The Classes
 
 Defined where data permits. Each is analysed **separately** before any pooled
@@ -26,8 +34,8 @@ analysis is run.
 | | Class | Endpoint (physiology-defined) | Expected mechanism | Expected z(t) |
 |:--:|---|---|---|:--:|
 | **T1** | Cardiac / circulatory deterioration | sustained MAP below threshold with lactate elevation | mixed | uncertain |
-| **T2** | Sepsis-related deterioration | infection-associated organ dysfunction by physiological criteria | **exogenous insult** | **z > 0** |
-| **T3** | Respiratory deterioration | sustained hypoxaemia / rising respiratory support requirement | exogenous, sometimes gradual | z > 0 |
+| **T2** | Sepsis-related deterioration | infection-associated organ dysfunction by physiological criteria | **exogenous insult** | ~~z > 0~~ withdrawn |
+| **T3** | Respiratory deterioration | sustained hypoxaemia / rising respiratory support requirement | exogenous, sometimes gradual | ~~z > 0~~ withdrawn |
 | **T4** | Neurological transition | sustained GCS decline, seizure, ICP crossing | often endogenous or abrupt | z ≈ 0 or < 0 |
 | **T5** | General ICU deterioration | composite, used only for power and comparison | mixed — uninterpretable mechanistically | uninterpretable |
 | **T6** | Abrupt / noise-dominated | arrhythmic arrest from fixed substrate, massive PE, tamponade | **noise-induced** | **z ≈ 0 — no precursor** |
