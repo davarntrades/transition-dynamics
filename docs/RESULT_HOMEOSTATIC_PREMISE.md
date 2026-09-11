@@ -124,6 +124,15 @@ is robust to the acquisition-behaviour confound.
 **Not justified:** any inference from an observed alignment to a homeostatic
 mechanism, in any dataset lacking time-since-onset.
 
+> **SUPERSEDED in part, 2026-09-11.** The exposure confound described below has
+> since been addressed. Alignment separates targeting under oracle exposure
+> control (within-stratum AUC 0.939), onset is estimable independently
+> (median MAE 1.2 time units), and estimated-exposure control removes a
+> spurious confounded effect exactly. See
+> [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md). The mechanism claim
+> is no longer demoted on identifiability grounds, though it remains untested
+> on real physiology.
+
 **The next test is not a new construct.** It is whether time-since-onset can be
 estimated well enough to separate the two — for example by fitting exposure and
 force direction jointly from the displacement trajectory, since

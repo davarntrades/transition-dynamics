@@ -48,11 +48,24 @@ hypothesis.** It is exploratory and lives in
 Previously load-bearing: that the **direction** of constrained deformation
 identifies which mechanism produced a transition.
 
-**Demoted.** The instrument test showed that exposure duration alone reproduces
-almost the whole effect (AUC 0.84, versus 0.91 for genuine targeting) in the
-operating regime. Without time-since-onset, an observed alignment cannot be
-attributed to mechanism. See
+**Demoted, then partly restored.** The instrument test found that exposure
+duration alone reproduced almost the whole effect in the operating regime, so
+an observed alignment could not be attributed to mechanism.
+
+A four-stage follow-up resolved the identifiability question. Under oracle
+exposure control, alignment separates targeting at within-stratum AUC 0.939
+(0.998 in the detectable regime, against 0.746 for covariance drift). Onset is
+estimable from the displacement trajectory using only baseline-derived rates,
+with median error 1.2 time units, and estimated-exposure control removes a
+deliberately constructed spurious effect exactly, matching the oracle. See
+[`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) and
 [`RESULT_HOMEOSTATIC_PREMISE.md`](RESULT_HOMEOSTATIC_PREMISE.md).
+
+The claim is therefore **identifiable in principle and operationally
+identifiable in the regime tested**, subject to three stated limits and one
+structural caveat: the onset estimator assumes the same exponential-approach
+form the simulator generates, so its validation is close to a consistency
+check. Nothing here tests real physiology.
 
 What survives is weaker and descriptive: alignment carries information that
 neither conventional univariate monitoring nor covariance drift carries, above

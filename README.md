@@ -213,7 +213,7 @@ establishes estimator behaviour only; it is not evidence about physiology.
 |---|---|---|
 | Structural deformation | Active | Falsifiable |
 | Deformation persistence | Active | Falsifiable |
-| Constraint / stiffness | Active, preregistered | Instrument tested; not identifiable without exposure control |
+| Constraint / stiffness | Active, preregistered | Identifiable under exposure control, which is independently estimable |
 | Critical threshold | Active, load-bearing | Must show threshold-like behaviour |
 | Higher-order integration | Active | Tested against pairwise-matched null |
 | Reach / homology condition | Demoted | Not operationalised |
@@ -263,6 +263,8 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/CLAIM_LADDER.md`](docs/CLAIM_LADDER.md) — levels 0–6
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) — withdrawn claims, blind spots
 - [`docs/RESULT_HOMEOSTATIC_PREMISE.md`](docs/RESULT_HOMEOSTATIC_PREMISE.md) — premise test result
+- [`docs/RESULT_EXPOSURE_STAGES.md`](docs/RESULT_EXPOSURE_STAGES.md) — exposure confound, four stages
+- [`docs/RESULT_STAGE1_ORACLE.md`](docs/RESULT_STAGE1_ORACLE.md) — oracle exposure control
 - [`docs/DERIVATION_ALIGNMENT.md`](docs/DERIVATION_ALIGNMENT.md) — consequence vs assumption
 - [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md) — self-attack and grade
 
