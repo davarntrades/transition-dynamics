@@ -35,13 +35,17 @@ established comparator does.
 
 | displacement | AUC univariate | AUC covariance drift | **AUC alignment** |
 |:--:|:--:|:--:|:--:|
+| 0.20 SD | 0.49–0.51 | 0.50 | 0.54–0.56 (chance) |
 | 0.50 SD | 0.49 | 0.56–0.63 | **0.91–0.92** |
-| 2.85 SD | 0.53 | 0.20 | **1.00** |
+| 2.85 SD | 0.53–0.56 | 0.04–0.20 | **1.00** |
 
 Univariate ≈ 0.50 is true by construction (it is the matching variable) and is
 not a finding. Covariance drift is **not** matched on, so its weakness is a
-finding: at large displacement it inverts to 0.20, because concentrating force
-in one direction perturbs covariance *less* than spreading it.
+finding: at large displacement it **inverts**, to 0.20 for distributed
+targeting and 0.04 for single-coordinate targeting. Concentrating force in one
+direction perturbs the covariance structure *less* than spreading it, so a
+drift-based detector ranks a sharply targeted insult as more benign than a
+diffuse one of the same clinical severity.
 
 This is the first result in this programme where the Transition Dynamics
 quantity beats both established comparators on a task neither performs.
@@ -141,6 +145,8 @@ one.
 
 Reproduce: `analysis/experiments/homeostatic_premise.py`,
 `analysis/experiments/alignment_identifiability.py`.
+Generated tables: [`../analysis/results/homeostatic_premise.md`](../analysis/results/homeostatic_premise.md),
+[`../analysis/results/alignment_identifiability.md`](../analysis/results/alignment_identifiability.md).
 Derivation: [`DERIVATION_ALIGNMENT.md`](DERIVATION_ALIGNMENT.md).
 
 ---

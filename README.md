@@ -262,6 +262,8 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 **Epistemic position**
 - [`docs/CLAIM_LADDER.md`](docs/CLAIM_LADDER.md) — levels 0–6
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) — withdrawn claims, blind spots
+- [`docs/RESULT_HOMEOSTATIC_PREMISE.md`](docs/RESULT_HOMEOSTATIC_PREMISE.md) — premise test result
+- [`docs/DERIVATION_ALIGNMENT.md`](docs/DERIVATION_ALIGNMENT.md) — consequence vs assumption
 - [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md) — self-attack and grade
 
 **Provenance**
