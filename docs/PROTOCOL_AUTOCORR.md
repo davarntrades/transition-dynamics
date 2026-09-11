@@ -1,7 +1,25 @@
 # Frozen confirmatory protocol — window autocorrelation as an incremental predictor
 
-**Status: PROPOSED, awaiting approval. The 600 confirmatory patients have not
-been accessed.**
+**Status: FROZEN — 2026-09-11. The 600 confirmatory patients have not been
+accessed. Nothing in this document may be changed by any later run.**
+
+> ## V2 is a development-selected candidate, not a confirmed survivor
+>
+> Window autocorrelation was **chosen by a search over nine candidate
+> representations on development data**. It is the arm that looked best in that
+> search. That is a selection event, not a finding.
+>
+> Selected-on-development quantities routinely fail on fresh patients. Three
+> have already done so in this programme. Until the one-shot confirmatory run
+> reports, V2 carries **no evidential status whatever** beyond "survived a
+> development screen", and must not be described as a result, a signal, a
+> discovery, or evidence for anything.
+>
+> The development numbers in
+> [`RESULT_REPRESENTATION_SEARCH.md`](RESULT_REPRESENTATION_SEARCH.md) are the
+> *reason for testing it*. They are not a preliminary confirmation of it, and
+> they may not be pooled with, averaged into, or cited alongside the
+> confirmatory result.
 
 ---
 
@@ -81,38 +99,58 @@ All three are required at every horizon that passes the primary criterion.
 
 ## 5. FROZEN DECISION RULE
 
-Reported under **both** rules. Neither is chosen after seeing the result.
+### The binding criterion is STRICT. It is the only criterion that can produce a SURVIVED verdict.
 
-### PRIMARY rule (AUPRC-led — matches where the development signal is)
+This is the same bar the structural-displacement protocol used. It is
+preserved unchanged so that this candidate is judged by a standard set before
+it existed, and not by one shaped around it.
 
-**SURVIVED** requires all of:
+**SURVIVED** requires **all** of:
 
-1. ΔAUPRC vs B\* $>0$ with Bonferroni 95% CI ($\alpha=0.05/3$) excluding 0 at
-   **both** the 10 and 15 min horizons;
-2. all three controls in §4 passed at those horizons;
-3. no calibration penalty: Brier $\le$ B\* $+0.005$ and
+1. $\Delta$AUPRC vs B\* $>0$ with Bonferroni 95% CI ($\alpha=0.05/3$)
+   excluding 0 at **both** the 10 and 15 min horizons;
+2. $\Delta$AUROC vs B\* $>0.01$ with Bonferroni 95% CI excluding 0 at **both**
+   those horizons;
+3. all three destructive controls in §4 passed at those horizons;
+4. no calibration penalty: Brier $\le$ B\* $+0.005$ and
    $\lvert\text{slope}(A)-\text{slope}(B^*)\rvert\le0.15$;
-4. no false-alert penalty: sensitivity at 10% FAR $\ge$ B\*;
-5. reproduced on the secondary endpoint (MAP < 55) at $\ge1$ horizon.
+5. no false-alert penalty: sensitivity at 10% FAR $\ge$ B\*;
+6. reproduced on the secondary endpoint (MAP < 55) at $\ge1$ horizon.
 
-### STRICT rule (both metrics — the bar the structural protocol used)
+### Other binding verdicts
 
-As above, **plus** ΔAUROC $>0.01$ with CI excluding 0 at both horizons.
-
-> On development data the candidate **passes the primary rule and fails the
-> strict rule.** That is declared here, before the confirmatory run. If it
-> passes strict on fresh patients, that is a stronger result than development
-> predicted and will be reported as such.
-
-### Other verdicts
-
-- **FALSIFIED** — ΔAUPRC CI entirely below zero at ≥ 2 horizons.
-- **NOT SUPPORTED** — valid and powered, criterion 1 fails.
+- **FALSIFIED** — $\Delta$AUPRC CI entirely below zero at $\ge2$ horizons.
+- **NOT SUPPORTED** — harness valid and adequately powered, criterion 1 or 2
+  fails.
 - **UNRESOLVED** — < 30 event-patients at a horizon, prevalence < 1%, or a
-  harness defect.
-- **EXPLORATORY** — passes at one horizon only, or passes at 5 min while
-  failing 10 and 15 (contradicting the directional prespecification), or
-  passes the primary criterion while failing any control in §4.
+  harness defect invalidating the run.
+- **EXPLORATORY** — passes criteria 1 and 2 at one horizon only, or passes at
+  5 min while failing 10 and 15 (contradicting the directional
+  prespecification), or passes 1 and 2 while failing any control in §4.
+
+---
+
+### SECONDARY / PROVISIONAL — AUPRC-led interpretation
+
+**This is a labelled secondary reading. It cannot produce SURVIVED, cannot
+alter the binding verdict, and carries no advancement authority.**
+
+It is recorded because the development screen selected V2 on AUPRC alone, and
+suppressing its confirmatory value would hide the one quantity the candidate
+was chosen for.
+
+> **Provisional AUPRC-led observation:** criteria 1 and 3–6 met, criterion 2
+> (AUROC) not met.
+
+Where this occurs, the binding verdict is **NOT SUPPORTED**, and the secondary
+observation is reported beneath it under that exact label — never as a
+qualified pass, a partial survival, a trend, or a near-miss.
+
+**Declared before the run:** on development data the candidate meets the
+AUPRC-led reading and **fails the binding STRICT criterion** ($\Delta$AUROC
+spans zero at every horizon). The most likely confirmatory outcome under the
+binding rule is therefore **NOT SUPPORTED**. Recording that expectation now
+removes any interpretive freedom later.
 
 ---
 
@@ -123,14 +161,43 @@ pre-hypotensive windows beyond level, trend, dispersion, elapsed time and mean
 recent displacement**, with the gain dependent on temporal order and channel
 identity.
 
-It would remain open whether the source is physiological or a subtler
-instrumentation signature than the repeated-sample probe detects. Resolving
-that is the **next** experiment, not this one, and would require channels with
-genuinely different acquisition characteristics — not a reinterpretation of
-this result.
-
 It would establish nothing about Transition Dynamics' source equations. No
 quantity in this protocol derives from them.
+
+### 6.1 The instrumentation rival hypothesis — carried explicitly
+
+$$R_{\text{instr}}:\ \text{the gain reflects monitor acquisition behaviour — refresh
+rate, sample-and-hold, quantisation — not physiology.}$$
+
+$R_{\text{instr}}$ is **not a caveat. It is a live competing explanation of
+equal standing**, and the confirmatory design cannot discriminate against it.
+
+The evidence bounding it is weak by construction. The six channels are heavily
+held: identical consecutive samples make up 0.962 of PLETH_SPO2, 0.900 of
+ETCO2, 0.721 of HR, 0.438 of ART_MBP, 0.376 of ART_DBP, 0.201 of ART_SBP; and
+Spearman(lag-1 AC, repeated fraction) reaches $-0.836$ for PLETH_SPO2. The
+repeated-sample probe shows only that the *crudest* form of the artefact does
+not account for the gain. A subtler acquisition signature would pass that probe
+untouched.
+
+### 6.2 Interpretations that are prohibited regardless of outcome
+
+A SURVIVED verdict **does not license**, and no document in this repository may
+assert, that window autocorrelation represents:
+
+- physiological recovery or relaxation;
+- critical slowing down;
+- homeostasis, homeostatic reserve, or loss of regulatory control;
+- stiffness, $\Lambda$, $\Sigma_0^{-1}$, $S(t)$, $Q_i$, deformation, or
+  persistence in any form;
+- any dynamical mechanism whatever.
+
+**A mechanistic reading may be attached only by an experiment whose design can
+discriminate that mechanism from $R_{\text{instr}}$ and from the others on this
+list.** This experiment cannot. Discriminating would require channels with
+genuinely different acquisition characteristics — a high-rate waveform
+alongside a held numeric — which this six-channel panel does not contain.
+That is the **next** experiment, not a reinterpretation of this one.
 
 ---
 
@@ -141,6 +208,26 @@ threshold structure **and** temporal organisation of variability have all
 failed to add reproducible information beyond strong marginal baselines. The
 stopping rule applies: this branch lacks empirical incremental value and the
 recommendation is fundamental reformulation, not further optimisation.
+
+---
+
+## 8. Freeze declaration
+
+Frozen 2026-09-11, before any confirmatory patient was loaded, queried,
+summarised or otherwise accessed.
+
+Fixed by this document and **not tunable by any later run**: the estimator
+($\rho_i$, $\tau_{\mathrm{AC1},i}$, lag 1, 300 s window, 60 s stride, minimum
+20 finite samples, 12 features); the baseline B\* and its 41 features; the
+endpoint and secondary endpoint; the three horizons; the baseline window,
+feature window and blanking gap; every exclusion and censoring rule;
+missingness handling; the patient-level split and 5-fold grouped CV; the three
+destructive controls and their 200 permutations; every numerical threshold in
+§5; and the directional prespecification that 10 and 15 min pass while 5 min
+does not.
+
+No further development-data analysis will be performed on this candidate. The
+confirmatory set is evaluated **once**.
 
 ---
 

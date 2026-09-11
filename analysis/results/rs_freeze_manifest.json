@@ -1,0 +1,13 @@
+{
+ "docs/PROTOCOL_AUTOCORR.md": "2a96f60b1baf4e20910a661095239e80800e81474d02eb2433cb35e4a43f46e8",
+ "analysis/repsearch/blocks.py": "b996ee106b8f008485f91647dd55508d910acb32101d322e20bbd1a65c1839d1",
+ "analysis/repsearch/variability.py": "ed5a74f2f90b849c071580ce315606713044a7284b30ae6d7ccd0456afa62026",
+ "analysis/repsearch/repsearch_dev.py": "f711ea8be5f8f9f4bf71d1cf83d6e320f1cc058105c8c181e86617eb5a0638f5",
+ "analysis/repsearch/cohort_rs.py": "fc3a3a2c781fa6f40cbb890897938f34cbf5fb59058229f4f9d60a2cc393f5ad",
+ "analysis/results/rs_split.json": "a888ca9d5a67b70af0363bd659009c31e7de6911398380f426a68a1745525ffd",
+ "analysis/structural/windows.py": "eac882aa2c2106eec79b3210f59b55da60af8323d633a5257170aee5440d916b",
+ "analysis/structural/features.py": "684a492bb1e2666aa5e56cf594aec42b963f69c32898c5011a7630053edcc38e",
+ "analysis/structural/models.py": "a55a2d2d3f4da6f9540f1753c13c1640cf79b8ec0bdc153c802ff0ab675dbdb1",
+ "analysis/structural/cohort.py": "8b541147c7047d55234953f50575c260a879df987ccf0347f2a2956e1df2fc11",
+ "_note": "SHA-256 of every file fixing the frozen H-AC specification, recorded before any confirmatory patient was accessed."
+}

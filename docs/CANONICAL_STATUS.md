@@ -276,7 +276,28 @@ quantised (SpO₂ 96% identical consecutive samples) and an instrumentation
 origin is not excluded.
 
 $Q_i$ is **demoted for this application**; its protocol was withdrawn before
-freezing. See [`RESULT_REPRESENTATION_SEARCH.md`](RESULT_REPRESENTATION_SEARCH.md)
+freezing.
+
+**V2 is a development-selected candidate, not a confirmed survivor.** It was
+chosen by a search over nine representations on development data — a selection
+event, not a finding. It carries no evidential status until the one-shot
+confirmatory run reports, and its development numbers may not be pooled with or
+cited alongside that result.
+
+The successor protocol is **FROZEN** with the pre-existing **STRICT** criterion
+binding: SURVIVED requires **both** ΔAUPRC and ΔAUROC significant at 10 and
+15 min. The AUPRC-led reading is recorded only as a labelled
+secondary/provisional observation with no advancement authority. Declared
+before the run: development meets the AUPRC-led reading and **fails STRICT**,
+so the most likely binding verdict is NOT SUPPORTED.
+
+The instrumentation/quantisation explanation is carried as a **live rival
+hypothesis of equal standing**, which this design cannot discriminate against.
+No mechanistic reading — recovery, relaxation, critical slowing down,
+homeostasis, or any revival of Λ, Σ₀⁻¹, S(t) or Q_i — may be attached to any
+outcome of this experiment.
+
+See [`RESULT_REPRESENTATION_SEARCH.md`](RESULT_REPRESENTATION_SEARCH.md)
 and [`PROTOCOL_AUTOCORR.md`](PROTOCOL_AUTOCORR.md).
 
 ---
