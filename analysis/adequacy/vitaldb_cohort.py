@@ -48,7 +48,7 @@ INTERVAL_S = 2
 MIN_HOURS = 6.5
 MIN_COVERAGE = 0.80
 N_CALIB = 40
-N_CONFIRM = 100
+N_CONFIRM = 10_000   # amended 2026-09-11: all remaining eligible
 
 _HERE = os.path.dirname(__file__)
 DATA = os.path.join(_HERE, "..", "..", "data", "real", "vitaldb")
@@ -86,3 +86,5 @@ if __name__ == "__main__":
     with open(os.path.join(_HERE, "..", "results", "vitaldb_split.json"),
               "w") as fh:
         json.dump(s, fh, indent=1)
+
+BASELINE_MINUTES = 120   # amended 2026-09-11, see docs/AMENDMENT_2026-09-11_STATIONARITY.md
