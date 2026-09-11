@@ -155,6 +155,32 @@ is the move this programme forbids.
 
 ---
 
+## 10. Real-physiology transfer — NOT SUPPORTED (2026-09-11)
+
+First valid real-data test. VitalDB, CC-BY 4.0, 2-second sampling, **56
+admissible recordings** against a required 50 — a scientific determination,
+not an admissibility failure.
+
+| gate | required | observed | |
+|---|:--:|:--:|:--:|
+| advantage over surrogates | CI excludes 0 | +7% [−6%, +19%] | **FAIL** |
+| baseline-rate vs curvature correlation | ≥ 0.50 | **0.00** [−0.15, 0.15] | **FAIL** |
+| M-exp selection rate | ≥ 60% | 62% | pass |
+| M-exp beats free-rate variant | > 50% | 89% | pass |
+
+The exponential form contributes nothing: baseline rates imply sub-minute
+relaxation, so over multi-hour segments the model is fully saturated in 100% of
+cases and differs from an explicit step by 0.28% in held-out error, with the
+step winning 57% of the time.
+
+Baseline autocorrelation measures fast fluctuation decay (~1 min); trajectory
+curvature reflects slow regulation (~107 min). No baseline resolution bridges
+them. **The onset estimator is not transferable to real physiology as
+specified**, and no mechanism or early-detection claim may proceed on its
+basis. See [`RESULT_VITALDB_ADEQUACY.md`](RESULT_VITALDB_ADEQUACY.md).
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail

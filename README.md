@@ -266,6 +266,10 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/DATA_REQUIREMENTS_REAL.md`](docs/DATA_REQUIREMENTS_REAL.md) — data needed and access blocker
 - [`docs/REAL_DATA_ACQUISITION.md`](docs/REAL_DATA_ACQUISITION.md) — **real data obtained, tested, and rejected by Stage A**
 
+**Real-physiology transfer — NOT SUPPORTED**
+- [`docs/RESULT_VITALDB_ADEQUACY.md`](docs/RESULT_VITALDB_ADEQUACY.md) — first valid real-data test
+- [`docs/AMENDMENT_2026-09-11_STATIONARITY.md`](docs/AMENDMENT_2026-09-11_STATIONARITY.md) — screen amendment
+
 **Canonical record**
 - [`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md) — **authoritative status of every claim**
 
