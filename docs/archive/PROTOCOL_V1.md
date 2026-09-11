@@ -8,8 +8,6 @@
 ![Validation](https://img.shields.io/badge/External-MIMIC--IV_·_eICU-4c1d95?style=flat-square)
 ![Metric](https://img.shields.io/badge/Headline_Metric-AUPRC_not_AUROC-b91c1c?style=flat-square)
 ![Topology](https://img.shields.io/badge/Persistent_Homology-Deferred_By_Design-047857?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
-![Rights](https://img.shields.io/badge/©-Davarn_Morrison-555555?style=flat-square)
 
 </div>
 
@@ -30,7 +28,6 @@
 
 ---
 
-
 *"Choose the endpoint before you choose the estimator. Otherwise the estimator will choose the endpoint for you."*
 
 *— Davarn Morrison, 2026*
@@ -50,17 +47,12 @@ MIMIC-IV was evaluated first, as instructed, and **demoted**.
 | H5 | Marginal | Channel count is adequate; temporal support for third-order co-occurrence is not |
 | H6 | **CANNOT TEST** | MIMIC contains **clinician** notes, not patient self-report. Observer language is not the L subspace. Pain scores and RASS are the only patient-sourced items and are far too sparse |
 
-```
-════════════════════════════════════════════════════════════════════
-  DECISION FIXED IN ADVANCE
-
-  A null result in MIMIC-IV would be evidence about SAMPLING RATE,
-  not about the hypothesis. Running it as primary would generate an
-  uninformative null and invite the wrong conclusion.
-
-  MIMIC-IV is the EXTERNAL VALIDATION cohort.
-════════════════════════════════════════════════════════════════════
-```
+> **DECISION FIXED IN ADVANCE**
+>
+> A null result in MIMIC-IV would be evidence about SAMPLING RATE,
+> not about the hypothesis. Running it as primary would generate an
+> uninformative null and invite the wrong conclusion.
+> MIMIC-IV is the EXTERNAL VALIDATION cohort.
 
 ---
 
@@ -98,9 +90,7 @@ transition event of the required severity (psychotic relapse).
 
 ## 3. Transition Event Definition
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THE ENDPOINT IS PHYSIOLOGY, NOT CLINICIAN BEHAVIOUR                 ║
-╚══════════════════════════════════════════════════════════════════════╝
+> THE ENDPOINT IS PHYSIOLOGY, NOT CLINICIAN BEHAVIOUR
 
 Vasopressor initiation is a **treatment decision** made by clinicians reading
 the same vital signs the model reads. A model predicting it is partly
@@ -122,22 +112,15 @@ would make H6 circular.
 
 ## 4. Windows
 
-```
-════════════════════════════════════════════════════════════════════
-  BASELINE         first 8 h of stable recording; no active titration
-                   → yields  Σ₀,  μ₀,  Λ_B = Σ₀⁻¹,  θ = p95(‖ΔG‖)
-
-  PRE-TRANSITION   8 h immediately before event onset
-
-  BLANKING         30 min immediately pre-event — EXCLUDED
-                   → treatment contamination and reverse causation
-
-  CONTROL          length-of-stay matched admissions with no event,
-                   sampled at matched relative times
-
-  PLACEBO          a pre-baseline interval; must show NO effect
-════════════════════════════════════════════════════════════════════
-```
+> **BASELINE         first 8 h of stable recording; no active titration**
+>
+> → yields  Σ₀,  μ₀,  Λ_B = Σ₀⁻¹,  θ = p95(‖ΔG‖)
+> PRE-TRANSITION   8 h immediately before event onset
+> BLANKING         30 min immediately pre-event — EXCLUDED
+> → treatment contamination and reverse causation
+> CONTROL          length-of-stay matched admissions with no event,
+> sampled at matched relative times
+> PLACEBO          a pre-baseline interval; must show NO effect
 
 Sliding evaluation: 2 h analysis window, 30 min stride (HiRID); 6 h window,
 1 h stride (MIMIC-IV, resolution-constrained).
@@ -151,7 +134,7 @@ controls the covariance estimate.
 
 ## 5. Estimators
 
-All implemented in [`../analysis/estimators.py`](../analysis/estimators.py).
+All implemented in [`../analysis/estimators.py`](../../analysis/estimators.py).
 
 | Quantity | Function | Definition |
 |---|---|---|
@@ -170,20 +153,17 @@ All implemented in [`../analysis/estimators.py`](../analysis/estimators.py).
 
 ### 5.1 Persistent homology is deferred by design
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  Persistent homology is NOT used in the primary analysis.        │
-│                                                                   │
-│  It is introduced only after the covariance and nerve-complex     │
-│  estimators are shown insufficient, and its introduction          │
-│  requires a written statement of exactly what the simpler         │
-│  estimators failed to resolve.                                    │
-│                                                                   │
-│  A more sophisticated estimator that is reached for before the    │
-│  simple one has failed is a way of generating a positive result,  │
-│  not a way of testing a hypothesis.                               │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> Persistent homology is NOT used in the primary analysis.
+> It is introduced only after the covariance and nerve-complex
+> estimators are shown insufficient, and its introduction
+> requires a written statement of exactly what the simpler
+> estimators failed to resolve.
+> A more sophisticated estimator that is reached for before the
+> simple one has failed is a way of generating a positive result,
+> not a way of testing a hypothesis.
+> ──────────────────────────────────────────────────────────────────
 
 ---
 
@@ -201,12 +181,9 @@ event and leaks the label directly into the covariance structure — a window
 sampled twice as often has a different empirical covariance for reasons that
 have nothing to do with physiology.
 
-```
-════════════════════════════════════════════════════════════════════
-  IF THE SAMPLING-RATE-ONLY MODEL APPROACHES THE REAL MODEL,
-  THE ENTIRE RESULT IS LEAKAGE — H1 THROUGH H5 TOGETHER.
-════════════════════════════════════════════════════════════════════
-```
+> **IF THE SAMPLING-RATE-ONLY MODEL APPROACHES THE REAL MODEL,**
+>
+> THE ENTIRE RESULT IS LEAKAGE — H1 THROUGH H5 TOGETHER.
 
 ### 6.2 Intervention masking
 
@@ -250,7 +227,7 @@ between explicitly nested models:
 ```
 
 **Headline metric: AUPRC, not AUROC.** At the prevalences in
-[`../analysis/base_rates.py`](../analysis/base_rates.py), AUROC is cosmetically
+[`../analysis/base_rates.py`](../../analysis/base_rates.py), AUROC is cosmetically
 flattering and nearly uninformative about utility. AUROC is reported for
 comparability with prior literature only, and never as the primary claim.
 
@@ -334,18 +311,13 @@ Structural deformation from passive sensing; self-report deformation from EMA.
 Rolling coupling ρ(t) and signed `divergence_index` over the 14 days before
 adjudicated relapse, against the person's own baseline coupling.
 
-```
-════════════════════════════════════════════════════════════════════
-  RESPONSE-TIMING-ONLY NEGATIVE CONTROL
-
-  A model using ONLY when EMA responses arrived — never their
-  content — must FAIL to reproduce the effect.
-
-  Declining compliance is itself a known relapse predictor. If
-  timing alone reproduces the decoupling, H6 is measuring
-  compliance, not decoupling, and is dead.
-════════════════════════════════════════════════════════════════════
-```
+> **RESPONSE-TIMING-ONLY NEGATIVE CONTROL**
+>
+> A model using ONLY when EMA responses arrived — never their
+> content — must FAIL to reproduce the effect.
+> Declining compliance is itself a known relapse predictor. If
+> timing alone reproduces the decoupling, H6 is measuring
+> compliance, not decoupling, and is dead.
 
 Compliance-matched sensitivity analysis is run regardless of the control's
 outcome.
@@ -400,30 +372,20 @@ result is how a leakage artifact becomes a publication.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   If the sampling-rate-only model works, everything here is          ║
-║   measuring how often a worried nurse takes a reading.               ║
-║                                                                      ║
-║   Run that control first.                                            ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Experimental Protocol*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **If the sampling-rate-only model works, everything here is**
+>
+> measuring how often a worried nurse takes a reading.
+> Run that control first.
 
 ---
 
 ## Related Work
 
-- [`../README.md`](../README.md) — Preregistration
-- [`MATHEMATICAL-AUDIT.md`](MATHEMATICAL-AUDIT.md) — Adversarial audit
-- [`LITERATURE.md`](LITERATURE.md) — Literature comparison
-- [`FALSIFICATION-MATRIX.md`](FALSIFICATION-MATRIX.md) — Kill conditions
+- [`../README.md`](../../README.md) — Preregistration
+- [`MATHEMATICAL_AUDIT.md`](../MATHEMATICAL_AUDIT.md) — Adversarial audit
+- [`LITERATURE.md`](../LITERATURE.md) — Literature comparison
+- [`FALSIFICATION-MATRIX.md`](FALSIFICATION_MATRIX_V1.md) — Kill conditions
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Experimental Protocol

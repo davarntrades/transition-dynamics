@@ -7,8 +7,6 @@
 ![Rule](https://img.shields.io/badge/Rule-Abandon_Not_Adjust-b91c1c?style=flat-square)
 ![Scope](https://img.shields.io/badge/Hypotheses-H1–H6-1f2937?style=flat-square)
 ![Control](https://img.shields.io/badge/Global_Kill-Sampling_Rate_Leakage-4c1d95?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
-![Rights](https://img.shields.io/badge/©-Davarn_Morrison-555555?style=flat-square)
 
 </div>
 
@@ -28,7 +26,6 @@
 > `docs/LIMITATIONS.md`. **Do not cite this file for current claims.**
 
 ---
-
 
 *"Write the kill condition before the data arrives. Afterwards, every threshold is a negotiation with your own hope."*
 
@@ -101,17 +98,12 @@ Any one of these ends the programme regardless of H1–H6 outcomes.
 | **Falsification** | Variance rises **and** dimensionality is flat or rising **and** Λ_A models outperform Λ_B models |
 | **Forces abandonment** | The primary interpretation is **abandoned, not redefined**. Work continues under §4's explicitly modified criterion `‖Λ⁻¹ΔG‖ > T`, labelled as a modification of the original mathematics |
 
-```
-════════════════════════════════════════════════════════════════════
-  H3 IS THE MOST INFORMATIVE MEASUREMENT IN THIS PREREGISTRATION.
-
-  HeRO says rigidification precedes neonatal sepsis.
-  van de Leemput says destabilisation precedes mood transition.
-  Both are published. Both cannot be the general law.
-
-  This test makes one of them lose on ICU data.
-════════════════════════════════════════════════════════════════════
-```
+> **H3 IS THE MOST INFORMATIVE MEASUREMENT IN THIS PREREGISTRATION.**
+>
+> HeRO says rigidification precedes neonatal sepsis.
+> van de Leemput says destabilisation precedes mood transition.
+> Both are published. Both cannot be the general law.
+> This test makes one of them lose on ICU data.
 
 ---
 
@@ -131,15 +123,11 @@ Any one of these ends the programme regardless of H1–H6 outcomes.
 | **Falsification** | ΔAIC ≤ 10 favouring the smooth model, **or** CV(T_critical) > 0.5 |
 | **Forces abandonment** | The **irreversibility claim** and the separatrix die. A predictor may survive. These outcomes are reported separately and must **never** be presented as partial support for the threshold |
 
-```
-════════════════════════════════════════════════════════════════════
-  H4 IS LOAD-BEARING.
-
-  It is the only hypothesis distinguishing this framework from the
-  existing early-warning literature. Everything else, in its weak
-  form, is already published.
-════════════════════════════════════════════════════════════════════
-```
+> **H4 IS LOAD-BEARING.**
+>
+> It is the only hypothesis distinguishing this framework from the
+> existing early-warning literature. Everything else, in its weak
+> form, is already published.
 
 ---
 
@@ -183,20 +171,19 @@ Any one of these ends the programme regardless of H1–H6 outcomes.
 
 What survives which death:
 
-```
-┌───────────────────────────────────────────────────────────────────┐
-│  G1 sampling leakage    →  EVERYTHING DIES                        │
-│  H1 dies                →  H2–H5 not run. Programme over          │
-│  H2 dies                →  ΔG survives; the product form does not │
-│  H3 dies                →  Λ_B abandoned; continue under Λ_A with │
-│                            the modification declared              │
-│  H4 dies                →  Separatrix and irreversibility die;    │
-│                            a predictor may survive                │
-│  H5 dies                →  Integration decorative; core intact    │
-│  H6 dies                →  Structure/language claim has no        │
-│                            physiological instantiation            │
-└───────────────────────────────────────────────────────────────────┘
-```
+> **───────────────────────────────────────────────────────────────────**
+>
+> G1 sampling leakage    →  EVERYTHING DIES
+> H1 dies                →  H2–H5 not run. Programme over
+> H2 dies                →  ΔG survives; the product form does not
+> H3 dies                →  Λ_B abandoned; continue under Λ_A with
+> the modification declared
+> H4 dies                →  Separatrix and irreversibility die;
+> a predictor may survive
+> H5 dies                →  Integration decorative; core intact
+> H6 dies                →  Structure/language claim has no
+> physiological instantiation
+> ───────────────────────────────────────────────────────────────────
 
 ### The strongest survivable outcome
 
@@ -227,29 +214,20 @@ G1 runs first.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Every row above was written before any data was touched.           ║
-║   That is the only thing that makes them kill conditions             ║
-║   rather than descriptions.                                          ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Falsification Matrix*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **Every row above was written before any data was touched.**
+>
+> That is the only thing that makes them kill conditions
+> rather than descriptions.
 
 ---
 
 ## Related Work
 
-- [`../README.md`](../README.md) — Preregistration
-- [`MATHEMATICAL-AUDIT.md`](MATHEMATICAL-AUDIT.md) — Adversarial audit
-- [`LITERATURE.md`](LITERATURE.md) — Literature comparison
-- [`PROTOCOL.md`](PROTOCOL.md) — Experimental protocol
+- [`../README.md`](../../README.md) — Preregistration
+- [`MATHEMATICAL_AUDIT.md`](../MATHEMATICAL_AUDIT.md) — Adversarial audit
+- [`LITERATURE.md`](../LITERATURE.md) — Literature comparison
+- [`PROTOCOL.md`](PROTOCOL_V1.md) — Experimental protocol
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Falsification Matrix

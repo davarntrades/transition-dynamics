@@ -7,7 +7,6 @@
 ![Classes](https://img.shields.io/badge/Classes-T1–T6-1f2937?style=flat-square)
 ![Outcomes](https://img.shields.io/badge/Outcomes-A_to_E-4c1d95?style=flat-square)
 ![Default](https://img.shields.io/badge/Default_Expectation-Not_Universal-b91c1c?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -49,27 +48,20 @@ a meaningless middle.
 
 ### 2.1 The five permitted outcomes
 
-```
-════════════════════════════════════════════════════════════════════
-  A  UNIVERSAL PRECURSOR
-     The same signature, same sign, in every powered class.
-
-  B  FAMILY-SPECIFIC PRECURSOR
-     Present in exogenous-insult classes (T2, T3), absent in
-     endogenous and abrupt classes (T4, T6).
-
-  C  MECHANISM-SPECIFIC PRECURSOR
-     z sign varies by class in the direction the mechanism predicts:
-     positive for exogenous, near-null or negative for endogenous.
-
-  D  PREDICTIVE BUT NON-MECHANISTIC
-     Structural quantities predict, but z carries no mechanistic
-     information and the sign does not track class.
-
-  E  NO PRECURSOR
-     Nothing beyond M1 in any powered class.
-════════════════════════════════════════════════════════════════════
-```
+> **A  UNIVERSAL PRECURSOR**
+>
+> The same signature, same sign, in every powered class.
+> B  FAMILY-SPECIFIC PRECURSOR
+> Present in exogenous-insult classes (T2, T3), absent in
+> endogenous and abrupt classes (T4, T6).
+> C  MECHANISM-SPECIFIC PRECURSOR
+> z sign varies by class in the direction the mechanism predicts:
+> positive for exogenous, near-null or negative for endogenous.
+> D  PREDICTIVE BUT NON-MECHANISTIC
+> Structural quantities predict, but z carries no mechanistic
+> information and the sign does not track class.
+> E  NO PRECURSOR
+> Nothing beyond M1 in any powered class.
 
 ### 2.2 Which outcome is expected
 
@@ -80,16 +72,14 @@ constrained displacement only**. It failed on the fold mechanism (AUC 0.30) and
 was blind to the noise mechanism (AUC 0.53). If the physiology mirrors the
 mathematics, universality is not available.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  Outcome A would be SURPRISING and should be treated with        │
-│  suspicion, not celebration.                                      │
-│                                                                   │
-│  A signature that appears in every class — including T6, where    │
-│  no precursor should exist — is the signature of a confound,      │
-│  most likely acquisition behaviour (M0).                          │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> Outcome A would be SURPRISING and should be treated with
+> suspicion, not celebration.
+> A signature that appears in every class — including T6, where
+> no precursor should exist — is the signature of a confound,
+> most likely acquisition behaviour (M0).
+> ──────────────────────────────────────────────────────────────────
 
 Outcome **D** is the most likely genuinely-positive result, and it is a
 significant demotion: it would mean the structural quantities work as
@@ -122,42 +112,30 @@ carry no confirmatory weight.
 
 ## 4. The Mechanistic Prediction That Would Be Genuinely New
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  If z(t) > 0 in T2/T3 (exogenous insult) and z(t) ≈ 0 in T6         ║
-║  (abrupt), at MATCHED deformation magnitude ‖ΔG‖, then the           ║
-║  direction of constrained deformation carries mechanistic            ║
-║  information that magnitude alone does not.                          ║
-║                                                                      ║
-║  Nothing located in the early-warning literature claims this.        ║
-║                                                                      ║
-║  It is also the outcome most easily produced by class-correlated     ║
-║  confounding — sepsis patients are monitored differently — which     ║
-║  is why M0 is stratified BY CLASS, not merely run once overall.      ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **If z(t) > 0 in T2/T3 (exogenous insult) and z(t) ≈ 0 in T6**
+>
+> (abrupt), at MATCHED deformation magnitude ‖ΔG‖, then the
+> direction of constrained deformation carries mechanistic
+> information that magnitude alone does not.
+> Nothing located in the early-warning literature claims this.
+> It is also the outcome most easily produced by class-correlated
+> confounding — sepsis patients are monitored differently — which
+> is why M0 is stratified BY CLASS, not merely run once overall.
 
 ---
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   T6 is where this is supposed to fail.                              ║
-║   If it succeeds there, the finding is a confound.                   ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Transition Taxonomy*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **T6 is where this is supposed to fail.**
+>
+> If it succeeds there, the finding is a confound.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`HYPOTHESIS.md`](HYPOTHESIS.md) · [`COMPETING_MODELS.md`](COMPETING_MODELS.md) · [`DATASET_REQUIREMENTS.md`](DATASET_REQUIREMENTS.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Transition Taxonomy

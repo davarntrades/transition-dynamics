@@ -7,7 +7,6 @@
 ![Gate](https://img.shields.io/badge/M0-Runs_First_Non_Negotiable-b91c1c?style=flat-square)
 ![Rule](https://img.shields.io/badge/Winning_≠_Predicting-1f2937?style=flat-square)
 ![Null](https://img.shields.io/badge/M__null-A_Permitted_Answer-047857?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -20,6 +19,23 @@
 ---
 
 ## The Model Set
+
+```mermaid
+flowchart TD
+    DATA[Multivariate physiological data]
+    DATA --> M0[M0 acquisition control]
+    DATA --> M1[M1 conventional baseline]
+    DATA --> M2[M2 critical slowing down]
+    DATA --> M3[M3 Transition Dynamics]
+    DATA --> M4[M4 combined]
+    M0 --> TEST[Out-of-sample comparison]
+    M1 --> TEST
+    M2 --> TEST
+    M3 --> TEST
+    M4 --> TEST
+    TEST --> SURVIVE[Incremental signal survives]
+    TEST --> FAIL[Hypothesis downgraded or rejected]
+```
 
 | | Model | Inputs | What it represents |
 |:--:|---|---|---|
@@ -39,11 +55,9 @@ required to make that reading fire at all.
 
 ## 1. M0 — The Gate
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  M0 RUNS BEFORE ANY PHYSIOLOGICAL MODEL IS INTERPRETED.              ║
-║                                                                      ║
-║  Not afterwards as a robustness check. First, as a gate.             ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **M0 RUNS BEFORE ANY PHYSIOLOGICAL MODEL IS INTERPRETED.**
+>
+> Not afterwards as a robustness check. First, as a gate.
 
 Clinical measurements are not sampled on a schedule. A worried clinician
 measures more often, orders more labs, re-checks sooner. That concern precedes
@@ -63,15 +77,11 @@ Fixed before running. Not renegotiable afterwards.
 | ≥ 0.50 | **MATERIAL** | M0 and M3 reported jointly in every table and abstract, always |
 | < 0.50 | ACCEPTABLE | Acquisition behaviour does not account for the signal |
 
-```
-════════════════════════════════════════════════════════════════════
-  DO NOT EXPLAIN THIS AWAY.
-
-  There is no argument available at analysis time that converts a
-  CRITICAL verdict into a publishable mechanistic claim. If M0 wins,
-  the finding is about how often people took readings.
-════════════════════════════════════════════════════════════════════
-```
+> **DO NOT EXPLAIN THIS AWAY.**
+>
+> There is no argument available at analysis time that converts a
+> CRITICAL verdict into a publishable mechanistic claim. If M0 wins,
+> the finding is about how often people took readings.
 
 ---
 
@@ -101,17 +111,14 @@ detection.** ΔG scores AUC 1.00 on both detectable mechanisms.
 
 So the decisive comparison is not detection at all:
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  DECISIVE TEST — MECHANISM DISCRIMINATION AT MATCHED MAGNITUDE       ║
-║                                                                      ║
-║  Stratify transitions into mechanism classes. Within a stratum       ║
-║  matched on deformation MAGNITUDE ‖ΔG‖, does z(t) discriminate       ║
-║  mechanism class where ΔG cannot?                                    ║
-║                                                                      ║
-║  Synthetic result: at matched magnitude, dG collapses to AUC 0.56    ║
-║  while z holds at 1.00. Real data must reproduce this or the         ║
-║  novelty claim dies.                                                 ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **DECISIVE TEST — MECHANISM DISCRIMINATION AT MATCHED MAGNITUDE**
+>
+> Stratify transitions into mechanism classes. Within a stratum
+> matched on deformation MAGNITUDE ‖ΔG‖, does z(t) discriminate
+> mechanism class where ΔG cannot?
+> Synthetic result: at matched magnitude, dG collapses to AUC 0.56
+> while z holds at 1.00. Real data must reproduce this or the
+> novelty claim dies.
 
 ---
 
@@ -191,25 +198,16 @@ seeing a positive result is how a leakage artifact becomes a publication.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   If the timestamp-only model wins, the finding is about how         ║
-║   often somebody took a reading. Run it first.                       ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Competing Models*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **If the timestamp-only model wins, the finding is about how**
+>
+> often somebody took a reading. Run it first.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`HYPOTHESIS.md`](HYPOTHESIS.md) · [`CLAIM_LADDER.md`](CLAIM_LADDER.md) · [`FALSIFICATION_CRITERIA.md`](FALSIFICATION_CRITERIA.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Competing Models

@@ -1,182 +1,117 @@
-<div align="center">
+# Demoted Objects
 
-# DEMOTED OBJECTS
+Historical / demoted / exploratory source objects.
 
-**Exploratory Theory · Unresolved Extensions · Non-Primary Claims**
-
-![Status](https://img.shields.io/badge/Status-Demoted_Not_Deleted-b91c1c?style=flat-square)
-![Objects](https://img.shields.io/badge/Objects-1_and_6-1f2937?style=flat-square)
-![Rule](https://img.shields.io/badge/Rule-May_Not_Support_Primary_Claims-4c1d95?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
-![Rights](https://img.shields.io/badge/©-Davarn_Morrison-555555?style=flat-square)
-
-</div>
+> **Standing rule.** Objects on this page are demoted from the primary
+> biomedical hypothesis. They may not be cited as evidence for it, and may not
+> appear in any results table, abstract or claim. An object returns to primary
+> status only when an operationalisation measures **the object itself**, not a
+> proxy that merely correlates with it.
 
 ---
 
-*"Demotion is not deletion. An object that cannot be measured today may be measurable tomorrow — but until then it earns no vote."*
+## Structural truth condition — DEMOTED
 
-*— Davarn Morrison, 2026*
+### Source equation, preserved exactly
 
----
+$$\exists k : H_k(\mathrm{Reach}(X_t)) \not\cong H_k(\mathrm{Reach}(X_0))$$
 
-## Standing Rule
-
-╔══════════════════════════════════════════════════════════════════════╗
-║  Objects in this file are EXPLORATORY THEORY.                        ║
-║                                                                      ║
-║  They may not be cited as evidence for the primary biomedical        ║
-║  Transition Dynamics hypothesis.                                     ║
-║                                                                      ║
-║  They may not appear in any results table, abstract, or claim.       ║
-║                                                                      ║
-║  A demoted object returns to primary status only when a genuine      ║
-║  operationalisation measures the object itself — not a proxy that    ║
-║  merely correlates with it.                                          ║
-╚══════════════════════════════════════════════════════════════════════╝
-
----
-
-## Object 1 — Homological Reachable-Set Truth Condition
-
-### Original form, preserved exactly
-
-```
-  ∃k :  H_k(Reach(X_t))  ≇  H_k(Reach(X_0))
-```
-
-**Status: DEMOTED to exploratory.** Full audit: [`MATHEMATICAL-AUDIT.md`](MATHEMATICAL-AUDIT.md) §1.
+**Status: demoted from the primary empirical hypothesis.** Retained here and in
+[`MATHEMATICAL_AUDIT.md`](MATHEMATICAL_AUDIT.md) as an exploratory object. It is
+**not** the operational definition of physiological deformation, and no
+modified version of it appears anywhere in this repository.
 
 ### Why it was demoted
 
 | # | Reason | Consequence |
-|:--:|---|---|
-| 1 | **Reach(X) is not observable from a single physiological trajectory.** A person emits one path, not a set | The object cannot be estimated even with infinite sampling of one patient |
-| 2 | **Estimating Reach requires assumptions that fail precisely near transition.** Recovering a reachable set from one realisation needs quasi-stationarity over the window | The estimator assumes the negation of what it is meant to detect. This circularity is not fixable by a better estimator |
-| 3 | **Ordinary reachable regions remain contractible.** For a controlled system with connected input set and no excluded region, the reachable tube is path-connected and simply connected, so H₀ = ℤ and H_k = 0 for k ≥ 1 at every t | The condition is never satisfied — not rarely, never. It is vacuous rather than false, and acquires content only relative to a physically realised forbidden region Ω, which the framework does not supply for human physiology |
-| 4 | **Metric change is not homological change.** Every practical estimator computes a distance | A nonzero deformation does not imply H_k changed; a homology change need not produce a large deformation. The two are logically independent |
-| 5 | **`Topology(X_t) − Topology(X_0)` is not a defined operation.** Subtraction does not exist in the category of groups | The difference must be given a numerical functor before it means anything, and that choice is an empirical commitment, not notation |
+|---|---|---|
+| 1 | The reachable set is not observable from a single physiological trajectory — a person emits one path, not a set | Cannot be estimated even with unlimited sampling of one patient |
+| 2 | Estimating a reachable set from one realisation requires near-stationarity over the window | The estimator would assume the negation of what it is meant to detect |
+| 3 | Ordinary reachable regions remain contractible, so the homology groups do not change | The condition is never satisfied, rather than rarely — vacuous unless a genuinely excluded region exists |
+| 4 | A change in metric geometry is not automatically a change in homology | Deformation results license no homological inference, in either direction |
+| 5 | A difference between topological objects must be formally defined; it is not ordinary scalar subtraction | Any numerical version requires a choice of functor, which is an empirical commitment |
 
-### What replaced it in the primary hypothesis
+### What replaced it
 
-Nothing claims to replace it. The primary hypothesis uses a **covariance-operator
-distance** and states plainly that this is a different object. See
+**Nothing claims to replace it.** The primary hypothesis operationalises
+deformation through second-order structure and states plainly that this is a
+different mathematical object. See
 [`MATHEMATICAL_OBJECTS.md`](MATHEMATICAL_OBJECTS.md) §1.
 
 ### What would restore it
 
-A physiological setting in which **Ω is physically realised** — a genuinely
-excluded region of state space, not merely an unlikely one — so that the
-reachable set acquires nontrivial topology, together with an estimator that
-recovers homology rather than a metric summary. Neither exists today.
+A setting in which a genuinely excluded region of physiological state space is
+physically realised, giving the reachable set non-trivial topology, together
+with an estimator that recovers homology rather than a metric summary. Neither
+exists today.
 
 ---
 
-## Object 6 — Literal Consciousness–Language Orthogonality
+## Orthogonality law — DEMOTED
 
-### Original form, preserved exactly
+### Source equation, preserved exactly
 
-```
-  C ⟂ L        ∀Δℓ ∈ L,  ΔR_C(t) = 0
-```
+$$\forall\, \Delta\ell \in L,\ \ \Delta R_C(t) = 0$$
 
-**Status: LITERAL FORM DEMOTED AND WITHDRAWN.** Full audit:
-[`MATHEMATICAL-AUDIT.md`](MATHEMATICAL-AUDIT.md) §6.
+**Status: the literal universal zero-effect claim is demoted and withdrawn.**
 
-### Why the literal zero-effect claim is withdrawn
+### Why the literal claim is withdrawn
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  We do NOT claim that linguistic interventions can never affect  │
-│  cognitive or physiological dynamics.                            │
-│                                                                   │
-│  That claim is false. Psychotherapy, verbal instruction and      │
-│  placebo suggestion each move measured physiology. A single      │
-│  counterexample refutes a universally quantified zero, and       │
-│  several are routine.                                             │
-└──────────────────────────────────────────────────────────────────┘
-```
+> We do **not** claim that linguistic interventions can never affect cognitive
+> or physiological dynamics. That claim is false. Verbal intervention,
+> instruction and suggestion each move measured physiology, and a single
+> counterexample refutes a universally quantified zero.
 
-The literal form also asserts a **null**, and a universally quantified
-zero-effect statement cannot be confirmed by any amount of evidence. Its only
-possible empirical fate was refutation, and refutation has occurred.
+The literal form also asserts a null, and a universal zero-effect statement
+cannot be confirmed by any amount of evidence. Its only possible empirical
+outcome was refutation.
 
-### What is retained — exploratory only
+### What is retained, separately and as exploratory only
 
-A **graded pre-transition decoupling** hypothesis:
+A **graded decoupling** hypothesis: that the coupling between self-reported
+state and measured structural state declines during a pre-transition window,
+with the two diverging in sign.
 
-> Coupling between self-reported state and measured structural state declines
-> during a pre-transition window, with signed divergence: structure deforming
-> while self-report stays flat or improves.
+> This is a **different proposition**. Decoupling is graded, local and
+> directional; orthogonality is global and absolute. Evidence for decoupling is
+> not evidence for the orthogonality law and must never be reported as though
+> it were.
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THIS IS A DIFFERENT PROPOSITION FROM C ⟂ L.                         ║
-║                                                                      ║
-║  Decoupling is graded, local and directional.                        ║
-║  Orthogonality is global and absolute.                               ║
-║                                                                      ║
-║  Evidence for decoupling is NOT evidence for orthogonality and       ║
-║  must never be reported as though it were.                           ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**It is not required for the physiological hypothesis to succeed.** The
-primary hypothesis in [`HYPOTHESIS.md`](HYPOTHESIS.md) stands or falls entirely
-without it. Should the decoupling hypothesis fail, nothing in the primary
+**It is not part of the primary physiological hypothesis and is not required
+for it to succeed.** If the decoupling hypothesis fails, nothing in the primary
 hypothesis changes.
 
-Its dominant confound remains unaddressed: declining self-report compliance is
-itself a relapse predictor, so a measured decoupling may be pure missingness
-artifact. The mandatory response-timing-only control is specified in
-[`COMPETING_MODELS.md`](COMPETING_MODELS.md).
+Its dominant confound is unresolved: declining self-report compliance is itself
+a known predictor of deterioration, so any measured decoupling may be a
+missingness artefact. A response-timing-only control is required before the
+result means anything.
 
 ---
 
-## Terminology Separated from the Biomedical Hypothesis
+## Terminology separated from the biomedical hypothesis
 
-The following terms are **removed** from the primary hypothesis, its
-hypotheses, its estimators and its results, because none of them is
-operationally required by anything the primary hypothesis measures:
+These terms are removed from the primary hypothesis, its estimators and its
+results, because none is operationally required by anything being measured.
 
-| Term | Where it now lives | Why removed from the biomedical claim |
+| Term | Status | Reason |
 |---|---|---|
-| **Consciousness** | Exploratory theory only | The primary hypothesis computes Betti numbers of a co-deformation complex. Nothing connects that to experience |
-| **Qualia** | Exploratory theory only | Object 2 is a deformation-persistence product. Its predictive value is testable; its phenomenological interpretation is not tested and is not needed |
-| **Governed qualia** | Exploratory theory only | Λ is used as a stiffness operator. No aspect of the measurement requires a phenomenological reading |
-| **Identity / intelligence** | Exploratory theory only | Not measured, not estimated, not required |
+| Consciousness | Exploratory only | The estimators compute co-deformation structure. Nothing connects that to experience |
+| Qualia | Exploratory only | The deformation–persistence object is testable; its phenomenological reading is not tested and not needed |
+| Governed qualia | Exploratory only | The constraint operator is used as a stiffness operator; no phenomenological reading is required |
 
 The mathematics is unchanged. Only the interpretive vocabulary attached to the
-**biomedical** claim is stripped, so that a physiological result cannot be
-mistaken for evidence about consciousness. Object 2 keeps its equation and
-loses its name — it is referred to throughout the primary documents as
-**deformation-persistence**, not qualia.
+**biomedical** claim is removed, so that a physiological result cannot be
+mistaken for evidence about consciousness.
 
 ---
 
-<div align="center">
+## Scope note
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Two objects were removed from the primary hypothesis.              ║
-║   Neither was deleted. Both keep their reasoning attached.           ║
-║   Neither may vote on a biomedical result.                           ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Demoted Objects*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+This repository contains Transition Dynamics only. Equations belonging to other
+lines of work — runtime governance, safety reachability, and related material —
+are **not** part of this hypothesis and are not reproduced here, including where
+they share notation such as reachability.
 
 ---
 
-## Related Work
-
-- [`../README.md`](../README.md) — Index
-- [`HYPOTHESIS.md`](HYPOTHESIS.md) — Revised primary hypothesis
-- [`MATHEMATICAL_OBJECTS.md`](MATHEMATICAL_OBJECTS.md) — Surviving objects
-- [`MATHEMATICAL-AUDIT.md`](MATHEMATICAL-AUDIT.md) — v1 audit that produced these demotions
+© 2026 Davarn Morrison · Transition Dynamics

@@ -6,7 +6,6 @@
 
 ![Rule](https://img.shields.io/badge/Rule-No_Level_Skipping-b91c1c?style=flat-square)
 ![Current](https://img.shields.io/badge/Current_Position-Level_0-1f2937?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -20,20 +19,26 @@
 
 ## Current Position
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   TRANSITION DYNAMICS IS AT  LEVEL 0.                                ║
-║                                                                      ║
-║   No real physiological data has been analysed.                      ║
-║   The synthetic benchmark establishes estimator behaviour only —     ║
-║   it is not evidence about human physiology and does not             ║
-║   constitute Level 1.                                                ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **TRANSITION DYNAMICS IS AT  LEVEL 0.**
+>
+> No real physiological data has been analysed.
+> The synthetic benchmark establishes estimator behaviour only —
+> it is not evidence about human physiology and does not
+> constitute Level 1.
 
 ---
 
 ## The Ladder
+
+```mermaid
+flowchart LR
+    L0[0 no evidence] --> L1[1 retrospective]
+    L1 --> L2[2 precedes]
+    L2 --> L3[3 adds information]
+    L3 --> L4[4 mechanism]
+    L4 --> L5[5 replicates]
+    L5 --> L6[6 clinical]
+```
 
 | Level | Claim | Evidence required | Language permitted |
 |:--:|---|---|---|
@@ -49,30 +54,22 @@
 
 ## Promotion Rules
 
-```
-════════════════════════════════════════════════════════════════════
-  1  Evidence at level N is NEVER described as evidence for N+1.
-
-  2  Levels are not skipped. A strong Level 1 result is a Level 1
-     result, however strong.
-
-  3  Promotion past Level 3 requires the M0 gate at ACCEPTABLE.
-     A SEVERE leakage verdict caps the programme at Level 1
-     permanently, for that dataset.
-
-  4  Promotion to Level 4 requires the SIGN to match the per-class
-     preregistration, not merely a significant effect. A significant
-     effect in the wrong direction is evidence AGAINST the mechanism
-     while possibly supporting Level 3.
-
-  5  Promotion to Level 6 requires the base-rate utility gate in
-     analysis/base_rates.py. Discrimination alone never reaches
-     Level 6, at any effect size.
-
-  6  A class-specific result is a claim about THAT CLASS. It is not
-     promoted to a general claim by pooling.
-════════════════════════════════════════════════════════════════════
-```
+> **1  Evidence at level N is NEVER described as evidence for N+1.**
+>
+> 2  Levels are not skipped. A strong Level 1 result is a Level 1
+> result, however strong.
+> 3  Promotion past Level 3 requires the M0 gate at ACCEPTABLE.
+> A SEVERE leakage verdict caps the programme at Level 1
+> permanently, for that dataset.
+> 4  Promotion to Level 4 requires the SIGN to match the per-class
+> preregistration, not merely a significant effect. A significant
+> effect in the wrong direction is evidence AGAINST the mechanism
+> while possibly supporting Level 3.
+> 5  Promotion to Level 6 requires the base-rate utility gate in
+> analysis/base_rates.py. Discrimination alone never reaches
+> Level 6, at any effect size.
+> 6  A class-specific result is a claim about THAT CLASS. It is not
+> promoted to a general claim by pooling.
 
 ---
 
@@ -107,25 +104,16 @@ scientifically interesting at Level 4 and only there.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   The synthetic benchmark is not Level 1.                            ║
-║   It is Level 0 with working code.                                   ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Claim Ladder*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **The synthetic benchmark is not Level 1.**
+>
+> It is Level 0 with working code.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`HYPOTHESIS.md`](HYPOTHESIS.md) · [`COMPETING_MODELS.md`](COMPETING_MODELS.md) · [`LIMITATIONS.md`](LIMITATIONS.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Claim Ladder

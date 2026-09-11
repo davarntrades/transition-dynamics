@@ -7,7 +7,6 @@
 ![Constraint](https://img.shields.io/badge/Binding_Constraint-n__eff_≥_10p-b91c1c?style=flat-square)
 ![Primary](https://img.shields.io/badge/Primary-HiRID_~2min-1f2937?style=flat-square)
 ![Rule](https://img.shields.io/badge/Univariate-Not_Confirmatory-4c1d95?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -35,21 +34,15 @@ dimension**, and a univariate test confirms whichever was assumed.
 They separate only in the multivariate case, because the stationary covariance
 depends on **both** the restoring operator and the noise covariance:
 
-```
-  Λ_B = Σ₀⁻¹      depends on restoring structure AND noise structure
-  Λ_A = I − A     depends on restoring structure only
-```
+$$\Lambda_B = \Sigma_0^{-1} \quad \text{(depends on restoring structure AND noise)}$$
 
-```
-════════════════════════════════════════════════════════════════════
-  RULE, FIXED IN ADVANCE
+$$\Lambda_A = I - A \quad \text{(depends on restoring structure only)}$$
 
-  Univariate evidence may NOT be used as confirmatory evidence for
-  distinguishing the competing physical interpretations of Λ.
-
-  Univariate analyses are reported as descriptive only.
-════════════════════════════════════════════════════════════════════
-```
+> **RULE, FIXED IN ADVANCE**
+>
+> Univariate evidence may NOT be used as confirmatory evidence for
+> distinguishing the competing physical interpretations of Λ.
+> Univariate analyses are reported as descriptive only.
 
 ---
 
@@ -129,17 +122,13 @@ hypothesis, and must be reported in those terms.
 | MIMIC-IV waveform / ECG subsets | resolution sensitivity analysis on a smaller cohort |
 | AmsterdamUMCdb | candidate additional validation, high resolution |
 
-```
-════════════════════════════════════════════════════════════════════
-  VERIFICATION REQUIREMENT
-
-  PhysioNet was not reachable from the environment in which this
-  document was written. Every figure above — record counts, sampling
-  rates, variable coverage, endpoint definitions — is from secondary
-  sources and MUST be re-verified against the authoritative dataset
-  landing pages before execution.
-════════════════════════════════════════════════════════════════════
-```
+> **VERIFICATION REQUIREMENT**
+>
+> PhysioNet was not reachable from the environment in which this
+> document was written. Every figure above — record counts, sampling
+> rates, variable coverage, endpoint definitions — is from secondary
+> sources and MUST be re-verified against the authoritative dataset
+> landing pages before execution.
 
 ---
 
@@ -194,16 +183,13 @@ At sensitivity 0.80, specificity 0.95:
 
 Specificity required for PPV ≥ 0.33 at sensitivity 0.80:
 
-```
-  ICU circulatory failure   0.9498
-  ICU sepsis onset          0.9836
-  Ward deterioration        0.9935
-════════════════════════════════════════════════════════════════════
-  Every setting except event-rich ICU circulatory failure demands
-  specificity of 0.98 or higher. No published early-warning system
-  in these domains achieves it.
-════════════════════════════════════════════════════════════════════
-```
+> **ICU circulatory failure   0.9498**
+>
+> ICU sepsis onset          0.9836
+> Ward deterioration        0.9935
+> Every setting except event-rich ICU circulatory failure demands
+> specificity of 0.98 or higher. No published early-warning system
+> in these domains achieves it.
 
 **Reference floor.** The Epic Sepsis Model, deployed at hundreds of hospitals:
 sensitivity 0.33, specificity 0.83, AUROC 0.63, PPV 0.12 on 38,455
@@ -217,25 +203,16 @@ utility and may not be described as such.** See
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   n_eff ≥ 10p, or the covariance is noise and everything             ║
-║   downstream is a story about noise.                                 ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Dataset Requirements*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **n_eff ≥ 10p, or the covariance is noise and everything**
+>
+> downstream is a story about noise.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`HYPOTHESIS.md`](HYPOTHESIS.md) · [`TRANSITION_TAXONOMY.md`](TRANSITION_TAXONOMY.md) · [`LIMITATIONS.md`](LIMITATIONS.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Dataset Requirements

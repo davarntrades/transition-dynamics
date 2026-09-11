@@ -7,7 +7,6 @@
 ![Mode](https://img.shields.io/badge/Mode-Self_Adversarial-b91c1c?style=flat-square)
 ![Grade](https://img.shields.io/badge/Revised_Grade-B-ca8a04?style=flat-square)
 ![Objective](https://img.shields.io/badge/Objective-Discover_If_False-1f2937?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -84,19 +83,16 @@ monitoring differences masquerade as mechanism).
 
 ## 5. Which single experiment could most efficiently kill it?
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THE KILL EXPERIMENT                                                 ║
-║                                                                      ║
-║  HiRID. Stratify by transition class. Within strata matched on       ║
-║  deformation magnitude ‖ΔG‖, compute mean z(t) per class with        ║
-║  cluster-bootstrap CIs. Run M0 stratified by class first.            ║
-║                                                                      ║
-║  KILLS IT:                                                           ║
-║    mean z CI includes 0 in all powered classes; OR                   ║
-║    signs do not track class; OR                                      ║
-║    z is as large in T6 as in T2/T3; OR                               ║
-║    class-stratified M0 reproduces the class pattern.                 ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **THE KILL EXPERIMENT**
+>
+> HiRID. Stratify by transition class. Within strata matched on
+> deformation magnitude ‖ΔG‖, compute mean z(t) per class with
+> cluster-bootstrap CIs. Run M0 stratified by class first.
+> KILLS IT:
+> mean z CI includes 0 in all powered classes; OR
+> signs do not track class; OR
+> z is as large in T6 as in T2/T3; OR
+> class-stratified M0 reproduces the class pattern.
 
 One retrospective analysis on existing public data. No new collection. It tests
 C6 directly — and C1–C5 can all pass without C6, leaving a replication of 2012
@@ -192,11 +188,7 @@ is **Level 0**.
 
 ## Grade
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   B — COHERENT BUT REQUIRES BETTER OPERATIONALISATION                ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
+> B — COHERENT BUT REQUIRES BETTER OPERATIONALISATION
 
 **Unchanged from v1 in letter, substantially improved in substance.**
 
@@ -254,23 +246,17 @@ next thing that should happen.
 
 ## The Honest Summary
 
-```
-════════════════════════════════════════════════════════════════════
-  Detection is not the contribution — covariance drift, published
-  in 2012, already achieves AUC 1.00 on every mechanism this
-  framework can detect.
-
-  What may be new is that the DIRECTION of constrained deformation
-  identifies WHICH mechanism produced it, independently of size.
-
-  That claim rests on one untested physiological premise, fails on
-  one of the two detectable mechanisms, and has never touched real
-  data.
-
-  It is small, it is sharp, and it can be killed by a single
-  retrospective analysis of a public dataset.
-════════════════════════════════════════════════════════════════════
-```
+> **Detection is not the contribution — covariance drift, published**
+>
+> in 2012, already achieves AUC 1.00 on every mechanism this
+> framework can detect.
+> What may be new is that the DIRECTION of constrained deformation
+> identifies WHICH mechanism produced it, independently of size.
+> That claim rests on one untested physiological premise, fails on
+> one of the two detectable mechanisms, and has never touched real
+> data.
+> It is small, it is sharp, and it can be killed by a single
+> retrospective analysis of a public dataset.
 
 That is the smallest version of Transition Dynamics that reality has not
 already killed.
@@ -279,26 +265,17 @@ already killed.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   The mechanistic vocabulary runs ahead of the evidence.             ║
-║   The equations are coherent. That they describe the physical        ║
-║   process is assumed throughout and demonstrated nowhere.            ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Adversarial Review*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **The mechanistic vocabulary runs ahead of the evidence.**
+>
+> The equations are coherent. That they describe the physical
+> process is assumed throughout and demonstrated nowhere.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`LIMITATIONS.md`](LIMITATIONS.md) · [`PREREGISTRATION.md`](PREREGISTRATION.md) · [`FALSIFICATION_CRITERIA.md`](FALSIFICATION_CRITERIA.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Adversarial Review

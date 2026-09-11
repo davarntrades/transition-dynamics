@@ -8,7 +8,6 @@
 ![Status](https://img.shields.io/badge/v1_Variance_Claim-WITHDRAWN-b91c1c?style=flat-square)
 ![Statistic](https://img.shields.io/badge/Primary-Stiffness_Alignment_A(t)-1f2937?style=flat-square)
 ![Null](https://img.shields.io/badge/Null-Empirical_not_Isotropic-4c1d95?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -20,23 +19,35 @@
 
 ---
 
-## 1. The Freeze
+## 1. The constraint operator, layer by layer
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  PREREGISTERED PRIMARY INTERPRETATION — FROZEN                       ║
-║                                                                      ║
-║      Λ  :=  Σ₀⁻¹                                                     ║
-║                                                                      ║
-║  Σ₀  =  covariance of the multivariate physiological state over an   ║
-║         explicitly defined, treatment-quiet baseline window          ║
-║                                                                      ║
-║  Λ is a STIFFNESS / PRECISION / RESISTANCE-TO-DEFORMATION operator.  ║
-║  It is computed ONCE, on the baseline, and never re-estimated.       ║
-╚══════════════════════════════════════════════════════════════════════╝
+### Layer 1 — SOURCE EQUATION
 
-Implemented as `freeze_lambda()` in
-[`../analysis/estimators.py`](../analysis/estimators.py). Every downstream
-function consumes the frozen dict read-only.
+$$Q_G = \Lambda\, Q$$
+
+Preserved exactly as supplied. It constrains $\Lambda$ only to be a linear
+operator. **It does not determine what $\Lambda$ is**, and therefore does not
+on its own generate any empirical prediction.
+
+### Layer 2 — PHYSICAL INTERPRETATION (preregistered)
+
+$\Lambda$ is a **stiffness / precision / resistance-to-deformation** operator.
+
+This is a commitment made before analysis. It could be wrong, and the competing
+reading is preregistered separately in §4.
+
+### Layer 3 — EMPIRICAL OPERATIONALISATION
+
+> **This layer is ours, not the source mathematics.**
+
+$\Lambda$ is operationalised as the inverse of the covariance of the
+multivariate physiological state over an explicitly defined, treatment-quiet
+baseline window. It is computed **once** and never re-estimated downstream.
+
+### Layer 4 — ESTIMATOR
+
+`freeze_lambda()` in [`../analysis/estimators.py`](../analysis/estimators.py),
+returning a read-only frozen object.
 
 ### 1.1 Why this interpretation is mathematically coherent
 
@@ -73,23 +84,17 @@ criterion**: stress = stiffness × strain, failure above a critical stress. The
 original equation is coherent **as written, with no rearrangement and no sign
 change**.
 
-### 1.2 Why the alternative was not chosen
+### Why this interpretation and not the other
 
-Under the resilience/recovery reading Λ_A = I − A, critical slowing down means
-the spectral radius of A tends to 1, so Λ_A → 0 and:
+Under a recovery-rate reading, the operator tends to zero as a transition is
+approached, so the quantity $\lVert\Lambda\Delta G\rVert$ **decreases** and the
+criterion $\lVert\Lambda\Delta G\rVert > T_{\mathrm{critical}}$ can never fire.
+Testing that reading requires inverting the operator, which **modifies the
+source equation**.
 
-```
-  ‖ Λ_A ΔG ‖  →  0   as the transition is approached
-```
-
-The criterion `‖ΛΔG‖ > T_critical` **can never fire**. Testing that reading
-requires inverting the operator, which modifies the original mathematics.
-
-Since the instruction is to hold the mathematics fixed, only one reading leaves
-it standing. The resilience reading is retained as a **separate competing model
-with its own preregistered equations** (M2 in
-[`COMPETING_MODELS.md`](COMPETING_MODELS.md)), never as a reinterpretation of
-this one.
+Since the source mathematics is held fixed, only one reading leaves it standing.
+The recovery reading is retained as a **separate competing model with its own
+equations** — see §4 — never as a reinterpretation of this one.
 
 ### 1.3 T_critical in transferable units
 
@@ -109,14 +114,11 @@ sample counts would make every displacement look overwhelming.
 
 ## 2. Withdrawn: the v1 Falling-Variance Prediction
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  v1 CLAIM, NOW WITHDRAWN                                             ║
-║                                                                      ║
-║  "The stiffness reading predicts that variance FALLS before a        ║
-║   transition, contradicting critical slowing down."                  ║
-║                                                                      ║
-║  THIS DOES NOT FOLLOW FROM Λ = Σ₀⁻¹.                                 ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **v1 CLAIM, NOW WITHDRAWN**
+>
+> "The stiffness reading predicts that variance FALLS before a
+> transition, contradicting critical slowing down."
+> THIS DOES NOT FOLLOW FROM Λ = Σ₀⁻¹.
 
 **Why it was wrong.** Λ is frozen at baseline. It is a **fixed metric, not a
 state variable**. It says nothing whatsoever about how the system's *current*
@@ -149,13 +151,10 @@ in the baseline metric. Decomposing δ in the eigenbasis of Σ₀ = Σᵢ λᵢ 
 Displacement along **low-variance (stiff, tightly defended)** directions
 contributes disproportionately. This motivates the primary v2 statistic:
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  STIFFNESS ALIGNMENT                                                 ║
-║                                                                      ║
-║        A(t)  =  ( δᵀ Σ₀⁻¹ δ )  /  ( ‖δ‖² · tr(Σ₀⁻¹)/p )              ║
-║                                                                      ║
-║  Dimensionless. Unit-invariant. Invariant to the MAGNITUDE of δ.     ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **STIFFNESS ALIGNMENT**
+>
+> A(t)  =  ( δᵀ Σ₀⁻¹ δ )  /  ( ‖δ‖² · tr(Σ₀⁻¹)/p )
+> Dimensionless. Unit-invariant. Invariant to the MAGNITUDE of δ.
 
 The magnitude-invariance is the point: A(t) asks *where* the system is being
 pushed, not *how hard*.
@@ -171,15 +170,11 @@ additional, explicitly separate, empirical premise:
 > Pathology does. Therefore acute deterioration displaces the system
 > preferentially along stiff, defended directions.
 
-```
-════════════════════════════════════════════════════════════════════
-  THIS PREMISE IS NOT A CONSEQUENCE OF THE EQUATION.
-
-  It is a physiological hypothesis bolted onto a geometric statistic,
-  and it is the weakest link in the chain. It is stated separately so
-  that it can be falsified separately.
-════════════════════════════════════════════════════════════════════
-```
+> **THIS PREMISE IS NOT A CONSEQUENCE OF THE EQUATION.**
+>
+> It is a physiological hypothesis bolted onto a geometric statistic,
+> and it is the weakest link in the chain. It is stated separately so
+> that it can be falsified separately.
 
 ### 3.2 Correction: the null is NOT A = 1
 
@@ -200,19 +195,16 @@ with equality only when Σ₀ ∝ I. For realistically ill-conditioned physiolog
 covariance this bound is 0.3 or lower — measured at **0.29** in the benchmark,
 against an observed stationary null median of **0.17**.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  CONSEQUENCE, FIXED BEFORE DATA CONTACT                          │
-│                                                                   │
-│  "A > 1" and "A < 1" are NOT valid decision rules.               │
-│                                                                   │
-│  Every decision uses z(t), the position of A within the          │
-│  PATIENT'S OWN empirical stationary band, estimated from         │
-│  held-out baseline sub-windows.                                   │
-│      z = 0   at the null median                                   │
-│      z = +1  at the upper 97.5% null bound                       │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> CONSEQUENCE, FIXED BEFORE DATA CONTACT
+> "A > 1" and "A < 1" are NOT valid decision rules.
+> Every decision uses z(t), the position of A within the
+> PATIENT'S OWN empirical stationary band, estimated from
+> held-out baseline sub-windows.
+> z = 0   at the null median
+> z = +1  at the upper 97.5% null bound
+> ──────────────────────────────────────────────────────────────────
 
 Implemented as `alignment_empirical_null()` and `alignment_z()`. The naive
 `alignment_null_band()` is retained in the code **solely to document the error
@@ -220,9 +212,43 @@ it embodies**.
 
 ---
 
-## 4. Head-to-Head With Critical Slowing Down
+## 4. The competing interpretation
 
-### 4.1 The two directional predictions
+The distinction below must not be blurred. Only the first line is source
+mathematics.
+
+**SOURCE EQUATION**
+
+$$Q_G = \Lambda\, Q$$
+
+**PRIMARY PREREGISTERED PHYSICAL INTERPRETATION**
+
+$\Lambda$ = stiffness / precision / resistance-to-deformation operator.
+Used with the source criterion, unchanged:
+
+$$\lVert \Lambda \Delta G \rVert > T_{\mathrm{critical}}$$
+
+**ALTERNATIVE MODEL (competing)**
+
+$\Lambda$ = recovery / resilience quantity. Because such a quantity tends to
+zero approaching a transition, this reading requires:
+
+$$\lVert \Lambda^{-1} \Delta G \rVert > T_{\mathrm{critical}}$$
+
+> **THIS IS A MODIFIED EQUATION FOR A COMPETING MODEL.**
+> It is **not** part of the source equation set. It is written here so the
+> competing model can be tested fairly, and it is never presented as the
+> original mathematics.
+
+Why the competing model is retained: it documents a genuine falsification
+issue. The source equation does not determine which reading is correct, so the
+choice must be made in advance and tested, not assumed.
+
+---
+
+## 5. Head-to-head with critical slowing down
+
+### 5.1 The two directional predictions
 
 | | Transition Dynamics (frozen Λ) | Critical slowing down |
 |---|---|---|
@@ -233,7 +259,7 @@ it embodies**.
 | **Mechanism** | exogenous insult driving the system against its constraints | endogenous soft mode losing restoring force |
 | **Uncertainty rule** | cluster-bootstrap 95% CI on mean z must exclude 0 | same on variance ratio vs 1 |
 
-### 4.2 They are complementary, not rivals — corrected from v1
+### 5.2 They are complementary, not rivals — corrected from v1
 
 v1 framed these as competitors of which one must lose. The synthetic benchmark
 ([`../analysis/results/mechanism_benchmark.md`](../analysis/results/mechanism_benchmark.md))
@@ -253,7 +279,7 @@ sampling noise also lives, so the two are not separable by alignment.
 The corrected framing: **a combined model should beat either alone**, and the
 mechanistic content lies in *which* statistic fires, not in whether one wins.
 
-### 4.3 What is actually novel — the magnitude-matched test
+### 5.3 What is actually novel — the magnitude-matched test
 
 Plain covariance drift `dG` scores **1.00 on both** detectable mechanisms. For
 pure detection, Transition Dynamics adds nothing over a quantity Dynamical
@@ -273,20 +299,17 @@ drift amplitude so that dG(yield) passes through dG(fold):
 At the matched point **dG collapses to chance while z holds at 1.00**, and
 below it dG inverts — it was tracking deformation size, not mechanism.
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THE SURVIVING NOVELTY CLAIM, IN FULL                                ║
-║                                                                      ║
-║  Transition Dynamics is NOT a claim about detection performance.     ║
-║  Covariance drift already detects, and detects at least as well.     ║
-║                                                                      ║
-║  It is a claim about MECHANISM IDENTIFICATION: z(t) discriminates    ║
-║  the mechanism that produced a deformation, independently of the     ║
-║  deformation's magnitude. Covariance drift cannot.                   ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **THE SURVIVING NOVELTY CLAIM, IN FULL**
+>
+> Transition Dynamics is NOT a claim about detection performance.
+> Covariance drift already detects, and detects at least as well.
+> It is a claim about MECHANISM IDENTIFICATION: z(t) discriminates
+> the mechanism that produced a deformation, independently of the
+> deformation's magnitude. Covariance drift cannot.
 
 ---
 
-## 5. Power Limit
+## 6. Power limit
 
 The empirical null band for A narrows only slowly with channel count:
 
@@ -305,24 +328,10 @@ statistic, not a tuning problem, and it bounds what may be claimed.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Λ = Σ₀⁻¹ predicts WHERE the system is pushed,                      ║
-║   not how much its variance changes.                                 ║
-║                                                                      ║
-║   The v1 variance prediction is withdrawn.                           ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Physical Interpretation*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **Λ = Σ₀⁻¹ predicts WHERE the system is pushed,**
+>
+> not how much its variance changes.
+> The v1 variance prediction is withdrawn.
 
 ---
 
@@ -332,3 +341,7 @@ GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
 - [`MATHEMATICAL_OBJECTS.md`](MATHEMATICAL_OBJECTS.md) — Surviving objects
 - [`COMPETING_MODELS.md`](COMPETING_MODELS.md) — M0–M4 and M_null
 - [`LIMITATIONS.md`](LIMITATIONS.md) — Known limits
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Physical Interpretation

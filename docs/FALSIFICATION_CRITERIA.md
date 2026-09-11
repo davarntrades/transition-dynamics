@@ -6,7 +6,6 @@
 
 ![Status](https://img.shields.io/badge/Fixed-Before_Data_Contact-047857?style=flat-square)
 ![Scope](https://img.shields.io/badge/Canonical-Claim_Map-1f2937?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -157,21 +156,20 @@ Any one ends the programme regardless of individual claim outcomes.
 
 ## Outcome Map
 
-```
-┌───────────────────────────────────────────────────────────────────┐
-│  G1 acquisition leakage  →  EVERYTHING DIES                       │
-│  C1 dies                 →  no signal to attribute. Programme over │
-│  C2 dies                 →  ΔG survives; product form does not    │
-│  C3 dies                 →  Λ weighting decorative; M2 preferred  │
-│  C4 dies                 →  separatrix and irreversibility die;   │
-│                             a predictor may survive               │
-│  C5 dies                 →  integration decorative                │
-│  C6 dies                 →  NO NOVELTY. The programme reduces to  │
-│                             a replication of DNB (2012)           │
-│  C7 dies                 →  nothing in the primary hypothesis      │
-│                             changes                                │
-└───────────────────────────────────────────────────────────────────┘
-```
+> **───────────────────────────────────────────────────────────────────**
+>
+> G1 acquisition leakage  →  EVERYTHING DIES
+> C1 dies                 →  no signal to attribute. Programme over
+> C2 dies                 →  ΔG survives; product form does not
+> C3 dies                 →  Λ weighting decorative; M2 preferred
+> C4 dies                 →  separatrix and irreversibility die;
+> a predictor may survive
+> C5 dies                 →  integration decorative
+> C6 dies                 →  NO NOVELTY. The programme reduces to
+> a replication of DNB (2012)
+> C7 dies                 →  nothing in the primary hypothesis
+> changes
+> ───────────────────────────────────────────────────────────────────
 
 **C6 is the load-bearing claim.** C1–C5 can all succeed while the programme
 contributes nothing new, because covariance drift already achieves detection.
@@ -182,25 +180,16 @@ theory on ICU data.*
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   C1 through C5 can all pass and the result still be                 ║
-║   a 2012 method in new clothes. C6 is the claim.                     ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Falsification Criteria*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **C1 through C5 can all pass and the result still be**
+>
+> a 2012 method in new clothes. C6 is the claim.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`MATHEMATICAL_OBJECTS.md`](MATHEMATICAL_OBJECTS.md) · [`COMPETING_MODELS.md`](COMPETING_MODELS.md) · [`CLAIM_LADDER.md`](CLAIM_LADDER.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Falsification Criteria

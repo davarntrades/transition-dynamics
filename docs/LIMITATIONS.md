@@ -7,7 +7,6 @@
 ![Status](https://img.shields.io/badge/Negative_Findings-Preserved-047857?style=flat-square)
 ![Blind](https://img.shields.io/badge/Blind_To-Noise_Induced_Transitions-b91c1c?style=flat-square)
 ![Withdrawn](https://img.shields.io/badge/v1_Claims-2_Withdrawn-ca8a04?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -40,19 +39,16 @@ engineering.
 
 ### 2.1 Blind to noise-induced transitions
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  Benchmark result, noise-induced mechanism:                      │
-│      z  = −0.22   (stationary null −0.23)                        │
-│      dG =  0.38   (stationary null  0.38)                        │
-│      variance ratio 1.01                                          │
-│                                                                   │
-│  A real transition occurs. Nothing anticipates it.                │
-│                                                                   │
-│  Any estimator that appeared to predict this case would be        │
-│  reporting leakage, not dynamics.                                 │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> Benchmark result, noise-induced mechanism:
+> z  = −0.22   (stationary null −0.23)
+> dG =  0.38   (stationary null  0.38)
+> variance ratio 1.01
+> A real transition occurs. Nothing anticipates it.
+> Any estimator that appeared to predict this case would be
+> reporting leakage, not dynamics.
+> ──────────────────────────────────────────────────────────────────
 
 If human deterioration is predominantly noise- or rate-induced, the framework
 is not false — **there is nothing to detect**, and that is a bound on scope
@@ -101,18 +97,15 @@ and is preregistered as a two-panel design.
 
 ## 3. The Weakest Link
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THE HOMEOSTATIC PREMISE IS NOT A CONSEQUENCE OF THE EQUATION.       ║
-║                                                                      ║
-║  A(t) is a geometric statistic. Turning it into a directional        ║
-║  prediction requires the separate empirical premise that low         ║
-║  normal variance indicates active homeostatic defence, and that      ║
-║  pathology displaces defended variables.                             ║
-║                                                                      ║
-║  That premise is plausible, physiologically motivated, and           ║
-║  untested. It is the weakest link in the chain and is stated         ║
-║  separately so it can be falsified separately.                       ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **THE HOMEOSTATIC PREMISE IS NOT A CONSEQUENCE OF THE EQUATION.**
+>
+> A(t) is a geometric statistic. Turning it into a directional
+> prediction requires the separate empirical premise that low
+> normal variance indicates active homeostatic defence, and that
+> pathology displaces defended variables.
+> That premise is plausible, physiologically motivated, and
+> untested. It is the weakest link in the chain and is stated
+> separately so it can be falsified separately.
 
 Counter-cases that would refute it: a low-variance channel that is low-variance
 merely because it is **measured coarsely** or **clipped by the instrument**
@@ -136,21 +129,16 @@ variance is within measurement quantisation, and report their identity.
 
 ## 5. What a Null Result Would and Would Not Mean
 
-```
-════════════════════════════════════════════════════════════════════
-  A NULL WOULD MEAN
-    This operationalisation, in this cohort, at this resolution,
-    found no effect.
-
-  A NULL WOULD NOT MEAN
-    The mathematics is wrong. The objects may be valid and badly
-    proxied — the demoted truth condition is the clearest case.
-
-  A POSITIVE WOULD NOT MEAN
-    The mathematics is right. A metric proxy can succeed for
-    reasons unrelated to the object it stands in for.
-════════════════════════════════════════════════════════════════════
-```
+> **A NULL WOULD MEAN**
+>
+> This operationalisation, in this cohort, at this resolution,
+> found no effect.
+> A NULL WOULD NOT MEAN
+> The mathematics is wrong. The objects may be valid and badly
+> proxied — the demoted truth condition is the clearest case.
+> A POSITIVE WOULD NOT MEAN
+> The mathematics is right. A metric proxy can succeed for
+> reasons unrelated to the object it stands in for.
 
 This programme tests **operationalisability**, not truth. It can fail without
 the framework being wrong, and succeed without the framework being right.
@@ -159,25 +147,16 @@ the framework being wrong, and succeed without the framework being right.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   z failed on the fold mechanism. That is recorded here, in the      ║
-║   same repository, at the same volume as anything that worked.       ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Limitations*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **z failed on the fold mechanism. That is recorded here, in the**
+>
+> same repository, at the same volume as anything that worked.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md) · [`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md) · [`ADVERSARIAL_REVIEW.md`](ADVERSARIAL_REVIEW.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Limitations

@@ -7,8 +7,6 @@
 ![Standard](https://img.shields.io/badge/Standard-Novelty_Claimed_Weakly-1f2937?style=flat-square)
 ![Rule](https://img.shields.io/badge/Rule-Absence_of_Prior_Work_≠_Novelty-b91c1c?style=flat-square)
 ![Section](https://img.shields.io/badge/Includes-Adversarial_Findings-4c1d95?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
-![Rights](https://img.shields.io/badge/©-Davarn_Morrison-555555?style=flat-square)
 
 </div>
 
@@ -17,7 +15,6 @@
 > **v1 document, still current.** This file records the audit and literature review that produced the v2 demotions and remains the authoritative record for both. See [`../README.md`](../README.md) for the v2 index.
 
 ---
-
 
 *"A field that only reads the papers agreeing with it has not read the literature. It has read a mirror."*
 
@@ -29,9 +26,7 @@
 
 These are placed before the supporting literature deliberately.
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THREAT 1 — THE PROTOTYPICAL TRANSITION SHOWS NO PRECURSOR           ║
-╚══════════════════════════════════════════════════════════════════════╝
+> THREAT 1 — THE PROTOTYPICAL TRANSITION SHOWS NO PRECURSOR
 
 Wilkat, Rings & Lehnertz, *Chaos* 29:091104 (2019) — "No evidence for critical
 slowing down prior to human epileptic seizures." Long-term multichannel
@@ -44,9 +39,7 @@ deformation exists there, these standard estimators do not see it.
 
 → [arXiv:1908.08973](https://arxiv.org/abs/1908.08973) · [Chaos](https://pubs.aip.org/aip/cha/article-abstract/29/9/091104/341751/No-evidence-for-critical-slowing-down-prior-to)
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THREAT 2 — LITTLE SUPPORT IN CLINICAL PSYCHOLOGY                    ║
-╚══════════════════════════════════════════════════════════════════════╝
+> THREAT 2 — LITTLE SUPPORT IN CLINICAL PSYCHOLOGY
 
 *Nature Reviews Psychology* (2024) — "Slow down and be critical before using
 early warning signals in psychopathology." The review finds **little support**
@@ -58,9 +51,7 @@ This directly threatens H6's cohort and the psychiatric arm of the protocol.
 
 → [Nature Reviews Psychology](https://www.nature.com/articles/s44159-024-00369-y)
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THREAT 3 — EARLY WARNING SIGNALS ARE BIFURCATION-SPECIFIC           ║
-╚══════════════════════════════════════════════════════════════════════╝
+> THREAT 3 — EARLY WARNING SIGNALS ARE BIFURCATION-SPECIFIC
 
 Critical slowing down is a property of **fold (saddle-node) bifurcations**,
 which possess a gradient potential. Two other routes produce genuine
@@ -113,13 +104,10 @@ strongly correlated variables carries early-warning signals of an impending
 critical transition; DNB indicators are derived **from the sample covariance
 matrix**, and distinguish a *pre-disease state* from a normal state.
 
-```
-════════════════════════════════════════════════════════════════════
-  DNB ALREADY COVERS THE COVARIANCE-DEFORMATION CORE OF H1 AND H5.
-  Novelty may not be claimed for "covariance structure changes
-  before conventional diagnosis." That result is fourteen years old.
-════════════════════════════════════════════════════════════════════
-```
+> **DNB ALREADY COVERS THE COVARIANCE-DEFORMATION CORE OF H1 AND H5.**
+>
+> Novelty may not be claimed for "covariance structure changes
+> before conventional diagnosis." That result is fourteen years old.
 
 → [Sci Rep 2:342](https://www.nature.com/articles/srep00342) · [Theory & applications review](https://pubmed.ncbi.nlm.nih.gov/34626720/) · [DNM selected by covariance](https://www.researchgate.net/publication/337206186_Early-warning_signals_using_dynamical_network_markers_selected_by_covariance)
 
@@ -144,12 +132,9 @@ before clinical signs of sepsis**. In a randomised trial of **3,003 preterm very
 low birth weight infants across 9 NICUs**, displaying the score reduced
 sepsis-associated mortality from roughly **20% to 12%**.
 
-```
-════════════════════════════════════════════════════════════════════
-  THE CORE RESEARCH QUESTION IS ALREADY ANSWERED AFFIRMATIVELY
-  IN AT LEAST ONE DOMAIN.  H1 IN ITS GENERIC FORM IS NOT NOVEL.
-════════════════════════════════════════════════════════════════════
-```
+> **THE CORE RESEARCH QUESTION IS ALREADY ANSWERED AFFIRMATIVELY**
+>
+> IN AT LEAST ONE DOMAIN.  H1 IN ITS GENERIC FORM IS NOT NOVEL.
 
 HeRO is also **directional evidence for the primary Λ_B reading**: what precedes
 neonatal sepsis is *reduced* variability — rigidification — not the variance
@@ -230,20 +215,14 @@ Claimed **weakly and provisionally**.
 | **β₁ of a co-deformation nerve complex as a predictor beyond all pairwise couplings** (H5) | TDA on physiology exists; the nerve-of-channel-deformations construction, tested specifically for higher-order gain over pairwise-complete models, was not located |
 | **Preregistered signed structure/report decoupling as an early-warning signal in its own right** (H6) | Digital phenotyping treats self-report as ground truth or as a target. Treating the *divergence* as the signal, with a timing-only negative control, was not located |
 
-```
-════════════════════════════════════════════════════════════════════
-  NOVELTY DISCIPLINE
-
-  Absence of located prior work is NOT evidence of novelty.
-
-  The DNB literature is large and substantially non-English. The
-  covariance components of H1 and H5 are likely covered somewhere
-  within it. This section is a hypothesis ABOUT THE LITERATURE and
-  is itself subject to falsification by a competent librarian.
-
-  No priority claim is made on the basis of this search.
-════════════════════════════════════════════════════════════════════
-```
+> **NOVELTY DISCIPLINE**
+>
+> Absence of located prior work is NOT evidence of novelty.
+> The DNB literature is large and substantially non-English. The
+> covariance components of H1 and H5 are likely covered somewhere
+> within it. This section is a hypothesis ABOUT THE LITERATURE and
+> is itself subject to falsification by a competent librarian.
+> No priority claim is made on the basis of this search.
 
 ---
 
@@ -274,35 +253,29 @@ Claimed **weakly and provisionally**.
 
 → [HiRID v1.1.1](https://physionet.org/content/hirid/1.1.1/) · [Hyland et al., circulatory failure](https://arxiv.org/pdf/1904.07990) · [HiRID-ICU-Benchmark](https://arxiv.org/pdf/2111.08536) · [cross-dataset generalisation, StudentLife/CrossCheck](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0266516) · [GLOBEM](https://dl.acm.org/doi/10.1145/3569485)
 
-```
-════════════════════════════════════════════════════════════════════
-  VERIFICATION CAVEAT
-
-  PhysioNet was not directly reachable from the environment in
-  which this document was assembled. Dataset specifications above
-  are drawn from secondary sources and published descriptions.
-
-  Every figure — record counts, sampling rates, variable coverage,
-  endpoint definitions — MUST be re-verified against the dataset
-  landing pages before the protocol is executed.
-════════════════════════════════════════════════════════════════════
-```
+> **VERIFICATION CAVEAT**
+>
+> PhysioNet was not directly reachable from the environment in
+> which this document was assembled. Dataset specifications above
+> are drawn from secondary sources and published descriptions.
+> Every figure — record counts, sampling rates, variable coverage,
+> endpoint definitions — MUST be re-verified against the dataset
+> landing pages before the protocol is executed.
 
 ---
 
 ## 6. Net Position
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  H1 generic form           ALREADY ESTABLISHED (HeRO, DNB)       │
-│  H5 weak form              ALREADY ESTABLISHED (Network Phys.)   │
-│  H2 product-form test      APPARENTLY NOVEL                      │
-│  H3 sign competition       APPARENTLY NOVEL                      │
-│  H4 threshold transfer     UNKNOWN — the decisive test           │
-│  H5 higher-order form      APPARENTLY NOVEL                      │
-│  H6 decoupling             APPARENTLY NOVEL, severely confounded │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> H1 generic form           ALREADY ESTABLISHED (HeRO, DNB)
+> H5 weak form              ALREADY ESTABLISHED (Network Phys.)
+> H2 product-form test      APPARENTLY NOVEL
+> H3 sign competition       APPARENTLY NOVEL
+> H4 threshold transfer     UNKNOWN — the decisive test
+> H5 higher-order form      APPARENTLY NOVEL
+> H6 decoupling             APPARENTLY NOVEL, severely confounded
+> ──────────────────────────────────────────────────────────────────
 
 The framework's defensible contribution is **not** that structure deforms before
 biomarkers — that is known and has an RCT behind it. It is the conjunction of:
@@ -317,30 +290,21 @@ for novelty.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   HeRO reduced sepsis mortality from 20% to 12% using reduced        ║
-║   variability. van de Leemput predicted mood transitions using       ║
-║   increased variability. Both are published. Both cannot be the      ║
-║   general law.                                                       ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Literature Comparison*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **HeRO reduced sepsis mortality from 20% to 12% using reduced**
+>
+> variability. van de Leemput predicted mood transitions using
+> increased variability. Both are published. Both cannot be the
+> general law.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) — Preregistration
-- [`MATHEMATICAL-AUDIT.md`](MATHEMATICAL-AUDIT.md) — Adversarial audit
-- [`PROTOCOL.md`](PROTOCOL.md) — Experimental protocol
-- [`FALSIFICATION-MATRIX.md`](FALSIFICATION-MATRIX.md) — Kill conditions
+- [`MATHEMATICAL_AUDIT.md`](MATHEMATICAL_AUDIT.md) — Adversarial audit
+- [`PROTOCOL.md`](archive/PROTOCOL_V1.md) — Experimental protocol
+- [`FALSIFICATION-MATRIX.md`](archive/FALSIFICATION_MATRIX_V1.md) — Kill conditions
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Literature Comparison

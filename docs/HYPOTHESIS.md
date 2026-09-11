@@ -7,7 +7,6 @@
 ![Scope](https://img.shields.io/badge/Scope-Acute_Physiological_Transitions-1f2937?style=flat-square)
 ![Claim](https://img.shields.io/badge/Claim-Mechanism_Identification-047857?style=flat-square)
 ![Permitted](https://img.shields.io/badge/Permitted_Conclusion-NO_DETECTABLE_PRECURSOR-b91c1c?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -21,19 +20,37 @@
 
 ## 1. Statement
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  TRANSITION DYNAMICS — REVISED PRIMARY HYPOTHESIS                    ║
-║                                                                      ║
-║  In a defined and identifiable subset of transition mechanisms,      ║
-║  acute physiological state transitions are preceded by measurable    ║
-║  change in the multivariate dynamical structure of the              ║
-║  physiological state, detectable before conventional transition      ║
-║  criteria are satisfied.                                             ║
-║                                                                      ║
-║  Where such change exists, the DIRECTION of constrained deformation  ║
-║  under the frozen operator Λ = Σ₀⁻¹ identifies WHICH mechanism       ║
-║  produced it, independently of the deformation's magnitude.          ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **Primary hypothesis**
+>
+> In a subset of acute physiological state transitions, the multivariate
+> structure of physiological measurements changes measurably before
+> conventional transition criteria are satisfied.
+
+The hypothesis tests five things:
+
+1. Multivariate structural deformation appears before transition.
+2. Deformation persistence adds information beyond magnitude alone.
+3. Baseline structural constraint changes the significance of deformation.
+4. The constrained deformation quantity shows reproducible transition-related
+   behaviour.
+5. Higher-order multichannel structure adds information beyond individual
+   channels and pairwise relationships.
+
+**It is not claimed that all transitions behave this way.** "No detectable
+precursor" is an explicitly permitted outcome.
+
+**The self-report / language decoupling hypothesis is not part of this
+hypothesis.** It is exploratory and lives in
+[`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md).
+
+### 1.0 The distinguishing sub-claim
+
+Where structural change does exist, the **direction** of constrained
+deformation is hypothesised to identify which mechanism produced it,
+independently of the deformation's magnitude. This is the part that is not
+already covered by established covariance methods, and it is what
+[`FALSIFICATION_CRITERIA.md`](FALSIFICATION_CRITERIA.md) treats as
+load-bearing.
 
 ### 1.1 What changed from v1, and why
 
@@ -49,28 +66,22 @@ evidence has not already killed**, which is the only kind worth preregistering.
 
 ### 1.2 What is explicitly NOT claimed
 
-```
-════════════════════════════════════════════════════════════════════
-  We do NOT claim that all cardiac arrests have detectable precursors.
-  We do NOT claim that all sepsis has detectable precursors.
-  We do NOT claim that all catastrophic events have precursors.
-  We do NOT claim this is a disease predictor.
-════════════════════════════════════════════════════════════════════
-```
+> **We do NOT claim that all cardiac arrests have detectable precursors.**
+>
+> We do NOT claim that all sepsis has detectable precursors.
+> We do NOT claim that all catastrophic events have precursors.
+> We do NOT claim this is a disease predictor.
 
 **Noise-induced and genuinely abrupt transitions remain live failure classes.**
 The benchmark confirms the estimator suite is blind to them by construction:
 a real transition occurs and every statistic stays at its stationary null. Any
 estimator that appeared to anticipate such a case would be reporting leakage.
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  THE FRAMEWORK IS PERMITTED — AND REQUIRED — TO CONCLUDE:            ║
-║                                                                      ║
-║                    NO DETECTABLE PRECURSOR                           ║
-║                                                                      ║
-║  for a transition class, a cohort, or the whole hypothesis.          ║
-║  That outcome is a result, not a failure of the study.               ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **THE FRAMEWORK IS PERMITTED — AND REQUIRED — TO CONCLUDE:**
+>
+> NO DETECTABLE PRECURSOR
+> for a transition class, a cohort, or the whole hypothesis.
+> That outcome is a result, not a failure of the study.
 
 ### 1.3 Candidate transition scope
 
@@ -114,37 +125,27 @@ defended channels cannot test the primary claim.**
 
 ### 2.2 Definitions
 
-```
-════════════════════════════════════════════════════════════════════
-  BASELINE                 W₀ = [t₀, t₀+ΔB], treatment-quiet
-                           μ₀ = mean X over W₀            ESTIMATED
-                           Σ₀ = shrunk covariance over W₀ ESTIMATED
-                           Λ  = Σ₀⁻¹                      FROZEN
-
-  LOCAL DEFORMATION        zᵢ(t) = (xᵢ(t) − μ₀ᵢ)/σ₀ᵢ      ESTIMATED
-                           per-channel, baseline-standardised
-
-  MULTIVARIATE DEFORMATION ΔG(t) = d(Σ₀, Σ_t)             ESTIMATED
-                           δ(t)  = μ(t) − μ₀              ESTIMATED
-
-  PERSISTENCE              τ(t) = contiguous duration of
-                           ‖ΔG‖ > θ, θ = baseline p95     ESTIMATED
-
-  HIGHER-ORDER INTEGRATION C(t) = ι(⋃ᵢ Nₜ(X,Iᵢ)) → β₁     ESTIMATED
-                           tested against pairwise-matched
-                           Gaussian surrogates
-
-  CONSTRAINED DEFORMATION  ‖ΛΔG‖ = √(δᵀΣ₀⁻¹δ)             ESTIMATED
-                           A(t), z(t) alignment            ESTIMATED
-
-  CRITICAL TRANSITION      the physiology-defined event     OBSERVED
-                           (never an order-entry event)
-
-  RECOVERY                 Λ_A = I − A from VAR(1)         ESTIMATED
-                           where resolution permits;
-                           belongs to competing model M2
-════════════════════════════════════════════════════════════════════
-```
+> **BASELINE                 W₀ = [t₀, t₀+ΔB], treatment-quiet**
+>
+> μ₀ = mean X over W₀            ESTIMATED
+> Σ₀ = shrunk covariance over W₀ ESTIMATED
+> Λ  = Σ₀⁻¹                      FROZEN
+> LOCAL DEFORMATION        zᵢ(t) = (xᵢ(t) − μ₀ᵢ)/σ₀ᵢ      ESTIMATED
+> per-channel, baseline-standardised
+> MULTIVARIATE DEFORMATION ΔG(t) = d(Σ₀, Σ_t)             ESTIMATED
+> δ(t)  = μ(t) − μ₀              ESTIMATED
+> PERSISTENCE              τ(t) = contiguous duration of
+> ‖ΔG‖ > θ, θ = baseline p95     ESTIMATED
+> HIGHER-ORDER INTEGRATION C(t) = ι(⋃ᵢ Nₜ(X,Iᵢ)) → β₁     ESTIMATED
+> tested against pairwise-matched
+> Gaussian surrogates
+> CONSTRAINED DEFORMATION  ‖ΛΔG‖ = √(δᵀΣ₀⁻¹δ)             ESTIMATED
+> A(t), z(t) alignment            ESTIMATED
+> CRITICAL TRANSITION      the physiology-defined event     OBSERVED
+> (never an order-entry event)
+> RECOVERY                 Λ_A = I − A from VAR(1)         ESTIMATED
+> where resolution permits;
+> belongs to competing model M2
 
 ### 2.3 Observables versus latents
 
@@ -162,25 +163,20 @@ defended channels cannot test the primary claim.**
 The framework suggests a sequence. **It is not assumed.** Each arrow is a
 separate falsifiable proposition, and each may fail independently.
 
+```mermaid
+flowchart LR
+    A[Stable regime]
+    B[Structural deformation]
+    C[Persistent deformation]
+    D[Critical regime]
+    E[State transition]
+    A -. P1 .-> B
+    B -. P2 .-> C
+    C -. P3 .-> D
+    D -. P4 .-> E
 ```
-        stable physiological regime
-                    │
-                    │  P1
-                    ▼
-          multivariate deformation
-                    │
-                    │  P2
-                    ▼
-     persistent / integrated deformation
-                    │
-                    │  P3
-                    ▼
-             critical regime
-                    │
-                    │  P4
-                    ▼
-         clinical state transition
-```
+
+Dashed arrows mark the pathway as **hypothesised, not established**.
 
 | Arrow | Proposition | Direction | Falsified if |
 |:--:|---|:--:|---|
@@ -200,16 +196,12 @@ Stated in advance so that its absence is a prediction, not an excuse:
 | **Exogenous catastrophe** (massive pulmonary embolus, tamponade, arrhythmic arrest from a fixed substrate) | P1 fails. The insult is the transition |
 | **Endogenous fold** | P1 and P3 may fire, but **A(t) will not discriminate it** — fold escape shares its direction with stationary sampling noise |
 
-```
-════════════════════════════════════════════════════════════════════
-  If most real deterioration turns out to be noise-induced or
-  exogenous-catastrophic, the hypothesis is not false — it is
-  detecting a small and possibly clinically minor subset.
-
-  That outcome must be reported as a bound on scope, in those words,
-  and not as a positive finding about the subset that worked.
-════════════════════════════════════════════════════════════════════
-```
+> **If most real deterioration turns out to be noise-induced or**
+>
+> exogenous-catastrophic, the hypothesis is not false — it is
+> detecting a small and possibly clinically minor subset.
+> That outcome must be reported as a bound on scope, in those words,
+> and not as a positive finding about the subset that worked.
 
 ---
 
@@ -234,23 +226,10 @@ Dynamical Network Biomarker theory, not extend it.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Covariance drift already detects.                                  ║
-║   The open question is whether the DIRECTION of deformation          ║
-║   identifies the mechanism. That is the whole hypothesis.            ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Revised Hypothesis*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **Covariance drift already detects.**
+>
+> The open question is whether the DIRECTION of deformation
+> identifies the mechanism. That is the whole hypothesis.
 
 ---
 
@@ -259,3 +238,7 @@ GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
 - [`../README.md`](../README.md) — Index
 - [`MATHEMATICAL_OBJECTS.md`](MATHEMATICAL_OBJECTS.md) · [`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md)
 - [`TRANSITION_TAXONOMY.md`](TRANSITION_TAXONOMY.md) · [`COMPETING_MODELS.md`](COMPETING_MODELS.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Revised Hypothesis

@@ -8,7 +8,6 @@
 ![Lambda](https://img.shields.io/badge/Λ-FROZEN_Σ₀⁻¹-047857?style=flat-square)
 ![Data](https://img.shields.io/badge/Real_Data_Analysed-NONE-b91c1c?style=flat-square)
 ![Level](https://img.shields.io/badge/Claim_Level-0-ca8a04?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
 
 </div>
 
@@ -22,15 +21,12 @@
 
 ## Status
 
-```
-════════════════════════════════════════════════════════════════════
-  VERSION            2.0
-  REAL DATA          NONE ANALYSED
-  CLAIM LEVEL        0
-  SYNTHETIC WORK     complete; establishes estimator behaviour only,
-                     and does NOT constitute Level 1 evidence
-════════════════════════════════════════════════════════════════════
-```
+> **VERSION            2.0**
+>
+> REAL DATA          NONE ANALYSED
+> CLAIM LEVEL        0
+> SYNTHETIC WORK     complete; establishes estimator behaviour only,
+> and does NOT constitute Level 1 evidence
 
 ---
 
@@ -41,16 +37,13 @@ with date and reason, with the pre-deviation analysis reported alongside.
 
 ### 1.1 The operator
 
-╔══════════════════════════════════════════════════════════════════════╗
-║      Λ  :=  Σ₀⁻¹                                                     ║
-║                                                                      ║
-║  Σ₀ = shrunk covariance over the treatment-quiet baseline window.    ║
-║  Computed ONCE per patient. Never re-estimated downstream.           ║
-║  Interpretation: stiffness / precision / resistance to deformation.  ║
-║                                                                      ║
-║  The resilience/recovery reading is NOT an alternative reading of    ║
-║  this operator. It is competing model M2, with its own equations.    ║
-╚══════════════════════════════════════════════════════════════════════╝
+> **Λ  :=  Σ₀⁻¹**
+>
+> Σ₀ = shrunk covariance over the treatment-quiet baseline window.
+> Computed ONCE per patient. Never re-estimated downstream.
+> Interpretation: stiffness / precision / resistance to deformation.
+> The resilience/recovery reading is NOT an alternative reading of
+> this operator. It is competing model M2, with its own equations.
 
 ### 1.2 The primary claim
 
@@ -92,28 +85,18 @@ patient, 2,000 replicates, must exclude 0 with the preregistered sign.
 
 ## 2. Prohibited Moves
 
-```
-════════════════════════════════════════════════════════════════════
-  Redefining Λ after seeing results.
-      If the stiffness reading fails, it is ABANDONED, not adjusted.
-      Work continues under M2 with its modification declared.
-
-  Reporting AUROC without PPV at the true prevalence.
-
-  Promoting a class-specific result to a general claim by pooling.
-
-  Describing decoupling results as evidence for C ⟂ L.
-
-  Introducing persistent homology before the covariance and
-  nerve-complex estimators have been shown, in writing, to fail.
-
-  Running a negative control after seeing a positive result.
-
-  Claiming novelty for detection. Covariance drift already detects.
-
-  Any clinical claim before the base-rate utility gate is cleared.
-════════════════════════════════════════════════════════════════════
-```
+> **Redefining Λ after seeing results.**
+>
+> If the stiffness reading fails, it is ABANDONED, not adjusted.
+> Work continues under M2 with its modification declared.
+> Reporting AUROC without PPV at the true prevalence.
+> Promoting a class-specific result to a general claim by pooling.
+> Describing decoupling results as evidence for C ⟂ L.
+> Introducing persistent homology before the covariance and
+> nerve-complex estimators have been shown, in writing, to fail.
+> Running a negative control after seeing a positive result.
+> Claiming novelty for detection. Covariance drift already detects.
+> Any clinical claim before the base-rate utility gate is cleared.
 
 ---
 
@@ -171,25 +154,16 @@ All amendments were made **before any real physiological data was analysed**.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Λ = Σ₀⁻¹.  Frozen.                                                 ║
-║   If it fails, it is abandoned — not adjusted.                       ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Preregistration v2.0*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **Λ = Σ₀⁻¹.  Frozen.**
+>
+> If it fails, it is abandoned — not adjusted.
 
 ---
 
 ## Related Work
 
 - [`../README.md`](../README.md) · [`HYPOTHESIS.md`](HYPOTHESIS.md) · [`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md) · [`FALSIFICATION_CRITERIA.md`](FALSIFICATION_CRITERIA.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Preregistration v2.0

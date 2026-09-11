@@ -1,38 +1,49 @@
 """
-estimators.py — Reference estimators for the Transition Dynamics preregistration.
+estimators.py — EMPIRICAL ESTIMATORS for Transition Dynamics.
 
-CRITICAL DISTINCTION ENFORCED THROUGHOUT THIS FILE
---------------------------------------------------
-Every function here is a MEASUREMENT PROXY. None of them computes the
-ORIGINAL MATHEMATICAL OBJECT.
+PROVENANCE RULE ENFORCED THROUGHOUT THIS FILE
+---------------------------------------------
+Every function here is an EMPIRICAL ESTIMATOR. None of them is a source
+equation, and none may be presented as one. The layering is:
 
-  Original object                     Proxy implemented here
-  ----------------------------------  ------------------------------------------
-  H_k(Reach(X_t)) vs H_k(Reach(X_0))  metric drift of a windowed second-order
-                                      structure estimate  (NOT a homology group)
-  ΔG                                  affine-invariant Riemannian distance between
-                                      covariance operators  (a scalar, not a group
-                                      difference)
-  Λ (stiffness reading)               baseline precision operator  Σ₀⁻¹
-  Λ (recovery reading)                discrete restoring operator  I − A  from VAR(1)
-  ‖ΛΔG‖                               deformation energy  √(δᵀ Σ₀⁻¹ δ)
-  C(t) = ι(⋃ᵢ Nₜ(X,Iᵢ))               Betti numbers of the nerve of the
-                                      co-deformation cover
-  C ⟂ L                               [DEMOTED in v2 — see docs/DEMOTED_OBJECTS.md]
-                                      retained only as exploratory decoupling
+    SOURCE EQUATION  ->  PHYSICAL INTERPRETATION  ->  EMPIRICAL
+    OPERATIONALISATION  ->  ESTIMATOR (this file)  ->  TEST
 
-The substitutions above are declared, not silent. Section 2 of README.md states
-exactly what each substitution costs in inferential strength.
+  Source equation                 Empirical estimator implemented here
+  ------------------------------  -----------------------------------------
+  Q_i = ||dG_i|| * tau_i          windowed second-order structural drift,
+                                  times excursion duration above a
+                                  baseline-fixed threshold
+  Q_G = Lambda * Q                Lambda operationalised as the inverse of
+                                  the baseline covariance (frozen once)
+  ||Lambda dG|| > T_critical      quadratic form in the baseline metric,
+                                  with the threshold expressed as a
+                                  chi-square quantile
+  C(t) = tau(union_i N_t(X,I_i))  Betti numbers of the nerve of the
+                                  co-deformation cover  [EXPLORATORY]
+
+  DEMOTED source objects, not estimated here and not supporting any
+  biomedical claim (see docs/DEMOTED_OBJECTS.md):
+    exists k : H_k(Reach(X_t)) not-iso H_k(Reach(X_0))
+    for all dl in L, dR_C(t) = 0
+
+WHAT THE SUBSTITUTIONS COST
+---------------------------
+The source set defines dG verbally, not formally. The covariance-based
+definition used here is OUR CHOICE. A change in this metric quantity is not a
+change in homology, and no homological inference is licensed by any result
+produced with this file.
+
+The demoted structural condition is NOT estimated by anything here. Nothing in
+this file should be read as evidence about reachable-set topology.
+
+Lambda is FROZEN as the baseline precision operator before any analysis
+(see freeze_lambda). The competing recovery/resilience reading requires a
+MODIFIED equation and belongs to a separate competing model; it is implemented
+as Lambda_A_recovery and is labelled as such.
 
 Dependencies: numpy, scipy only. Deliberately no TDA library — persistent
 homology is not used until the simpler estimators have been shown to fail.
-
-VERSION 2 NOTE
--------------
-Objects 1 (homological truth condition) and 6 (C ⟂ L) were DEMOTED after the
-v1 audit and are no longer part of the primary hypothesis. Λ is now FROZEN as
-Σ₀⁻¹ (see freeze_lambda below). The v2 additions begin at the section marked
-"V2 ADDITIONS".
 
 Run:  python3 analysis/estimators.py
 """
@@ -329,7 +340,12 @@ def betti_numbers(simplices: dict) -> tuple[int, int]:
 
 
 # ----------------------------------------------------------------------------
-# C ⟂ L — operational decoupling, not statistical independence
+# EXPLORATORY — graded decoupling  [source object DEMOTED]
+#
+# The literal universal zero-effect law is demoted and withdrawn; see
+# docs/DEMOTED_OBJECTS.md. What follows estimates a DIFFERENT and weaker
+# proposition — graded decoupling — which is not part of the primary
+# physiological hypothesis and is not required for it to succeed.
 # ----------------------------------------------------------------------------
 
 def structural_report_coupling(dg_struct: np.ndarray, dg_report: np.ndarray,
@@ -338,11 +354,12 @@ def structural_report_coupling(dg_struct: np.ndarray, dg_report: np.ndarray,
     Rolling Spearman coupling ρ(t) between the structural deformation series and
     the self-report deformation series.
 
-    The claim under test is NOT ρ = 0 (the literal reading of C ⟂ L is already
-    refuted by any verbal intervention that moves physiology). The claim under
-    test is that ρ(t) DECLINES during the pre-transition window while the two
+    The claim under test is NOT that the coupling is zero. The literal
+    universal zero-effect law is demoted and withdrawn — it is refuted by any
+    verbal intervention that moves physiology. The claim under test is that
+    the coupling DECLINES during the pre-transition window while the two
     series diverge in sign: structure deforming upward, self-report flat or
-    improving.
+    improving. That is a different and weaker proposition.
     """
     from scipy.stats import spearmanr
     a, b = np.asarray(dg_struct, float), np.asarray(dg_report, float)

@@ -1,267 +1,250 @@
-<div align="center">
+# Mathematical Objects
 
-# MATHEMATICAL OBJECTS
+Every object is presented in five separate layers. **Nothing below the first
+layer is source mathematics**, and nothing below it may be attributed to the
+original equation set.
 
-**The Surviving Equations · Full Specification**
+```mermaid
+flowchart TD
+    S[SOURCE EQUATION<br/>supplied, preserved exactly] --> P[PHYSICAL INTERPRETATION<br/>preregistered, could be wrong]
+    P --> O[EMPIRICAL OPERATIONALISATION<br/>a choice, not a derivation]
+    O --> E[ESTIMATOR<br/>code, with assumptions]
+    E --> T[TEST<br/>with a kill condition]
+```
 
-![Objects](https://img.shields.io/badge/Surviving-Objects_2_·_4_·_5-047857?style=flat-square)
-![Rule](https://img.shields.io/badge/Observed_≠_Estimated-Enforced-1f2937?style=flat-square)
-![Novelty](https://img.shields.io/badge/Multivariate_&gt;_Univariate-NOT_the_Novelty-b91c1c?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
-
-</div>
+**Notation.** $\tau$ denotes a duration throughout. The integration map in the
+integrated-deformation object is written $\iota$ to avoid the collision.
 
 ---
 
-*"Every symbol gets a unit, an observable, and a way to die. Anything else is decoration."*
+## 1. Deformation–persistence
 
-*— Davarn Morrison, 2026*
+### Source equation
 
----
+$$Q_i = \lVert \Delta G_i \rVert \cdot \tau_i$$
 
-## 0. Standing Distinction
+**Status: active.** $\Delta G_i$ is the structural deformation associated with
+channel-set or perturbation $i$; $\tau_i$ is its persistence duration.
 
-```
-════════════════════════════════════════════════════════════════════
-  OBSERVED    a number that comes off an instrument
-  ESTIMATED   a number computed from observations under assumptions
-  LATENT      an object the theory names but no instrument returns
-════════════════════════════════════════════════════════════════════
-```
+> The source equation set defines $\Delta G$ **verbally**, not formally. Any
+> formula for $\Delta G$ in this repository is an empirical operationalisation
+> chosen by us, not part of the supplied mathematics.
 
-Every object below is tagged. Objects that are LATENT with no estimator are in
-[`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md), not here.
+### Physical interpretation
 
-**Symbol collision resolved.** v1 used `τ` for both a duration and a topological
-integration map. Throughout v2: **τ is a duration**; the integration map is
-**ι**.
+Deformation magnitude combined multiplicatively with how long the system stays
+deformed. A large brief excursion and a small sustained one are not equivalent.
 
----
+Interpreted **neutrally**. No claim is made that this quantity demonstrates
+qualia or subjective experience.
 
-## 1. Structural Deformation — the substrate
+### Empirical operationalisation
 
-### Equation
+$\Delta G$ is operationalised as the drift of the joint second-order structure
+away from a baseline window, and $\tau$ as the contiguous duration above a
+threshold fixed per patient at the baseline 95th percentile.
 
-```
-  ΔG(t)  =  d( Σ₀ , Σ_t )  =  ‖ log( Σ₀^{-1/2} Σ_t Σ₀^{-1/2} ) ‖_F
-```
+### Estimator
 
-| Field | Specification |
-|---|---|
-| **Physical interpretation** | How far the joint second-order structure of the physiological state has been bent from its own baseline |
-| **Variables** | Σ₀ = baseline covariance (p×p); Σ_t = window covariance; d = affine-invariant Riemannian distance |
-| **Units** | Dimensionless. Invariant to invertible linear reparameterisation of channels, so the value does not depend on recording units |
-| **Observed** | The p channel values on a regular grid |
-| **Estimated** | Σ₀, Σ_t — both under Ledoit–Wolf shrinkage, mandatory |
-| **Latent** | None |
-| **Estimator** | `delta_G_structure` |
-| **Direction approaching transition** | ΔG **rises** |
-| **Null prediction** | ΔG stays within its own stationary band |
-| **Falsifies it** | ΔG shows no rise on windows where all marginals are in range, in primary **and** external cohorts |
+`delta_G_structure`, `Q_deformation_persistence`, with `Q_integral` as a
+comparator. Baseline covariance uses shrinkage; without it the estimate is
+ill-conditioned at realistic window lengths.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  DECLARED SUBSTITUTION, CARRIED FORWARD FROM v1                  │
-│                                                                   │
-│  This is a METRIC distance, not the homology comparison of the   │
-│  demoted Object 1. A nonzero ΔG does not imply a homology        │
-│  change and a homology change need not produce a large ΔG.       │
-│  No homological inference is licensed by any ΔG result.          │
-└──────────────────────────────────────────────────────────────────┘
-```
+### Test
 
-**Priority note.** ΔG is essentially the covariance-drift quantity of Dynamical
-Network Biomarker theory (2012). It is **not novel** and is used here as the
-established comparator, not as a contribution.
+$\tau$ is defined by a threshold on $\lVert\Delta G\rVert$, so $Q$ is a
+deterministic function of $\lVert\Delta G\rVert$ and one constant. "Q carries
+information beyond its factors" is therefore not a coherent claim. The testable
+claim is that the exponents are equal:
+
+$$\mathrm{logit}(P) = \beta_0 + \beta_1 \log\lVert\Delta G\rVert + \beta_2 \log \tau$$
+
+with the product form corresponding to $\beta_1 = \beta_2$, and requiring
+$\beta_1 > 0$, $\beta_2 > 0$.
+
+**Expected direction:** $Q$ rises approaching transition; its advantage over
+magnitude alone grows with horizon.
+**Null:** $\beta_2 = 0$.
+**Falsified if:** $\beta_2$ CI includes 0; or unconstrained exponents beat the
+constrained form by $\Delta$AIC > 10; or the integral form
+$\int \lVert\Delta G\rVert\,dt$ beats the product form by $\Delta$AIC > 10.
+
+> This reformulation is **ours**, not the source mathematics. If the integral
+> form wins, the idea survives and the written product form does not.
 
 ---
 
-## 2. Deformation-Persistence — surviving Object 2
+## 2. Constraint operator
 
-### Equation, reproduced exactly
+### Source equation
 
-```
-  Q_i  =  ‖ΔG_i‖ · τ_i
-```
+$$Q_G = \Lambda\, Q$$
 
-| Field | Specification |
-|---|---|
-| **Physical interpretation** | Deformation magnitude combined multiplicatively with how long the system has stayed bent. A large brief excursion and a small sustained one are not equivalent |
-| **Variables** | ‖ΔG_i‖ = deformation magnitude for channel-set i, dimensionless; τ_i = contiguous excursion duration above threshold θ |
-| **Units** | Q carries **time** (dimensionless × time). Unit-invariance of the test is preserved because units move only the regression intercept |
-| **Observed** | Channel values; the clock |
-| **Estimated** | ΔG, τ, θ (θ = baseline 95th percentile of ΔG, fixed per patient before analysis) |
-| **Latent** | None |
-| **Estimator** | `Q_deformation_persistence`; comparator `Q_integral` |
-| **Direction approaching transition** | Q **rises**, and its advantage over ΔG alone **grows with horizon** |
-| **Null prediction** | β₂ = 0 — τ contributes nothing and Q is a rescaling of ΔG |
-| **Falsifies it** | β₂ CI includes 0, **or** unconstrained exponents beat the constrained form by ΔAIC > 10, **or** the integral form beats the product form by ΔAIC > 10 |
+**Status: active, preregistered.**
 
-### The identifiability problem and its declared repair
+### Physical interpretation
 
-τ is defined by a threshold on ‖ΔG‖, so **Q is a deterministic function of
-‖ΔG‖ and one tuning constant.** "Q carries information beyond its own factors"
-is not a coherent claim. The testable claim is that the exponents are equal:
+$\Lambda$ is preregistered as a **stiffness / precision / resistance-to-deformation**
+operator. The source equation constrains $\Lambda$ only to be a linear
+operator; it does not fix the interpretation. Choosing one is a commitment made
+in advance, and it could be wrong.
 
-```
-  logit(P) = β₀ + β₁·log‖ΔG‖ + β₂·log τ
+The competing resilience/recovery interpretation is a **separate model** —
+see [`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md).
 
-  Morrison product form   ⟺   H₀: β₁ = β₂        (Wald test)
-  Require additionally    β₁ > 0  and  β₂ > 0
-```
+### Empirical operationalisation
 
-**This reformulation is ours, not the framework's.** It is declared, not
-smuggled in. `Q_integral` = ∫‖ΔG‖dt is the physically correct functional of
-which the product is a rectangle approximation; if the integral wins, the idea
-survives and the written product form does not.
+$\Lambda$ is operationalised as the inverse of the baseline covariance,
+computed once on a treatment-quiet baseline window and never re-estimated.
 
-**Terminology.** This object is referred to as *deformation-persistence*. The
-"qualia" reading is demoted — see [`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md).
+> **EMPIRICAL OPERATIONALISATION, not the source equation.** The source
+> equation does not mention covariance.
 
----
+### Estimator
 
-## 3. Constrained Deformation and Critical Threshold — surviving Object 4
+`freeze_lambda`, which returns the frozen baseline quantities as a read-only
+object so that no downstream step can silently re-fit them.
 
-### Equation, reproduced exactly
+### Test
 
-```
-  ‖ Λ ΔG ‖  >  T_critical
-```
+Whether constraint-weighted deformation improves on unweighted deformation and
+on deformation–persistence, in a nested comparison, out of sample.
 
-with Λ **frozen** as Σ₀⁻¹ — see [`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md).
-
-| Field | Specification |
-|---|---|
-| **Physical interpretation** | A yield criterion. Stress = stiffness × strain; the regime changes when constrained deformation exceeds a critical stress |
-| **Variables** | δ = μ(t) − μ₀, mean displacement; Λ = Σ₀⁻¹, stiffness operator, dimensionless when channels are z-scored to baseline; T_critical stated as a χ² quantile |
-| **Quadratic form** | `‖ΛΔG‖ = √(δᵀ Σ₀⁻¹ δ)` — a Mahalanobis norm in the baseline metric, **not** a scalar product |
-| **Units** | Dimensionless. n_eff·δᵀΣ₀⁻¹δ ~ χ²_p under the no-displacement null, which is what makes T_critical transferable across cohorts with different p |
-| **Observed** | Channel values |
-| **Estimated** | μ₀, Σ₀ (frozen at baseline); μ(t); n_eff via autocorrelation correction |
-| **Latent** | T_critical — fitted, and its transferability is the central open question |
-| **Estimator** | `deformation_energy`, `deformation_energy_chi2` |
-| **Direction approaching transition** | Energy **rises**; and the hazard as a function of it contains a **knee**, not a smooth gradient |
-| **Null prediction** | Hazard rises smoothly and monotonically. No knee |
-| **Falsifies it** | Smooth monotone hazard fits as well as or better than a threshold model (ΔAIC ≤ 10 favouring smooth), **or** between-cohort CV of fitted T_critical exceeds 0.5 |
-
-### The directional companion — stiffness alignment
-
-```
-  A(t)  =  ( δᵀ Σ₀⁻¹ δ )  /  ( ‖δ‖² · tr(Σ₀⁻¹)/p )
-```
-
-| Field | Specification |
-|---|---|
-| **Physical interpretation** | *Where* the system is being pushed, independent of *how hard*. Magnitude-invariant by construction |
-| **Direction approaching transition** | z(t) **> 0** against the patient's own empirical stationary null — displacement along homeostatically defended directions |
-| **Null prediction** | z within the patient's own baseline band |
-| **Falsifies it** | Mean z cluster-bootstrap 95% CI includes 0, or is negative, in exogenous-insult transition classes |
-
-**Critical caveat, established empirically.** The decision rule is **not**
-A > 1. The stationary null for A is Σ₀-shaped and sits well below 1. All
-inference uses z against the patient's own empirical band. See
-[`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md) §3.2.
+**Null:** the weighting adds nothing; deformation is isotropic with respect to
+the baseline structure.
+**Falsified if:** the nested gain CI includes zero **and** the competing
+resilience model outperforms.
 
 ---
 
-## 4. Higher-Order Integration — surviving Object 5
+## 3. Critical deformation
 
-### Equation, reproduced exactly
+### Source equation
 
-```
-  C(t)  =  ι( ⋃ᵢ Nₜ(X, Iᵢ) )
-```
+$$\lVert \Lambda \Delta G \rVert > T_{\mathrm{critical}}$$
 
-| Field | Specification |
-|---|---|
-| **Physical interpretation** | Integrated multichannel deformation: the shape of how channels co-deform, not merely how many do |
-| **Variables** | Nₜ(X,Iᵢ) = { t : \|zᵢ(t)\| > θ }, the times channel i is deformed; ι = topological integration map, realised as the **nerve** of the cover |
-| **Units** | Betti numbers are integer counts, dimensionless |
-| **Observed** | Channel values |
-| **Estimated** | The complex, via co-deformation support; β₀, β₁ over GF(2) |
-| **Latent** | None |
-| **Estimator** | `codeformation_complex` → `betti_numbers` → `beta1_excess_over_pairwise` |
-| **Direction approaching transition** | β₁ excess **rises** above its pairwise-matched surrogate null |
-| **Null prediction** | z-score of β₁ excess = 0 — the complex carries nothing beyond pairwise |
-| **Falsifies it** | β₁ excess z-score CI includes 0, or a pairwise-complete model matches the β₁-augmented model |
+**Status: active, load-bearing.** This is the current primary critical-transition
+condition. It is not replaced by any other equation.
 
-### Why the union is non-trivial
+### Physical interpretation
 
-A naive union of overlapping neighbourhoods is connected and its invariants are
-trivial. The **nerve theorem** supplies the content: for a good cover the
-homotopy type of the union equals that of the nerve. A simplex {i₀…i_k} is
-included iff those channels co-deform on at least a support fraction ρ of the
-window. Intersection support is monotone decreasing under supersets, so the
-family is **automatically downward closed** — a genuine simplicial complex with
-no repair required.
+A yield-type condition: a regime change occurs when constraint-weighted
+deformation exceeds a critical value. The claim is of a **threshold**, not a
+smooth risk gradient — that distinction is what makes it testable against
+existing early-warning work.
 
-### The strong claim, formalised
+### Empirical operationalisation
 
-╔══════════════════════════════════════════════════════════════════════╗
-║  "MULTIVARIATE BEATS UNIVARIATE" IS NOT THE NOVELTY.                 ║
-║                                                                      ║
-║  That is established (Network Physiology, DNB) and is not tested     ║
-║  here as a contribution.                                             ║
-║                                                                      ║
-║  THE CLAIM IS: higher-order structural information exists that       ║
-║  CANNOT be reconstructed from pairwise supports alone.               ║
-╚══════════════════════════════════════════════════════════════════════╝
+The norm is operationalised as a quadratic form in the baseline metric,
 
-**The observable that tests it.** Gaussian surrogates matched to the window's
-mean and covariance preserve **all** pairwise second-order structure and
-nothing higher, by construction. So the surrogate distribution of β₁ is exactly
-"what β₁ would be if only pairwise structure existed":
+$$\lVert \Lambda \Delta G \rVert \;\longrightarrow\; \sqrt{\delta^{\mathsf T} \Sigma_0^{-1} \delta}, \qquad \delta = \mu(t) - \mu_0$$
 
-```
-  z_β₁  =  ( β₁_observed − mean β₁_surrogate ) / sd β₁_surrogate
-```
+and $T_{\mathrm{critical}}$ is expressed as a $\chi^2$ quantile so that a
+threshold fitted in one cohort is comparable in another with a different number
+of channels.
 
-β₁ is determined by which **triangles are filled** — third-order co-deformation
-support — and is provably not a function of the pairwise supports alone. A
-model containing every pairwise coupling can still be missing β₁.
+> **EMPIRICAL OPERATIONALISATION.** The quadratic form and the $\chi^2$
+> expression are choices we made. They are not in the source equation.
 
-**z_β₁ significantly > 0 is the only result that supports higher-order
-integration.** Anything else means the integration operator is decorative and a
-pairwise-complete model suffices. Implemented as `beta1_excess_over_pairwise`.
+### Estimator
+
+`deformation_energy`, `deformation_energy_chi2`, with an
+autocorrelation-corrected effective sample size — physiological channels are
+strongly autocorrelated and raw sample counts would overstate significance.
+
+### Test
+
+Fit a threshold hazard model and a smooth monotone hazard model; compare. Then
+fit the threshold in one cohort and evaluate it unchanged in another.
+
+**Expected direction:** the quantity rises approaching transition and the
+hazard contains a knee.
+**Null:** a smooth monotone hazard with no knee.
+**Falsified if:** $\Delta$AIC ≤ 10 favouring the smooth model, or the
+between-cohort coefficient of variation of the fitted threshold exceeds 0.5.
+
+> Either failure kills the **threshold** claim while possibly leaving a useful
+> predictor. Those are different results and must be reported separately.
 
 ---
 
-## 5. Summary Table
+## 4. Integrated deformation
 
-| Object | Equation | Observed | Estimated | Latent | Direction | Kill condition |
-|:--:|---|---|---|---|:--:|---|
-| ΔG | d(Σ₀,Σ_t) | channels | Σ₀, Σ_t | — | ↑ | no rise with marginals in range |
-| Q | ‖ΔG‖·τ | channels, clock | ΔG, τ, θ | — | ↑ | β₂ = 0, or integral form wins |
-| ‖ΛΔG‖ | √(δᵀΣ₀⁻¹δ) | channels | μ₀, Σ₀, n_eff | T_critical | ↑ with a knee | smooth hazard fits as well |
-| A(t) | normalised quadratic form | channels | Σ₀, empirical null | — | z > 0 | mean z CI includes 0 |
-| C(t) | ι(⋃Nᵢ) → β₁ | channels | complex, surrogates | — | z_β₁ ↑ | z_β₁ CI includes 0 |
+### Source equation
+
+$$C(t) = \tau\!\left( \bigcup_i N_t(X, I_i) \right)$$
+
+**Status: exploratory source object.** Used here only for its higher-order
+integration structure, where that is empirically meaningful.
+
+> No claim is made that physiological integration demonstrates consciousness.
+> The object is used as a mathematical structure and nothing more.
+
+### Physical interpretation
+
+Integrated multichannel deformation: the *shape* of how channels co-deform,
+not merely how many of them do.
+
+### Empirical operationalisation
+
+$N_t(X, I_i)$ is operationalised as the set of times channel $i$ is deformed,
+and the integration map $\iota$ as the **nerve** of that cover. A simplex is
+included when its channels co-deform on at least a support fraction of the
+window. Intersection support decreases under supersets, so the family is
+automatically downward closed and forms a valid simplicial complex.
+
+### Estimator
+
+`codeformation_complex` → `betti_numbers` → `beta1_excess_over_pairwise`.
+
+### Test
+
+> **"Multivariate beats univariate" is not the claim.** That is already
+> established elsewhere and is not tested here as a contribution.
+
+The claim is that higher-order structural information exists which **cannot be
+reconstructed from pairwise relationships alone.**
+
+The observable that tests it: Gaussian surrogates matched to the window's mean
+and covariance preserve every pairwise relationship and nothing higher, by
+construction. So their distribution of the first Betti number is exactly "what
+would be seen if only pairwise structure existed":
+
+$$z_{\beta_1} = \frac{\beta_1^{\text{obs}} - \overline{\beta_1^{\text{surr}}}}{\mathrm{sd}\,\beta_1^{\text{surr}}}$$
+
+$\beta_1$ depends on which triangles are filled — third-order co-deformation —
+and is provably not a function of the pairwise supports alone.
+
+**Expected direction:** $z_{\beta_1} > 0$ approaching transition.
+**Null:** $z_{\beta_1} = 0$.
+**Falsified if:** the CI includes zero, or a model containing every pairwise
+relationship matches the augmented model.
 
 ---
 
-<div align="center">
+## 5. Demoted objects
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   Higher-order means: not reconstructible from pairwise.             ║
-║   The surrogate is the test. Anything else is a slogan.              ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
+Two source objects are demoted from the primary hypothesis. They are preserved
+in [`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md) with full reasoning and may not
+support any biomedical claim.
 
-**Transition Dynamics** · Morrison Framework™ · *Mathematical Objects*
+$$\exists k : H_k(\mathrm{Reach}(X_t)) \not\cong H_k(\mathrm{Reach}(X_0))$$
 
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+$$\forall\, \Delta\ell \in L,\ \ \Delta R_C(t) = 0$$
 
 ---
 
-## Related Work
+## Summary
 
-- [`../README.md`](../README.md) — Index
-- [`PHYSICAL_INTERPRETATION.md`](PHYSICAL_INTERPRETATION.md) — The frozen Λ
-- [`DEMOTED_OBJECTS.md`](DEMOTED_OBJECTS.md) — Objects 1 and 6
-- [`FALSIFICATION_CRITERIA.md`](FALSIFICATION_CRITERIA.md) — Canonical table
+| Object | Layer 1 status | Kill condition |
+|---|---|---|
+| $Q_i = \lVert\Delta G_i\rVert\tau_i$ | Active | $\beta_2 = 0$, or integral form wins |
+| $Q_G = \Lambda Q$ | Active, preregistered | Nested gain CI includes 0 |
+| $\lVert\Lambda\Delta G\rVert > T_c$ | Active, load-bearing | Smooth hazard fits as well |
+| $C(t) = \tau(\bigcup_i N_t)$ | Exploratory | $z_{\beta_1}$ CI includes 0 |
+| Reach / homology | Demoted | — |
+| Orthogonality law | Demoted | — |
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics

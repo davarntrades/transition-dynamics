@@ -7,8 +7,6 @@
 ![Mode](https://img.shields.io/badge/Mode-Adversarial-b91c1c?style=flat-square)
 ![Test](https://img.shields.io/badge/Test-Coherence_·_Dimensions_·_Identifiability-1f2937?style=flat-square)
 ![Rule](https://img.shields.io/badge/Rule-No_Silent_Repair-4c1d95?style=flat-square)
-![Patent](https://img.shields.io/badge/Patent-GB2600765.8-0075ca?style=flat-square)
-![Rights](https://img.shields.io/badge/©-Davarn_Morrison-555555?style=flat-square)
 
 </div>
 
@@ -17,7 +15,6 @@
 > **v1 document, still current.** This file records the audit and literature review that produced the v2 demotions and remains the authoritative record for both. See [`../README.md`](../README.md) for the v2 index.
 
 ---
-
 
 *"Repairing an equation quietly is how a field dies. Name the break. Then decide, in the open, whether to work around it."*
 
@@ -30,16 +27,13 @@
 Each object is tested against four questions. A failure on any one is recorded
 and **not repaired in place**.
 
-```
-════════════════════════════════════════════════════════════════════
-  INTERNAL CONSISTENCY   do the symbols mean one thing throughout?
-  DIMENSIONAL COHERENCE  do the units combine legally?
-  IDENTIFIABILITY        can the quantity be recovered from data,
-                         even in principle, with infinite samples?
-  UNIQUE PREDICTION      does it force one empirical expectation
-                         rather than permitting several?
-════════════════════════════════════════════════════════════════════
-```
+> **INTERNAL CONSISTENCY   do the symbols mean one thing throughout?**
+>
+> DIMENSIONAL COHERENCE  do the units combine legally?
+> IDENTIFIABILITY        can the quantity be recovered from data,
+> even in principle, with infinite samples?
+> UNIQUE PREDICTION      does it force one empirical expectation
+> rather than permitting several?
 
 Where a workaround is adopted, it appears as a **DECLARED SUBSTITUTION** with
 its inferential cost stated. Silent substitution is the one prohibited move.
@@ -48,9 +42,7 @@ its inferential cost stated. Silent substitution is the one prohibited move.
 
 ## Object 1 — Structural Deformation / Truth Condition
 
-```
-  ∃k :  H_k(Reach(X_t))  ≇  H_k(Reach(X_0))
-```
+$$\exists k : H_k(\mathrm{Reach}(X_t)) \not\cong H_k(\mathrm{Reach}(X_0))$$
 
 ### Finding 1.1 — Reach is not observable. **FAILS IDENTIFIABILITY.**
 
@@ -61,15 +53,14 @@ within the observation window — an ergodicity or quasi-stationarity assumption
 
 This produces a circularity that cannot be worked around by better estimation:
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  To estimate Reach(X_t) we assume quasi-stationarity on the      │
-│  window.                                                          │
-│  The hypothesis under test is that quasi-stationarity is failing. │
-│  The estimator therefore assumes the negation of the thing it is  │
-│  meant to detect.                                                 │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> To estimate Reach(X_t) we assume quasi-stationarity on the
+> window.
+> The hypothesis under test is that quasi-stationarity is failing.
+> The estimator therefore assumes the negation of the thing it is
+> meant to detect.
+> ──────────────────────────────────────────────────────────────────
 
 Delay embedding of a windowed trajectory estimates the **attractor**, which is
 a proper subset of the reachable set. Attractor ⊂ Reach. These are different
@@ -80,9 +71,7 @@ mathematical objects, and evidence about one is not evidence about the other.
 For a controlled dynamical system with connected input set and no excluded
 region, the reachable tube is path-connected and simply connected. Then:
 
-```
-  H₀(Reach) = ℤ        H_k(Reach) = 0  for all k ≥ 1
-```
+$$H_0(\mathrm{Reach}) = \mathbb{Z}, \qquad H_k(\mathrm{Reach}) = 0 \ \ \text{for all } k \ge 1$$
 
 at **every** t. The condition `∃k : H_k(Reach(X_t)) ≇ H_k(Reach(X_0))` is then
 not merely rarely satisfied. It is **never** satisfied.
@@ -98,29 +87,24 @@ research programme, because the programme can proceed on a declared metric
 proxy — but it is fatal to any claim that a result here is evidence *about
 homology*.
 
-### Finding 1.3 — ΔG as written is a category error. **FAILS CONSISTENCY.**
+### Finding 1.3 — ΔG has no formal definition in the source set. **REQUIRES A CHOICE.**
 
-The companion definition is:
+The source equation set defines ΔG **verbally** — "geometric/structural
+deformation" — and supplies no formula for it. The truth condition above is a
+statement about homology groups; it does not itself yield a graded magnitude.
 
-```
-  ΔG = Topology(X_t) − Topology(X_0)
-```
+So a numerical ΔG requires choosing a functor, and that choice is an empirical
+commitment rather than a notational convenience:
 
-If `Topology(·)` returns a homology group, this subtracts groups. **Subtraction
-is not defined in the category of groups.** There is no group difference
-operation; the closest legal constructions are quotients (requiring a normal
-subgroup relationship that does not generally hold here) or connecting
-homomorphisms in a long exact sequence, neither of which yields the intended
-"how far has it bent" scalar.
-
-The expression becomes meaningful only after choosing a numerical functor. The
-choice is an empirical commitment:
-
-| Functor | ΔG becomes | Cost |
+| Choice | ΔG becomes | Cost |
 |---|---|---|
-| Betti vector β = (β₀,…,β_k) | β(t) − β(0), an integer vector | Integer-quantised. Sub-threshold deformation returns **exactly zero**. No graded early warning possible |
-| Persistence diagram | Wasserstein / bottleneck distance | Continuous and stable, but this is a **metric on a filtration summary**, not a homology comparison |
-| Covariance operator | Riemannian distance d(Σ₀,Σ_t) | Continuous, well-conditioned, cheap — and abandons topology entirely |
+| Betti vector | an integer vector difference | Integer-quantised: sub-threshold deformation returns exactly zero, so no graded early warning is possible |
+| Persistence diagram | a distance between diagrams | Continuous and stable, but this is a metric on a filtration summary, not a homology comparison |
+| Second-order structure | a distance between covariance operators | Continuous, well-conditioned, cheap — and abandons topology entirely |
+
+Any of these is an **empirical operationalisation**, not source mathematics.
+Presenting one as though it were the supplied equation would be the error this
+audit exists to prevent.
 
 ### DECLARED SUBSTITUTION 1
 
@@ -141,9 +125,7 @@ containing an undefined operation.
 
 ## Object 2 — Qualia / Deformation-Persistence
 
-```
-  Q_i = ‖ΔG_i‖ · τ_i
-```
+$$Q_i = \lVert \Delta G_i \rVert \cdot \tau_i$$
 
 ### Finding 2.1 — Dimensionally coherent, conditionally. **PASSES.**
 
@@ -159,9 +141,7 @@ Standardisation is therefore **mandatory**, not stylistic.
 τ is "persistence duration of the deformation". Duration of what condition?
 Any operational answer requires a threshold on ‖ΔG‖:
 
-```
-  τ = |{ t : ‖ΔG(t)‖ > θ }|      (contiguous, ending at now)
-```
+$$\tau = \lvert \{\, t : \lVert \Delta G(t) \rVert > \theta \,\} \rvert \quad \text{(contiguous, ending now)}$$
 
 So Q = ‖ΔG‖ · τ(‖ΔG‖, θ). Q is a **deterministic function of ‖ΔG‖ and one
 tuning constant.** The hypothesis "Q carries information beyond ‖ΔG‖ and τ" is
@@ -170,9 +150,7 @@ therefore not well-posed — Q is definitionally determined by them.
 Further, ‖ΔG‖·τ is a **rectangle approximation** to the quantity the physical
 story actually describes:
 
-```
-  Q_true = ∫ ‖ΔG(t)‖ dt   over the excursion
-```
+$$Q_{\text{true}} = \int \lVert \Delta G(t) \rVert \, dt \quad \text{over the excursion}$$
 
 The product form equals the integral only if ‖ΔG‖ is constant across the
 excursion, which it is not.
@@ -221,18 +199,15 @@ coherent, resilient; Λ → 0 means collapse.
 
 Object 4 states that collapse occurs when `‖ΛΔG‖ > T_critical`.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  Under "high Λ = resilient", a MAXIMALLY RESILIENT system         │
-│  crosses the irreversibility threshold at the SMALLEST            │
-│  deformation.                                                     │
-│                                                                   │
-│  Under those semantics the criterion should be  ΔG / Λ > T_crit.  │
-│  It is written  Λ · ΔG > T_crit.                                  │
-│                                                                   │
-│  The written form and the stated semantics disagree in sign.      │
-└──────────────────────────────────────────────────────────────────┘
-```
+> **──────────────────────────────────────────────────────────────────**
+>
+> Under "high Λ = resilient", a MAXIMALLY RESILIENT system
+> crosses the irreversibility threshold at the SMALLEST
+> deformation.
+> Under those semantics the criterion should be  ΔG / Λ > T_crit.
+> It is written  Λ · ΔG > T_crit.
+> The written form and the stated semantics disagree in sign.
+> ──────────────────────────────────────────────────────────────────
 
 This is a genuine inconsistency between the resilience gloss on Λ and the
 multiplicative form of the irreversibility criterion. It is **not repaired
@@ -476,21 +451,18 @@ different and weaker proposition that must be labelled as such.
 
 ### Declared substitutions, collected
 
-```
-════════════════════════════════════════════════════════════════════
- 1  Homology comparison        →  covariance-operator distance
-    COST: no homological inference is licensed by any result here
- 2  Q = ‖ΔG‖·τ                 →  constrained-exponent test β₁ = β₂
-    COST: the reformulation is ours; the framework does not force it
- 3  Λ                          →  Σ₀⁻¹, stiffness reading
-    COST: the resilience gloss on Λ is given up
- 5  ι(⋃ᵢ Nᵢ)                   →  Betti numbers of the nerve
-    COST: none material; this is the nerve theorem, not a weakening
- 6  C ⟂ L                      →  graded pre-transition decoupling
-    COST: a different and weaker proposition, never to be reported
-          as evidence for orthogonality
-════════════════════════════════════════════════════════════════════
-```
+> **1  Homology comparison        →  covariance-operator distance**
+>
+> COST: no homological inference is licensed by any result here
+> 2  Q = ‖ΔG‖·τ                 →  constrained-exponent test β₁ = β₂
+> COST: the reformulation is ours; the framework does not force it
+> 3  Λ                          →  Σ₀⁻¹, stiffness reading
+> COST: the resilience gloss on Λ is given up
+> 5  ι(⋃ᵢ Nᵢ)                   →  Betti numbers of the nerve
+> COST: none material; this is the nerve theorem, not a weakening
+> 6  C ⟂ L                      →  graded pre-transition decoupling
+> COST: a different and weaker proposition, never to be reported
+> as evidence for orthogonality
 
 ### The audit's central conclusion
 
@@ -508,23 +480,10 @@ could ever contradict a claim whose terms shift on contact with data.
 
 <div align="center">
 
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║        Λ is not determined by the equations.                         ║
-║        The equations are consistent with two opposite worlds.        ║
-║        Choose one in writing, or predict nothing.                    ║
-║                                                                      ║
-║                    GB2600765.8                                       ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-
-**Transition Dynamics** · Morrison Framework™ · *Mathematical Audit*
-
-GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
-
-© 2026 Davarn Morrison — Intelligence Invariant™ · All Rights Reserved
-
-</div>
+> **Λ is not determined by the equations.**
+>
+> The equations are consistent with two opposite worlds.
+> Choose one in writing, or predict nothing.
 
 ---
 
@@ -532,5 +491,9 @@ GB2600765.8 · GB2602013.1 · GB2602072.7 · GB26023332.5
 
 - [`../README.md`](../README.md) — Preregistration
 - [`LITERATURE.md`](LITERATURE.md) — Literature comparison
-- [`PROTOCOL.md`](PROTOCOL.md) — Experimental protocol
-- [`FALSIFICATION-MATRIX.md`](FALSIFICATION-MATRIX.md) — Kill conditions
+- [`PROTOCOL.md`](archive/PROTOCOL_V1.md) — Experimental protocol
+- [`FALSIFICATION-MATRIX.md`](archive/FALSIFICATION_MATRIX_V1.md) — Kill conditions
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics · Mathematical Audit
