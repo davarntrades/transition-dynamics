@@ -172,7 +172,7 @@ walk; or no advantage over phase-randomised surrogates; or the free-rate
 exponential substantially outperforms the baseline-rate-constrained form; or
 rate rank-correlation < 0.5; or decline > 50%.
 
-**Justifies proceeding to early-detection testing:** all of — ≥ 60% selection
+**Justifies advancing to prospective early-detection evaluation:** all of — ≥ 60% selection
 and more often than surrogates with a bootstrap CI excluding zero; better
 held-out prediction than linear and natural-spline comparators; rate
 correlation ≥ 0.5; decline ≤ 50%; ≥ 50 admissible recordings.

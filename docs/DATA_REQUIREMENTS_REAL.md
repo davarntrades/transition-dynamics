@@ -115,7 +115,7 @@ waveforms; for already-tabular vitals it can be bypassed.
 - Decline rate > 50% → not operationally usable, regardless of performance on
   the remainder.
 
-## What would justify proceeding to early-detection testing
+## What would justify advancing to prospective early-detection evaluation
 
 All of:
 
