@@ -1,7 +1,23 @@
 # Protocol — Candidate family 1: deformation persistence
 
-**Status: DRAFT, awaiting approval. Not yet frozen. The confirmatory set has
-not been touched.**
+> # WITHDRAWN BEFORE FREEZING — 2026-09-11
+>
+> This protocol was never frozen and never run on confirmatory data. The
+> representation search that preceded freezing tested the run-length of
+> abnormal variability — the same persistence family — against a destructive
+> control that preserves marginals and destroys temporal order. Its gain was
+> **fully reproduced by the control** (temporal gain +0.002 / +0.000 / −0.001
+> AUROC at 5/10/15 min). The information is order-free.
+>
+> $Q_i=\lVert\Delta G_i\rVert\tau_i$ is therefore **demoted for this
+> application**, on development data, before any confirmatory patient was
+> touched. See [`RESULT_REPRESENTATION_SEARCH.md`](RESULT_REPRESENTATION_SEARCH.md).
+>
+> The document is retained unaltered below as a record of what was proposed.
+> The baseline B\* it establishes in §1 remains in force and is used unchanged
+> by the successor protocol.
+
+**Status: WITHDRAWN. Never frozen, never run on confirmatory data.**
 
 ---
 

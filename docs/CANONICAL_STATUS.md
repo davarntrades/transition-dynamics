@@ -109,6 +109,7 @@ produced confident wrong answers.
 | 8 | Onset estimator never declined, including on stationary data | Interleaved cross-fitting does not control overfitting at lag-1 autocorrelation 0.76 | Null-calibrated threshold from stationary trajectories; declines 80–95% |
 | 9 | Stage C appeared to validate the onset model | Baseline rates recomputed from the first half of the very segment being tested — circular | `k_base` made a required argument |
 | 10 | Stage C correlations undefined | Rate grid capped at 1/h while real rates are ~1000/h, so every fit pinned to the boundary; and rates faster than the sampling interval are unidentifiable | Grid spans 10⁻²–10⁴; baseline estimated at matched resolution; identifiability band enforced |
+| 12 | Channel-shuffle control returned numbers bit-identical to the uncontrolled arm | The control permuted feature **columns** globally, which is a no-op for a ridge model — reordering columns leaves the fit identical | Permute channel assignment **independently per row**, preserving each row's multiset of values while destroying channel identity |
 | 11 | Every fitted model sat at AUROC 0.48–0.52 while unfitted raw scores reached 0.60–0.63 | Out-of-fold **probabilities** pooled across folds. One fold had test prevalence 0.014 against 0.129 in training, so its intercept and standardisation placed its predictions on a different scale and the pooled ranking inverted — despite every fold ranking correctly on its own | Discrimination, false-alert rate and lead time use within-fold rank-normalised scores; calibration keeps untransformed probabilities. Regression test: a single-feature model must reproduce its own feature's AUROC |
 
 **Why they were dangerous.** Each produced a confident, plausible-looking
@@ -245,6 +246,38 @@ stiffness reading was already demoted; the bare metric now has no incremental
 predictive value either. Cross-channel structure generally fails here — the
 covariance-drift/DNB comparator adds nothing to the marginal baseline.
 See [`RESULT_STRUCTURAL_PREDICTION.md`](RESULT_STRUCTURAL_PREDICTION.md).
+
+---
+
+## 13. Representation search — persistence demoted, autocorrelation survives development (2026-09-11)
+
+Strategy changed after three real-data failures: no longer rescuing the
+covariance/stiffness representation. Search over temporal representations of
+**marginal variability**, which is the actual empirical survivor — the
+dispersion block dominates every other feature block by an order of magnitude
+on leave-one-out.
+
+Nine candidates on 166 development patients, each paired with a destructive
+control preserving marginals and destroying temporal order.
+
+| candidate | verdict |
+|---|---|
+| run-length of abnormal variability (the $Q_i=\lVert\Delta G_i\rVert\tau_i$ family) | **NOT SUPPORTED** — gain fully reproduced by the order-destroyed control |
+| dV/dt, accumulated excess, change-point, hazard/first-passage | **NOT SUPPORTED** |
+| spectral / entropy, all-temporal combined | **EXPLORATORY** |
+| **window autocorrelation** | **SURVIVED on development, AUPRC-only, narrow** |
+
+Window autocorrelation: ΔAUPRC +0.0011 / **+0.0127 [+0.0055, +0.0211]** /
+**+0.0189 [+0.0099, +0.0298]** at 5/10/15 min, surviving Bonferroni over all 27
+search comparisons. **ΔAUROC spans zero at every horizon.** Gain destroyed by
+both the within-window shuffle and a row-wise channel shuffle, and not
+explained by the repeated-sample fraction — though these signals are heavily
+quantised (SpO₂ 96% identical consecutive samples) and an instrumentation
+origin is not excluded.
+
+$Q_i$ is **demoted for this application**; its protocol was withdrawn before
+freezing. See [`RESULT_REPRESENTATION_SEARCH.md`](RESULT_REPRESENTATION_SEARCH.md)
+and [`PROTOCOL_AUTOCORR.md`](PROTOCOL_AUTOCORR.md).
 
 ---
 
