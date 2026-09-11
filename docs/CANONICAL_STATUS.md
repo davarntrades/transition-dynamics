@@ -181,6 +181,30 @@ basis. See [`RESULT_VITALDB_ADEQUACY.md`](RESULT_VITALDB_ADEQUACY.md).
 
 ---
 
+## 11. Short-timescale transfer — NOT SUPPORTED (2026-09-11)
+
+Baseline relaxation does not predict response relaxation even on compatible,
+identifiable timescales. Fresh subjects, disjoint from all prior work.
+
+| band | subjects | within-channel ρ | CI | surrogate |
+|:--:|:--:|:--:|:--:|:--:|
+| seconds | 112 | +0.043 | [−0.09, +0.18] | +0.000 |
+| tens of seconds | 83 | −0.006 | [−0.22, +0.21] | +0.004 |
+| short minutes | 11 | — | — | **UNRESOLVED** |
+
+Channel identity alone predicts **+0.266**, six times better than a subject's
+own baseline. Range restriction rejected (predictor CV 0.56–1.00); reliability
+ceiling is 0.593, above the 0.30 threshold, so the test was capable of
+detecting the effect. Disattenuated estimate +0.073 [−0.15, +0.30].
+
+**Consequence: the stiffness interpretation of $\Lambda=\Sigma_0^{-1}$ has no
+empirical support at any tested timescale.** It is demoted to a whitening
+metric, whose operational value is untested. The source equations are not
+falsified by this; the physical reading frozen for them is.
+See [`RESULT_SHORT_TIMESCALE.md`](RESULT_SHORT_TIMESCALE.md).
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail

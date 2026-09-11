@@ -215,7 +215,7 @@ about physiology. Authoritative record:
 |---|---|---|
 | Structural deformation | Active | Falsifiable |
 | Deformation persistence | Active | Falsifiable |
-| Constraint / stiffness | Active, preregistered | Identifiable under exposure control, which is independently estimable |
+| Constraint / stiffness | **Stiffness reading demoted** | No empirical support at any tested timescale; Σ₀⁻¹ retained only as a whitening metric |
 | Critical threshold | Active, load-bearing | Must show threshold-like behaviour |
 | Higher-order integration | Active | Tested against pairwise-matched null |
 | Reach / homology condition | Demoted | Not operationalised |
@@ -267,6 +267,8 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/REAL_DATA_ACQUISITION.md`](docs/REAL_DATA_ACQUISITION.md) — **real data obtained, tested, and rejected by Stage A**
 
 **Real-physiology transfer — NOT SUPPORTED**
+- [`docs/RESULT_SHORT_TIMESCALE.md`](docs/RESULT_SHORT_TIMESCALE.md) — short-timescale relaxation
+- [`docs/PROTOCOL_SHORT_TIMESCALE.md`](docs/PROTOCOL_SHORT_TIMESCALE.md) — its frozen protocol
 - [`docs/RESULT_VITALDB_ADEQUACY.md`](docs/RESULT_VITALDB_ADEQUACY.md) — first valid real-data test
 - [`docs/AMENDMENT_2026-09-11_STATIONARITY.md`](docs/AMENDMENT_2026-09-11_STATIONARITY.md) — screen amendment
 
