@@ -261,6 +261,10 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/DATASET_REQUIREMENTS.md`](docs/DATASET_REQUIREMENTS.md) — resolution, base rates
 - [`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md) — frozen commitments
 
+**Next phase — model adequacy**
+- [`docs/PROTOCOL_MODEL_ADEQUACY.md`](docs/PROTOCOL_MODEL_ADEQUACY.md) — preregistered protocol
+- [`docs/DATA_REQUIREMENTS_REAL.md`](docs/DATA_REQUIREMENTS_REAL.md) — data needed and access blocker
+
 **Canonical record**
 - [`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md) — **authoritative status of every claim**
 
