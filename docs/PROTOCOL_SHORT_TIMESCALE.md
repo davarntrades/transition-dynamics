@@ -166,3 +166,26 @@ Disjoint by construction.
 ---
 
 © 2026 Davarn Morrison · Transition Dynamics
+
+---
+
+## 11. Calibration yield — recorded before the confirmatory run
+
+Measured on the 60 calibration subjects only:
+
+| band | W | subjects contributing | events | median τ_MRT |
+|:--:|:--:|:--:|:--:|:--:|
+| A — seconds | 60 s | 46 / 60 | 709 | 8.6 s |
+| B — tens of seconds | 300 s | 39 / 60 | 114 | 46.0 s |
+| **C — short minutes** | 1200 s | **7 / 60** | 12 | 182 s |
+
+Bands A and B are well powered. **Band C is expected to fail the 30-subject
+minimum** — 7/60 projects to roughly 23 of 200 confirmatory subjects — and is
+therefore expected to return **UNRESOLVED** rather than a determination.
+
+This is recorded now so that a Band C null cannot later be presented as
+evidence against the hypothesis, nor its exclusion as a convenience.
+
+The measured τ_MRT medians (8.6 s, 46 s, 182 s) fall inside their respective
+prespecified bands, confirming the bands were placed on identifiable
+timescales rather than chosen to fit.
