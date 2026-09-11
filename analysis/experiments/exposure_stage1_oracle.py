@@ -108,6 +108,21 @@ def simulate(cfg: Config, force_eig, scale, T, seed, noise=True):
     return y @ cfg.basis().T
 
 
+def stationary_cov(cfg: Config):
+    """
+    Analytic stationary covariance in the OBSERVATION basis.
+
+    For the discrete recursion y_t = a y_{t-1} + eps with
+    a = exp(-k h) and var(eps) = sigma^2 (1-a^2)/(2k), the stationary
+    variance is sigma^2/(2k) per eigen-coordinate.
+
+    Needed because the deterministic twin has zero baseline variance, so a
+    baseline SD cannot be measured from it.
+    """
+    Q = cfg.basis()
+    return Q @ np.diag(cfg.sigma ** 2 / (2 * cfg.k)) @ Q.T
+
+
 def measure(X, cfg: Config, want_null=False):
     base, pre = X[:cfg.base_n], X[cfg.base_n:]
     S0 = E._spd_guard(E.shrunk_covariance(base))
@@ -154,10 +169,25 @@ CONDS = {"isotropic": d_isotropic, "stiff-sub": d_stiff_sub,
 
 
 def calibrate(cfg, dirfn, T, target_uni):
-    """Exact, on the deterministic twin: delta is linear in the force scale."""
+    """
+    Exact, on the deterministic twin: delta is linear in the force scale.
+
+    BUG FIXED HERE, recorded rather than quietly corrected. An earlier version
+    called measure() on the twin and read its max-univariate-z. That statistic
+    divides by the BASELINE SD, which on a noise-free twin is exactly zero, so
+    the ratio exploded and the returned scale collapsed to about 1e-12. The
+    force was then never applied: all three conditions produced bit-identical
+    trajectories and every AUC in the grid came out at 0.5, which was reported
+    as a falsification. It was an artefact.
+
+    The baseline SD is now taken analytically from the stationary covariance,
+    which is well defined whether or not the twin carries noise.
+    """
     d = dirfn(cfg, 0)
     X = simulate(cfg, d, 1.0, T, 0, noise=False)
-    u = measure(X, cfg)["uni"]
+    delta = X[cfg.base_n:].mean(0) - X[:cfg.base_n].mean(0)
+    sd0 = np.sqrt(np.diag(stationary_cov(cfg)))
+    u = float(np.max(np.abs(delta) / (sd0 / np.sqrt(cfg.pre_n))))
     return target_uni / u if u > 1e-12 else 0.0
 
 
@@ -201,6 +231,24 @@ def main() -> str:
             s = calibrate(cfg, dirfn, T, sev)
             cell[cname] = [measure(simulate(cfg, dirfn(cfg, i), s, T, i), cfg)
                            for i in SEEDS]
+        # GUARD. Three separate scaling bugs in this programme have silently
+        # produced "no effect" verdicts by never applying the force. A cell is
+        # only valid if the realised severity tracks the target and the
+        # conditions actually differ. Failing loudly beats reporting a null.
+        for cname in CONDS:
+            got = float(np.mean([x["uni"] for x in cell[cname]]))
+            if not (0.6 * sev <= got <= 1.7 * sev):
+                raise AssertionError(
+                    f"severity matching failed in {cfg.name}/T={T}/sev={sev} "
+                    f"for {cname}: target {sev}, realised {got:.2f}. The force "
+                    "is probably not being applied.")
+        spread = abs(float(np.mean([x["A"] for x in cell["stiff-sub"]]))
+                     - float(np.mean([x["A"] for x in cell["isotropic"]])))
+        if spread < 1e-9:
+            raise AssertionError(
+                f"conditions identical in {cfg.name}/T={T}/sev={sev}: "
+                "stiff-targeted and isotropic produced the same alignment to "
+                "machine precision.")
         rows.append({"cfg": cfg.name, "T": T, "sev": sev, "cell": cell})
 
     def col(r, cond, key):
