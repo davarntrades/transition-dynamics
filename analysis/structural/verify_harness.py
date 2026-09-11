@@ -120,6 +120,25 @@ def main():
           a7["S"] <= a7["marg"] + 0.02,
           f"AUROC S={a7['S']:.3f} vs marginal={a7['marg']:.3f}")
 
+    # 8 -- REGRESSION for harness bug 11: cross-fold pooling must not invert
+    print("8. cross-fold pooling (regression test for harness bug 11)")
+    from run_confirmatory import load_all, assemble, cv_scores
+    Dc = assemble(cases)
+    Hh = 600
+    kp = np.array([k[Hh] for k in Dc["keeps"]])
+    yy = np.array([l[Hh] for l in Dc["labels"]], float)[kp]
+    gg = Dc["groups"][kp]
+    bl = [b for b, k in zip(Dc["blocks"], kp) if k]
+    Xm = F.design(bl, ["maxz"])
+    rank, _, prob = cv_scores(Xm, yy, gg, fixed_lam=10.0)
+    a_raw, a_rank, a_true = (M.auroc(yy, prob), M.auroc(yy, rank),
+                             M.auroc(yy, Xm[:, 0]))
+    check("a single-feature model reproduces its own feature's AUROC "
+          "when out-of-fold scores are ranked within fold",
+          abs(a_rank - a_true) < 0.02,
+          f"pooled-probability {a_raw:.4f} | ranked {a_rank:.4f} | "
+          f"feature {a_true:.4f}")
+
     print("\n" + ("ALL CHECKS PASSED" if not FAIL else f"FAILURES: {FAIL}"))
     return 1 if FAIL else 0
 
