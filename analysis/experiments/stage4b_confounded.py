@@ -66,17 +66,19 @@ from onset_estimator import estimate_onset, alignment_crossfit         # noqa: E
 SHORT, LONG = 3.0, 120.0
 N = 60                       # cases per group
 SEV = 30.0                   # 1.5 baseline SD: the regime where onset is identifiable
+SEV_WEAK = 10.0              # 0.5 baseline SD: targeting present but not overwhelming
 STRUCTS = [Config("wide-rotated"),
            Config("wide-diagonal", rotate=False),
            Config("narrow-rotated", k_lo=0.60, k_hi=2.40)]
 
 
-def make_group(cfg, dirfn, p_short, seed0):
+def make_group(cfg, dirfn, p_short, seed0, sev=None):
     """A group whose exposure is a mixture: p_short recent, rest established."""
     rng = np.random.default_rng(seed0)
     rows = []
-    scales = {SHORT: calibrate(cfg, dirfn, SHORT, SEV),
-              LONG: calibrate(cfg, dirfn, LONG, SEV)}
+    sev = SEV if sev is None else sev
+    scales = {SHORT: calibrate(cfg, dirfn, SHORT, sev),
+              LONG: calibrate(cfg, dirfn, LONG, sev)}
     for i in range(N):
         T = SHORT if rng.random() < p_short else LONG
         X = simulate(cfg, dirfn(cfg, seed0 + i), scales[T], T, seed0 + i)
@@ -90,6 +92,13 @@ def stratified_auc(gA, gB, edges=(0.0, 20.0, 1e9)):
     """
     AUC after binning both groups by ESTIMATED exposure, pooled across bins
     weighted by the number of comparable pairs. Returns (auc, n_bins, support).
+
+    ORIENTATION. Group B is the positive class, matching the naive comparison.
+    An earlier version scored group A as positive here while the naive
+    comparison scored group B, so oracle and estimated came back as one minus
+    the intended value. In the spurious scenario that is nearly invisible
+    because the answer is symmetric about one half; in the masked scenario it
+    produced an AUC of exactly zero, which is what exposed it.
     """
     a = [r for r in gA if r["ident"]]
     b = [r for r in gB if r["ident"]]
@@ -100,7 +109,7 @@ def stratified_auc(gA, gB, edges=(0.0, 20.0, 1e9)):
         xb = [r["A"] for r in b if lo <= r["T_hat"] < hi]
         if len(xa) >= 5 and len(xb) >= 5:
             w = len(xa) * len(xb)
-            num += auc(xa, xb) * w
+            num += auc(xb, xa) * w
             den += w
             used += 1
     if den == 0:
@@ -115,7 +124,7 @@ def oracle_auc(gA, gB):
         xb = [r["A"] for r in gB if r["T_true"] == T]
         if len(xa) >= 5 and len(xb) >= 5:
             w = len(xa) * len(xb)
-            num += auc(xa, xb) * w
+            num += auc(xb, xa) * w
             den += w
     return num / den if den else float("nan")
 
@@ -130,21 +139,23 @@ def main() -> str:
     w(f"\nRecent exposure T={SHORT:g}, established T={LONG:g}; {N} cases per "
       f"group; displacement {SEV/20:.1f} baseline SD.\n")
 
-    for scen, dirA, pA, dirB, pB, truth in (
+    for scen, dirA, pA, dirB, pB, truth, sev in (
         ("SPURIOUS — both groups untargeted",
-         d_isotropic, 0.80, d_isotropic, 0.20, "AUC should be 0.50"),
-        ("MASKED — targeted but established vs untargeted but recent",
-         d_isotropic, 0.80, d_stiff_sub, 0.20, "targeting present"),
+         d_isotropic, 0.80, d_isotropic, 0.20, "AUC should be 0.50", SEV),
+        ("MASKED, strong targeting (1.5 SD)",
+         d_isotropic, 0.80, d_stiff_sub, 0.20, "targeting present", SEV),
+        ("MASKED, weak targeting (0.5 SD)",
+         d_isotropic, 0.80, d_stiff_sub, 0.20, "targeting present", SEV_WEAK),
     ):
         w(f"\n## {scen}\n")
         w(f"\nGroup A: {pA:.0%} recent. Group B: {pB:.0%} recent. "
-          f"Truth: {truth}.\n")
+          f"Displacement {sev/20:.1f} baseline SD. Truth: {truth}.\n")
         w("\n| structure | naive (no control) | oracle true T | estimated T | bins | declined |")
         w("|---|:--:|:--:|:--:|:--:|:--:|")
         rows = []
         for cfg in STRUCTS:
-            gA = make_group(cfg, dirA, pA, 200_000)
-            gB = make_group(cfg, dirB, pB, 300_000)
+            gA = make_group(cfg, dirA, pA, 200_000, sev)
+            gB = make_group(cfg, dirB, pB, 300_000, sev)
             naive = auc([r["A"] for r in gB], [r["A"] for r in gA])
             orc = oracle_auc(gA, gB)
             estv, nb, sup = stratified_auc(gA, gB)
@@ -165,8 +176,10 @@ def main() -> str:
             w(f"\n\n### Verdict: **"
               f"{'RESCUES' if abs(ev-0.5) <= 0.10 else 'FAILS'}**\n")
         else:
-            w(f"\n- naive understates targeting: {nv:.3f}")
-            w(f"\n- estimated-T control recovers: **{ev:.3f}**\n")
+            w(f"\n- naive comparison: {nv:.3f}")
+            w(f"\n- oracle true-T control: {ov:.3f}")
+            w(f"\n- estimated-T control: **{ev:.3f}**")
+            w(f"\n- masking present? {'yes' if ov - nv > 0.03 else 'no — targeting dominates the exposure contrast'}\n")
     return "\n".join(out)
 
 
