@@ -37,7 +37,14 @@ from stationarity_calibration import stationarity_reject             # noqa
 
 NB = int(BASELINE_MINUTES * 60 / INTERVAL_S)
 H_HOURS = INTERVAL_S / 3600.0
-DECIM = 30          # analyse the later segment at 60 s to keep CV tractable
+# Analysis resolution for the later segment, chosen by an identifiability
+# criterion rather than by convenience. A relaxation rate is recoverable at
+# resolution h only if the lag-1 autocorrelation there exceeds exp(-0.5) =
+# 0.607; above that the rate exceeds 1/(2h) and has decayed between samples.
+# Measured on the calibration set, the fraction of identifiable channels is
+# 96% at 2 s, 86% at 10 s, and only 43% at 60 s. The segment is therefore
+# analysed at native 2 s resolution.
+DECIM = 1
 
 
 def prepare(caseid):
@@ -65,7 +72,12 @@ def prepare(caseid):
 
 def run_case(rec):
     h = INTERVAL_S * DECIM / 3600.0          # hours per later-segment sample
-    k_base = baseline_rates(rec["B"], INTERVAL_S / 3600.0)
+    # Baseline rates are estimated at the SAME resolution as the later segment.
+    # An autocorrelation rate is resolution dependent: rates derived at 2 s
+    # reach ~1000/hour, whose relaxation time is seconds and is not
+    # identifiable from curvature sampled once a minute. Decimating the
+    # baseline first makes the two quantities refer to the same timescale band.
+    k_base = baseline_rates(rec["B"][::DECIM], h)
     L = rec["later"] - rec["B"].mean(0)      # displacement from baseline mean
     res = stage_b(L, h, k_base)
     best = min(MODELS, key=lambda m: res[m])
@@ -73,12 +85,27 @@ def run_case(rec):
     for s in range(8):
         rs = stage_b(phase_surrogate(L, 1000 + s), h, k_base)
         sur.append(min(MODELS, key=lambda m: rs[m]) == "M-exp")
-    c = stage_c(rec["later"], h)
+    # IDENTIFIABILITY BAND. A relaxation rate can only be recovered from a
+    # trajectory if its relaxation time lies between the sampling interval and
+    # the segment length. Faster rates have decayed between samples; slower
+    # ones have not begun to bend within the segment. Channels whose baseline
+    # rate falls outside that band are excluded from the rate-consistency
+    # comparison -- they are unidentifiable in principle, not badly fitted --
+    # and the count is reported. They remain in Stage B.
+    T_seg = len(rec["later"]) * h
+    k_lo, k_hi = 1.0 / T_seg, 1.0 / (2.0 * h)
+    band = (k_base >= k_lo) & (k_base <= k_hi)
+    if band.sum() >= 3:
+        c = stage_c(rec["later"][:, band], h, k_base[band])
+    else:
+        c = {"k_curv": np.full(int(band.sum()), np.nan),
+             "rank_corr": float("nan"), "log_bias": float("nan")}
     return {"caseid": rec["caseid"], "mse": {m: res[m] for m in MODELS},
             "best": best, "exp_beats_free": res["M-exp"] <= res["M-exp-free"],
             "surrogate_sel": float(np.mean(sur)),
             "k_base": k_base.tolist(), "k_curv": c["k_curv"].tolist(),
             "rank_corr": c["rank_corr"], "log_bias": c["log_bias"],
+            "n_identifiable": int(band.sum()), "k_band": [k_lo, k_hi],
             "n_eff": rec["n_eff"], "sha256": rec["sha256"]}
 
 
