@@ -1,0 +1,140 @@
+# Canonical status
+
+The authoritative record of what this programme has and has not established.
+Where any other document disagrees with this one, this one governs.
+
+Phase closed: **synthetic exposure and onset control (Stages 1–4).**
+Nothing in this programme has been tested on human physiology.
+
+---
+
+## 1. Established in the simulator
+
+| # | Claim | Evidence |
+|---|---|---|
+| S1 | Alignment separates targeted from untargeted displacement **under true exposure control** | Within-stratum AUC median 0.939 over 108 strata; 0.998 in the detectable regime |
+| S2 | **Controlling exposure improved discrimination rather than destroying it** | Unconditional 0.783 → within-stratum 0.939 |
+| S3 | Alignment beats the established comparator under identical control | Covariance drift 0.746 vs alignment 0.998, detectable regime |
+| S4 | Onset is **independently recoverable** over much of the simulated parameter space | Median absolute error 1.2 time units; identifiable in 81% of cases; rates from baseline only |
+| S5 | The estimator declines on stationary trajectories, as required | 80–95% declined |
+| S6 | **Estimated** exposure control removes a deliberately manufactured spurious targeting effect | Naive bias 0.119 → 0.008, matching oracle control to three decimals |
+| S7 | Exposure imbalance can create a false positive but **cannot mask** genuine targeting | Targeting effect AUC 0.95–1.00 vs exposure effect 0.62. Not predicted in advance |
+
+---
+
+## 2. Known limits of the above
+
+| # | Limit |
+|---|---|
+| L1 | **Non-identifiable regime**: low displacement combined with long exposure. Near equilibrium the trajectory has lost the curvature onset is inferred from. The estimator mostly declines there, and when it does fire it errs by roughly half the true exposure |
+| L2 | **Differential decline — UNRESOLVED.** The estimator declines at group-dependent rates (2/14 identifiable for untargeted-established vs 13/45 for targeted-established), so the identifiable subset is not a random sample and stratified estimates are conditioned on a group-dependent filter. Not quantified |
+| L3 | **Thin support.** Where decline is frequent, stratification collapses to a single bin and answers a narrower question rather than controlling exposure across the range |
+| L4 | **The combination that matters most never arose.** No regime in the grid required exposure control *and* had frequent decline |
+| L5 | **Detection floor.** Below roughly 0.2 baseline SD of displacement nothing separates, for any statistic including covariance drift |
+
+---
+
+## 3. The structural caveat that bounds Stages 2–4
+
+> The onset estimator assumes displacement of the form
+> $\delta_i(t) = b_i(1-e^{-k_i(t-t_0)})$, and it was tested on data generated
+> by exactly that family.
+>
+> **Stages 2–4 are therefore primarily an internal consistency and
+> identifiability result, not evidence that human physiology follows that
+> model.**
+
+Nothing in this programme tests whether real pre-transition trajectories take
+that form. If they do not, the onset estimates will be wrong in ways these
+experiments cannot reveal, and the mechanism claim returns to being
+non-identifiable on real data regardless of the synthetic results.
+
+---
+
+## 4. Preregistered verdicts, recorded as issued
+
+| Stage | Verdict | Held |
+|---|---|---|
+| Homeostatic premise (instrument test) | **B — unresolved** | The script printed A; overridden because the automated check computed the exposure comparison in the wrong regime |
+| Stage 1 oracle control | **UNRESOLVED** | Median 0.939 clears the 0.75 bar; 67% of strata exceed 0.65 against a 70% bar |
+
+**The Stage 1 verdict stands at UNRESOLVED.** All 36 sub-threshold strata are
+exactly the lowest severity, which lies below the noise floor of the matching
+variable itself. A rule written after seeing that structure would have excluded
+those strata and returned SURVIVES. That rule was not preregistered and is
+**not** adopted retrospectively.
+
+---
+
+## 5. Withdrawn and demoted claims
+
+| Claim | Status | Reason |
+|---|---|---|
+| "Exposure duration destroys targeting discriminability" | **WITHDRAWN** | Stage 1: controlling exposure *improves* separation. Exposure shifts alignment's absolute level, not its discriminative content |
+| Per-class alignment sign predictions (positive in sepsis/respiratory, null in abrupt) | **WITHDRAWN, remain withdrawn** | Confounded by insult kinetics, and the kinetic ordering is inverted relative to the prediction |
+| "Stiffness predicts falling pre-transition variance" | **WITHDRAWN** | Does not follow from a baseline-frozen operator, which is a fixed metric rather than a state variable |
+| "Transition Dynamics competes with critical slowing down; one must lose" | **WITHDRAWN** | They are complementary; each detects the mechanism the other misses |
+| "The contribution is detection" | **NARROWED** | Covariance drift already detects at least as well |
+| Homological truth condition | **DEMOTED** | Not operationalised; reachable set not observable from one trajectory |
+| Literal orthogonality law | **DEMOTED** | Universal zero-effect claim, already refuted |
+| Stage 4 as a test of the confound | **VOID** | Both groups drawn from the same exposure grid, so no confound existed to remove. Retained with the limitation recorded |
+
+---
+
+## 6. The mechanism claim
+
+**Status: identifiable in principle, operationally identifiable in the
+simulated regime tested, and NOT validated in real physiology.**
+
+It may not be described as validated, as clinically useful, or as a
+demonstrated property of human deterioration. The next step is a model-adequacy
+study, not a mechanism or prediction study.
+
+---
+
+## 7. Harness bugs in this programme
+
+Seven in total across the whole programme; four in the exposure sequence. All
+produced confident wrong answers.
+
+| # | Symptom | Cause | Guard added |
+|---|---|---|---|
+| 1 | Instrument test reported falsification at AUC 0.52 | Force onset placed relative to the series end while displacement was measured over the pre-transition window; signal diluted ~40× | Deterministic-twin calibration |
+| 2 | Same run: conditions identical | Target displacement set below the sampling noise floor, so calibration could not converge | Target set as a multiple of the computed noise floor |
+| 3 | Long exposures contaminated the baseline | Force onset fell inside the baseline window | Simulator raises rather than proceeding |
+| 4 | Stage 1 reported FALSIFIED, all 108 AUCs inside a 0.008 band | Calibration read max-univariate-z on the deterministic twin, whose baseline SD is exactly zero; force scale collapsed to 4×10⁻¹² | Analytic stationary SD; per-stratum assertion that conditions differ and are equally observable |
+| 5 | Guard aborted a correct stratum | Guard compared realised severity to a nominal target lying below the noise floor | Guard now checks cross-condition agreement, which is the assumption the analysis rests on |
+| 6 | Rate recovery reported >100% error | Estimated rates compared against descending-sorted truth while the simulator orders ascending | Corrected; true per-channel error 3% |
+| 7 | Masked scenario returned AUC exactly 0.000 | Naive comparison scored group B as positive while oracle and stratified scored group A | Orientation unified |
+
+**Why they were dangerous.** Each produced a confident, plausible-looking
+answer. Bugs 1, 4 and 7 produced *falsifications* — the flattering direction
+would have been to accept them, since a null result looks rigorous.
+
+**What caught them.** Constraints on the *shape* of a result, not its
+direction: an AUC that cannot occur, a variance too small to be real,
+conditions bit-identical to machine precision. Directional plausibility checks
+would have passed all seven.
+
+---
+
+## 8. Discarded runs
+
+Retained as record, not as evidence. Result files from runs 1, 4 and 7 above
+were deleted rather than kept, because each contained values that cannot occur.
+The reasoning that produced and then rejected them is preserved in the result
+documents and in the commit history.
+
+---
+
+## Related records
+
+- [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail
+- [`RESULT_STAGE1_ORACLE.md`](RESULT_STAGE1_ORACLE.md) — oracle control
+- [`RESULT_HOMEOSTATIC_PREMISE.md`](RESULT_HOMEOSTATIC_PREMISE.md) — instrument test
+- [`DERIVATION_ALIGNMENT.md`](DERIVATION_ALIGNMENT.md) — consequence versus assumption
+- [`LIMITATIONS.md`](LIMITATIONS.md) · [`CLAIM_LADDER.md`](CLAIM_LADDER.md)
+
+---
+
+© 2026 Davarn Morrison · Transition Dynamics

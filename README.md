@@ -205,7 +205,9 @@ verified against authoritative sources before execution — see
 ## Current status
 
 **Claim level 0** — no real physiological data analysed. Synthetic work
-establishes estimator behaviour only; it is not evidence about physiology.
+establishes estimator behaviour and identifiability only; it is not evidence
+about physiology. Authoritative record:
+[`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md).
 
 **Provisional grade: B** — coherent, but requires better operationalisation.
 
@@ -258,6 +260,9 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/TRANSITION_TAXONOMY.md`](docs/TRANSITION_TAXONOMY.md) — transition classes
 - [`docs/DATASET_REQUIREMENTS.md`](docs/DATASET_REQUIREMENTS.md) — resolution, base rates
 - [`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md) — frozen commitments
+
+**Canonical record**
+- [`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md) — **authoritative status of every claim**
 
 **Epistemic position**
 - [`docs/CLAIM_LADDER.md`](docs/CLAIM_LADDER.md) — levels 0–6
