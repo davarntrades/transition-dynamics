@@ -232,6 +232,14 @@ at most 0.003; replacing it with the **identity** costs at most 0.007.
 Patient-specific geometry never beats diagonal rescaling or a population
 covariance. $S$ alone reaches 0.535–0.570.
 
+The prespecified **secondary endpoint** (MAP < 55 mmHg) reproduces this on a
+better-behaved, well-calibrated task: M9 reaches AUROC 0.832 / 0.787 / 0.740
+with calibration slope 0.99 / 0.85 / 0.65, and $S$ moves AUROC by ≤ 0.0001 at
+5 and 10 min. At 15 min it **hurts** — ΔAUPRC −0.0044 [−0.0088, −0.0010], the
+interval entirely below zero. One harmful horizon is short of the two the
+frozen FALSIFIED rule requires, so the verdict stands at NOT SUPPORTED.
+At 5 and 10 min another patient's covariance outperforms the patient's own.
+
 **Consequence: the last empirical claim attached to $\Lambda$ is gone.** The
 stiffness reading was already demoted; the bare metric now has no incremental
 predictive value either. Cross-channel structure generally fails here — the

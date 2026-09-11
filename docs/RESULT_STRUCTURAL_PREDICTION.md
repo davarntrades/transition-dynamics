@@ -169,6 +169,46 @@ Median time from first alert to onset, among detected events, at 10% FAR:
 (15 min). M10 and M9 are indistinguishable — at most 0.1 min apart at any
 horizon. Lead time is set by the horizon, not by the model.
 
+## 7b. Prespecified secondary endpoint — severe hypotension (MAP < 55 mmHg)
+
+The protocol prespecified a secondary endpoint. It was run on the same frozen
+split with the same harness and the same models; only the threshold moved. It
+is a **better-behaved task**: rarer events, higher discrimination, and — unlike
+the primary — well-calibrated baselines.
+
+| horizon | event-patients | prevalence | AUROC M9 | cal. slope M9 | ΔAUROC (M10 − M9) | ΔAUPRC |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| 5 min | 70 | 0.0119 | **0.8319** | 0.99 | −0.0001 [−0.0009, +0.0007] | +0.00015 [−0.0005, +0.0008] |
+| 10 min | 83 | 0.0275 | **0.7870** | 0.85 | −0.0001 [−0.0014, +0.0011] | +0.00135 [−0.0011, +0.0044] |
+| 15 min | 85 | 0.0449 | **0.7404** | 0.65 | −0.0041 [−0.0084, +0.0002] | **−0.00438 [−0.0088, −0.0010]** |
+
+Two things stand out.
+
+**The nulls are far tighter.** With a well-calibrated baseline at AUROC 0.83,
+$S$ moves AUROC by one ten-thousandth. This is not a failure of power — it is a
+measurement of zero.
+
+**At 15 min, adding $S$ actively hurts**: the ΔAUPRC interval lies entirely
+below zero. One horizon is not enough to trigger the frozen FALSIFIED rule,
+which requires two, so the verdict stands at NOT SUPPORTED — but the direction
+is recorded.
+
+**The sharpest ablation result in the whole experiment appears here.** At 5 and
+10 min, replacing a patient's covariance with **another patient's** gives the
+*highest* AUROC of any variant (0.8356 and 0.7896, against 0.8318 and 0.7868
+for the patient's own):
+
+| severe, AUROC of M9+S | patient | diagonal | identity | shuffled | **subject-permuted** | population |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| 5 min | 0.8318 | 0.8322 | 0.8321 | 0.8310 | **0.8356** | 0.8322 |
+| 10 min | 0.7868 | 0.7865 | 0.7858 | 0.7849 | **0.7896** | 0.7879 |
+| 15 min | 0.7363 | **0.7439** | 0.7363 | 0.7391 | 0.7411 | 0.7423 |
+
+A patient's own baseline geometry is not merely weak. It is not preferred over
+a stranger's.
+
+---
+
 ## 8. What survived
 
 - **The harness.** Its positive control detects a purely geometric displacement
