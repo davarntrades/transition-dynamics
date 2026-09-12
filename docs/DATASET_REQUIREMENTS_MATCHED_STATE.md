@@ -186,25 +186,34 @@ basis of recollection.
 
 #### What a credentialed user must check, in this order
 
-1. **Timestamp systems.** Which clock do waveform record headers carry, and
-   which clock do `inputevents.starttime` / `endtime` carry? Are both expressed
-   in the same per-patient date-shifted frame?
-2. **Per-patient consistency of the shift.** De-identification shifts dates;
-   the shift must be *identical* for the waveform and clinical records of the
-   same patient, or alignment is impossible in principle.
-3. **Stated alignment precision.** Is the linkage documented as admission-level,
-   stay-level, or sub-minute? A subset can be "matched" at admission level and
-   still be useless for a perturbation-response experiment.
-4. **Empirical confirmation, not documentation alone.** Take interventions with
-   an unmistakable physiological signature — a vasopressor start should be
-   followed by a pressure rise — and confirm the waveform response begins after
-   the recorded time, with a plausible and consistent lag. If the apparent
-   response *precedes* the timestamp, the clocks are misaligned.
-5. Only then proceed to Gate 2 (coverage: 10 min pre + 30 min post) and Gate 3
-   (event yield after isolation rules R4).
+**Corrected 2026-09-12.** An earlier draft of this section treated the
+physiological-response timing test as confirmation of alignment. That was wrong
+and is replaced. The test is **asymmetric** and can only ever falsify.
 
-Until step 4 is passed **on data**, MIMIC-IV must be treated as unverified for
-this purpose.
+| # | Check | Kind |
+|:--:|---|---|
+| 1 | **Authoritative documentation of waveform timestamps** — what clock the record headers carry, and in what frame | documentation |
+| 2 | **Authoritative documentation of clinical-event timestamps** — the frame used by intervention records | documentation |
+| 3 | **Identifier mapping** — how patient and stay identifiers map between MIMIC-IV and MIMIC-IV Waveform, and whether the mapping is provided or must be constructed | documentation + data |
+| 4 | **De-identification / date-shift rules** — and specifically whether the shift is *identical within a patient* across both datasets. If it is not, alignment is impossible in principle | documentation |
+| 5 | **Direct timestamp overlap on several credentialed records** — do waveform spans actually bracket recorded intervention times | data |
+| 6 | **Physiological-response timing — consistency check only** | data, secondary |
+
+**Interpretation of step 6, stated precisely:**
+
+- A response occurring **systematically before** the recorded intervention
+  **falsifies** the assumed alignment.
+- A response occurring **after** the intervention **does not** establish correct
+  alignment. Responses may be delayed, absent, noisy, confounded by concurrent
+  care, or charted imperfectly, and a plausible-looking lag is consistent with
+  many wrong alignments.
+
+Step 6 is therefore a **one-directional falsifier**, never evidence of success.
+Gate 1 is passed on steps 1–5; step 6 can only take it away.
+
+Until steps 1–5 are passed **on credentialed data and documentation**, MIMIC-IV
+must be treated as unverified for this purpose. See
+[`CREDENTIALED_ACCESS_CHECKLIST.md`](CREDENTIALED_ACCESS_CHECKLIST.md).
 
 ---
 
@@ -273,8 +282,9 @@ impossible, but because neither the data nor its authoritative documentation is
 reachable here (§4a). Capability is therefore **not inferred**.
 
 The path to **B** is unchanged and now precisely specified: a credentialed user
-executes the five steps in §4a, ending with the **empirical** lag check on real
-records. If that passes and Gates 2 and 3 yield adequate events, this becomes
+executes the six ordered checks in §4a — Gate 1 is passed on checks 1–5, with
+check 6 able only to falsify, never to confirm. If Gate 1 passes and Gates 2 and
+3 yield adequate events, this becomes
 **B — partial testing with named limitations**, the limitations being absent
 $Z$ variables, residual indication confounding for fluid boluses, and the
 permanent impossibility of excluding unmeasured $Z$
