@@ -422,6 +422,42 @@ See [`RESULT_ACQ_TIER1.md`](RESULT_ACQ_TIER1.md).
 
 ---
 
+## 17. Acquisition discrimination, Tier 2 — UNRESOLVED (2026-09-12)
+
+One authorised execution on 600 fresh patients, 236 usable, 29,887/29,431
+windows, 156/159 event-patients, prevalence 6.1%/9.4%. **All power gates
+passed** — this is not an underpowered run. One aborted pre-outcome launch is
+recorded in [`PROVENANCE_TIER2_LAUNCH.md`](PROVENANCE_TIER2_LAUNCH.md); zero
+endpoints, labels, models or metrics were computed at that point.
+
+| test | 10 min | 15 min |
+|---|:--:|:--:|
+| T2.1 ΔAUPRC(W) CI includes 0 | yes | **no** (excludes 0 negatively) |
+| T2.2 ΔAUPRC(W+inj) > 0, CI excludes 0 | no | no |
+| T2.3 paired ΔAUPRC(W+inj − W) > 0, CI excludes 0 | no | no |
+
+Paired contrasts: **+0.00089** [−0.00278, +0.00504] and **+0.00032**
+[−0.00251, +0.00300]. Injecting the acquisition process changed predictive
+performance by less than one thousandth of AUPRC.
+
+**No arm produced a predictive increment**, so there was no increment to
+attribute. The frozen table has no matching branch and returns its fallback,
+UNRESOLVED. Not H_instr supported; not H_phys supported; nothing "survived".
+
+Secondary, non-binding: W+inj is the only arm whose ΔAUROC excludes zero
+(+0.0140, +0.0058). AUROC is not in the Tier-2 rule and did not change the
+verdict; the gain belongs to the more monitor-like arm, which is what
+H_instr and H_target would both predict, but no frozen rule adjudicates it.
+
+**This says nothing about the original H-AC increment**, which was a
+six-channel aggregate; Tier 2 tested a two-feature ABP-only block, a limitation
+declared before the run. Tier 1 stands unaffected — it was a measurement-level
+claim, never a predictive one. $H_{\mathrm{target}}$ remains live and
+unexamined. H-AC remains NOT SUPPORTED.
+See [`RESULT_ACQ_TIER2.md`](RESULT_ACQ_TIER2.md).
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail

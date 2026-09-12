@@ -268,7 +268,9 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/REAL_DATA_ACQUISITION.md`](docs/REAL_DATA_ACQUISITION.md) — **real data obtained, tested, and rejected by Stage A**
 
 **Real-physiology transfer — NOT SUPPORTED**
-- [`docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md`](docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md) — **frozen: does acquisition or physiology generate the residual signal?**
+- [`docs/RESULT_ACQ_TIER2.md`](docs/RESULT_ACQ_TIER2.md) — **Tier 2 predictive attribution: UNRESOLVED — no arm showed an increment**
+- [`docs/RESULT_ACQ_TIER1.md`](docs/RESULT_ACQ_TIER1.md) — **Tier 1 measurement level: ACQUISITION SUFFICIENT**
+- [`docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md`](docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md) — its frozen protocol
 - [`docs/RESULT_HAC_CONFIRMATORY.md`](docs/RESULT_HAC_CONFIRMATORY.md) — **window autocorrelation: binding STRICT criterion fails on ΔAUROC**
 - [`docs/RESULT_REPRESENTATION_SEARCH.md`](docs/RESULT_REPRESENTATION_SEARCH.md) — the development search behind it
 - [`docs/RESULT_STRUCTURAL_PREDICTION.md`](docs/RESULT_STRUCTURAL_PREDICTION.md) — **Σ₀⁻¹ as a bare whitening metric adds nothing beyond marginals**
