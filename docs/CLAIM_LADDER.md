@@ -19,12 +19,19 @@
 
 ## Current Position
 
-> **TRANSITION DYNAMICS IS AT  LEVEL 0.**
+> **TRANSITION DYNAMICS IS AT LEVEL 0.**
 >
-> No real physiological data has been analysed.
-> The synthetic benchmark establishes estimator behaviour only —
-> it is not evidence about human physiology and does not
-> constitute Level 1.
+> Real physiological data **has** been analysed: seven preregistered
+> experiments on VitalDB, four returning NOT SUPPORTED, one SUPPORTED in a
+> narrow measurement-level scope, one UNRESOLVED.
+>
+> The position remains Level 0 because **no experiment produced a supported
+> incremental predictive claim**. Negative and unresolved results do not raise
+> the ladder. The synthetic benchmark establishes estimator behaviour only and
+> is not evidence about human physiology.
+>
+> Current status: [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md). `main` is the
+> canonical branch.
 
 ---
 

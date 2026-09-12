@@ -235,12 +235,32 @@ $$\forall\, \Delta\ell \in L,\ \ \Delta R_C(t) = 0$$
 ---
 
 ## Summary
+> **Status updated 2026-09-12.** The five-layer separation below is preserved
+> exactly. Failures recorded in this repository are attributed to the layer that
+> was actually tested — a failed PHYSICAL INTERPRETATION, EMPIRICAL
+> OPERATIONALISATION or ESTIMATOR is **not** recorded as a failure of the SOURCE
+> EQUATION unless the source relationship itself was tested. No experiment in
+> this repository has tested a source relationship directly.
+>
+> | Object | Layer tested | Layer that failed | Verdict |
+> |---|---|---|---|
+> | $Q_i=\lVert\Delta G_i\rVert\tau_i$ | operationalisation (run-length) | operationalisation | **DEMOTED** — gain reproduced by an order-destroying control |
+> | $Q_G=\Lambda Q$, $\Lambda=\Sigma_0^{-1}$ as stiffness | physical interpretation | **physical interpretation** | **DEMOTED** — source relation untested |
+> | $\Sigma_0^{-1}$ as whitening metric | estimator $S(t)$ | estimator | **NOT SUPPORTED** |
+> | $\lVert\Lambda\Delta G\rVert>T_c$ | none | — | **UNOPERATIONALISED** |
+> | $C(t)$ | none on real data | — | **EXPLORATORY — synthetic only** |
+> | $H_k(\mathrm{Reach})$ | none | — | **DEMOTED / UNOPERATIONALISED** |
+> | orthogonality law | prior audit | — | **DEMOTED** |
+>
+> Current status: [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md). `main` is the
+> canonical branch.
+
 
 | Object | Layer 1 status | Kill condition |
 |---|---|---|
-| $Q_i = \lVert\Delta G_i\rVert\tau_i$ | Active | $\beta_2 = 0$, or integral form wins |
-| $Q_G = \Lambda Q$ | Active, preregistered | Nested gain CI includes 0 |
-| $\lVert\Lambda\Delta G\rVert > T_c$ | Active, load-bearing | Smooth hazard fits as well |
+| $Q_i = \lVert\Delta G_i\rVert\tau_i$ | **DEMOTED** (operationalisation) | $\beta_2 = 0$, or integral form wins |
+| $Q_G = \Lambda Q$ | **Source relation untested; its stiffness INTERPRETATION is DEMOTED** | Nested gain CI includes 0 |
+| $\lVert\Lambda\Delta G\rVert > T_c$ | **UNOPERATIONALISED / HISTORICAL** — never estimated | Smooth hazard fits as well |
 | $C(t) = \tau(\bigcup_i N_t)$ | Exploratory | $z_{\beta_1}$ CI includes 0 |
 | Reach / homology | Demoted | — |
 | Orthogonality law | Demoted | — |

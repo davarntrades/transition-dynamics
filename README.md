@@ -4,7 +4,16 @@ Does the multivariate structure of physiological measurements change in a
 detectable way *before* conventional criteria say a patient has deteriorated?
 
 This repository holds a preregistered hypothesis, its falsification criteria,
-and runnable estimators. **No real physiological data has been analysed yet.**
+runnable estimators, and **the record of seven completed experiments on real
+VitalDB physiological data** — most of which returned negative results.
+
+> **`main` is the canonical branch.** It is the default branch and the single
+> source of truth. All other branches are historical working branches whose
+> commits are already merged here; nothing on them supersedes `main`.
+>
+> **Authoritative status:** [`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md).
+> Where any other document in this repository disagrees with it, that document
+> is out of date and the canonical record governs.
 
 ---
 
@@ -175,7 +184,12 @@ Detail: [`docs/COMPETING_MODELS.md`](docs/COMPETING_MODELS.md).
 
 ---
 
-## Minimum experiment that could kill the hypothesis
+## Minimum experiment that could kill the hypothesis — HISTORICAL PLAN
+
+> **Superseded.** This plan was written before any real data was obtained. It
+> was not executed as written: HiRID was never accessed, and every real
+> experiment used VitalDB with an intraoperative hypotension endpoint. Retained
+> as a record of what was originally proposed.
 
 **Primary cohort:** HiRID, if dataset verification supports its use.
 **Primary transition class:** circulatory / haemodynamic deterioration,
@@ -204,27 +218,75 @@ verified against authoritative sources before execution — see
 
 ## Current status
 
-**Claim level 0.** Four preregistered tests on real physiology have now
-returned NOT SUPPORTED. Synthetic work establishes estimator behaviour and
-identifiability only; it is not evidence about physiology. Authoritative
-record:
-[`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md).
+**Claim level 0 — no clinical or mechanistic claim is supported.**
 
-**Provisional grade: B** — coherent, but requires better operationalisation.
+Seven preregistered experiments have been run on real VitalDB data. Every one
+was frozen before execution and evaluated once on patients not used to design
+it. Every endpoint tested was **intraoperative hypotension**
+(`ART_MBP < 65 mmHg` for ≥ 60 s) in anaesthetised surgical patients. **Nothing
+here bears on cardiac arrest, sepsis, respiratory failure, or ICU
+deterioration** — those are separate transition classes that were never tested.
 
-| Component | Status | Reason |
+| # | Experiment | Verdict |
+|:--:|---|---|
+| 1 | Model adequacy — exponential onset form on real physiology | **NOT SUPPORTED** |
+| 2 | Short-timescale relaxation transfer | **NOT SUPPORTED** |
+| 3 | Structural displacement $S(t)=\lVert\Sigma_0^{-1}\delta\rVert$ | **NOT SUPPORTED** |
+| 4 | Window autocorrelation (H-AC), one-shot confirmatory | **NOT SUPPORTED** |
+| 5 | Acquisition discrimination, Tier 1 (measurement level) | **SUPPORTED — narrow scope** |
+| 6 | Acquisition discrimination, Tier 2 (predictive attribution) | **UNRESOLVED** |
+| — | Representation search over temporal structure (development) | selection step, no confirmatory status |
+
+### Status of every object
+
+Failures are attributed to the layer that was actually tested. A failed
+*physical interpretation* is not recorded as a failure of the *source
+mathematics* unless the source relationship itself was tested.
+
+| Object | Layer that failed | Status |
 |---|---|---|
-| Structural deformation | Active | Falsifiable |
-| Deformation persistence | Active | Falsifiable |
-| Constraint / stiffness | **Demoted entirely** | No empirical support at any tested timescale, and as a bare whitening metric no incremental predictive value for deterioration |
-| Critical threshold | Active, load-bearing, **never operationalised** | Must show threshold-like behaviour; the next experiment |
-| Higher-order integration | Active | Tested against pairwise-matched null |
-| Reach / homology condition | Demoted | Not operationalised |
-| Literal orthogonality law | Demoted | Universal zero-effect claim fails |
+| Structural deformation / displacement | operationalisation + estimator | **NOT SUPPORTED — incremental** |
+| Deformation persistence $Q_i$ | operationalisation | **DEMOTED** — gain reproduced by an order-destroying control |
+| $\Lambda = \Sigma_0^{-1}$ as stiffness / resistance / recovery structure | **physical interpretation** | **DEMOTED** — no empirical support at any tested timescale |
+| $\Sigma_0^{-1}$ as a bare whitening / precision metric | estimator | **NOT SUPPORTED** — no meaningful incremental information |
+| Patient-specific covariance geometry | estimator | **NOT SUPPORTED** — did not beat diagonal or population alternatives |
+| $\lVert\Lambda\Delta G\rVert > T_{\mathrm{critical}}$ | — | **UNOPERATIONALISED / HISTORICAL** — never estimated in any experiment |
+| $C(t)$ / higher-order integration | — | **EXPLORATORY — synthetic only**, never tested on real data |
+| Reach / homology condition | — | **DEMOTED / UNOPERATIONALISED** |
+| Literal orthogonality law | — | **DEMOTED** |
+| Marginal dispersion (baseline σ, window SD) | — | **SUPPORTED — narrow, development data only** |
+| Window autocorrelation (H-AC) | estimator | **NOT SUPPORTED** under the binding STRICT rule |
+| Arterial autocorrelation structure vs acquisition | measurement level | **SUPPORTED — narrow scope** (Tier 1) |
+| Consciousness / qualia interpretations | — | **OUT OF SCOPE — never claimed, never tested** |
 
-Nothing here is proven. Reasoning: [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md).
+Nothing here is proven. Reasoning: [`docs/ADVERSARIAL_REVIEW.md`](docs/ADVERSARIAL_REVIEW.md)
+(written before any real data was analysed; see its banner).
 
-### What synthetic testing found
+### The three results that need stating precisely
+
+**H-AC returned NOT SUPPORTED.** The binding STRICT rule was the only rule
+capable of producing SURVIVED, and it failed on criterion 2: ΔAUROC > 0.01 with
+a confidence interval excluding zero was not met at either required horizon
+(+0.0022 at 10 min, −0.0014 at 15 min).
+
+**The AUPRC increment at 10 and 15 min is a provisional secondary observation
+with no advancement authority.** It reproduced out of sample (+0.0132 and
++0.0145, intervals excluding zero). It is **not** validation, **not** partial
+survival, **not** a near-miss, and **not** evidence specifically for
+physiological dynamics. Monitor and acquisition behaviour remains a live
+competing explanation for it.
+
+**Synthetic identifiability results are internal-consistency evidence only.**
+They establish how the estimators behave on data generated by the assumed
+model. They are not validation on human physiology and must not be read as
+such.
+
+### What synthetic testing found — SYNTHETIC ONLY
+
+> These results characterise estimator behaviour on data generated by the
+> assumed model. **They are internal-consistency evidence, not validation on
+> human physiology.** Every claim below was later tested on real data; see the
+> verdict table above.
 
 | Finding | Result |
 |---|---|
@@ -262,16 +324,19 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/DATASET_REQUIREMENTS.md`](docs/DATASET_REQUIREMENTS.md) — resolution, base rates
 - [`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md) — frozen commitments
 
-**Next phase — model adequacy**
+**Model adequacy — COMPLETED, NOT SUPPORTED**
 - [`docs/PROTOCOL_MODEL_ADEQUACY.md`](docs/PROTOCOL_MODEL_ADEQUACY.md) — preregistered protocol
 - [`docs/DATA_REQUIREMENTS_REAL.md`](docs/DATA_REQUIREMENTS_REAL.md) — data needed and access blocker
 - [`docs/REAL_DATA_ACQUISITION.md`](docs/REAL_DATA_ACQUISITION.md) — **real data obtained, tested, and rejected by Stage A**
 
-**Real-physiology transfer — NOT SUPPORTED**
+**Completed real-data experiments** (verdicts in [`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md))
 - [`docs/RESULT_ACQ_TIER2.md`](docs/RESULT_ACQ_TIER2.md) — **Tier 2 predictive attribution: UNRESOLVED — no arm showed an increment**
 - [`docs/RESULT_ACQ_TIER1.md`](docs/RESULT_ACQ_TIER1.md) — **Tier 1 measurement level: ACQUISITION SUFFICIENT**
 - [`docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md`](docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md) — its frozen protocol
 - [`docs/RESULT_HAC_CONFIRMATORY.md`](docs/RESULT_HAC_CONFIRMATORY.md) — **window autocorrelation: binding STRICT criterion fails on ΔAUROC**
+- [`docs/PROTOCOL_AUTOCORR.md`](docs/PROTOCOL_AUTOCORR.md) — H-AC's frozen protocol and binding STRICT rule
+- [`docs/PROVENANCE_TIER2_LAUNCH.md`](docs/PROVENANCE_TIER2_LAUNCH.md) — Tier-2 aborted pre-outcome launch, recorded
+- [`docs/PROTOCOL_PERSISTENCE.md`](docs/PROTOCOL_PERSISTENCE.md) — withdrawn before freezing, retained for provenance
 - [`docs/RESULT_REPRESENTATION_SEARCH.md`](docs/RESULT_REPRESENTATION_SEARCH.md) — the development search behind it
 - [`docs/RESULT_STRUCTURAL_PREDICTION.md`](docs/RESULT_STRUCTURAL_PREDICTION.md) — **Σ₀⁻¹ as a bare whitening metric adds nothing beyond marginals**
 - [`docs/PROTOCOL_STRUCTURAL_PREDICTION.md`](docs/PROTOCOL_STRUCTURAL_PREDICTION.md) — its frozen protocol

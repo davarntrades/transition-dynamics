@@ -17,6 +17,25 @@
 
 ---
 
+> ## ⚠ HISTORICAL — written before any real data was analysed
+>
+> This document records what was **proposed**. It is retained unchanged as part
+> of the scientific record and is **not** a statement of current status.
+>
+> Seven experiments have since been run on real VitalDB data. Four returned
+> NOT SUPPORTED, one SUPPORTED in a narrow measurement-level scope, one
+> UNRESOLVED. In particular **mechanism identification is not a surviving
+> contribution**, and the stiffness reading of $\Lambda=\Sigma_0^{-1}$ is
+> demoted.
+>
+> **Current status: [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) governs.**
+> `main` is the canonical branch.
+>
+> **Specific to this document:** C6 is labelled "the surviving novelty claim".
+> That label is historical. C6 was tested and is not supported.
+
+---
+
 ## Global Kill Conditions
 
 Any one ends the programme regardless of individual claim outcomes.

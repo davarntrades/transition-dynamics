@@ -3,8 +3,80 @@
 The authoritative record of what this programme has and has not established.
 Where any other document disagrees with this one, this one governs.
 
-Phase closed: **synthetic exposure and onset control (Stages 1–4).**
-Nothing in this programme has been tested on human physiology.
+> **`main` is the canonical branch** and this is the canonical document. Where
+> any other file in this repository disagrees with it, that file is out of date.
+
+---
+
+## 0. Current status (2026-09-12)
+
+**Seven preregistered experiments have been run on real VitalDB physiological
+data.** Each was frozen before execution and evaluated once on patients not
+used to design it. The earlier statement that nothing had been tested on human
+physiology is superseded and was removed on this date.
+
+Every endpoint tested was **intraoperative hypotension** (`ART_MBP < 65 mmHg`
+for ≥ 60 s) in anaesthetised surgical patients. **No result here bears on
+cardiac arrest, sepsis, respiratory failure or ICU deterioration.**
+
+| # | Experiment | Binding verdict | Record |
+|:--:|---|---|---|
+| 1 | Model adequacy — exponential onset form | **NOT SUPPORTED** | §10 |
+| 2 | Short-timescale relaxation transfer | **NOT SUPPORTED** | §11 |
+| 3 | Structural displacement $S(t)$ | **NOT SUPPORTED** | §12 |
+| 4 | H-AC confirmatory | **NOT SUPPORTED** | §14 |
+| 5 | Acquisition discrimination Tier 1 | **SUPPORTED — narrow, measurement level** | §16 |
+| 6 | Acquisition discrimination Tier 2 | **UNRESOLVED** | §17 |
+| — | Representation search (development) | selection step only | §13 |
+
+### Precise statements that must not be softened
+
+1. **The baseline-derived onset / relaxation model did not transfer to real
+   physiology** (§10). The exponential form degenerated to a step function.
+2. **Baseline relaxation properties did not predict subsequent response
+   dynamics** (§11).
+3. **$\Lambda=\Sigma_0^{-1}$ read as physiological stiffness, resistance or
+   recovery structure is no longer empirically supported** (§11). This is a
+   failure at the **PHYSICAL INTERPRETATION** layer. The source relation
+   $Q_G=\Lambda Q$ was not itself tested.
+4. **$\Sigma_0^{-1}$ in the weaker role of a whitening / precision metric added
+   no meaningful out-of-sample predictive information** for the tested
+   hypotension endpoint (§12).
+5. **Patient-specific covariance geometry did not outperform simpler
+   alternatives** — shuffled off-diagonals cost ≤ 0.003 AUROC, the identity
+   ≤ 0.007, and on the secondary endpoint another patient's covariance
+   outperformed the patient's own (§12).
+6. **H-AC returned NOT SUPPORTED** because the preregistered ΔAUROC
+   requirement failed (+0.0022 and −0.0014; > 0.01 with CI excluding zero was
+   required at both horizons) (§14).
+7. **The AUPRC increment at 10 and 15 min is a provisional secondary
+   observation only.** It may not be described as validation, partial survival,
+   a near-miss, or evidence specifically for physiological dynamics. It has no
+   advancement authority.
+8. **Monitor / instrument acquisition behaviour remains a live competing
+   explanation** for that AUPRC observation (§16, §17).
+9. **Synthetic identifiability results (§§1–8) are internal-consistency
+   evidence**, not validation on human physiology.
+10. **Reachability / homology and self-report / qualia-related objects remain
+    demoted or out of scope** and are not part of the biomedical hypothesis.
+11. **No next experiment is currently preregistered.** Every frozen protocol in
+    this repository has a recorded result; the one exception,
+    `PROTOCOL_PERSISTENCE.md`, was withdrawn before freezing.
+
+### Distinctions that must not be collapsed
+
+representation ≠ mechanism · autocorrelation ≠ physiology · measurement-level
+sufficiency ≠ predictive attribution · predictive attribution ≠ physiological
+mechanism · secondary AUPRC effect ≠ H-AC survival · mathematical coherence ≠
+empirical support · historical equation ≠ current hypothesis · failure of one
+representation ≠ failure of all · ABP-only null ≠ falsification of the
+six-channel aggregate · instrumentation sufficiency ≠ necessity · unresolved ≠
+supported.
+
+---
+
+Phase closed: **synthetic exposure and onset control (Stages 1–4).** Sections
+1–8 below are the synthetic record and are retained unchanged.
 
 ---
 
@@ -87,14 +159,18 @@ those strata and returned SURVIVES. That rule was not preregistered and is
 simulated regime tested, and NOT validated in real physiology.**
 
 It may not be described as validated, as clinically useful, or as a
-demonstrated property of human deterioration. The next step is a model-adequacy
-study, not a mechanism or prediction study.
+demonstrated property of human deterioration.
+
+> **Superseded 2026-09-12.** The model-adequacy study named here as "the next
+> step" was carried out and returned **NOT SUPPORTED** (§10), as did three
+> further real-data experiments. Mechanism identification is **not** a
+> surviving contribution of this programme. See §0.
 
 ---
 
 ## 7. Harness bugs in this programme
 
-Seven in total across the whole programme; four in the exposure sequence. All
+Twelve in total across the whole programme; four in the exposure sequence. All
 produced confident wrong answers.
 
 | # | Symptom | Cause | Guard added |
@@ -265,7 +341,7 @@ control preserving marginals and destroying temporal order.
 | run-length of abnormal variability (the $Q_i=\lVert\Delta G_i\rVert\tau_i$ family) | **NOT SUPPORTED** — gain fully reproduced by the order-destroyed control |
 | dV/dt, accumulated excess, change-point, hazard/first-passage | **NOT SUPPORTED** |
 | spectral / entropy, all-temporal combined | **EXPLORATORY** |
-| **window autocorrelation** | **SURVIVED on development, AUPRC-only, narrow** |
+| **window autocorrelation** | **Selected on development, AUPRC-only** — subsequently **NOT SUPPORTED** in confirmatory testing (§14) |
 
 Window autocorrelation: ΔAUPRC +0.0011 / **+0.0127 [+0.0055, +0.0211]** /
 **+0.0189 [+0.0099, +0.0298]** at 5/10/15 min, surviving Bonferroni over all 27

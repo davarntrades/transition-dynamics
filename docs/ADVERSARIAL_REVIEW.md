@@ -18,6 +18,22 @@
 
 ---
 
+> ## ⚠ HISTORICAL — written before any real data was analysed
+>
+> This document records what was **proposed**. It is retained unchanged as part
+> of the scientific record and is **not** a statement of current status.
+>
+> Seven experiments have since been run on real VitalDB data. Four returned
+> NOT SUPPORTED, one SUPPORTED in a narrow measurement-level scope, one
+> UNRESOLVED. In particular **mechanism identification is not a surviving
+> contribution**, and the stiffness reading of $\Lambda=\Sigma_0^{-1}$ is
+> demoted.
+>
+> **Current status: [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) governs.**
+> `main` is the canonical branch.
+
+---
+
 ## 1. What is genuinely novel?
 
 **One thing, and it is narrow:**
@@ -205,6 +221,9 @@ things block it:
    realistic channel counts — a cohort discriminator, not a bedside alarm.
 3. **No real data has been touched.** Falsifiability has been *designed*; it
    has not been *exercised*. The kill experiment exists on paper.
+   *(Superseded 2026-09-12: real data was subsequently analysed in seven
+   preregistered experiments. Falsifiability was exercised, and most of the
+   claims did not survive. See [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) §0.)*
 
 ### Why not C
 
