@@ -124,10 +124,10 @@ $$\forall\, \Delta\ell \in L,\ \ \Delta R_C(t) = 0$$
 
 | Object | Status | Reason |
 |---|---|---|
-| $Q_i = \lVert\Delta G_i\rVert \tau_i$ | Active | Falsifiable |
-| $Q_G = \Lambda Q$ | Active, preregistered | Needs empirical validation |
-| $\lVert\Lambda\Delta G\rVert > T_c$ | Active, load-bearing | Must show threshold-like behaviour |
-| $C(t) = \tau(\bigcup_i N_t)$ | Exploratory | Higher-order structure only |
+| $Q_i = \lVert\Delta G_i\rVert \tau_i$ | **DEMOTED** | Operationalisation tested; gain reproduced by an order-destroying control |
+| $Q_G = \Lambda Q$ | Source relation **untested**; its stiffness interpretation **DEMOTED** | The interpretation failed, not the source relation |
+| $\lVert\Lambda\Delta G\rVert > T_c$ | **UNOPERATIONALISED / HISTORICAL** | Never estimated in any experiment |
+| $C(t) = \tau(\bigcup_i N_t)$ | **EXPLORATORY — synthetic only** | Never tested on real data |
 | $H_k(\mathrm{Reach})$ condition | **Demoted** | Not operationalised |
 | $\forall \Delta\ell,\ \Delta R_C = 0$ | **Demoted** | Universal zero-effect claim fails |
 
@@ -141,8 +141,13 @@ Demotions and their reasons: [`docs/DEMOTED_OBJECTS.md`](docs/DEMOTED_OBJECTS.md
 **Source equation.** $Q_G = \Lambda Q$ — this does not by itself fix what
 $\Lambda$ is.
 
-**Primary preregistered interpretation.** $\Lambda$ is a stiffness / precision /
-resistance-to-deformation operator, frozen before analysis.
+**Primary preregistered interpretation — DEMOTED.** $\Lambda$ was frozen before
+analysis as a stiffness / precision / resistance-to-deformation operator. That
+reading has **no empirical support at any tested timescale**, and $\Sigma_0^{-1}$
+in the weaker role of a bare whitening metric added no meaningful incremental
+predictive information. The failure is at the **physical interpretation** layer;
+the source relation $Q_G=\Lambda Q$ was not itself tested. The section below
+records what was proposed.
 
 **Competing model.** $\Lambda$ as a recovery / resilience quantity. Under that
 reading the criterion must be written $\lVert \Lambda^{-1} \Delta G \rVert > T_{\mathrm{critical}}$ —
