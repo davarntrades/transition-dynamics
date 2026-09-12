@@ -204,9 +204,10 @@ verified against authoritative sources before execution — see
 
 ## Current status
 
-**Claim level 0** — no real physiological data analysed. Synthetic work
-establishes estimator behaviour and identifiability only; it is not evidence
-about physiology. Authoritative record:
+**Claim level 0.** Four preregistered tests on real physiology have now
+returned NOT SUPPORTED. Synthetic work establishes estimator behaviour and
+identifiability only; it is not evidence about physiology. Authoritative
+record:
 [`docs/CANONICAL_STATUS.md`](docs/CANONICAL_STATUS.md).
 
 **Provisional grade: B** — coherent, but requires better operationalisation.
@@ -215,8 +216,8 @@ about physiology. Authoritative record:
 |---|---|---|
 | Structural deformation | Active | Falsifiable |
 | Deformation persistence | Active | Falsifiable |
-| Constraint / stiffness | **Stiffness reading demoted** | No empirical support at any tested timescale; Σ₀⁻¹ retained only as a whitening metric |
-| Critical threshold | Active, load-bearing | Must show threshold-like behaviour |
+| Constraint / stiffness | **Demoted entirely** | No empirical support at any tested timescale, and as a bare whitening metric no incremental predictive value for deterioration |
+| Critical threshold | Active, load-bearing, **never operationalised** | Must show threshold-like behaviour; the next experiment |
 | Higher-order integration | Active | Tested against pairwise-matched null |
 | Reach / homology condition | Demoted | Not operationalised |
 | Literal orthogonality law | Demoted | Universal zero-effect claim fails |
@@ -267,6 +268,11 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/REAL_DATA_ACQUISITION.md`](docs/REAL_DATA_ACQUISITION.md) — **real data obtained, tested, and rejected by Stage A**
 
 **Real-physiology transfer — NOT SUPPORTED**
+- [`docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md`](docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md) — **frozen: does acquisition or physiology generate the residual signal?**
+- [`docs/RESULT_HAC_CONFIRMATORY.md`](docs/RESULT_HAC_CONFIRMATORY.md) — **window autocorrelation: binding STRICT criterion fails on ΔAUROC**
+- [`docs/RESULT_REPRESENTATION_SEARCH.md`](docs/RESULT_REPRESENTATION_SEARCH.md) — the development search behind it
+- [`docs/RESULT_STRUCTURAL_PREDICTION.md`](docs/RESULT_STRUCTURAL_PREDICTION.md) — **Σ₀⁻¹ as a bare whitening metric adds nothing beyond marginals**
+- [`docs/PROTOCOL_STRUCTURAL_PREDICTION.md`](docs/PROTOCOL_STRUCTURAL_PREDICTION.md) — its frozen protocol
 - [`docs/RESULT_SHORT_TIMESCALE.md`](docs/RESULT_SHORT_TIMESCALE.md) — short-timescale relaxation
 - [`docs/PROTOCOL_SHORT_TIMESCALE.md`](docs/PROTOCOL_SHORT_TIMESCALE.md) — its frozen protocol
 - [`docs/RESULT_VITALDB_ADEQUACY.md`](docs/RESULT_VITALDB_ADEQUACY.md) — first valid real-data test

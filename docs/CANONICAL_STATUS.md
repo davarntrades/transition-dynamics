@@ -106,15 +106,22 @@ produced confident wrong answers.
 | 5 | Guard aborted a correct stratum | Guard compared realised severity to a nominal target lying below the noise floor | Guard now checks cross-condition agreement, which is the assumption the analysis rests on |
 | 6 | Rate recovery reported >100% error | Estimated rates compared against descending-sorted truth while the simulator orders ascending | Corrected; true per-channel error 3% |
 | 7 | Masked scenario returned AUC exactly 0.000 | Naive comparison scored group B as positive while oracle and stratified scored group A | Orientation unified |
+| 8 | Onset estimator never declined, including on stationary data | Interleaved cross-fitting does not control overfitting at lag-1 autocorrelation 0.76 | Null-calibrated threshold from stationary trajectories; declines 80–95% |
+| 9 | Stage C appeared to validate the onset model | Baseline rates recomputed from the first half of the very segment being tested — circular | `k_base` made a required argument |
+| 10 | Stage C correlations undefined | Rate grid capped at 1/h while real rates are ~1000/h, so every fit pinned to the boundary; and rates faster than the sampling interval are unidentifiable | Grid spans 10⁻²–10⁴; baseline estimated at matched resolution; identifiability band enforced |
+| 12 | Channel-shuffle control returned numbers bit-identical to the uncontrolled arm | The control permuted feature **columns** globally, which is a no-op for a ridge model — reordering columns leaves the fit identical | Permute channel assignment **independently per row**, preserving each row's multiset of values while destroying channel identity |
+| 11 | Every fitted model sat at AUROC 0.48–0.52 while unfitted raw scores reached 0.60–0.63 | Out-of-fold **probabilities** pooled across folds. One fold had test prevalence 0.014 against 0.129 in training, so its intercept and standardisation placed its predictions on a different scale and the pooled ranking inverted — despite every fold ranking correctly on its own | Discrimination, false-alert rate and lead time use within-fold rank-normalised scores; calibration keeps untransformed probabilities. Regression test: a single-feature model must reproduce its own feature's AUROC |
 
 **Why they were dangerous.** Each produced a confident, plausible-looking
-answer. Bugs 1, 4 and 7 produced *falsifications* — the flattering direction
-would have been to accept them, since a null result looks rigorous.
+answer. Bugs 1, 4, 7 and 11 produced *falsifications* — the flattering
+direction would have been to accept them, since a null result looks rigorous.
+Bugs 8 and 9 pointed the other way and would have produced a false positive.
 
 **What caught them.** Constraints on the *shape* of a result, not its
 direction: an AUC that cannot occur, a variance too small to be real,
-conditions bit-identical to machine precision. Directional plausibility checks
-would have passed all seven.
+conditions bit-identical to machine precision, a single-feature model whose
+AUROC is neither its feature's nor its complement. Directional plausibility
+checks would have passed all eleven.
 
 ---
 
@@ -202,6 +209,216 @@ empirical support at any tested timescale.** It is demoted to a whitening
 metric, whose operational value is untested. The source equations are not
 falsified by this; the physical reading frozen for them is.
 See [`RESULT_SHORT_TIMESCALE.md`](RESULT_SHORT_TIMESCALE.md).
+
+---
+
+## 12. Structural displacement prediction — NOT SUPPORTED (2026-09-11)
+
+$S(t)=\lVert\Sigma_0^{-1}\delta(t)\rVert$, with $\Sigma_0^{-1}$ treated as a
+bare whitening metric and no interpretation attached, adds **no** out-of-sample
+predictive information about intraoperative hypotension beyond marginal
+features. 166 fresh arterial-line patients, 21,590 windows, 103–110
+event-patients per horizon, prediction only from currently non-hypotensive
+states.
+
+| horizon | AUROC M9 (marginals) | ΔAUROC (M10 − M9) | ΔAUPRC |
+|:--:|:--:|:--:|:--:|
+| 5 min | 0.6904 | +0.0035 [−0.0029, +0.0104] | −0.0005 [−0.0038, +0.0021] |
+| 10 min | 0.6467 | −0.0029 [−0.0158, +0.0100] | −0.0039 [−0.0120, +0.0034] |
+| 15 min | 0.6165 | +0.0019 [−0.0107, +0.0153] | +0.0064 [−0.0030, +0.0213] |
+
+Every interval spans zero and the sign flips across horizons. Replacing the
+patient's covariance with **randomly permuted off-diagonals** changes AUROC by
+at most 0.003; replacing it with the **identity** costs at most 0.007.
+Patient-specific geometry never beats diagonal rescaling or a population
+covariance. $S$ alone reaches 0.535–0.570.
+
+The prespecified **secondary endpoint** (MAP < 55 mmHg) reproduces this on a
+better-behaved, well-calibrated task: M9 reaches AUROC 0.832 / 0.787 / 0.740
+with calibration slope 0.99 / 0.85 / 0.65, and $S$ moves AUROC by ≤ 0.0001 at
+5 and 10 min. At 15 min it **hurts** — ΔAUPRC −0.0044 [−0.0088, −0.0010], the
+interval entirely below zero. One harmful horizon is short of the two the
+frozen FALSIFIED rule requires, so the verdict stands at NOT SUPPORTED.
+At 5 and 10 min another patient's covariance outperforms the patient's own.
+
+**Consequence: the last empirical claim attached to $\Lambda$ is gone.** The
+stiffness reading was already demoted; the bare metric now has no incremental
+predictive value either. Cross-channel structure generally fails here — the
+covariance-drift/DNB comparator adds nothing to the marginal baseline.
+See [`RESULT_STRUCTURAL_PREDICTION.md`](RESULT_STRUCTURAL_PREDICTION.md).
+
+---
+
+## 13. Representation search — persistence demoted, autocorrelation survives development (2026-09-11)
+
+Strategy changed after three real-data failures: no longer rescuing the
+covariance/stiffness representation. Search over temporal representations of
+**marginal variability**, which is the actual empirical survivor — the
+dispersion block dominates every other feature block by an order of magnitude
+on leave-one-out.
+
+Nine candidates on 166 development patients, each paired with a destructive
+control preserving marginals and destroying temporal order.
+
+| candidate | verdict |
+|---|---|
+| run-length of abnormal variability (the $Q_i=\lVert\Delta G_i\rVert\tau_i$ family) | **NOT SUPPORTED** — gain fully reproduced by the order-destroyed control |
+| dV/dt, accumulated excess, change-point, hazard/first-passage | **NOT SUPPORTED** |
+| spectral / entropy, all-temporal combined | **EXPLORATORY** |
+| **window autocorrelation** | **SURVIVED on development, AUPRC-only, narrow** |
+
+Window autocorrelation: ΔAUPRC +0.0011 / **+0.0127 [+0.0055, +0.0211]** /
+**+0.0189 [+0.0099, +0.0298]** at 5/10/15 min, surviving Bonferroni over all 27
+search comparisons. **ΔAUROC spans zero at every horizon.** Gain destroyed by
+both the within-window shuffle and a row-wise channel shuffle, and not
+explained by the repeated-sample fraction — though these signals are heavily
+quantised (SpO₂ 96% identical consecutive samples) and an instrumentation
+origin is not excluded.
+
+$Q_i$ is **demoted for this application**; its protocol was withdrawn before
+freezing.
+
+**V2 is a development-selected candidate, not a confirmed survivor.** It was
+chosen by a search over nine representations on development data — a selection
+event, not a finding. It carries no evidential status until the one-shot
+confirmatory run reports, and its development numbers may not be pooled with or
+cited alongside that result.
+
+The successor protocol is **FROZEN** with the pre-existing **STRICT** criterion
+binding: SURVIVED requires **both** ΔAUPRC and ΔAUROC significant at 10 and
+15 min. The AUPRC-led reading is recorded only as a labelled
+secondary/provisional observation with no advancement authority. Declared
+before the run: development meets the AUPRC-led reading and **fails STRICT**,
+so the most likely binding verdict is NOT SUPPORTED.
+
+The instrumentation/quantisation explanation is carried as a **live rival
+hypothesis of equal standing**, which this design cannot discriminate against.
+No mechanistic reading — recovery, relaxation, critical slowing down,
+homeostasis, or any revival of Λ, Σ₀⁻¹, S(t) or Q_i — may be attached to any
+outcome of this experiment.
+
+See [`RESULT_REPRESENTATION_SEARCH.md`](RESULT_REPRESENTATION_SEARCH.md)
+and [`PROTOCOL_AUTOCORR.md`](PROTOCOL_AUTOCORR.md).
+
+---
+
+## 14. H-AC confirmatory — NOT SUPPORTED (2026-09-12)
+
+One-shot preregistered run of the protocol frozen at `9efe10c`, on 600 fresh
+patients never previously accessed. 228 usable, 28,219 windows, 130–155
+event-patients per horizon.
+
+**Binding STRICT criterion fails on ΔAUROC at both required horizons.**
+
+| horizon | ΔAUROC [CI] | ΔAUPRC [CI] |
+|:--:|:--:|:--:|
+| 5 min | +0.0057 [−0.0145, +0.0259] | +0.0043 [−0.0051, +0.0140] |
+| 10 min | **+0.0022 [−0.0126, +0.0171]** | +0.0132 [+0.0024, +0.0237] |
+| 15 min | **−0.0014 [−0.0156, +0.0135]** | +0.0145 [+0.0034, +0.0259] |
+
+Five of six STRICT criteria met; criterion 2 (ΔAUROC > 0.01 with CI excluding
+0) fails at both 10 and 15 min, one point estimate being negative. All three
+destructive controls passed at all three horizons, calibration improved, the
+false-alert criterion was met, and the MAP < 55 secondary endpoint reproduced
+the AUPRC increment. The directional prespecification held on ΔAUPRC: 10 and
+15 min exclude zero, 5 min does not.
+
+**Secondary/provisional AUPRC-led observation** (no advancement authority):
+criteria 1 and 3–6 met, criterion 2 not met. This is the outcome the frozen
+protocol declared most likely before the run.
+
+$R_{\mathrm{instr}}$ — monitor refresh, sample-and-hold and quantisation —
+**remains a live competing explanation of equal standing**; the design could
+not discriminate against it, since acquisition behaviour also depends on
+temporal order and channel identity. No physiological, recovery, relaxation,
+critical-slowing-down, homeostatic, Λ, Σ₀⁻¹, S(t) or Q_i reading is attached to
+any part of this result.
+
+Development and confirmatory results are kept separate and are not pooled.
+See [`RESULT_HAC_CONFIRMATORY.md`](RESULT_HAC_CONFIRMATORY.md).
+
+---
+
+## 15. Programme progression and the next experiment (2026-09-12)
+
+Explicit chain, so no step can be read out of order:
+
+```
+development representation search
+  -> window autocorrelation (V2) selected on development data
+  -> H-AC frozen at 9efe10c, STRICT binding
+  -> one-shot confirmatory run, 228 fresh patients
+  -> STRICT = NOT SUPPORTED (criterion 2, dAUROC, fails at both horizons)
+  -> a reproducible AUPRC-specific increment remains at 10-15 min,
+     dependent on temporal order and channel identity
+  -> H_phys vs H_instr UNRESOLVED
+  -> next experiment designed specifically to discriminate them
+```
+
+**The six-channel matched-pair design is INVALID and must not be revived.**
+SpO2 is not reconstructable: it requires red/infrared ratio-of-ratios plus a
+proprietary calibration, and VitalDB has a single unitless pleth waveform with
+no optical absorbance channels. HR and ETCO2 are detector- and
+device-contaminated. Only the arterial pathway admits a clean acquisition
+intervention.
+
+A measurement finding that motivates the design: the six channels carry four
+distinct refresh cadences (2/4/6/8 s) and are all integer-quantised, so in this
+panel **refresh interval is very nearly a synonym for channel identity** — the
+exact signature H-AC's controls were reported to establish.
+
+The successor protocol
+([`PROTOCOL_ACQUISITION_DISCRIMINATION.md`](PROTOCOL_ACQUISITION_DISCRIMINATION.md))
+is frozen with two **separate** inference tiers:
+
+- **Tier 1**, measurement level, uses no outcome information. Binding verdict
+  requires T1.1 (paired injection effect) AND T1.3 (saturating dose-response).
+  Gap closure toward the monitor is **characterisation only** — the monitor arm
+  is descriptive and may not re-enter the causal rule.
+- **Tier 2**, predictive attribution, one shot on 600 fresh patients.
+  Identification rests on W vs W+inj, never W vs M.
+
+Three claims are recorded as **not equivalent**: acquisition changes AC
+structure; acquisition improves prediction of a monitor-defined endpoint;
+physiology generates predictive temporal structure. A third instrumentation
+mechanism, **H_target** (the endpoint is itself defined from monitor ART_MBP,
+so a more monitor-like representation may predict it better for purely
+constructional reasons), is carried explicitly and is **not** excluded by this
+design.
+
+---
+
+## 16. Acquisition discrimination, Tier 1 — ACQUISITION SUFFICIENT (2026-09-12)
+
+Measurement level. **No outcome information of any kind was used.** One
+execution of the protocol frozen at `33b3195c`; 261 usable development cases,
+51,563 autocorrelation windows.
+
+Binding tests, both passed:
+
+| test | result |
+|---|---|
+| **T1.1** paired ΔAC = AC(W+inj) − AC(W) | **+0.08376** [+0.07428, +0.09517]; 90.7% of windows positive |
+| **T1.3(a)** 4/6/8 s vs the 2 s identity | +0.0928, +0.0968, +0.1079, all CIs excluding 0 |
+| **T1.3(b)** Spearman(hold fraction, AC) | **0.800** |
+| **T1.3(c)** saturation ratio | 0.11194 / 0.01010 = **11.08** |
+
+**Permitted claim, verbatim and no more: "The known acquisition transformation
+is sufficient to reproduce a substantial component of the arterial
+autocorrelation structure."**
+
+Characterisation (non-binding, changed nothing): gap closure G = +0.838;
+dose-response interpolated at the monitor's measured hold fraction 0.560 gives
+0.904 against an observed 0.926, error 0.022; **quantisation NON-CONTRIBUTORY
+at every hold (−0.0008 to −0.0038) — sample-and-hold is the mechanism, not
+quantisation**. W and M still disagree by 6.52 mmHg SD (r 0.870), which is why
+M carried no identification claim.
+
+**This does not explain the predictive AUPRC increment, does not generalise
+beyond the arterial pathway, and makes no claim about physiology.** Sufficiency
+is not necessity. H-AC remains NOT SUPPORTED. $H_{\mathrm{target}}$ is
+untouched and remains live. Tier 2 is not run.
+See [`RESULT_ACQ_TIER1.md`](RESULT_ACQ_TIER1.md).
 
 ---
 

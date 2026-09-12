@@ -1,0 +1,17 @@
+{
+ "docs/PROTOCOL_ACQUISITION_DISCRIMINATION.md": "bb135248ce377e248250817d69dfa0fd48827637754353bef5737182545a5476",
+ "analysis/acquisition/beats.py": "700811dfb393bbcb258ca30016bc5b538555be09aff23c371bc2e6dd9a98beed",
+ "analysis/acquisition/admissible.py": "5c936faa972b3b05d6b0e16732bc7913fb7d66660a36a1b7b4fbc186247e5bf9",
+ "analysis/acquisition/cohort_acq.py": "aa5c1f37c7b77fdd5c2dc0326422f10ac84e30c3ac68b957b06e319a21a06515",
+ "analysis/acquisition/run_tier1.py": "2ddb0fa074f4add39372280e386246d906e0fa519d324c298913178a741a7241",
+ "analysis/acquisition/run_tier2.py": "d31e4386c20ef6ddee71efff95824580cf4d5a04d9f441149b9203ecb5df1b68",
+ "analysis/acquisition/test_acquisition.py": "3fe4809e8092a52bb0b59c3bc07fdf5688206bc0609ed024d20d11ab502b8167",
+ "analysis/results/acq_split.json": "e35f3b3bc284e0cba1ef4b8b91fe2b578ad4c9184c21da8c580f5d8c86691bd8",
+ "analysis/structural/windows.py": "eac882aa2c2106eec79b3210f59b55da60af8323d633a5257170aee5440d916b",
+ "analysis/structural/features.py": "684a492bb1e2666aa5e56cf594aec42b963f69c32898c5011a7630053edcc38e",
+ "analysis/structural/models.py": "a55a2d2d3f4da6f9540f1753c13c1640cf79b8ec0bdc153c802ff0ab675dbdb1",
+ "analysis/structural/cohort.py": "8b541147c7047d55234953f50575c260a879df987ccf0347f2a2956e1df2fc11",
+ "analysis/repsearch/blocks.py": "b996ee106b8f008485f91647dd55508d910acb32101d322e20bbd1a65c1839d1",
+ "analysis/repsearch/persistence.py": "41ee778add6a5d9c0e74df23fa2fc71f7a1295ff5ef75c697e1245b337c1fe0a",
+ "_note": "SHA-256 of every file fixing the frozen acquisition-discrimination specification, recorded before Tier 1 was run and before the Tier-2 cohort was accessed."
+}
