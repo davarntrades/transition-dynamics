@@ -339,6 +339,55 @@ See [`RESULT_HAC_CONFIRMATORY.md`](RESULT_HAC_CONFIRMATORY.md).
 
 ---
 
+## 15. Programme progression and the next experiment (2026-09-12)
+
+Explicit chain, so no step can be read out of order:
+
+```
+development representation search
+  -> window autocorrelation (V2) selected on development data
+  -> H-AC frozen at 9efe10c, STRICT binding
+  -> one-shot confirmatory run, 228 fresh patients
+  -> STRICT = NOT SUPPORTED (criterion 2, dAUROC, fails at both horizons)
+  -> a reproducible AUPRC-specific increment remains at 10-15 min,
+     dependent on temporal order and channel identity
+  -> H_phys vs H_instr UNRESOLVED
+  -> next experiment designed specifically to discriminate them
+```
+
+**The six-channel matched-pair design is INVALID and must not be revived.**
+SpO2 is not reconstructable: it requires red/infrared ratio-of-ratios plus a
+proprietary calibration, and VitalDB has a single unitless pleth waveform with
+no optical absorbance channels. HR and ETCO2 are detector- and
+device-contaminated. Only the arterial pathway admits a clean acquisition
+intervention.
+
+A measurement finding that motivates the design: the six channels carry four
+distinct refresh cadences (2/4/6/8 s) and are all integer-quantised, so in this
+panel **refresh interval is very nearly a synonym for channel identity** — the
+exact signature H-AC's controls were reported to establish.
+
+The successor protocol
+([`PROTOCOL_ACQUISITION_DISCRIMINATION.md`](PROTOCOL_ACQUISITION_DISCRIMINATION.md))
+is frozen with two **separate** inference tiers:
+
+- **Tier 1**, measurement level, uses no outcome information. Binding verdict
+  requires T1.1 (paired injection effect) AND T1.3 (saturating dose-response).
+  Gap closure toward the monitor is **characterisation only** — the monitor arm
+  is descriptive and may not re-enter the causal rule.
+- **Tier 2**, predictive attribution, one shot on 600 fresh patients.
+  Identification rests on W vs W+inj, never W vs M.
+
+Three claims are recorded as **not equivalent**: acquisition changes AC
+structure; acquisition improves prediction of a monitor-defined endpoint;
+physiology generates predictive temporal structure. A third instrumentation
+mechanism, **H_target** (the endpoint is itself defined from monitor ART_MBP,
+so a more monitor-like representation may predict it better for purely
+constructional reasons), is carried explicitly and is **not** excluded by this
+design.
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail
