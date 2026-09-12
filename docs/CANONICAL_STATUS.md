@@ -388,6 +388,40 @@ design.
 
 ---
 
+## 16. Acquisition discrimination, Tier 1 — ACQUISITION SUFFICIENT (2026-09-12)
+
+Measurement level. **No outcome information of any kind was used.** One
+execution of the protocol frozen at `33b3195c`; 261 usable development cases,
+51,563 autocorrelation windows.
+
+Binding tests, both passed:
+
+| test | result |
+|---|---|
+| **T1.1** paired ΔAC = AC(W+inj) − AC(W) | **+0.08376** [+0.07428, +0.09517]; 90.7% of windows positive |
+| **T1.3(a)** 4/6/8 s vs the 2 s identity | +0.0928, +0.0968, +0.1079, all CIs excluding 0 |
+| **T1.3(b)** Spearman(hold fraction, AC) | **0.800** |
+| **T1.3(c)** saturation ratio | 0.11194 / 0.01010 = **11.08** |
+
+**Permitted claim, verbatim and no more: "The known acquisition transformation
+is sufficient to reproduce a substantial component of the arterial
+autocorrelation structure."**
+
+Characterisation (non-binding, changed nothing): gap closure G = +0.838;
+dose-response interpolated at the monitor's measured hold fraction 0.560 gives
+0.904 against an observed 0.926, error 0.022; **quantisation NON-CONTRIBUTORY
+at every hold (−0.0008 to −0.0038) — sample-and-hold is the mechanism, not
+quantisation**. W and M still disagree by 6.52 mmHg SD (r 0.870), which is why
+M carried no identification claim.
+
+**This does not explain the predictive AUPRC increment, does not generalise
+beyond the arterial pathway, and makes no claim about physiology.** Sufficiency
+is not necessity. H-AC remains NOT SUPPORTED. $H_{\mathrm{target}}$ is
+untouched and remains live. Tier 2 is not run.
+See [`RESULT_ACQ_TIER1.md`](RESULT_ACQ_TIER1.md).
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail
