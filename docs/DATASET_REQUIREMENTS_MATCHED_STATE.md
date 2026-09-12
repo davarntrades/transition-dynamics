@@ -150,17 +150,8 @@ fields (`intraop_eph`, `intraop_phe`, …) are **case totals, not timestamps
 → Fails R6 (no unperturbed recovery interval), R8/R9 for any non-ventilator
 perturbation. Supports the ventilator secondary experiment only.
 
-**MIMIC-IV Waveform matched subset [U] — the most promising candidate, and the
-one most likely to fail on a detail.** It is the only widely used resource that
-could satisfy R1–R3 and R10 simultaneously. Before any commitment, three things
-must be verified against authoritative documentation, **in this order**:
-1. **Clock alignment.** Do waveform record timestamps align with `inputevents`
-   times, and with what stated accuracy? A matched subset can be "matched" at
-   admission level while being useless at minute level.
-2. **Coverage overlap.** For how many patients does waveform coverage actually
-   span the 10 min pre + 30 min post window around isolated interventions?
-3. **Isolation.** After applying R4, how many events survive?
-If any of the three fails, the dataset is inadequate regardless of its size.
+**MIMIC-IV Waveform matched subset — GATE 1 NOT CLOSED. Pathway stopped.**
+See §4a below for the verification attempt and its outcome.
 
 **HiRID / AmsterdamUMCdb / eICU [U] — fail R1 as stated.** If their resolution
 is minute-level numerics with no waveform, they cannot separate response
@@ -171,6 +162,49 @@ experiment that must be labelled as such.
 
 **CHARIS [V] — inadequate.** 13 subjects, 3 channels, 50 Hz, **no intervention
 records at all**. Verified directly from the record headers.
+
+### 4a. MIMIC-IV verification attempt — 2026-09-12
+
+Three gates were to be checked in order. **Gate 1 could not be closed from this
+environment, so Gates 2 and 3 were not attempted**, per the rule that the MIMIC
+pathway stops if reliable alignment cannot be established.
+
+**Gate 1 — clock alignment: UNVERIFIED.** Verified facts:
+
+| check | result |
+|---|---|
+| MIMIC-IV Waveform present in the open PhysioNet bucket | **absent** — only `mimic-iv-demo-meds` and `mimic-iv-fhir-demo` exist, neither containing waveforms **[V]** |
+| Open MIMIC-IV clinical demo (with `inputevents`) in the bucket | **absent** — probed four candidate prefixes, zero keys **[V]** |
+| `physionet.org/content/mimiciv/` and `/mimic4wdb/` | **HTTP 000 — blocked [V]** |
+| `physionet-restricted.s3.amazonaws.com` | **HTTP 404 [V]** |
+| MIMIC-IV access model | *"Access to MIMIC-IV is limited to credentialed users"* — quoted from the open `mimic-iv-demo-meds` README **[V]** |
+
+Neither the waveform data nor its authoritative documentation is reachable.
+**No inference about alignment capability is recorded here.** The claim stays
+**UNVERIFIED**; it is not downgraded to "probably works" or upgraded on the
+basis of recollection.
+
+#### What a credentialed user must check, in this order
+
+1. **Timestamp systems.** Which clock do waveform record headers carry, and
+   which clock do `inputevents.starttime` / `endtime` carry? Are both expressed
+   in the same per-patient date-shifted frame?
+2. **Per-patient consistency of the shift.** De-identification shifts dates;
+   the shift must be *identical* for the waveform and clinical records of the
+   same patient, or alignment is impossible in principle.
+3. **Stated alignment precision.** Is the linkage documented as admission-level,
+   stay-level, or sub-minute? A subset can be "matched" at admission level and
+   still be useless for a perturbation-response experiment.
+4. **Empirical confirmation, not documentation alone.** Take interventions with
+   an unmistakable physiological signature — a vasopressor start should be
+   followed by a pressure rise — and confirm the waveform response begins after
+   the recorded time, with a plausible and consistent lag. If the apparent
+   response *precedes* the timestamp, the clocks are misaligned.
+5. Only then proceed to Gate 2 (coverage: 10 min pre + 30 min post) and Gate 3
+   (event yield after isolation rules R4).
+
+Until step 4 is passed **on data**, MIMIC-IV must be treated as unverified for
+this purpose.
 
 ---
 
@@ -232,12 +266,19 @@ Y_pre (>=10 min stable)  ->  U (protocolised, logged to the second)
 > **C — no identified existing dataset is verified adequate, and a prospective
 > study is required unless verification changes the picture.**
 
-More precisely: **C, with a defined path to B.** VitalDB is verified inadequate
-for the full question [V]. The credentialed candidates are unverifiable from
-this environment [U]; if MIMIC-IV Waveform passes the three checks in §4 —
-clock alignment, coverage overlap, post-isolation event count — this would
-become **B: partial testing with named limitations**, the limitations being
-absent $Z$ variables and residual indication confounding for fluid boluses.
+**Reaffirmed 2026-09-12 after the MIMIC-IV verification attempt.** VitalDB is
+verified inadequate for the full question [V]. MIMIC-IV Waveform **failed to
+close Gate 1 from this environment** — not because alignment was shown to be
+impossible, but because neither the data nor its authoritative documentation is
+reachable here (§4a). Capability is therefore **not inferred**.
+
+The path to **B** is unchanged and now precisely specified: a credentialed user
+executes the five steps in §4a, ending with the **empirical** lag check on real
+records. If that passes and Gates 2 and 3 yield adequate events, this becomes
+**B — partial testing with named limitations**, the limitations being absent
+$Z$ variables, residual indication confounding for fluid boluses, and the
+permanent impossibility of excluding unmeasured $Z$
+([`STATE_COMPLETENESS_TEST.md`](STATE_COMPLETENESS_TEST.md)).
 
 **Nothing should be frozen or executed until that verification is done.**
 
@@ -245,6 +286,8 @@ absent $Z$ variables and residual indication confounding for fluid boluses.
 
 ## 8. Related
 
+- [`STATE_COMPLETENESS_TEST.md`](STATE_COMPLETENESS_TEST.md) — the nested
+  state-hierarchy design that challenges any observed history effect
 - [`CANDIDATE_VENTILATOR_EXPERIMENT.md`](CANDIDATE_VENTILATOR_EXPERIMENT.md) —
   the feasible VitalDB secondary experiment, not frozen
 - [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) — unchanged by this document
