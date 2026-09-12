@@ -302,6 +302,43 @@ and [`PROTOCOL_AUTOCORR.md`](PROTOCOL_AUTOCORR.md).
 
 ---
 
+## 14. H-AC confirmatory — NOT SUPPORTED (2026-09-12)
+
+One-shot preregistered run of the protocol frozen at `9efe10c`, on 600 fresh
+patients never previously accessed. 228 usable, 28,219 windows, 130–155
+event-patients per horizon.
+
+**Binding STRICT criterion fails on ΔAUROC at both required horizons.**
+
+| horizon | ΔAUROC [CI] | ΔAUPRC [CI] |
+|:--:|:--:|:--:|
+| 5 min | +0.0057 [−0.0145, +0.0259] | +0.0043 [−0.0051, +0.0140] |
+| 10 min | **+0.0022 [−0.0126, +0.0171]** | +0.0132 [+0.0024, +0.0237] |
+| 15 min | **−0.0014 [−0.0156, +0.0135]** | +0.0145 [+0.0034, +0.0259] |
+
+Five of six STRICT criteria met; criterion 2 (ΔAUROC > 0.01 with CI excluding
+0) fails at both 10 and 15 min, one point estimate being negative. All three
+destructive controls passed at all three horizons, calibration improved, the
+false-alert criterion was met, and the MAP < 55 secondary endpoint reproduced
+the AUPRC increment. The directional prespecification held on ΔAUPRC: 10 and
+15 min exclude zero, 5 min does not.
+
+**Secondary/provisional AUPRC-led observation** (no advancement authority):
+criteria 1 and 3–6 met, criterion 2 not met. This is the outcome the frozen
+protocol declared most likely before the run.
+
+$R_{\mathrm{instr}}$ — monitor refresh, sample-and-hold and quantisation —
+**remains a live competing explanation of equal standing**; the design could
+not discriminate against it, since acquisition behaviour also depends on
+temporal order and channel identity. No physiological, recovery, relaxation,
+critical-slowing-down, homeostatic, Λ, Σ₀⁻¹, S(t) or Q_i reading is attached to
+any part of this result.
+
+Development and confirmatory results are kept separate and are not pooled.
+See [`RESULT_HAC_CONFIRMATORY.md`](RESULT_HAC_CONFIRMATORY.md).
+
+---
+
 ## Related records
 
 - [`RESULT_EXPOSURE_STAGES.md`](RESULT_EXPOSURE_STAGES.md) — four-stage detail

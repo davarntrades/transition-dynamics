@@ -204,7 +204,7 @@ verified against authoritative sources before execution — see
 
 ## Current status
 
-**Claim level 0.** Three preregistered tests on real physiology have now
+**Claim level 0.** Four preregistered tests on real physiology have now
 returned NOT SUPPORTED. Synthetic work establishes estimator behaviour and
 identifiability only; it is not evidence about physiology. Authoritative
 record:
@@ -268,6 +268,8 @@ Reproduce: `python3 analysis/experiments/mechanism_benchmark.py`
 - [`docs/REAL_DATA_ACQUISITION.md`](docs/REAL_DATA_ACQUISITION.md) — **real data obtained, tested, and rejected by Stage A**
 
 **Real-physiology transfer — NOT SUPPORTED**
+- [`docs/RESULT_HAC_CONFIRMATORY.md`](docs/RESULT_HAC_CONFIRMATORY.md) — **window autocorrelation: binding STRICT criterion fails on ΔAUROC**
+- [`docs/RESULT_REPRESENTATION_SEARCH.md`](docs/RESULT_REPRESENTATION_SEARCH.md) — the development search behind it
 - [`docs/RESULT_STRUCTURAL_PREDICTION.md`](docs/RESULT_STRUCTURAL_PREDICTION.md) — **Σ₀⁻¹ as a bare whitening metric adds nothing beyond marginals**
 - [`docs/PROTOCOL_STRUCTURAL_PREDICTION.md`](docs/PROTOCOL_STRUCTURAL_PREDICTION.md) — its frozen protocol
 - [`docs/RESULT_SHORT_TIMESCALE.md`](docs/RESULT_SHORT_TIMESCALE.md) — short-timescale relaxation
