@@ -131,7 +131,7 @@ own assumptions; mislabelled as per-bin (F6).**
 | Check | Result |
 |---|---|
 | Independent seed (7), n = 20, step30 | rule power 0.56 / **0.835** / 0.92 at mean Δ ≈ 0.18 / **0.24** / 0.27. Committed: 0.55 / 0.815 / 0.95 at ≈ 0.18 / 0.23 / 0.29 |
-| Exact same-seed rerun of the committed `power` stage | see `reproduction` in `vf_phase0_sim_checks.json` |
+| Exact same-seed rerun of the committed `power` stage | **bit-identical** to the committed JSON (max abs difference 0.0; `reproduction` in `vf_phase0_sim_checks.json`) |
 
 On the verified eligible sets it is not 0.23 (§3.1).
 

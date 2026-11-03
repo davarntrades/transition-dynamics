@@ -1623,5 +1623,9 @@
     "0.2": 0.0
    }
   }
+ },
+ "reproduction": {
+  "identical_to_committed": true,
+  "max_abs_diff": 0.0
  }
 }
