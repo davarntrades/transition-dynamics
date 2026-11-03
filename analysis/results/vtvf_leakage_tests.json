@@ -1,0 +1,156 @@
+{
+ "hr_rise_1sd": {
+  "bin_means": {
+   "B5": 0.010127526864062153,
+   "B10": 0.009885129108444676,
+   "B15": 0.011830772606883033,
+   "B30": 0.01016334228425704
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.99,
+   "TRIGGER_PROXIMAL": 0.005,
+   "SINGLE_BIN_LONG_LEAD": 0.005
+  },
+  "any_positive_n80": 0.01,
+  "T1": true,
+  "T2": true
+ },
+ "hr_rise_3sd": {
+  "bin_means": {
+   "B5": 0.0015644099146699569,
+   "B10": 0.005021252178200517,
+   "B15": 0.004571419530121442,
+   "B30": 7.816608452378563e-05
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.99,
+   "PIPELINE_INVALID": 0.005,
+   "SINGLE_BIN_LONG_LEAD": 0.0025,
+   "TRIGGER_PROXIMAL": 0.0025
+  },
+  "any_positive_n80": 0.005,
+  "T1": true,
+  "T2": true
+ },
+ "hrv_drop_30pct": {
+  "bin_means": {
+   "B5": 0.0003421723716820457,
+   "B10": 0.008846199383478024,
+   "B15": 0.011541132507116686,
+   "B30": 0.007672039539758509
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.9975,
+   "SINGLE_BIN_LONG_LEAD": 0.0025
+  },
+  "any_positive_n80": 0.0025,
+  "T1": true,
+  "T2": true
+ },
+ "hrv_drop_50pct": {
+  "bin_means": {
+   "B5": 0.005080126005102605,
+   "B10": 0.01159377925596624,
+   "B15": 0.013549884320348135,
+   "B30": 0.0066753490005777615
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.9825,
+   "SINGLE_BIN_LONG_LEAD": 0.015,
+   "EXPLORATORY_ASSOCIATION": 0.0025
+  },
+  "any_positive_n80": 0.017499999999999998,
+  "T1": true,
+  "T2": true
+ },
+ "hr2_hrv50": {
+  "bin_means": {
+   "B5": 0.0009602341773260795,
+   "B10": 0.004899795155317072,
+   "B15": 0.006153537739598234,
+   "B30": 0.000513418848790496
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.9925,
+   "PIPELINE_INVALID": 0.005,
+   "SINGLE_BIN_LONG_LEAD": 0.0025
+  },
+  "any_positive_n80": 0.0025,
+  "T1": true,
+  "T2": true
+ },
+ "hr2_hrv50_rt0.6": {
+  "bin_means": {
+   "B5": 0.022012432986926372,
+   "B10": 0.013766046317722005,
+   "B15": 0.007691585281064594,
+   "B30": 0.004697378514864893
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.9775,
+   "TRIGGER_PROXIMAL": 0.015,
+   "UNRESOLVED": 0.0025,
+   "EXPLORATORY_ASSOCIATION": 0.0025,
+   "SINGLE_BIN_LONG_LEAD": 0.0025
+  },
+  "any_positive_n80": 0.02,
+  "T1": true,
+  "T2": true
+ },
+ "hr2_hrv50_rt0": {
+  "bin_means": {
+   "B5": 0.0004675541067533458,
+   "B10": 0.004289221346354296,
+   "B15": -0.0014604300843253,
+   "B30": -0.003682623820175763
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 1.0
+  },
+  "any_positive_n80": 0,
+  "T1": true,
+  "T2": true
+ },
+ "null": {
+  "bin_means": {
+   "B5": -0.000571205272790334,
+   "B10": 0.006930882240790453,
+   "B15": 0.007522669084953228,
+   "B30": -0.0032982360941364395
+  },
+  "verdict_rates_n80": {
+   "NOT_SUPPORTED": 0.99,
+   "TRIGGER_PROXIMAL": 0.005,
+   "EXPLORATORY_ASSOCIATION": 0.0025,
+   "SINGLE_BIN_LONG_LEAD": 0.0025
+  },
+  "any_positive_n80": 0.01,
+  "T1": true,
+  "T2": true
+ },
+ "structural_gamma0.10": {
+  "bin_means": {
+   "B5": 0.31139585338694425,
+   "B10": 0.3022563393098155,
+   "B15": 0.27763694750063395,
+   "B30": 0.1701981516180026
+  },
+  "verdict_rates_n80": {
+   "EXPLORATORY_ASSOCIATION": 0.995,
+   "PIPELINE_INVALID": 0.0025,
+   "TRIGGER_PROXIMAL": 0.0025
+  },
+  "any_positive_n80": 0.9974999999999999,
+  "T3": true
+ },
+ "test_power_check_shape_hp_hr2_hrv50_rt0.6": {
+  "bin_means": {
+   "B5": 0.4094131505177015,
+   "B10": 0.4014939543233584,
+   "B15": 0.38334470876449805,
+   "B30": 0.2634505837869575
+  },
+  "leak_detected": true
+ },
+ "ALL_PASS": true
+}
