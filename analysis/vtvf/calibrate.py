@@ -33,8 +33,13 @@ import repaired_rule as R  # noqa: E402
 
 OUT = "analysis/results/vtvf_repair_calibration.json"
 T_RANGE = (140.0, 1440.0)            # pre-onset minutes, uniform (SDDB-like range)
-GAMMA_PC = 0.10                       # injected pipeline positive control
-S_PC_FLOOR = 0.13                     # fixed before calibration: ~50% of the pilot E[s | GAMMA_PC]
+# Run 1 used GAMMA_PC = 0.10 with floor 0.13 and N_PC = 8: the control was
+# underpowered (false PIPELINE_INVALID 11-20% under H0; results kept in
+# vtvf_repair_calibration_run1.json). Run 2 fixes the control's power a priori:
+# required false-fail <= 1% => 0.5*mu*sqrt(k)/sigma >= 2.33. With pilot
+# E[s | gamma=0.30] ~ 0.41, sigma ~ 0.20 and k = 8 the predicted false-fail is ~0.15%.
+GAMMA_PC = 0.30                       # injected pipeline positive control
+S_PC_FLOOR = 0.20                     # fixed before run 2: ~50% of the pilot E[s | GAMMA_PC]
 N_PC = 8                              # injected patients per study
 VARIANTS = {"td3": dict(composite="td3", basis_kind="poly"),
             "shape": dict(composite="shape", basis_kind="poly")}
@@ -51,6 +56,7 @@ SCENARIOS = {
     "td_gamma0.10_plus_conventional": {"td_gamma": 0.10, "conv_kappa": 1.0},
     "td_gamma0.05_ramp": {"td_gamma": 0.05, "td_shape": "ramp"},
     "td_gamma0.10_half_responders": {"td_gamma": 0.10, "responders": 0.5},
+    "pipeline_pc_gamma0.30": {"td_gamma": 0.30},
 }
 BROKEN = {"label_misaligned_75min": {"td_gamma": GAMMA_PC},   # stats at T-75: labels wrong
           "label_leak_null": {}}                               # leak=+0.3 on bin windows
@@ -117,7 +123,14 @@ def main():
     ap.add_argument("--studies", type=int, default=1000)
     ap.add_argument("--procs", type=int, default=4)
     a = ap.parse_args()
-    pools = build_pools(a.pool, a.procs)
+    import pickle
+    pk = os.environ.get("VTVF_POOL_CACHE")
+    if pk and os.path.exists(pk):
+        pools = pickle.load(open(pk, "rb"))
+    else:
+        pools = build_pools(a.pool, a.procs)
+        if pk:
+            pickle.dump(pools, open(pk, "wb"))
     rng = np.random.default_rng(20261105)
     res = {"meta": {"synthetic_only": True, "pool_per_scenario": a.pool, "studies_per_cell": a.studies,
                     "gamma_pc": GAMMA_PC, "s_pc_floor": S_PC_FLOOR, "n_pc": N_PC,
@@ -147,7 +160,7 @@ def main():
                     if s == "label_misaligned_75min":
                         pc_pool = pool              # the injected control is broken too
                     else:
-                        pc_pool = pools["td_gamma0.10"]
+                        pc_pool = pools["pipeline_pc_gamma0.30"]
                     cnt, flag, pbin = {}, 0, {b: 0 for b in R.BINS}
                     for _ in range(a.studies):
                         d, _t = run_study(rng, pool, pc_pool, n, vn, delta_ex)
