@@ -182,6 +182,27 @@
    "P0001.dat 16+0 100 16 0  Z"
   ]
  },
+ "vitaldb_arrhythmia": {
+  "annotation_files": 482,
+  "patients_with_VT_label": 88,
+  "longest_VT_run_s_p50_p90_max": [
+   2.7,
+   9.3,
+   33.9
+  ],
+  "patients_with_VT_run_ge_30s": 1,
+  "first_VT_label_s_min_median_max": [
+   318,
+   2284,
+   17207
+  ],
+  "patients_first_VT_ge_140min": 16,
+  "annotated_span_median_start_end_s": [
+   2574,
+   3732
+  ],
+  "note": "labels cover classifier-screened candidate segments only"
+ },
  "ahadb_on_mirror_records": [
   "0001",
   "0201"

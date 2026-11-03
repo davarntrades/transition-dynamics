@@ -135,6 +135,41 @@ def verify_music(w: str) -> dict:
             "first_holter_header": open(hea).read().strip().splitlines()}
 
 
+def verify_vitaldb_arrhythmia(w: str) -> dict:
+    """Rhythm-label metadata only: VT run counts/durations and first-VT time."""
+    import csv
+    d = os.path.join(w, "vitaldb_arrhythmia"); os.makedirs(d, exist_ok=True)
+    keys = [k for k, _ in listing("vitaldb-arrhythmia/1.0.0/Annotation_Files/")]
+    pat, starts, ends = {}, [], []
+    for k in keys:
+        rows = list(csv.DictReader(open(get(k, os.path.join(d, k.split("/")[-1])))))
+        if not rows:
+            continue
+        t = np.array([float(r["time_second"]) for r in rows])
+        lab = [r["rhythm_label"] for r in rows]
+        starts.append(t.min()); ends.append(t.max())
+        eps, cur = [], None
+        for tt, l in zip(t, lab):
+            if l == "VT":
+                cur = [tt, tt] if cur is None else [cur[0], tt]
+            elif cur:
+                eps.append(cur); cur = None
+        if cur:
+            eps.append(cur)
+        if eps:
+            pat[k] = (len(eps), max(b - a for a, b in eps), eps[0][0])
+    runs = np.array([v[1] for v in pat.values()]); first = np.array([v[2] for v in pat.values()])
+    return {"annotation_files": len(keys), "patients_with_VT_label": len(pat),
+            "longest_VT_run_s_p50_p90_max": [round(float(np.median(runs)), 1),
+                                             round(float(np.percentile(runs, 90)), 1), round(float(runs.max()), 1)],
+            "patients_with_VT_run_ge_30s": int((runs >= 30).sum()),
+            "first_VT_label_s_min_median_max": [round(float(first.min())), round(float(np.median(first))),
+                                                round(float(first.max()))],
+            "patients_first_VT_ge_140min": int((first >= 8400).sum()),
+            "annotated_span_median_start_end_s": [round(float(np.median(starts))), round(float(np.median(ends)))],
+            "note": "labels cover classifier-screened candidate segments only"}
+
+
 def main():
     w, out = sys.argv[1], sys.argv[2]
     os.makedirs(w, exist_ok=True)
@@ -149,6 +184,7 @@ def main():
     for db in ("vfdb", "cudb", "incartdb"):
         res[db] = verify_rhythm_db(w, db)
     res["music_sudden_cardiac_death"] = verify_music(w)
+    res["vitaldb_arrhythmia"] = verify_vitaldb_arrhythmia(w)
     res["ahadb_on_mirror_records"] = [l.strip() for l in
                                       open(get("ahadb/1.0.0/RECORDS", f"{w}/ahadb_RECORDS")) if l.strip()]
     with open(out, "w") as f:
