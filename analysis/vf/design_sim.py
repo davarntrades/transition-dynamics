@@ -655,13 +655,21 @@ def far_experiment(rng, n: int, reps: int) -> dict:
 
 
 def exp_guard(rng, reps: int, n: int = 20) -> dict:
-    """Guard interval vs onset-marking error and trigger-proximal precursors."""
+    """Guard interval vs onset-marking error and trigger-proximal precursors.
+
+    Marking error eps ~ U(0, 3) min: minutes with lead <= eps contain the
+    arrhythmia itself. With 1-min resolution, the window ending at lead l
+    contains minute leads l..l+4, so it is contaminated iff eps >= l.
+    Guard g admits windows with lead > g, i.e. l >= g+1.
+    """
     out = {}
-    for label, sc in {"null_markerr2": {"mark_err": 2.0},
-                      "late5_b1.0": {"b": 1.0, "shape": "late5"},
-                      "ramp30_b0.75": {"b": 0.75}}.items():
-        for g in (1, 2):
-            pw, m1, dm = 0, [], []
+    cases = {"null_markerr3": {"mark_err": 3.0},
+             "late5_b3_noerr": {"b": 3.0, "shape": "late5"},
+             "late5_b3_markerr3": {"b": 3.0, "shape": "late5", "mark_err": 3.0},
+             "ramp30_b2_noerr": {"b": 2.0}}
+    for label, sc in cases.items():
+        for g in (0, 1, 2):
+            pw, m1, dm, m4 = 0, [], [], []
             for st in many(rng, sc, n, reps, guard_lo=g):
                 pw += st["bins"]["B5"]["pass"]
                 m1.append(st["bins"]["B5"]["auroc_M1"])
