@@ -1,5 +1,15 @@
 # Draft protocol v2 — structural dynamics before ventricular fibrillation onset (H-VF)
 
+> **Post-Phase-0 status (2026-11-03): DO NOT FREEZE THIS DRAFT.** The
+> independent review found two CRITICAL defects in the binding logic (§13.1
+> gates 3–4; the §9.1 pipeline band), confirmed by the author on null
+> simulations. The readiness assessment classifies the SDDB test of H-VF as
+> **NOT FEASIBLE WITH CURRENT DATA**. This v2 text is kept unchanged below as
+> the reviewed version. See
+> [`VF_V2_INDEPENDENT_REVIEW.md`](VF_V2_INDEPENDENT_REVIEW.md),
+> [`VF_READINESS_ASSESSMENT.md`](VF_READINESS_ASSESSMENT.md) and
+> [`VF_PROTOCOL_V3_AMENDMENTS.md`](VF_PROTOCOL_V3_AMENDMENTS.md).
+
 > ## Status: DRAFT v2 FOR INDEPENDENT REVIEW. NOT FROZEN. NOT PREREGISTERED.
 >
 > - **No SDDB, chfdb or NSRDB signal or annotation file has been accessed.**
