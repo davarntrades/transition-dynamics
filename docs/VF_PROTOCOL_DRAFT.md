@@ -1,20 +1,29 @@
-# Draft protocol — structural dynamics before ventricular fibrillation onset (H-VF)
+# Draft protocol v2 — structural dynamics before ventricular fibrillation onset (H-VF)
 
-> ## Status: DRAFT FOR REVIEW. NOT FROZEN. NOT PREREGISTERED.
+> ## Status: DRAFT v2 FOR INDEPENDENT REVIEW. NOT FROZEN. NOT PREREGISTERED.
 >
-> - No SDDB signal or annotation file has been accessed. Header snippets seen
->   during design are disclosed in
+> - **No SDDB, chfdb or NSRDB signal or annotation file has been accessed.**
+>   Header snippets seen during design are disclosed in
 >   [`VF_DATASET_FEASIBILITY.md`](VF_DATASET_FEASIBILITY.md) §0.
-> - This is a **new transition class**: ventricular fibrillation (VF) onset in
->   ambulatory Holter ECG. It is **not** a reinterpretation of, an extension
->   of, or a rescue attempt for any intraoperative-hypotension result. Nothing
->   here changes a verdict in [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md), and
->   no VF outcome may be cited for or against a hypotension verdict.
+> - **v2 revises v1** in response to the methodological review in
+>   [`VF_METHODOLOGICAL_REVIEW.md`](VF_METHODOLOGICAL_REVIEW.md). Every change
+>   is listed, with its reason, in Appendix A. Design numbers come from the
+>   synthetic simulation in
+>   [`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md), not from approximate
+>   formulas.
+> - This is a **new transition class**: VF onset in ambulatory Holter ECG. It
+>   is **not** a reinterpretation of, extension of, or rescue attempt for any of
+>   the seven intraoperative-hypotension results. Their verdicts in
+>   [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) are unchanged, and no VF
+>   outcome may be cited for or against them.
 > - Claim level is **0**. The most positive verdict this protocol can issue is
->   **EXPLORATORY SIGNAL**, capped at Claim Level 2. **No clinical predictive
->   capability is claimed or claimable.**
-> - Every numerical threshold below is a proposal for review. Changes are
->   expected **before** freezing. None is permitted after.
+>   **EXPLORATORY ASSOCIATION**, which is retrospective and capped at Claim
+>   Level 2. **Retrospective discrimination is not advance prediction and not
+>   clinical early warning** (§15). No such capability is claimed or claimable
+>   from this study.
+> - **Not to be executed until this revision has been independently reviewed**,
+>   the open decisions in §16 are resolved, and a separate FROZEN document
+>   exists.
 
 ---
 
@@ -24,143 +33,220 @@
 
 - The five-layer separation (source equation → physical interpretation →
   operationalisation → estimator → test). Every estimator in §7 is labelled as
-  an **operationalisation**, not as source mathematics.
-- The statements in [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) §0 that
-  "must not be softened", and the distinctions there that "must not be
-  collapsed", including: representation ≠ mechanism, autocorrelation ≠
-  physiology, measurement-level sufficiency ≠ predictive attribution, and
-  failure of one representation ≠ failure of all.
-- The rules that M0 runs first, that an underpowered null is not a null
-  ([`COMPETING_MODELS.md`](COMPETING_MODELS.md) §3), that bootstrapping is by
-  patient, the $n_{\mathrm{eff}} \ge 10p$ rule, and the twelve harness-bug
-  guards ([`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) §7).
+  an **operationalisation**, never as source mathematics.
+- The statements in [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) §0 that must
+  not be softened, and its distinctions that must not be collapsed.
+- Running M0 first, "an underpowered null is not a null", patient-level
+  uncertainty, $n_{\mathrm{eff}} \ge 10p$, and the twelve harness-bug guards
+  ([`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) §7).
 
 ### 1.2 Status of the objects entering this study
 
 Re-testing an object in a new transition class is a **new test**. It is not a
-reversal of a demotion, and a demoted object stays demoted unless a test of
-that object itself succeeds.
+reversal of a demotion.
 
 | Object | Current status (unchanged) | Role here |
 |---|---|---|
-| $S(t)=\lVert\Sigma_0^{-1/2}\delta\rVert$ as a bare whitening statistic | NOT SUPPORTED (hypotension) | TD-1. **No stiffness, resistance or recovery reading.** Must beat diagonal, identity, permuted-off-diagonal and population metrics |
+| $S(t)$ as a bare whitening statistic | NOT SUPPORTED (hypotension) | TD-1. No stiffness, resistance or recovery reading. Mandatory geometry competitors |
 | $\Lambda=\Sigma_0^{-1}$ as stiffness / recovery | DEMOTED (physical interpretation) | **Not used.** No result here can restore it |
-| Covariance deformation $\Delta G$ | not novel (DNB / covariance drift) | TD-2, explicitly as a covariance-drift statistic |
-| $Q_i=\lVert\Delta G_i\rVert\tau_i$ | DEMOTED (operationalisation) | TD-3, persistence. Must beat an order-destroyed control, or it stays demoted |
-| $\lVert\Lambda\Delta G\rVert>T_{\mathrm{critical}}$ | UNOPERATIONALISED | **Not attempted.** A threshold/knee test (ΔAIC > 10, cross-cohort CV) is impossible with about 20 events. TD-1 must not be described as estimating it |
-| $C(t)$ / $z_{\beta_1}$ | EXPLORATORY, synthetic only | TD-4, reported descriptively. **No binding role** |
-| A(t) alignment / mechanism identification | not a surviving contribution | **Not used.** Needs several transition classes, and SDDB has one |
-| Reach / homology, orthogonality law, consciousness / qualia | DEMOTED / out of scope | **Excluded** |
+| Covariance deformation $\Delta G$ | not novel (DNB / covariance drift) | TD-2, exact estimator in §7.4. Must beat the simpler covariance statistics for any structure-specific claim |
+| $Q_i=\lVert\Delta G_i\rVert\tau_i$ | DEMOTED (operationalisation) | TD-3. Stays demoted unless it beats the order-destroyed control |
+| $\lVert\Lambda\Delta G\rVert>T_{\mathrm{critical}}$ | UNOPERATIONALISED | **Not attempted** (threshold identification is impossible with ≈ 20 events) |
+| $C(t)$ / $z_{\beta_1}$ | EXPLORATORY, synthetic only | TD-4, descriptive only |
+| A(t) alignment, reach / homology, orthogonality, consciousness / qualia | not surviving / DEMOTED / out of scope | **Excluded** |
 
-### 1.3 The taxonomy tension, stated in advance
+### 1.3 Prior evidence, recorded without a declared expected outcome
 
-[`TRANSITION_TAXONOMY.md`](TRANSITION_TAXONOMY.md) places "arrhythmic arrest
-from a fixed substrate" in **T6**, the negative class where no precursor is
-expected and where a positive finding "would be evidence of leakage, not of
-sensitivity". SDDB VF cannot be assigned to T6 or excluded from it, because
-mechanism is unknown per patient. This protocol therefore:
+v1 declared NOT SUPPORTED as the expected result. **That declaration is
+withdrawn.** It prejudged the outcome and served no inferential purpose. The
+prior evidence is recorded instead, in both directions, and none of it enters
+the decision rule:
 
-1. records the prior expectation for TD-specific increments as **M_null**;
-2. treats any EXPLORATORY SIGNAL as **suspicious first**, and makes the
-   leakage audit in §13.3 mandatory before reporting;
-3. leaves the taxonomy itself unchanged. Re-classifying VF is a separate
-   decision that is not taken here.
+- **Against a TD-specific increment:**
+  - every incremental TD test in this programme so far has been NOT SUPPORTED
+    (hypotension; [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md) §10–§14);
+  - [`TRANSITION_TAXONOMY.md`](TRANSITION_TAXONOMY.md) classes arrhythmic
+    arrest from a fixed substrate as T6, a no-precursor class;
+  - early-warning signals are bifurcation-specific, and none were found
+    before human seizures ([`LITERATURE.md`](LITERATURE.md) §0).
+- **For some pre-onset change (conventional features):** Holter and ICD
+  studies report heart-rate rise, HRV decline and T-wave alternans upsurge
+  before spontaneous ventricular tachyarrhythmia
+  ([`VF_LITERATURE_BASELINES.md`](VF_LITERATURE_BASELINES.md) §1).
+- **The T6 classification is kept, not overridden.** SDDB VF cannot be
+  assigned to T6 or excluded from it, because mechanism is unknown per
+  patient. v1 applied extra scrutiny to positive results only. v2 replaces
+  this with a **symmetric** audit (§13.4) that runs whatever the verdict, so
+  that scrutiny is not itself a function of the outcome.
 
 ---
 
-## 2. Two estimands that must not be conflated
+## 2. Estimands that must not be conflated
 
-| | **E-onset (tested)** | **E-risk (not tested)** |
-|---|---|---|
-| Question | In a patient who will develop VF, does the ECG in the next H minutes before onset differ from that patient's own earlier periods, in a way a model trained on *other* patients recognises? | Does this patient carry a higher risk of VF than other patients? |
-| Unit | window within patient | patient |
-| Negatives | the same patient's remote pre-onset windows | patients without VF |
-| SDDB support | about 12–18 eligible patients | **none**: 3 no-VF records, 2 paced |
-| What a positive means | temporal precedence within patients who do develop VF | risk stratification |
-| What it does not mean | that the method can identify who will develop VF, or that it alarms usefully in an unselected population | anything about timing |
+| | **E-onset (tested)** | **E-risk (not tested)** | **E-advance (not estimable here)** |
+|---|---|---|---|
+| Question | In patients who **do** develop VF, do pre-onset periods differ from the same patients' remote periods, as recognised by a model trained on other patients? | Is this patient at higher VF risk than others? | Given continuous monitoring of an unselected population, does an alarm precede VF with useful lead time and an acceptable false-alarm burden? |
+| Conditioning | on VF occurring | none | none: event-unconditional |
+| SDDB support | about 13–19 patients (Analyses A and B, §4) | none (3 no-VF records) | none |
+| A positive result means | a retrospective, within-patient association | — | — |
 
-Rules:
-
-- **E-risk is not estimated.** The SDDB-vs-NSRDB design is prohibited from
-  carrying any claim. It appears only as the methodological demonstration in
-  §9.6.
-- An E-onset result is **conditional on VF occurring**. Its false-alarm rates
-  (§12) are measured in pre-VF remote zones and in no-VF recordings. They are
-  **not** population alarm rates, and PPV at population prevalence is not
-  estimable from this design.
+E-risk is not estimated. The SDDB-vs-NSRDB design appears only as the
+methodological demonstration in §9.7. E-advance is discussed in §15.
 
 ---
 
 ## 3. Hypotheses
 
-**H-VF (primary, incremental).** Adding the TD block (TD-1 $S$, TD-2
-$\Delta G$, TD-3 $Q_{\mathrm{int}}$; §7.4) to the conventional baseline M1
-raises the within-patient, patient-independent discrimination of pre-onset
-lead-bin windows from remote pre-onset windows, at lead times beyond the
-immediate trigger zone.
+- **H0-VF (null; binding falsification target).** In every lead bin, adding
+  the TD block (TD-1, TD-2, TD-3) to M1 does not change mean within-patient
+  AUROC: $\mathbb{E}[\Delta_i]=0$.
+- **H1-VF (alternative).** $\mathbb{E}[\Delta_i]>0$ in at least two lead bins,
+  at least one of which is B15 or B30.
+- **H-VF0 (descriptive, not binding).** M1 alone discriminates lead-bin
+  windows from remote windows.
+- **Not claimed under any outcome.**
+  - That VF is predictable.
+  - Any alarm or clinical capability.
+  - Any mechanism (stiffness, recovery, homeostasis, critical slowing down,
+    loss of constraint).
+  - That a TD statistic estimates a source equation.
+  - Anything about patients without VF.
 
-**H-VF0 (descriptive, not binding).** M1 alone discriminates lead-bin windows
-from remote windows. This checks whether the known conventional precursors
-(heart-rate rise, HRV fall, ectopy) are reproduced. It carries no TD claim.
-
-**Not claimed under any outcome.** That VF is predictable; any clinical
-alarm capability; any mechanism (stiffness, recovery, homeostasis, critical
-slowing down, loss of constraint); that a TD statistic estimates a source
-equation; anything about patients without VF.
-
-**Expected outcome, declared before any data access.** NOT SUPPORTED, with
-LARGE INCREMENT EXCLUDED likely and H-VF0 likely positive at short lead.
+**No expected outcome is declared** (§1.3).
 
 ---
 
-## 4. Data and eligibility (rules fixed before headers are read)
+## 4. Data and eligibility
 
-- **Source.** SDDB v1.0.0, with checksums verified (Phase 0). External no-VF
-  set: `chfdb`, role restricted (§9.5).
-- **Primary eligibility for VF records:**
-  1. an annotated VF onset (`#vfon`);
-  2. no continuous pacing and no atrial fibrillation as the underlying rhythm,
-     because NN-based features are undefined;
-  3. onset elapsed time ≥ **2 h 15 min**. This equals 15 min settling + 30 min
-     baseline + ≥ 30 min remote zone + 60 min (grey zone plus the largest lead
-     bin), so every patient contributes all four bins and a remote zone;
-  4. ≥ 70% of beats in the baseline period detected with SQI pass (§9.3).
-- **Minimum to proceed: 12 eligible VF patients.** Below that, the verdict is
-  UNRESOLVED-BY-DESIGN.
-- **Sensitivity population.** Records excluded by rule 2 enter an exploratory
-  run that uses non-NN features only.
-- The eligibility list and its SHA-256 are frozen **before any feature is
-  computed**.
+### 4.1 Two separately reported analyses (no pooling)
+
+| | **Analysis A (primary)** | **Analysis B (rhythm-inclusive, separate)** |
+|---|---|---|
+| Records | VF records in sinus rhythm, including intermittent pacing (paced beats removed) | **All** VF records except continuous pacing, **including AF** |
+| Panel | NN, RTa, Tamp, ST | RTa, Tamp, ST, R amplitude: **no NN-derived channel** |
+| M1 | 10 features ([`VF_LITERATURE_BASELINES.md`](VF_LITERATURE_BASELINES.md) §3.1) | M1-B: mean ventricular rate, Δ mean rate vs baseline, PVC₅, PVC₃₀, couplets₃₀, NSVT₃₀ |
+| M2 | 6 features | M2-B: AC1(RT), var(RT), TWA |
+| Decision rule | §13, at α = 0.05/4 | §13, at its own α = 0.05/4. Reported in a separate table, never combined with A |
+
+Analysis B exists because excluding AF is a **selection on rhythm**. AF
+patients are older, more often in heart failure, and may differ in
+arrhythmic mechanism. B tells the reader whether any A result depends on
+that selection. The rhythm composition of each analysis is reported, along
+with any available header demographics for included vs excluded patients.
+Known limitation of B: PVC detection in AF is less reliable (aberrancy), so
+M1-B's ectopy features are noisier.
+
+Whether B is co-primary with an α split, or secondary, is an open decision
+(§16, D1). The current proposal makes it secondary but binding-reported: its
+verdict is stated, but it cannot alone yield an EXPLORATORY ASSOCIATION for
+the programme.
+
+### 4.2 Eligibility: derived geometry, not an arbitrary sum
+
+A VF record is eligible if, first, its onset elapsed time satisfies
+$T_{\mathrm{VF}} \ge T_{\min} = $ settling 15 + baseline 30 + window 5 +
+$R_{\min}$ + 60 min, with $R_{\min}$ = 30 min. **This gives $T_{\min}$ =
+140 min (2 h 20 min).** It must also satisfy two signal conditions:
+
+- ≥ 600 complete panel beats in the baseline (for $\Sigma_0$, §7.4);
+- baseline beat-level $n_{\mathrm{eff}} \ge 10p$.
+
+**Justification of each term.**
+
+| Term | Value | Why |
+|---|---|---|
+| Settling | 15 min | electrode settling. **Choice**, sensitivity analysis at 0 and 30 min |
+| Baseline | 30 min | the minimum that gives ≥ 600 beats for a 4×4 shrunk covariance at any heart rate ≥ 20 bpm. **Choice** |
+| Window | 5 min | first window entirely after the baseline |
+| $R_{\min}$ | 30 min | simulation shows per-patient Δ precision is limited by the few effective positives (§8.2), not by remote length beyond about 30 min. That is the shortest remote zone holding ≥ 3 window decorrelation lengths (≈ 10 min each). **Choice informed by simulation** |
+| 60 min | grey zone 30 + largest bin 30 | fixed by the horizons |
+
+**The v1 rule (2 h 15 min) was an unjustified sum, and it sat just below two
+disclosed onsets** (records 48 at 02:29:40 and 52 at 02:32:40). v2 handles
+this as follows:
+
+1. Two things are true at once. Onset times reveal nothing about whether a
+   record's ECG shows a precursor, so selection bias from knowing them is
+   limited. A threshold placed near known values still invites the suspicion
+   of being tuned.
+2. **Pre-specified eligibility sensitivity analysis:** $T_{\min}$ ∈
+   {2 h 20 (primary), 3 h, 4 h}. The verdict is reported at each. Records 48
+   and 52 are included at 2 h 20 and excluded at 3 h. If the verdict differs
+   between 2 h 20 and 3 h, that is reported as **eligibility-sensitive**, and
+   the more conservative verdict (the one further from EXPLORATORY
+   ASSOCIATION) governs.
+3. The eligibility list is frozen, with its hash, before any feature is
+   computed.
+
+### 4.3 The 12-patient minimum is withdrawn
+
+The 12-patient minimum was not derived from anything. It is replaced by:
+
+- **A capability floor.** n ≥ 6 patients contributing to a bin. This is the
+  smallest n at which the one-sided sign test can reach p < 0.025 (6/6 gives
+  p = 0.016).
+- **An outcome-blind informativeness gate** (§11.3). The design simulation is
+  rerun with parameters estimated from outcome-blind data (truncated loader)
+  and the realised n and $T_{\mathrm{VF}}$ distribution. If the MDE (80%
+  power) exceeds 0.20 in B15 and in B30, H-VF is UNRESOLVED-BY-DESIGN, and
+  the true-onset analysis is not read.
 
 ---
 
 ## 5. Event, time axis and zones
 
-$t_{\mathrm{VF}}$ is the annotated VF onset. For a feature window ending at
-$t$, the lead is $\ell = t_{\mathrm{VF}} - t$.
+$T_{\mathrm{VF}}$ is the annotated VF onset. For a window ending at $t$, the
+lead is $\ell = T_{\mathrm{VF}} - t$.
 
-| Zone | Definition | Use |
+| Zone | Definition |
+|---|---|
+| Settling | first 15 min, discarded |
+| Baseline | the next 30 min: $\mu_0$, $\Sigma_0$, standardisation, SQI thresholds. Never evaluated |
+| Remote (negative) | windows ending after baseline end + 5 min, with $\ell \ge 60$ min |
+| Grey | $30 < \ell < 60$, excluded |
+| **Lead bins** | **B5: $g<\ell\le5$ · B10: $5<\ell\le10$ · B15: $10<\ell\le15$ · B30: $15<\ell\le30$**, with guard $g$ = 2 min (primary) |
+| Post-onset | never read by feature code |
+
+Bins are disjoint in **alarm time** $t$. Their data overlap, because a B10
+window spans 5–15 min before onset and so shares data with B5 and B15.
+Information "at lead 10 min" therefore means *an alarm raised 5–10 min before
+onset using only data up to that time*, which is the correct definition for
+prediction. Bins are not statistically independent, so Bonferroni over four
+bins is conservative.
+
+### 5.1 VT, the guard interval, and the risk of removing the precursor
+
+A window that overlaps a **sustained** VT episode (≥ 30 s) is excluded:
+during such a window the patient is already in a ventricular
+tachyarrhythmia. **Non-sustained VT, couplets and PVCs are retained**, and
+enter M1 as features. A precursor made of ectopy is therefore attributed to
+M1 rather than removed, and the TD increment is tested beyond it.
+
+The guard $g$ protects against onset-marking error. If the true arrhythmia
+starts before the annotated onset, windows within the error contain the
+arrhythmia itself. The design simulation quantifies the trade-off between
+this contamination and losing trigger-proximal signal (§8.4).
+
+**Pre-specified sensitivity analyses** (reported; non-binding unless stated):
+
+| # | Variant | Purpose |
 |---|---|---|
-| Settling | first 15 min of the recording | discarded |
-| Baseline | the next 30 min | per-patient $\mu_0$, $\Sigma_0$, feature standardisation, SQI thresholds. **Never evaluated** |
-| Remote (negative) | from baseline end to $\ell \ge 60$ min | within-patient negatives |
-| Grey | $30 < \ell < 60$ min | excluded, so the 30-min bin is not contaminated by neighbouring windows |
-| **Lead bins (positives)** | **B5: $2<\ell\le5$ · B10: $5<\ell\le10$ · B15: $10<\ell\le15$ · B30: $15<\ell\le30$ min** | one primary test per bin |
-| Lead exclusion | $\ell \le 2$ min | excluded: immediate trigger / onset-marking error |
-| Post-onset | $\ell<0$ | excluded, and never read by feature code |
+| S-g1 | $g$ = 1 min | recovers trigger-proximal signal; reports contamination risk |
+| S-g5 | $g$ = 5 min (B5 becomes empty, B10 starts at 5) | removes any residual onset-marking contamination |
+| S-VT1 | event = first sustained VT within 60 min before VF (where present) | the event is the start of the tachyarrhythmia, not VF |
+| S-VT2 | windows overlapping sustained VT **kept** | labelled "detection-contaminated"; bounds what was removed |
+| S-VT3 | windows containing NSVT **also** excluded | tests whether a TD increment is carried by ectopy |
+| S-ect | windows with > 10% ventricular beats excluded | same purpose, at the beat level |
 
-**Why disjoint bins are primary.** Cumulative horizons such as "VF within 30
-min" are nested: a 30-min result can be produced entirely by the last 5
-minutes. Only disjoint bins show *how far ahead* any information exists.
-Cumulative horizons (2, H] for H ∈ {5, 10, 15, 30} are reported as secondary
-results, for comparability with the literature.
+**Precursor-removal audit, reported for every analysis.** For each patient
+and bin it reports:
 
-**Sustained VT.** Any window overlapping annotated or detected sustained VT
-(≥ 30 s) is excluded from every analysis. Sensitivity analysis: the event is
-redefined as the first sustained VT within 30 min before VF.
+- windows available;
+- windows excluded by each rule, and the share of all windows each removed;
+- the time from the last sustained VT to $T_{\mathrm{VF}}$.
 
-Grid: windows end every 60 s; window length $W$ = 5 min (§6.3). Every feature
-uses samples at or before $t$ only.
+If **> 25% of patients lose a bin** to the VT rule, that bin is reported as
+non-evaluable rather than tested.
 
 ---
 
@@ -168,350 +254,522 @@ uses samples at or before $t$ only.
 
 ### 6.1 Beat processing
 
-A fixed, open QRS detector is applied to both leads. The provided `.ari`
-annotations are used only for beat class (N / V / paced / noise) and for
-detector–annotation disagreement, which is an artefact covariate. NN series:
-normal beats whose neighbours are both normal, with RR in 0.3–2.0 s.
+A fixed, open QRS detector runs on both leads. `.ari` annotations supply beat
+class only, and detector–annotation disagreement is an SQI covariate. NN beats
+are normal beats whose neighbours are both normal, with RR in 0.3–2.0 s
+(Analysis A).
 
-### 6.2 Per-beat panel ($p=4$, lead 1 primary, lead 2 replication)
+### 6.2 Per-beat panel ($p$ = 4, lead 1 primary, lead 2 replication)
 
-| Channel | Measurement |
-|---|---|
-| NN | normal-to-normal interval |
-| RTa | R peak to T-wave apex (more robust than QT end at 250 Hz Holter quality) |
-| Tamp | T-wave apex amplitude relative to the PR baseline |
-| ST | level at J + 60 ms relative to the PR baseline |
+Analysis A: NN, RTa (R to T apex), Tamp (T apex vs PR baseline), ST (J + 60 ms
+vs PR baseline).
 
-Morphology channels are measured on beats passing a template-correlation SQI.
-Their fidelity on analogue Holter tape is a declared limitation
-([`VF_DATASET_FEASIBILITY.md`](VF_DATASET_FEASIBILITY.md) §1.2).
+Analysis B: RTa, Tamp, ST and R amplitude.
 
-### 6.3 Resolution gate (outcome-blind)
+Morphology is measured on beats that pass a template-correlation SQI.
 
-In the **baseline zones only**, compute the median $n_{\mathrm{eff}}$ of the
-4-channel panel over 5-min windows. If the median is < 40 (= 10p), $W$ becomes
-10 min for all features. This is decided and recorded before any label is
-attached.
+### 6.3 Window definitions
+
+- **First-order features** (M1, M2, SQI): 5-min windows ending at $t$, on a
+  60-s grid.
+- **Covariance-based features** (TD-1, TD-2, TD-4): the **most recent
+  $N_b$ = 256 complete panel beats** ending at or before $t$. The window is
+  missing if those beats span more than 10 min.
+
+**Why fixed beat count.** In fixed-duration windows the number of beats rises
+with heart rate. The small-sample bias of the covariance distance falls as
+the beat count rises, so ΔG would drop *mechanically* whenever heart rate
+rose. Heart-rate rise is the main conventional precursor. Simulation: under
+no structural change, mean AIRM falls from 0.474 at 300 beats to 0.430 at 330
+beats, which corresponds to a 10% HR rise (§7.4).
+
+**$n_{\mathrm{eff}}$ gate (outcome-blind).** If the median baseline
+$n_{\mathrm{eff}}$ of 256-beat windows is < 40 (= 10p), $N_b$ becomes 512.
 
 ---
 
 ## 7. Competing models
 
-All features are standardised against the patient's own baseline zone. Model
-inputs are fixed lists, and **no feature selection is performed on SDDB**.
+All inputs are standardised against the patient's own baseline. Lists are
+fixed, and **no feature selection is performed on SDDB**.
 
-### 7.1 M0-acq — recording and acquisition artefact (gate)
+### 7.1 M0-acq — acquisition and artefact (gate)
 
-Seven SQI features: noise or unclassifiable annotation fraction;
-detector–annotation disagreement fraction; baseline-wander power (< 0.5 Hz);
-high-frequency noise power (40–100 Hz); median R amplitude relative to
-baseline; clipping or flat-line fraction; inter-lead QRS-detection
-disagreement.
+Seven SQI features:
 
-### 7.2 M1 — conventional
+- noise or unclassifiable annotation fraction;
+- detector–annotation disagreement;
+- baseline-wander power (< 0.5 Hz);
+- high-frequency power (40–100 Hz);
+- median R amplitude vs baseline;
+- clipping or flat-line fraction;
+- inter-lead QRS disagreement.
 
-The 10 features in [`VF_LITERATURE_BASELINES.md`](VF_LITERATURE_BASELINES.md)
-§3.1.
+Beat-exclusion (missingness) rate per window is added as an eighth.
 
-### 7.3 M2 — classical early warning
+### 7.2 M1 and 7.3 M2
 
-The 6 features in [`VF_LITERATURE_BASELINES.md`](VF_LITERATURE_BASELINES.md)
-§3.2.
+As listed in [`VF_LITERATURE_BASELINES.md`](VF_LITERATURE_BASELINES.md) §3,
+with the Analysis B variants in §4.1.
 
-### 7.4 M3 — Transition Dynamics block (empirical operationalisations only)
+### 7.4 M3 — TD block: exact estimators (to be frozen as written)
 
-| | Estimator | Definition | Layer label |
-|---|---|---|---|
-| TD-1 | $S(t)$ | $\sqrt{\delta^{\mathsf T}\Sigma_0^{-1}\delta}$, with $\delta=\mu_W(t)-\mu_0$ and $\Sigma_0$ the Ledoit–Wolf estimate from baseline | **bare whitening statistic**. No stiffness reading |
-| TD-2 | $\Delta G(t)$ | $\lVert\log(\Sigma_0^{-1/2}\Sigma_W(t)\Sigma_0^{-1/2})\rVert_F$, Ledoit–Wolf (`delta_G_structure` or an affine-invariant variant, decided at freeze) | covariance-drift statistic (DNB family, not novel) |
-| TD-3 | $Q_{\mathrm{int}}(t)$ | $\int_{t-30\,\mathrm{min}}^{t}\max(0,\Delta G(s)-\theta)\,ds$, with θ the patient's baseline 95th percentile of $\Delta G$ | persistence operationalisation (integral form, per [`MATHEMATICAL_OBJECTS.md`](MATHEMATICAL_OBJECTS.md) §1) |
-| TD-4 | $z_{\beta_1}$ | `beta1_excess_over_pairwise`, θ = 1.5, support 0.10–0.30 | **exploratory, descriptive only** |
+**Pre-processing (shared).** Each beat $k$ gives $x_k\in\mathbb{R}^4$. A
+channel value outside the baseline median ± 6·MAD·1.4826 marks the beat
+incomplete. Channels are standardised by the baseline median and
+MAD·1.4826, so every channel enters on a unitless, outlier-robust scale
+before shrinkage.
+
+**Covariance estimator, identical for $\Sigma_0$ and $\Sigma_W$.**
+Ledoit–Wolf shrinkage toward $\bar\sigma^2 I$, with analytic intensity, as in
+`analysis/estimators.py::shrunk_covariance`. This is followed by the SPD
+guard (relative eigenvalue floor $10^{-6}$, `_spd_guard`).
+
+- $\Sigma_0$ uses all complete baseline beats (≥ 600).
+- $\Sigma_W(t)$ uses the last $N_b$ complete beats.
+- The condition number of $\Sigma_0$ is recorded; above $10^4$ the patient's
+  TD features are flagged and a sensitivity analysis excludes them.
+
+Ledoit–Wolf intensity formulas assume independent samples. Beats are
+autocorrelated, so the analytic intensity is biased low. **Sensitivity:**
+fixed intensities α ∈ {0.1, 0.3}.
+
+**TD-2, covariance deformation (AIRM).**
+Let $L$ be the Cholesky factor of $\Sigma_0$ and $\lambda_1..\lambda_4$ the
+eigenvalues of $L^{-1}\Sigma_W L^{-\mathsf T}$, floored at $10^{-12}$. Then
+
+$$\Delta G(t)=\Big(\sum_{k}\log^2\lambda_k\Big)^{1/2}
+=\Big(\underbrace{p\,\overline{\log\lambda}^{\,2}}_{\text{scale}}+\underbrace{\textstyle\sum_k(\log\lambda_k-\overline{\log\lambda})^2}_{\text{shape}}\Big)^{1/2}.$$
+
+This is mathematically identical to `delta_G_structure`; Cholesky is used
+for numerical stability. The scale and shape components are reported
+separately.
+
+**Mandatory simpler covariance comparators**, on the same beats, the same
+standardisation and the same estimator:
+
+| | Statistic | Captures |
+|---|---|---|
+| C-a | $\big(\sum_i \log^2(s^2_{W,i}/s^2_{0,i})\big)^{1/2}$ | variance change only (diagonal AIRM) |
+| C-b | AIRM between correlation matrices $R_0$, $R_W$ | correlation change only |
+| C-c | $\lVert R_W-R_0\rVert_F$ | DNB-style correlation drift |
+| C-d | $\lvert\log\det\Sigma_W-\log\det\Sigma_0\rvert$ | generalised variance |
+| C-e | mean $\lvert r_{ij}\rvert$ in the window × mean SD | DNB composite |
+
+**Known mechanical couplings, declared.**
+
+1. ΔG's sampling dispersion grows when beat autocorrelation grows, because
+   $n_{\mathrm{eff}}$ falls. So ΔG partly re-expresses AC1, an M2 quantity.
+2. ΔG's scale component overlaps SDNN and var(RT).
+
+TD-specific attribution therefore requires the M1 ∪ M2 contrast and the
+comparator contrasts (§13.5).
+
+**TD-1, displacement.** $\delta(t)$ is the mean of the last $N_b$
+standardised beats minus the baseline mean, and
+$S(t)=\sqrt{\delta^{\mathsf T}\Sigma_0^{-1}\delta}$. Its competitors replace
+$\Sigma_0$ with: its diagonal; the identity; $\Sigma_0$ with off-diagonals
+permuted; the pooled covariance of the other patients.
+
+**TD-3, persistence.**
+$Q_{\mathrm{int}}(t)=\sum_{s=t-29}^{t}\max(0,\Delta G(s)-\theta)$ over the
+1-min grid. θ is the 95th percentile of ΔG computed over baseline sub-windows,
+and it is noisy: about 3 independent baseline sub-windows exist.
+**Sensitivity:** θ from the first 30 min of the remote zone. The
+order-destroyed control is a block permutation of ΔG within the trailing
+30 min.
+
+**TD-4.** `beta1_excess_over_pairwise`, descriptive only.
 
 ### 7.5 Models
 
-- **M1**: 10 features.
-- **M4 = M1 ∪ {TD-1, TD-2, TD-3}**: 13 features. **The primary contrast is
-  M4 vs M1.**
-- Secondary contrasts: M2 vs M1, M1 ∪ M2 vs M1, M3 alone, and each TD
-  estimator alone.
-- Mandatory geometry competitors for TD-1, each replacing $\Sigma_0$ with:
-  the diagonal of $\Sigma_0$; the identity; $\Sigma_0$ with off-diagonals
-  permuted; the pooled population covariance of the other patients. Mandatory
-  competitors for TD-2: a variance-only change and a correlation-only change.
-- Fitting: L2 logistic regression, λ fixed at 1 on standardised features,
-  balanced class weights, and no tuning.
+- M1 (Analysis A: 10 features).
+- **M4 = M1 ∪ {TD-1, TD-2, TD-3}. The primary contrast is M4 vs M1.**
+- **Mandatory for TD attribution** (§13.5): M1 ∪ M2 ∪ M3 vs M1 ∪ M2;
+  M1 ∪ {ΔG} vs M1 ∪ {C-x} for each comparator; and the geometry competitors.
+- Fitting: L2 logistic regression, λ = 1 on standardised features, balanced
+  class weights, no tuning.
 
 ---
 
-## 8. Patient-independent evaluation
+## 8. Patient-independent evaluation and what the overlapping grid does
 
-- **Leave-one-patient-out (LOPO).** Train on the bin and remote windows of
-  all other eligible patients, then score the held-out patient. Repeat for
-  every patient and every bin.
-- **Primary metric: within-patient AUROC** of the held-out patient's scores,
-  bin windows vs remote windows, $\mathrm{AUROC}_i$. Probabilities are never
-  pooled across folds (harness bug 11). Pooled AUPRC is secondary, computed
-  with per-patient rank-normalised scores and reported with its prevalence.
-- Per-patient contrast: $\Delta_i = \mathrm{AUROC}_i(M4)-\mathrm{AUROC}_i(M1)$.
-- Regression guard: a single-feature "model" must reproduce that feature's
-  raw within-patient AUROC.
+### 8.1 Leave-one-patient-out (LOPO)
+
+Train on all other patients' bin and remote windows, then score the held-out
+patient. The primary metric is the within-patient AUROC (bin vs remote) of
+the held-out patient, $\Delta_i=\mathrm{AUROC}_i(M4)-\mathrm{AUROC}_i(M1)$.
+No probabilities are pooled across folds (bug 11). A single-feature model
+must reproduce its raw AUROC (regression guard).
+
+### 8.2 Overlap: effective sample size, uncertainty and false alarms
+
+Results are from the design simulation; see
+[`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §3.
+
+- **Window correlation.** Consecutive 5-min windows on a 60-s grid share 80%
+  of their data. Simulated lag-1 correlation of window features is ≈ 0.98,
+  and the correlation length is about 10 min.
+- **Effective positives per bin.** B5 has 3 windows, B10 and B15 have 5, and
+  B30 has 15. These amount to about **1, 1, 1 and 2–3 effective independent
+  observations**. Each patient's $\mathrm{AUROC}_i$ is therefore close to the
+  percentile of one or two independent observations within that patient's
+  remote distribution. That is why $\Delta_i$ is so dispersed across patients.
+- **Stride does not create information.** At a 5-min stride
+  (non-overlapping), the null SD of $\Delta_i$ is of the same order. The 60-s
+  grid gives alarm-time resolution, not extra information. It does not bias
+  the patient-level inference, because inference treats the patient as the
+  unit.
+- **Window-level uncertainty is invalid.** A Hanley–McNeil SE that treats
+  windows as independent underestimates the true within-patient AUROC
+  variability by a factor of about 3. **Every CI in this protocol is
+  patient-level**, and no window-level SE or p-value may be reported.
+- **False alarms.** Overlap makes "≥ 2 consecutive windows above threshold"
+  almost no filter: it removes only about 10% of single-window alarms. The
+  alarm rule is therefore defined as a **persistence-in-time requirement**
+  (§12). FAR is reported per monitored hour and does not depend on the
+  stride.
+
+### 8.3 Power and MDE
+
+Summarised in §14 from the simulation. Approximate analytic AUROC power
+formulas are not used anywhere for design decisions.
+
+### 8.4 Guard-interval trade-off
+
+See §14 and the simulation document §5.
 
 ---
 
 ## 9. Controls
 
-All controls are run in the same execution as the primary analysis. None may
-be run or re-run after the primary result has been seen.
-
-### 9.1 Pipeline negative controls (gate; any failure → PIPELINE INVALID)
+### 9.1 Pipeline negative and positive controls (gate)
 
 | Control | Requirement |
 |---|---|
-| Shuffled onsets (each patient given another patient's lead-time geometry, truncated to fit) | mean ΔAUROC 95% CI includes 0, and each model's mean within-patient AUROC is within 0.45–0.55 |
-| Within-patient label permutation (bin/remote labels permuted in contiguous blocks) | chance |
-| Synthetic no-precursor arm (stationary surrogate series with an abrupt event: the G3 analogue) | no detection: mean ΔAUROC CI includes 0 |
-| Synthetic injected-precursor arm (known structural change inserted 15–30 min before a pseudo-event) | detected. Confirms the harness can see a real effect |
+| Shuffled onsets | mean Δ CI includes 0; mean AUROC of each model within 0.45–0.55 |
+| Within-patient block label permutation | chance |
+| Synthetic no-precursor arm | no detection |
+| Synthetic injected precursor (known change 15–30 min before a pseudo-event, inserted into real outcome-blind remote data) | detected. Shows the harness can see a real effect, so a null is not a pipeline failure |
 
-### 9.2 Within-patient temporal controls. This is the dominant leakage route
+### 9.2 Temporal controls, and exactly what each can and cannot catch
 
-In a within-patient design the label is a function of time: lead-bin windows
-are always *later* than remote windows. **Any monotone drift therefore
-separates them**, whether it comes from electrode drying, tape degradation,
-fatigue, activity or the time of day. An elapsed-time-only model scores
-within-patient AUROC = 1 by construction, so a timestamp ratio gate is
-meaningless here. It is replaced by:
+Lead-bin windows are always later than remote windows. The design
+simulation (§4 of that document) audited each control against artefacts
+calibrated so that, alone, each gives the same raw within-patient separation
+as a strong precursor.
 
-1. **Pseudo-onset placebo.** For each eligible patient, pseudo-onsets are
-   placed at $t_{\mathrm{VF}} - k\cdot 3$ h ($k = 1, 2, \ldots$) wherever the
-   full zone geometry of §5 fits using data before the pseudo-onset only.
-   No-VF records (SDDB 40, 42, 49 and `chfdb`) also get pseudo-onsets at the
-   elapsed times of the real onsets. The identical pipeline is applied to each.
-   The null distribution of the mean ΔAUROC comes from 2,000 draws of one
-   pseudo-onset per patient. **Requirement:** the observed mean ΔAUROC
-   exceeds the 95th percentile of that null in every bin that is claimed.
-2. **Detrending.** Each feature is residualised on a per-patient linear trend
-   fitted to the remote zone, then the analysis is recomputed. The claimed
-   ΔAUROC must keep ≥ 50% of its value and its sign.
-3. **Elapsed-time-matched comparison (secondary).** Lead-bin windows are
-   compared with windows from other patients at the same elapsed recording
-   time.
+| Confound | Pseudo-onsets | Detrending | Elapsed-time matching | SQI gate | Blinded audit |
+|---|:--:|:--:|:--:|:--:|:--:|
+| Linear drift in elapsed time | **catches** | **catches** | **catches** | only if visible in SQI | partly |
+| Accelerating (convex) drift in elapsed time | partly (offsets are earlier, where drift is slower) | partly | **catches** if shared across patients | only if visible | partly |
+| Onset-locked non-physiological change (symptom-related motion, electrode, end of tape) | **cannot** | **cannot** | **cannot** | **catches only if the artefact is visible in SQI** | partly |
+| Clock-locked (circadian) change with VF clustering in the morning | partly | **cannot** | **cannot** (clock ≠ elapsed time) | **cannot** | **cannot** |
 
-### 9.3 Recording artefact controls
+The simulated rates behind this table are in
+[`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §4.
 
-1. **M0-acq ratio gate**, reusing [`COMPETING_MODELS.md`](COMPETING_MODELS.md)
-   §1 thresholds:
-   $R = \frac{\overline{\mathrm{AUROC}}(M0\text{-acq}) - 0.5}{\overline{\mathrm{AUROC}}(M3) - 0.5}$.
+**Consequence, binding on reporting.** Any positive result must state, in
+the same sentence, that **onset-locked non-physiological change is excluded
+only to the extent that the SQI features see it**, and that **circadian
+confounding is not excluded** unless clock time is available (Phase 0 checks
+the headers for start times).
+
+**Specification.**
+
+1. **Pseudo-onsets.**
+   - Offsets $k\cdot$3 h before $T_{\mathrm{VF}}$, wherever the §5 geometry
+     fits. No-VF records (SDDB 40, 42, 49) are added at elapsed times drawn
+     from the real onsets.
+   - One LOPO per offset. The null of the cohort mean comes from 9,999 draws
+     of one available offset per subject.
+   - Pass: $p=(1+\#\{\text{null}\ge\text{obs}\})/(1+9999)\le0.05$.
+   - If fewer than 8 subjects contribute, the pseudo-onset control is
+     **non-evaluable**, and the bin cannot pass. This is conservative by
+     design: in the simulated "mixed" duration scenario only about half of
+     patients have a pseudo-onset.
+2. **Detrending.** Per patient and per feature, a linear trend is fitted on
+   the remote zone and removed everywhere. Pass: retained Δ ≥ 50% of the
+   observed value, same sign.
+3. **Elapsed-time matching** (promoted from secondary to required).
+   - Statistic: the fixed, unfitted TD composite (mean of the
+     baseline-standardised TD-1, TD-2 and TD-3).
+   - For each patient, compare its bin windows with other patients'
+     remote-zone windows within ±15 min of the same elapsed time.
+   - Pass: mean matched AUROC > 0.5, with its Bonferroni interval excluding
+     0.5.
+   - LOPO model scores are **not** used here. Other patients' windows are
+     training data for those models, so their scores would be in-sample.
+4. **Clock-time matching**, only if start times exist: the same, with clock
+   time instead of elapsed time. Otherwise the circadian limitation is
+   declared.
+
+### 9.3 Recording-artefact controls
+
+1. **M0-acq ratio gate:**
+   $R=\frac{\overline{\mathrm{AUROC}}(M0)-0.5}{\overline{\mathrm{AUROC}}(M3)-0.5}$.
    R ≥ 0.90 is CRITICAL, ≥ 0.70 SEVERE, ≥ 0.50 MATERIAL.
-2. **Conditional increment.** The contrast M4 ∪ M0-acq vs M1 ∪ M0-acq must
-   keep the sign and ≥ 50% of the primary ΔAUROC.
-3. **Artefact masking.** Windows whose SQI exceeds the patient's baseline
-   99th percentile on any SQI feature are excluded and the analysis is rerun.
-   The claimed ΔAUROC must keep its sign and ≥ 50% of its value.
-4. **Lead replication.** The lead-2 panel must give the same sign in every
-   claimed bin (descriptive).
-5. **Annotation-algorithm probe.** Rerun with the own-detector beat classes
-   only, ignoring `.ari` classes. Same requirement as item 3.
+2. **Conditional increment:** M4 ∪ M0 vs M1 ∪ M0 keeps ≥ 50% of Δ, with the
+   same sign.
+3. **Artefact masking:** exclude windows above the patient's baseline 99th
+   percentile on any SQI feature, then require ≥ 50% retained, same sign.
+4. **Lead replication:** same sign on lead 2.
+5. **Annotation-algorithm probe:** own-detector beat classes only.
 
-### 9.4 Structure-destroying controls for the TD block
+### 9.4 Structure-destroying controls (TD attribution)
 
-| Control | Destroys | Requirement for any TD-specific claim |
-|---|---|---|
-| Row-wise channel shuffle (per beat, harness bug 12 fix) | channel identity / covariance structure | real ΔAUROC above the 95th percentile of 200 permutations |
-| Within-window beat-order shuffle | temporal order (TD-3, TD-4) | same |
-| Order-destroyed $\Delta G$ series (block permutation inside the trailing 30 min) | persistence ordering (TD-3) | TD-3's gain over TD-2 not reproduced. Otherwise $Q$ remains DEMOTED |
-| Geometry competitors (§7.5) | patient-specific Σ₀ | TD-1 must beat all four. Otherwise "patient-specific geometry" is not supported in VF either |
+Row-wise channel shuffle (bug 12), within-window beat-order shuffle, and the
+order-destroyed ΔG series. Each uses 200 permutations, and the real value
+must exceed the 95th percentile.
 
-### 9.5 External no-VF records
+### 9.5 No-VF records
 
-SDDB 40, 42 and 49 plus `chfdb` are used **only** for false-alarm rates
-(§12) and pseudo-onset nulls (§9.2). They are never used as negatives in
-model training and never used for E-risk.
+See §12.3 for their restricted role.
 
-### 9.6 Between-database demonstration (methodological, not evidence)
+### 9.6 Symmetric integrity audit
 
-An M0-acq-only classifier for SDDB vs NSRDB segments, with patient-level
-splits. It is expected to separate the databases. It is reported as a
-demonstration that the standard literature design is acquisition-separable.
-**It carries no claim about VF.**
+Runs for every verdict past gate 2:
+
+- an independent second QRS detector;
+- a visual audit, blinded to zone, of 50 random bin windows and 50 remote
+  windows;
+- a per-patient breakdown, including whether ≤ 2 patients drive the mean.
+
+### 9.7 Between-database demonstration (methodological only)
+
+M0-acq-only classification of SDDB vs NSRDB segments, with patient-level
+splits. Its result is reported **whatever it is**, and carries no claim about
+VF.
 
 ---
 
-## 10. Leakage prevention (implemented as code guards)
+## 10. Leakage prevention (code guards)
 
-1. Feature code takes **no onset argument**. Only `zones.py` reads
-   `#vfon`, and tests assert that feature outputs are invariant to onset.
-2. Feature windows end at or before $t$. Filters are causal, or zero-phase
-   within the window only. No record-level normalisation: baselines only.
-3. Every evaluated window has $\ell > 2$ min. Post-onset samples are
-   truncated **before** feature extraction.
-4. Patient-level LOPO, and no hyperparameter or feature selection on SDDB.
-   λ, $W$, θ and the bin edges are fixed at freeze, apart from the single
-   outcome-blind $W$ gate in §6.3.
-5. **Outcome-blind calibration loader.** Before execution, any data access
-   uses a loader that truncates each VF record at $t_{\mathrm{VF}} - 60$ min,
-   so no lead-bin or grey-zone sample can be read.
-6. Frozen manifest: eligibility list, record checksums, code commit and
-   parameter hash.
-7. Development and execution outputs are never pooled.
+1. Feature code takes **no onset argument**. Only `zones.py` reads `#vfon`.
+   Tests assert that feature outputs are invariant to the onset.
+2. Every feature uses samples at or before $t$ only. Filters are causal or
+   window-local. Standardisation uses the baseline only.
+3. Evaluated windows have $\ell>g$, and post-onset samples are truncated
+   before feature extraction.
+4. LOPO with no SDDB-based selection. Parameters are fixed at freeze, apart
+   from the two outcome-blind gates ($N_b$, informativeness).
+5. Outcome-blind loader: truncation at $T_{\mathrm{VF}}-60$ min for all
+   calibration.
+6. A frozen manifest: eligibility list, checksums, code commit and parameter
+   hash.
+7. Outputs from development and execution are never pooled.
 
 ---
 
 ## 11. Statistics and uncertainty
 
-### 11.1 Primary inference, per bin
-
-- Mean of $\Delta_i$ over eligible patients, with a Student-t interval at
-  Bonferroni α = 0.05/4 = 0.0125 (two-sided).
-- Patient-cluster bootstrap (2,000 replicates) as a sensitivity analysis.
-- Exact one-sided sign test for direction consistency: the number of
-  patients with $\Delta_i > 0$ must reach p < 0.025. For n = 20 that means
-  ≥ 15; for n = 12, ≥ 10.
-
-### 11.2 Large-effect exclusion
-
-One-sided 95% upper bound of mean $\Delta_i$, per bin, compared with
-$\delta_{\mathrm{large}}$ = **0.10 AUROC**.
-
-### 11.3 Outcome-blind power gate
-
-The SD of $\Delta_i$ under the pseudo-onset null (§9.2.1) is computed using
-pre-pseudo-onset data only. It gives the realised minimum detectable effect
-(MDE: 80% power, α = 0.0125). If **MDE > 0.15 in ≥ 2 bins**, H-VF is
-declared UNRESOLVED-BY-DESIGN before the true-onset analysis is read. In that
-case only descriptive H-VF0 output is reported.
-
-### 11.4 Reporting
-
-Every interval is reported, including those for failed controls. AUPRC is
-always reported with its within-patient prevalence. Calibration (intercept,
-slope, Brier) is reported for M1 and M4 on LOPO probabilities within each
-patient.
+1. **Primary, per bin.** Mean $\Delta_i$; Student-t interval at α = 0.0125;
+   patient-cluster bootstrap (2,000 replicates) as sensitivity; exact
+   one-sided sign test at p < 0.025.
+2. **Large-effect exclusion.** The one-sided 95% upper bound of mean
+   $\Delta_i$ is below $\delta_{\mathrm{large}}$ = 0.10.
+3. **Outcome-blind informativeness gate.** As in §4.3, using the simulation
+   recalibrated on truncated-loader data.
+4. **Reporting.**
+   - Per-patient $\Delta_i$ for every bin, shown as a dot plot.
+   - Within-patient prevalence beside every AUPRC.
+   - Calibration (intercept, slope, Brier) within patient.
+   - **No window-level inference.**
 
 ---
 
 ## 12. Alarm evaluation and false-alarm rates
 
-- **Alarm.** ≥ 2 consecutive windows above threshold, then a 15-min
-  refractory period.
-- **Thresholds.** Set in each LOPO training fold at false-alarm-rate (FAR)
-  targets of **0.1, 0.5 and 1.0 per hour** in training patients' remote
-  zones, then applied unchanged to the held-out patient.
-- **Reported.**
-  - FAR per hour in held-out remote zones and in no-VF records.
-  - Per-patient sensitivity: an alarm inside the bin, or inside the
-    cumulative horizon.
-  - Lead time from the first alarm to onset.
-  - Time-in-alarm fraction.
-- **Chance reference.** $1-e^{-\mathrm{FAR}\cdot w}$ for bin width $w$. At
-  0.5/h it is 0.025 for B5, 0.041 for B10 and B15, and 0.118 for B30; for the
-  cumulative 28-min window it is 0.208. Sensitivities are always reported next
-  to this reference and next to M1.
-- **Alarm burden statement.** Even 0.1 false alarms per hour is 2.4 per
-  patient-day, in a population in which VF is rare. **No FAR achievable on
-  this dataset may be described as clinically usable.**
+### 12.1 Alarm rule (exact)
+
+An alarm is raised at $t$ if the score has been above threshold in every
+window ending in $[t-2, t]$ (3 consecutive minutes), and no alarm has been
+raised in the preceding 15 min. Thresholds are set in the LOPO training fold
+for nominal FAR targets of 0.1, 0.5 and 1.0 per hour.
+
+### 12.2 What is reported
+
+- **Realised held-out FAR**, which is the quantity reported. The nominal
+  target is not. Simulation shows that realised held-out FAR scatters widely
+  around a target calibrated on other patients.
+- The per-patient FAR distribution: median, 10th–90th percentiles, and the
+  fraction of patients with zero alarms.
+- The pooled FAR with a patient-bootstrap CI.
+- Per-patient sensitivity, lead time from the first alarm, and time in alarm.
+- The chance reference $1-e^{-\mathrm{FAR}\cdot w}$, and the M1 comparison.
+
+### 12.3 Which records may estimate FAR
+
+| Set | Status | Reason |
+|---|---|---|
+| SDDB remote zones (same equipment, same patients) | **primary**, labelled "**pre-VF-conditional FAR**" | same acquisition and population. But these are hours before VF in patients who go on to have it, **not** VF-free time |
+| SDDB no-VF records 40, 42, 49 | descriptive only (n = 3; two paced) | same acquisition. Far too few for any rate claim |
+| `chfdb` (and the Long-Term ST Database, if verified) | **transportability stress test**, admissible only if an acquisition comparability check passes; see below | different recorder, digitisation, annotation process and population. Its FAR measures a different acquisition chain |
+| NSRDB | **never used for FAR** | different sampling rate (reported 128 Hz), healthy population |
+
+**Acquisition comparability check, outcome-blind.** For each SQI feature,
+compare the distribution in external records with that in SDDB remote zones.
+The check fails if any feature's two-sample KS distance exceeds 0.3, or if
+the ECG power spectra differ by more than 3 dB in the 0.5–40 Hz band. If it
+fails, external FAR is reported as **non-interpretable** and not tabulated as
+a rate.
+
+### 12.4 Burden statement
+
+Even 0.1 false alarms per hour is 2.4 per patient-day. **No FAR from this
+study may be described as clinically usable.**
 
 ---
 
-## 13. Binding decision rule (proposed)
+## 13. Binding decision rule
 
-### 13.1 Gates, evaluated in order. The first that fires is the verdict
+### 13.1 Gates, in order
 
-1. **PIPELINE INVALID.** Any §9.1 control fails. Stop.
-2. **UNRESOLVED-BY-DESIGN.** Fewer than 12 eligible patients, or the §11.3
-   power gate fires.
-3. **ACQUISITION-EXPLAINED.** M0-acq ratio R ≥ 0.70, or §9.3 items 2–3 fail
-   in every bin that would otherwise pass. At R ≥ 0.90 (CRITICAL) no
-   physiological reading of any part of the result is permitted.
-4. **DRIFT-EXPLAINED.** The pseudo-onset requirement or the detrending
-   requirement (§9.2) fails in every bin that would otherwise pass.
+1. **PIPELINE INVALID.** A §9.1 control fails.
+2. **UNRESOLVED-BY-DESIGN.** A bin has < 6 contributing patients, or the
+   outcome-blind informativeness gate fires.
+3. **ACQUISITION-EXPLAINED.** R ≥ 0.70, or the conditional-increment or
+   masking requirement fails in every bin that would otherwise pass.
+4. **DRIFT-EXPLAINED.** Pseudo-onset, detrending or elapsed-time matching
+   fails (or is non-evaluable) in every bin that would otherwise pass.
 
-### 13.2 Primary verdicts, after the gates
+### 13.2 Primary verdicts
 
-- **EXPLORATORY SIGNAL.** All of the following, in ≥ 2 bins, **at least one
-  of which is B15 or B30**:
-  1. mean ΔAUROC > 0 with its Bonferroni interval excluding 0;
+- **EXPLORATORY ASSOCIATION** (renamed from EXPLORATORY SIGNAL). In ≥ 2
+  bins, at least one of which is B15 or B30, all of the following hold:
+  1. the primary interval excludes 0;
   2. the sign test is met;
-  3. the pseudo-onset and detrending requirements are met;
-  4. M0-acq R < 0.50, and the conditional-increment and masking requirements
-     are met;
-  5. at FAR 0.5/h, M4 sensitivity is ≥ M1 sensitivity and above the chance
-     reference.
-- **SHORT-LEAD ONLY.** The conditions above are met only in B5 and/or B10.
-  Recorded as "**not advance warning**": consistent with trigger-proximal
-  change.
-- **NOT SUPPORTED.** The harness is valid, the power gate passes, and neither
-  of the above holds.
-- **HARM** (recorded alongside any verdict). The interval lies entirely below
-  0 in ≥ 2 bins.
+  3. all three temporal controls pass;
+  4. R < 0.50, and the conditional-increment and masking requirements are
+     met;
+  5. at nominal FAR 0.5/h, realised sensitivity is ≥ M1 and above chance.
+- **TRIGGER-PROXIMAL ASSOCIATION ONLY.** The same conditions hold, but only
+  in B5 and/or B10.
+- **NOT SUPPORTED.** The harness is valid and the informativeness gate is
+  passed, and neither of the above holds.
+- **HARM** (alongside any verdict). The interval lies entirely below 0 in
+  ≥ 2 bins.
 
-### 13.3 Binding falsification flag, reported with every verdict past gate 2
+### 13.3 Binding falsification flag
 
-- **LARGE INCREMENT EXCLUDED.** The one-sided 95% upper bound is < 0.10 in
-  all four bins. This **falsifies the proposition that the TD block provides a
-  large (≥ 0.10 AUROC) incremental advance warning of VF in SDDB**. Smaller
-  increments remain unresolved, and that must be stated in the same sentence.
+**LARGE INCREMENT EXCLUDED:** the one-sided 95% upper bound is < 0.10 in all
+four bins. This falsifies a large (≥ 0.10 AUROC) incremental association in
+SDDB. Smaller increments remain unresolved, and that must be stated in the
+same sentence.
 
-**Mandatory before reporting an EXPLORATORY SIGNAL** (the T6 rule, §1.3):
+### 13.4 Eligibility and sensitivity governance
 
-- rerun with an independent second QRS detector;
-- a visual audit of 50 random lead-bin windows and 50 remote windows, blinded
-  to zone;
-- per-patient breakdown, to show whether ≤ 2 patients drive the mean.
+- The verdict is reported at each $T_{\min}$ (§4.2) and each guard (§5.1).
+- A verdict that changes between the primary and the 3-h eligibility rule is
+  reported as eligibility-sensitive, and the more conservative verdict
+  governs.
+- Sensitivity variants never upgrade a verdict.
 
-### 13.4 TD-specific attribution, secondary and non-binding for the verdict
+### 13.5 TD-specific attribution (secondary; required before any TD wording)
 
-An EXPLORATORY SIGNAL is attributed to multichannel structure only if the
-§9.4 controls pass. Otherwise it is reported as "an increment from features
-that do not require multichannel structure", with no TD reading.
+An EXPLORATORY ASSOCIATION may be described as involving **multivariate
+structure** only if all of the following hold:
 
-### 13.5 What each outcome permits
+- M1 ∪ M2 ∪ M3 beats M1 ∪ M2;
+- ΔG beats each of comparators C-a to C-e, with a positive point estimate
+  and the sign test met;
+- the §9.4 controls pass.
+
+Otherwise it is reported as "an increment from features that do not require
+multichannel structure", with no TD reading.
+
+### 13.6 Permitted language
 
 | Verdict | Maximum language |
 |---|---|
-| EXPLORATORY SIGNAL | "In this retrospective dataset of ≈ N patients, TD statistics were associated with pre-VF periods at lead times of X min beyond conventional features. This is exploratory and requires an independent cohort." Claim Level ≤ 2. **Never** "predicts VF", "early warning", or any mechanism |
-| SHORT-LEAD ONLY | "Changes within X min of onset", and not advance warning |
-| NOT SUPPORTED + LARGE EXCLUDED | "No large incremental value. Smaller effects are not excluded" |
+| EXPLORATORY ASSOCIATION | "In a retrospective dataset of N patients who developed VF, adding TD statistics to conventional features was associated with better within-patient separation of pre-onset periods at alarm lead times of X min. Onset-locked artefact is excluded only insofar as the SQI features detect it, and circadian confounding is not excluded. This is exploratory and requires independent, event-unconditional validation." **Never** "predicts VF", "early warning", "advance warning", "forecast", or any mechanism |
+| TRIGGER-PROXIMAL ONLY | "Changes within X min of onset." Not advance warning |
+| NOT SUPPORTED + LARGE EXCLUDED | "No large incremental association. Smaller effects are not excluded" |
 | NOT SUPPORTED alone | "Not supported. The data cannot resolve small effects" |
 | any verdict | Hypotension verdicts are unaffected. M2 and M_null remain live |
 
 ---
 
-## 14. Sample-size assessment (summary)
+## 14. Sample size and minimum detectable effect (from simulation)
 
-The full arithmetic is in
-[`VF_DATASET_FEASIBILITY.md`](VF_DATASET_FEASIBILITY.md) §3. With about 20
-patients and Bonferroni over 4 bins, the detectable mean ΔAUROC is about 0.12
-if the between-patient SD is 0.15. About 100 events are needed for 0.05 and
-about 280 for 0.03. **This study is exploratory with a binding large-effect
-falsification. It is not confirmatory.** A confirmatory test of H-VF requires
-an independent cohort, frozen from this protocol's output, with at least
-about 100 adjudicated VF onsets and ≥ 60 min of pre-onset multichannel-capable
-ECG.
+See [`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) for the
+assumptions, the scenarios and the full tables. The headline figures are
+summarised there and in
+[`VF_DATASET_FEASIBILITY.md`](VF_DATASET_FEASIBILITY.md) §3. They are
+**design-stage numbers under stated generative assumptions**, not
+established properties of SDDB. They are recalibrated by the outcome-blind
+gate.
+
+**Conclusion.** SDDB supports exploratory analysis with a binding
+large-effect falsification. It does not support confirmatory testing of
+increments of the size this programme has historically measured.
 
 ---
 
-## 15. Questions for the reviewer before freezing
+## 15. Retrospective discovery is not advance prediction
 
-1. **Disjoint lead bins as primary** (vs cumulative horizons as primary).
-2. **Remote zone at $\ell \ge 60$ min with a 30-min grey zone**, and the
-   2 h 15 min eligibility rule. Records 48 and 52 lie just above it; see the
-   disclosure.
-3. **δ_large = 0.10** and the **12-patient** minimum.
-4. **Excluding AF from the primary analysis**, at the cost of up to 4
-   patients.
-5. **VF onset vs first sustained VT** as the primary event.
-6. Whether TD-2 uses `delta_G_structure` as implemented or the
-   affine-invariant distance. Only one is permitted.
-7. Whether `chfdb` is acceptable as the external no-VF set given its disease
-   and era differences.
+| Requirement for genuine advance prediction | Met here? |
+|---|:--:|
+| Model frozen **before** it is evaluated on independent patients | partly (LOPO within one dataset; community-mined dataset) |
+| Evaluation over **all** monitored time, event-unconditional, including people who never develop VF | **no** |
+| Calibrated absolute risk at realistic prevalence; PPV | **no**: not estimable from VF-conditional data |
+| False-alarm burden measured in the target population and acquisition chain | **no**: pre-VF-conditional FAR only |
+| Actionable lead time, shown prospectively or in a temporally external cohort | **no** |
+| Independent site / era / equipment | **no** |
 
-## 16. Freezing conditions
+**This study can at most discover a candidate retrospective association.**
+Even a strong EXPLORATORY ASSOCIATION would leave every row above except the
+first unmet. It would justify only a confirmatory study designed to meet
+them, never a statement about early-warning capability.
 
-The protocol is frozen only after: the Phase 0 verification is recorded; §15
-is resolved; this file is amended and committed with an explicit FROZEN
-banner and a parameter hash; and the user authorises a single execution.
-**Until then no analysis code is run on SDDB beyond header/metadata
-verification.**
+---
+
+## 16. Open research decisions (must be resolved before freezing)
+
+| # | Decision | Options | Current proposal |
+|---|---|---|---|
+| D1 | Status of Analysis B (AF-inclusive, NN-free) | co-primary with α split (0.05/8) / secondary but binding-reported | secondary, binding-reported |
+| D2 | Is the design worth executing, given the simulated MDE? | run as exploratory / defer until a larger, event-unconditional cohort is secured | the reviewer decides after reading the simulation |
+| D3 | Guard $g$ | 1 / 2 / 5 min | 2 min, with 1 and 5 as sensitivities |
+| D4 | Primary event | VF onset / first sustained VT | VF onset |
+| D5 | $R_{\min}$ and therefore $T_{\min}$ | 30 / 60 min | 30 min, with eligibility sensitivity |
+| D6 | Circadian confound, if headers lack clock time | accept as a declared limitation / do not run | declared limitation |
+| D7 | External FAR set | chfdb / LTSTDB / none | chfdb, conditional on the comparability check |
+| D8 | ΔG Ledoit–Wolf intensity | analytic / fixed 0.1 / fixed 0.3 | analytic primary, fixed as sensitivity |
+| D9 | δ_large | 0.10 / 0.15 | 0.10; the simulation shows how often the flag can fire under H0 |
+
+## 17. Freezing conditions
+
+The protocol is frozen only after all of the following:
+
+- Phase 0 verification is recorded;
+- an independent review of v2 is complete;
+- the §16 decisions are resolved;
+- a separate `PROTOCOL_VF_ONSET.md` exists with a FROZEN banner and hashes;
+- the user authorises a single execution.
+
+Until then nothing is run on SDDB beyond header and metadata verification.
+
+---
+
+## Appendix A — change log v1 → v2
+
+| # | v1 | v2 | Reason (review item) |
+|---|---|---|---|
+| A1 | "Expected outcome: NOT SUPPORTED …" | **removed**. Prior evidence recorded in both directions, none in the rule | review C3 / issue 1 |
+| A2 | Positive results "treated as suspicious first" | symmetric integrity audit for every verdict (§9.6) | outcome-dependent scrutiny prejudges the result (issue 1) |
+| A3 | Explicit H0 absent | H0-VF stated as the binding falsification target (§3) | issue 1 |
+| A4 | Analytic MDE (σ = 0.15 assumed) | simulation-based MDE, clustering, overlap, 4 bins, LOPO (§14) | review C2 / issue 2 |
+| A5 | Pseudo-onsets and detrending required; elapsed-time matching secondary | all three required, with a capability table; onset-locked and circadian limits declared in reporting language (§9.2) | review C1 / issue 3 |
+| A6 | Overlap not analysed; "≥ 2 consecutive windows" alarm rule | effective-positive analysis, patient-level-only inference, persistence-in-time alarm rule, realised FAR reported (§8.2, §12) | review M1 / issue 4 |
+| A7 | Guard 2 min; VT exclusion with one sensitivity | guard justified by the simulated trade-off; NSVT retained in M1; six sensitivity variants; precursor-removal audit (§5.1) | review M2 / issue 5 |
+| A8 | $T_{\min}$ = 2 h 15 (arbitrary sum); minimum 12 patients | derived $T_{\min}$ = 2 h 20 with each term justified; eligibility sensitivity at 3 h and 4 h with a conservative governing rule; 12 replaced by a capability floor of 6 and an outcome-blind informativeness gate (§4.2–4.3) | review M3 / issue 6 |
+| A9 | AF excluded; non-NN analysis exploratory | Analysis B, rhythm-inclusive and NN-free, separately reported (§4.1) | review M4 / issue 7 |
+| A10 | ΔG "decided at freeze" | exact AIRM, Ledoit–Wolf, SPD floor, Cholesky, fixed beat count, robust standardisation, five simpler comparators, M1 ∪ M2 attribution (§7.4) | review M5 / issue 8 |
+| A11 | chfdb as the external FAR set | FAR source hierarchy; outcome-blind comparability check; NSRDB excluded (§12.3) | review M6 / issue 9 |
+| A12 | "EXPLORATORY SIGNAL"; "advance warning" wording | "EXPLORATORY ASSOCIATION"; §15 requirements table; forbidden-terms list | review M7 / issue 10 |
+| A13 | Pseudo-onset null with no availability rule | non-evaluable when < 8 subjects, which fails the bin | review moderate item |
+| A14 | Between-database demo "expected to separate" | reported whatever it shows | issue 1 |
 
 ---
 

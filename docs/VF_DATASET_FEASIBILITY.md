@@ -1,6 +1,6 @@
 # VF onset programme — dataset feasibility: PhysioNet Sudden Cardiac Death Holter Database
 
-> **Status: PROPOSAL / DESIGN RECORD. No signal data accessed.**
+> **Status: PROPOSAL / DESIGN RECORD (revised with protocol v2). No signal data accessed.**
 > This is a new transition-class study (ventricular fibrillation onset). It does
 > not reinterpret any of the seven completed intraoperative-hypotension
 > experiments. Their verdicts in [`CANONICAL_STATUS.md`](CANONICAL_STATUS.md)
@@ -89,9 +89,9 @@ reads headers and annotation metadata only. Any discrepancy found there
 | Group | Count (to verify) | Usable for |
 |---|:--:|---|
 | VF onset recorded | 20 | within-patient onset prediction |
-| of which AF underlying | up to 4 | RR-based features undefined in AF, so excluded from the primary analysis |
-| of which onset too early in recording for baseline + control zones | unknown until headers are read | excluded by a fixed rule |
-| **Expected eligible VF patients, primary** | **≈ 12–18** | — |
+| of which AF underlying | up to 4 | excluded from Analysis A (NN features undefined); **included in Analysis B** (NN-free panel, protocol §4.1) |
+| of which onset earlier than $T_{\min}$ = 2 h 20 min | unknown until headers are read; records 48 and 52 (disclosed) lie just above it | excluded by the derived geometry rule (protocol §4.2), with sensitivity at 3 h and 4 h |
+| **Plausible eligible VF patients** | **≈ 12–18 (A); ≈ 13–19 (B)** | a range, not a verified count |
 | No VF | 3 (two paced) | false-alarm estimation only. Far too few for any between-patient comparison |
 
 ### 1.4 Data quality
@@ -137,8 +137,8 @@ reads headers and annotation metadata only. Any discrepancy found there
    available data. [`TRANSITION_TAXONOMY.md`](TRANSITION_TAXONOMY.md) places
    "arrhythmic arrest from a fixed substrate" in **T6, the negative class where
    no precursor is expected**. SDDB VF cannot be assigned to T6 or excluded
-   from it. That classification is preserved, and protocol §1.3 treats it as
-   the prior expectation.
+   from it. That classification is preserved and recorded as prior evidence
+   (protocol §1.3); it does not set an expected verdict.
 
 ---
 
@@ -146,7 +146,8 @@ reads headers and annotation metadata only. Any discrepancy found there
 
 | Dataset | Proposed role | Why not primary |
 |---|---|---|
-| BIDMC Congestive Heart Failure Database (`chfdb`) | **External no-VF false-alarm set.** Severe structural heart disease, long Holter recordings, reported 250 Hz, similar era | No VF events. Not a matched control for patient-level risk |
+| BIDMC Congestive Heart Failure Database (`chfdb`) | **Transportability stress test for false-alarm rates only**, admissible only if the outcome-blind acquisition-comparability check passes (protocol §12.3). Severe structural heart disease, long Holter recordings, reported 250 Hz | Different recorder, digitisation, annotation process and population: its FAR is a property of a different acquisition chain. No VF events. Not a matched control for patient-level risk. **Not** used for pseudo-onset nulls of SDDB drift |
+| Long-Term ST Database (`ltstdb`) | Candidate second stress-test set, if verified (ischaemic patients, long Holter) | Unverified; same transportability caveat |
 | Spontaneous Ventricular Tachyarrhythmia Database (`mvtdb`) | Possible RR-only replication at the 5 and 10 min lead bins. Reported 135 event/control RR pairs from 78 ICD patients, ≈1,000 RR intervals each | RR-only, so univariate, and [`DATASET_REQUIREMENTS.md`](DATASET_REQUIREMENTS.md) §1 makes univariate evidence non-confirmatory for structural claims. ≈1,000 beats is about 10–15 min, which cannot reach the 15–30 min bins. Whether the controls are within-patient is unverified |
 | NSRDB | **Methodological negative demonstration only.** Shows that database identity is separable from acquisition features alone | Confounded by construction. Prohibited from carrying any onset or risk claim |
 | MIMIC-III/IV waveform, VTaC and similar ICU monitor datasets (credentialed) | Candidate **independent confirmatory cohort**, conditional on adjudicated VF onsets and ≥ 30 min of pre-onset ECG | Not verified. Needs credentialed access ([`CREDENTIALED_ACCESS_CHECKLIST.md`](CREDENTIALED_ACCESS_CHECKLIST.md)). Event yield unknown |
