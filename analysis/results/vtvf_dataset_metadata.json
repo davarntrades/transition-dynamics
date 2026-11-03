@@ -1,0 +1,189 @@
+{
+ "source": "https://physionet-open.s3.amazonaws.com/",
+ "note": "metadata only; no ECG samples read",
+ "mirror_open_datasets": 252,
+ "on_mirror_vtac": false,
+ "on_mirror_challenge-2015": false,
+ "on_mirror_mimic3wdb": false,
+ "on_mirror_mimic3wdb-matched": false,
+ "on_mirror_mimic4wdb": false,
+ "mvtdb": {
+  "records": 270,
+  "patients": 78,
+  "vt_records": 106,
+  "vf_records": 29,
+  "control_records": 135,
+  "events_per_patient_distribution": {
+   "1": 43,
+   "2": 21,
+   "3": 8,
+   "4": 4,
+   "5": 2
+  },
+  "patients_with_vf": 25,
+  "patients_with_vt": 59,
+  "patients_with_both": 6,
+  "signals_per_record": [
+   0
+  ],
+  "beat_annotations_per_record_pooled": [
+   986,
+   1023,
+   1024
+  ],
+  "record_span_minutes_pooled_p5_p50_p95_max": [
+   9.2,
+   12.5,
+   17.5,
+   19.6
+  ],
+  "annotation_symbols_pooled": [
+   "N"
+  ],
+  "aux_labels_pooled": [],
+  "clinical_table_rows": 58,
+  "clinical_device_class": {
+   "vt": 34,
+   "vf": 19,
+   "FVT via vf": 3,
+   "FVT via vt": 1,
+   "fvt via vt": 1
+  },
+  "clinical_episode_time_present": 58,
+  "clinical_antiarrhythmic_meds": {
+   "Yes": 43,
+   "No": 14
+  }
+ },
+ "vfdb": {
+  "records": 22,
+  "fs": [
+   250
+  ],
+  "n_signals": [
+   2
+  ],
+  "duration_min_median_max": [
+   35.0,
+   35.0,
+   35.0
+  ],
+  "rhythm_label_counts": {
+   "(N": 216,
+   "(VFL": 98,
+   "(NOISE": 73,
+   "(VT": 93,
+   "(VFIB": 4,
+   "(ASYS": 13,
+   "(NOD": 6,
+   "(AFIB": 9,
+   "(NSR": 2,
+   "(B": 12,
+   "(VF": 9,
+   "(SVTA": 6,
+   "(BI": 22,
+   "(SBR": 2,
+   "(HGEA": 19,
+   "(VER": 3,
+   "(PM": 5
+  },
+  "records_with_ventricular_tachyarrhythmia_label": 22,
+  "minutes_before_first_ventricular_label_min_median_max": [
+   0.7,
+   15.2,
+   30.7
+  ],
+  "records_first_onset_ge_15min": 11,
+  "records_first_onset_ge_30min": 1
+ },
+ "cudb": {
+  "records": 35,
+  "fs": [
+   250
+  ],
+  "n_signals": [
+   1
+  ],
+  "duration_min_median_max": [
+   8.5,
+   8.5,
+   8.5
+  ],
+  "rhythm_label_counts": {
+   "(VF": 2,
+   "(VT": 5,
+   "(N": 19,
+   "(AF": 4
+  },
+  "records_with_ventricular_tachyarrhythmia_label": 34,
+  "minutes_before_first_ventricular_label_min_median_max": [
+   0.0,
+   5.8,
+   8.3
+  ],
+  "records_first_onset_ge_15min": 0,
+  "records_first_onset_ge_30min": 0
+ },
+ "incartdb": {
+  "records": 75,
+  "fs": [
+   257
+  ],
+  "n_signals": [
+   12
+  ],
+  "duration_min_median_max": [
+   30.0,
+   30.0,
+   30.0
+  ],
+  "rhythm_label_counts": {
+   "(AFIB": 2,
+   "(PREX": 7,
+   "(WPWAF": 3
+  },
+  "records_with_ventricular_tachyarrhythmia_label": 0,
+  "minutes_before_first_ventricular_label_min_median_max": null,
+  "records_first_onset_ge_15min": 0,
+  "records_first_onset_ge_30min": 0
+ },
+ "music_sudden_cardiac_death": {
+  "subjects": 992,
+  "records_listed": 1623,
+  "cause_of_death_codes": {
+   "0": 726,
+   "6": 100,
+   "3": 94,
+   "1": 61,
+   "7": 11
+  },
+  "holter_available": {
+   "1": 936,
+   "0": 56
+  },
+  "holter_VT_flag_codes": {
+   "0.0": 573,
+   "1.0": 346,
+   "nan": 69,
+   "2.0": 3,
+   "3.0": 1
+  },
+  "holter_NSVT_flag": {
+   "0.0": 714,
+   "1.0": 277,
+   "nan": 1
+  },
+  "holter_onset_clock_present": 650,
+  "follow_up_days_median": 1805.0,
+  "first_holter_header": [
+   "P0001 3 200 16460600 ",
+   "P0001.dat 16+0 100 16 0  X ",
+   "P0001.dat 16+0 100 16 0  Y ",
+   "P0001.dat 16+0 100 16 0  Z"
+  ]
+ },
+ "ahadb_on_mirror_records": [
+  "0001",
+  "0201"
+ ]
+}
