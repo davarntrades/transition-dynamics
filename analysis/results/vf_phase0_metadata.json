@@ -1,0 +1,1455 @@
+{
+ "dataset": "sddb",
+ "version": "1.0.0",
+ "source": "https://physionet-open.s3.amazonaws.com/sddb/1.0.0/",
+ "manifest_sha256": "03196bc43c2d751bd902414c388c392849349509fe20d7f5f510700c903e1f7a",
+ "n_files_in_manifest": 109,
+ "local_files_verified": 86,
+ "local_files_failed": [],
+ "read_policy": "P1-P4 (see module docstring); .dat never read",
+ "vocabulary_pooled": {
+  "ari_symbols": [
+   "+",
+   "?",
+   "E",
+   "N",
+   "Q",
+   "S",
+   "V",
+   "r",
+   "s"
+  ],
+  "ari_aux": [
+   "(AFIB",
+   "(N",
+   "(ST0+",
+   "(ST0-",
+   "(ST1+",
+   "(ST1-",
+   "ST0+)",
+   "ST0-)",
+   "ST1+)",
+   "ST1-)"
+  ],
+  "atr_symbols": [
+   "/",
+   "B",
+   "E",
+   "F",
+   "J",
+   "N",
+   "Q",
+   "S",
+   "V",
+   "a",
+   "f",
+   "|",
+   "~"
+  ],
+  "atr_aux": []
+ },
+ "records": [
+  {
+   "record": "30",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22099250,
+   "duration": "24:33:17",
+   "duration_s": 88397.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform_new from record 30, beginning at 26:35.000",
+    "vfon: 07:54:33"
+   ],
+   "vfon": "07:54:33",
+   "vfon_s": 28473.0,
+   "expected_dat_bytes_fmt212": 66297750,
+   "onset_within_record": true,
+   "post_onset_s": 59924.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 364.55,
+   "ari": {
+    "n_annotations": 131512,
+    "first_s": 0.52,
+    "last_s": 88396.776,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 14,
+    "post_onset_N_0_60s": 11,
+    "post_onset_beats_60_180s": 3,
+    "post_onset_N_60_180s": 3,
+    "baseline_readable": true,
+    "baseline_beats": 2592,
+    "baseline_rhythm_labels": [
+     "(AFIB",
+     "(N",
+     "(ST0-",
+     "(ST1+"
+    ]
+   },
+   "atr": {
+    "n_annotations": 128808,
+    "first_s": 0.016,
+    "last_s": 86398.824,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 7,
+    "post_onset_N_0_60s": 1,
+    "post_onset_beats_60_180s": 0,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 2387,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2592,
+    "n_atr": 2387,
+    "matched_150ms": 2365,
+    "sensitivity_ari_vs_atr": 0.9907834101382489,
+    "ppv_ari_vs_atr": 0.9124228395061729,
+    "class_agreement_N_vs_nonN": 0.9742071881606765
+   }
+  },
+  {
+   "record": "31",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 12580000,
+   "duration": "13:58:40",
+   "duration_s": 50320.0,
+   "base_time": "10:15:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform_new from record 31, beginning at 13:20.000",
+    "vfon: 13:42:24"
+   ],
+   "vfon": "13:42:24",
+   "vfon_s": 49344.0,
+   "expected_dat_bytes_fmt212": 37740000,
+   "onset_within_record": true,
+   "post_onset_s": 976.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 712.4,
+   "ari": {
+    "n_annotations": 61364,
+    "first_s": 0.872,
+    "last_s": 49867.344,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 44,
+    "post_onset_N_0_60s": 33,
+    "post_onset_beats_60_180s": 55,
+    "post_onset_N_60_180s": 41,
+    "baseline_readable": true,
+    "baseline_beats": 2262,
+    "baseline_rhythm_labels": [
+     "(ST0-",
+     "(ST1+",
+     "(ST1-"
+    ]
+   },
+   "atr": {
+    "n_annotations": 63218,
+    "first_s": 0.328,
+    "last_s": 50278.784,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 9,
+    "post_onset_N_0_60s": 1,
+    "post_onset_beats_60_180s": 0,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 2324,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2262,
+    "n_atr": 2324,
+    "matched_150ms": 2247,
+    "sensitivity_ari_vs_atr": 0.9668674698795181,
+    "ppv_ari_vs_atr": 0.993368700265252,
+    "class_agreement_N_vs_nonN": 0.9777481085892301
+   }
+  },
+  {
+   "record": "32",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 21900000,
+   "duration": "24:20:00",
+   "duration_s": 87600.0,
+   "base_time": "5:04:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform_new from record 32, beginning at 18:00.000",
+    "vfon: 16:45:18"
+   ],
+   "vfon": "16:45:18",
+   "vfon_s": 60318.0,
+   "expected_dat_bytes_fmt212": 65700000,
+   "onset_within_record": true,
+   "post_onset_s": 27282.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 895.3,
+   "ari": {
+    "n_annotations": 121402,
+    "first_s": 0.152,
+    "last_s": 87586.228,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 23,
+    "post_onset_N_0_60s": 17,
+    "post_onset_beats_60_180s": 15,
+    "post_onset_N_60_180s": 14,
+    "baseline_readable": true,
+    "baseline_beats": 2627,
+    "baseline_rhythm_labels": []
+   },
+   "atr": {
+    "n_annotations": 127200,
+    "first_s": 0.136,
+    "last_s": 86399.4,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 8,
+    "post_onset_N_0_60s": 1,
+    "post_onset_beats_60_180s": 0,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 2627,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2627,
+    "n_atr": 2627,
+    "matched_150ms": 2627,
+    "sensitivity_ari_vs_atr": 1.0,
+    "ppv_ari_vs_atr": 1.0,
+    "class_agreement_N_vs_nonN": 1.0
+   }
+  },
+  {
+   "record": "33",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22095000,
+   "duration": "24:33:00",
+   "duration_s": 88380.0,
+   "base_time": "10:38:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform_new from record 33, beginning at 7:00.000",
+    "vfon: 04:46:19"
+   ],
+   "vfon": "04:46:19",
+   "vfon_s": 17179.0,
+   "expected_dat_bytes_fmt212": 66285000,
+   "onset_within_record": true,
+   "post_onset_s": 71201.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 176.31666666666666,
+   "ari": {
+    "n_annotations": 69276,
+    "first_s": 0.388,
+    "last_s": 88377.76,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 103,
+    "post_onset_N_0_60s": 75,
+    "post_onset_beats_60_180s": 181,
+    "post_onset_N_60_180s": 170,
+    "baseline_readable": true,
+    "baseline_beats": 1766,
+    "baseline_rhythm_labels": [
+     "(AFIB",
+     "(N",
+     "(ST1-"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "34",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 6380000,
+   "duration": "07:05:20",
+   "duration_s": 25520.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform_new from record 34, beginning at 0",
+    "vfon: 06:35:44"
+   ],
+   "vfon": "06:35:44",
+   "vfon_s": 23744.0,
+   "expected_dat_bytes_fmt212": 19140000,
+   "onset_within_record": true,
+   "post_onset_s": 1776.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 285.73333333333335,
+   "ari": {
+    "n_annotations": 27310,
+    "first_s": 0.532,
+    "last_s": 25512.384,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 64,
+    "post_onset_N_0_60s": 54,
+    "post_onset_beats_60_180s": 144,
+    "post_onset_N_60_180s": 118,
+    "baseline_readable": true,
+    "baseline_beats": 1848,
+    "baseline_rhythm_labels": []
+   },
+   "atr": {
+    "n_annotations": 26766,
+    "first_s": 0.024,
+    "last_s": 25163.64,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 36,
+    "post_onset_N_0_60s": 0,
+    "post_onset_beats_60_180s": 46,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 1850,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 1848,
+    "n_atr": 1850,
+    "matched_150ms": 1848,
+    "sensitivity_ari_vs_atr": 0.9989189189189189,
+    "ppv_ari_vs_atr": 1.0,
+    "class_agreement_N_vs_nonN": 1.0
+   }
+  },
+  {
+   "record": "35",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22380000,
+   "duration": "24:52:00",
+   "duration_s": 89520.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform_new from record 35, beginning at 0",
+    "vfon: 24:34:56"
+   ],
+   "vfon": "24:34:56",
+   "vfon_s": 88496.0,
+   "expected_dat_bytes_fmt212": 67140000,
+   "onset_within_record": true,
+   "post_onset_s": 1024.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 1364.9333333333334,
+   "ari": {
+    "n_annotations": 100564,
+    "first_s": 0.32,
+    "last_s": 89518.848,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 78,
+    "post_onset_N_0_60s": 35,
+    "post_onset_beats_60_180s": 179,
+    "post_onset_N_60_180s": 106,
+    "baseline_readable": true,
+    "baseline_beats": 2479,
+    "baseline_rhythm_labels": [
+     "(ST1+"
+    ]
+   },
+   "atr": {
+    "n_annotations": 100742,
+    "first_s": 0.304,
+    "last_s": 86399.32,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 0,
+    "post_onset_N_0_60s": 0,
+    "post_onset_beats_60_180s": 0,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 2473,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2479,
+    "n_atr": 2473,
+    "matched_150ms": 2472,
+    "sensitivity_ari_vs_atr": 0.9995956328346138,
+    "ppv_ari_vs_atr": 0.9971762807583703,
+    "class_agreement_N_vs_nonN": 0.9983818770226537
+   }
+  },
+  {
+   "record": "36",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 18320000,
+   "duration": "20:21:20",
+   "duration_s": 73280.0,
+   "base_time": "15:09:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 36, beginning at 8:40.000",
+    "vfon: 18:59:01"
+   ],
+   "vfon": "18:59:01",
+   "vfon_s": 68341.0,
+   "expected_dat_bytes_fmt212": 54960000,
+   "onset_within_record": true,
+   "post_onset_s": 4939.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 1029.0166666666667,
+   "ari": {
+    "n_annotations": 77235,
+    "first_s": 0.424,
+    "last_s": 73279.848,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 74,
+    "post_onset_N_0_60s": 57,
+    "post_onset_beats_60_180s": 119,
+    "post_onset_N_60_180s": 87,
+    "baseline_readable": true,
+    "baseline_beats": 1947,
+    "baseline_rhythm_labels": [
+     "(ST1-"
+    ]
+   },
+   "atr": {
+    "n_annotations": 77324,
+    "first_s": 0.416,
+    "last_s": 73167.512,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 103,
+    "post_onset_N_0_60s": 32,
+    "post_onset_beats_60_180s": 131,
+    "post_onset_N_60_180s": 91,
+    "baseline_readable": true,
+    "baseline_beats": 1946,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 1947,
+    "n_atr": 1946,
+    "matched_150ms": 1946,
+    "sensitivity_ari_vs_atr": 1.0,
+    "ppv_ari_vs_atr": 0.9994863893168978,
+    "class_agreement_N_vs_nonN": 0.0005138746145940391
+   }
+  },
+  {
+   "record": "37",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22620000,
+   "duration": "25:08:00",
+   "duration_s": 90480.0,
+   "base_time": "14:29:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 37, beginning at 10:00.000",
+    "vfon: 01:31:13"
+   ],
+   "vfon": "01:31:13",
+   "vfon_s": 5473.0,
+   "expected_dat_bytes_fmt212": 67860000,
+   "onset_within_record": true,
+   "post_onset_s": 85007.0,
+   "eligible_2h20": false,
+   "eligible_2h50": false,
+   "eligible_3h": false,
+   "eligible_4h": false,
+   "remote_zone_min": 0.0,
+   "ari": {
+    "n_annotations": 63698,
+    "first_s": 3.68,
+    "last_s": 90477.472,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 25,
+    "post_onset_N_0_60s": 17,
+    "post_onset_beats_60_180s": 50,
+    "post_onset_N_60_180s": 44,
+    "baseline_readable": false
+   },
+   "atr": null
+  },
+  {
+   "record": "38",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 16476250,
+   "duration": "18:18:25",
+   "duration_s": 65905.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 38, beginning at 8:55.000",
+    "vfon: 08:01:54"
+   ],
+   "vfon": "08:01:54",
+   "vfon_s": 28914.0,
+   "expected_dat_bytes_fmt212": 49428750,
+   "onset_within_record": true,
+   "post_onset_s": 36991.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 371.9,
+   "ari": {
+    "n_annotations": 74431,
+    "first_s": 0.28,
+    "last_s": 65889.352,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 88,
+    "post_onset_N_0_60s": 73,
+    "post_onset_beats_60_180s": 55,
+    "post_onset_N_60_180s": 50,
+    "baseline_readable": true,
+    "baseline_beats": 2973,
+    "baseline_rhythm_labels": []
+   },
+   "atr": null
+  },
+  {
+   "record": "39",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "200",
+    "200"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 5205000,
+   "duration": "05:47:00",
+   "duration_s": 20820.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 39, beginning at 0",
+    "vfon: 04:37:51"
+   ],
+   "vfon": "04:37:51",
+   "vfon_s": 16671.0,
+   "expected_dat_bytes_fmt212": 15615000,
+   "onset_within_record": true,
+   "post_onset_s": 4149.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 167.85000000000002,
+   "ari": {
+    "n_annotations": 31394,
+    "first_s": 0.62,
+    "last_s": 20804.3,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 143,
+    "post_onset_N_0_60s": 84,
+    "post_onset_beats_60_180s": 179,
+    "post_onset_N_60_180s": 83,
+    "baseline_readable": true,
+    "baseline_beats": 2349,
+    "baseline_rhythm_labels": [
+     "(ST1-"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "40",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22395000,
+   "duration": "24:53:00",
+   "duration_s": 89580.0,
+   "base_time": "9:50:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 40, beginning at 0"
+   ],
+   "vfon": null,
+   "vfon_s": null,
+   "expected_dat_bytes_fmt212": 67185000,
+   "ari": {
+    "n_annotations": 109216,
+    "first_s": 0.216,
+    "last_s": 89541.764,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "baseline_readable": true,
+    "baseline_beats": 2293,
+    "baseline_rhythm_labels": [
+     "(ST0+"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "41",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 3540000,
+   "duration": "03:56:00",
+   "duration_s": 14160.0,
+   "base_time": "11:45:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 41, beginning at 0",
+    "vfon: 02:59:24"
+   ],
+   "vfon": "02:59:24",
+   "vfon_s": 10764.0,
+   "expected_dat_bytes_fmt212": 10620000,
+   "onset_within_record": true,
+   "post_onset_s": 3396.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": false,
+   "eligible_4h": false,
+   "remote_zone_min": 69.4,
+   "ari": {
+    "n_annotations": 22086,
+    "first_s": 0.624,
+    "last_s": 14118.42,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 181,
+    "post_onset_N_0_60s": 73,
+    "post_onset_beats_60_180s": 236,
+    "post_onset_N_60_180s": 131,
+    "baseline_readable": true,
+    "baseline_beats": 2707,
+    "baseline_rhythm_labels": []
+   },
+   "atr": {
+    "n_annotations": 17940,
+    "first_s": 0.008,
+    "last_s": 11459.992,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 226,
+    "post_onset_N_0_60s": 0,
+    "post_onset_beats_60_180s": 246,
+    "post_onset_N_60_180s": 148,
+    "baseline_readable": true,
+    "baseline_beats": 2708,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2707,
+    "n_atr": 2708,
+    "matched_150ms": 2707,
+    "sensitivity_ari_vs_atr": 0.9996307237813885,
+    "ppv_ari_vs_atr": 1.0,
+    "class_agreement_N_vs_nonN": 0.9988917620982638
+   }
+  },
+  {
+   "record": "42",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22622500,
+   "duration": "25:08:10",
+   "duration_s": 90490.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 42, beginning at 18:10.000"
+   ],
+   "vfon": null,
+   "vfon_s": null,
+   "expected_dat_bytes_fmt212": 67867500,
+   "ari": {
+    "n_annotations": 115575,
+    "first_s": 0.124,
+    "last_s": 90481.068,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "baseline_readable": true,
+    "baseline_beats": 2747,
+    "baseline_rhythm_labels": [
+     "(ST1+"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "43",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 20817500,
+   "duration": "23:07:50",
+   "duration_s": 83270.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 43, beginning at 1:20.000",
+    "vfon: 15:37:11"
+   ],
+   "vfon": "15:37:11",
+   "vfon_s": 56231.0,
+   "expected_dat_bytes_fmt212": 62452500,
+   "onset_within_record": true,
+   "post_onset_s": 27039.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 827.1833333333333,
+   "ari": {
+    "n_annotations": 124864,
+    "first_s": 0.32,
+    "last_s": 83269.684,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 95,
+    "post_onset_N_0_60s": 69,
+    "post_onset_beats_60_180s": 184,
+    "post_onset_N_60_180s": 176,
+    "baseline_readable": true,
+    "baseline_beats": 2185,
+    "baseline_rhythm_labels": [
+     "(ST1-"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "44",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 21000000,
+   "duration": "23:20:00",
+   "duration_s": 84000.0,
+   "base_time": "14:51:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 44, beginning at 0",
+    "vfon: 19:38:45"
+   ],
+   "vfon": "19:38:45",
+   "vfon_s": 70725.0,
+   "expected_dat_bytes_fmt212": 63000000,
+   "onset_within_record": true,
+   "post_onset_s": 13275.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 1068.75,
+   "ari": {
+    "n_annotations": 118668,
+    "first_s": 0.12,
+    "last_s": 83998.436,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 117,
+    "post_onset_N_0_60s": 89,
+    "post_onset_beats_60_180s": 235,
+    "post_onset_N_60_180s": 223,
+    "baseline_readable": true,
+    "baseline_beats": 2296,
+    "baseline_rhythm_labels": [
+     "(AFIB",
+     "(N"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "45",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 21740000,
+   "duration": "24:09:20",
+   "duration_s": 86960.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 45, beginning at 0:40.000",
+    "vfon: 18:09:17"
+   ],
+   "vfon": "18:09:17",
+   "vfon_s": 65357.0,
+   "expected_dat_bytes_fmt212": 65220000,
+   "onset_within_record": true,
+   "post_onset_s": 21603.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 979.2833333333333,
+   "ari": {
+    "n_annotations": 99452,
+    "first_s": 0.144,
+    "last_s": 86953.092,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 29,
+    "post_onset_N_0_60s": 20,
+    "post_onset_beats_60_180s": 147,
+    "post_onset_N_60_180s": 128,
+    "baseline_readable": true,
+    "baseline_beats": 2096,
+    "baseline_rhythm_labels": []
+   },
+   "atr": {
+    "n_annotations": 99138,
+    "first_s": 0.136,
+    "last_s": 85721.104,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 25,
+    "post_onset_N_0_60s": 1,
+    "post_onset_beats_60_180s": 0,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 2089,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2096,
+    "n_atr": 2089,
+    "matched_150ms": 2084,
+    "sensitivity_ari_vs_atr": 0.9976065102920058,
+    "ppv_ari_vs_atr": 0.9942748091603053,
+    "class_agreement_N_vs_nonN": 0.9956813819577736
+   }
+  },
+  {
+   "record": "46",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 3827500,
+   "duration": "04:15:10",
+   "duration_s": 15310.0,
+   "base_time": "10:20:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 46, beginning at 9:50.000",
+    "vfon: 03:41:47"
+   ],
+   "vfon": "03:41:47",
+   "vfon_s": 13307.0,
+   "expected_dat_bytes_fmt212": 11482500,
+   "onset_within_record": true,
+   "post_onset_s": 2003.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": false,
+   "remote_zone_min": 111.78333333333333,
+   "ari": {
+    "n_annotations": 17233,
+    "first_s": 0.5,
+    "last_s": 15107.3,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 126,
+    "post_onset_N_0_60s": 68,
+    "post_onset_beats_60_180s": 168,
+    "post_onset_N_60_180s": 90,
+    "baseline_readable": true,
+    "baseline_beats": 2411,
+    "baseline_rhythm_labels": []
+   },
+   "atr": {
+    "n_annotations": 16789,
+    "first_s": 0.488,
+    "last_s": 14918.632,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 12,
+    "post_onset_N_0_60s": 0,
+    "post_onset_beats_60_180s": 0,
+    "post_onset_N_60_180s": 0,
+    "baseline_readable": true,
+    "baseline_beats": 2411,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2411,
+    "n_atr": 2411,
+    "matched_150ms": 2411,
+    "sensitivity_ari_vs_atr": 1.0,
+    "ppv_ari_vs_atr": 1.0,
+    "class_agreement_N_vs_nonN": 0.9987557030277893
+   }
+  },
+  {
+   "record": "47",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "200",
+    "200"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 21237500,
+   "duration": "23:35:50",
+   "duration_s": 84950.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 47, beginning at 44:10.000",
+    "vfon: 06:13:01"
+   ],
+   "vfon": "06:13:01",
+   "vfon_s": 22381.0,
+   "expected_dat_bytes_fmt212": 63712500,
+   "onset_within_record": true,
+   "post_onset_s": 62569.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 263.01666666666665,
+   "ari": {
+    "n_annotations": 92813,
+    "first_s": 1.004,
+    "last_s": 84949.676,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 72,
+    "post_onset_N_0_60s": 28,
+    "post_onset_beats_60_180s": 118,
+    "post_onset_N_60_180s": 80,
+    "baseline_readable": true,
+    "baseline_beats": 1838,
+    "baseline_rhythm_labels": [
+     "(ST0+",
+     "(ST0-",
+     "(ST1-"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "48",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22143750,
+   "duration": "24:36:15",
+   "duration_s": 88575.0,
+   "base_time": "10:15:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 48, beginning at 7:45.000",
+    "vfon: 02:29:40"
+   ],
+   "vfon": "02:29:40",
+   "vfon_s": 8980.0,
+   "expected_dat_bytes_fmt212": 66431250,
+   "onset_within_record": true,
+   "post_onset_s": 79595.0,
+   "eligible_2h20": true,
+   "eligible_2h50": false,
+   "eligible_3h": false,
+   "eligible_4h": false,
+   "remote_zone_min": 39.66666666666666,
+   "ari": {
+    "n_annotations": 147362,
+    "first_s": 0.236,
+    "last_s": 88547.924,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 134,
+    "post_onset_N_0_60s": 122,
+    "post_onset_beats_60_180s": 286,
+    "post_onset_N_60_180s": 284,
+    "baseline_readable": true,
+    "baseline_beats": 2933,
+    "baseline_rhythm_labels": [
+     "(ST1+"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "49",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22380957,
+   "duration": "24:52:04",
+   "duration_s": 89523.828,
+   "base_time": "13:40:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 49, beginning at 6:05.000"
+   ],
+   "vfon": null,
+   "vfon_s": null,
+   "expected_dat_bytes_fmt212": 67142871,
+   "ari": {
+    "n_annotations": 94840,
+    "first_s": 0.392,
+    "last_s": 89523.62,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "baseline_readable": true,
+    "baseline_beats": 1666,
+    "baseline_rhythm_labels": []
+   },
+   "atr": {
+    "n_annotations": 82692,
+    "first_s": 0.376,
+    "last_s": 84530.16,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "baseline_readable": true,
+    "baseline_beats": 1672,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 1666,
+    "n_atr": 1672,
+    "matched_150ms": 1666,
+    "sensitivity_ari_vs_atr": 0.9964114832535885,
+    "ppv_ari_vs_atr": 1.0,
+    "class_agreement_N_vs_nonN": 1.0
+   }
+  },
+  {
+   "record": "50",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 20814500,
+   "duration": "23:07:38",
+   "duration_s": 83258.0,
+   "base_time": "21:50:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 50, beginning at 0:22.000",
+    "vfon: 11:45:43"
+   ],
+   "vfon": "11:45:43",
+   "vfon_s": 42343.0,
+   "expected_dat_bytes_fmt212": 62443500,
+   "onset_within_record": true,
+   "post_onset_s": 40915.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 595.7166666666667,
+   "ari": {
+    "n_annotations": 64254,
+    "first_s": 0.188,
+    "last_s": 83256.704,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 149,
+    "post_onset_N_0_60s": 31,
+    "post_onset_beats_60_180s": 103,
+    "post_onset_N_60_180s": 103,
+    "baseline_readable": true,
+    "baseline_beats": 1468,
+    "baseline_rhythm_labels": [
+     "(ST1+"
+    ]
+   },
+   "atr": null
+  },
+  {
+   "record": "51",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 22627500,
+   "duration": "25:08:30",
+   "duration_s": 90510.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 51, beginning at 0",
+    "vfon: 22:58:23"
+   ],
+   "vfon": "22:58:23",
+   "vfon_s": 82703.0,
+   "expected_dat_bytes_fmt212": 67882500,
+   "onset_within_record": true,
+   "post_onset_s": 7807.0,
+   "eligible_2h20": true,
+   "eligible_2h50": true,
+   "eligible_3h": true,
+   "eligible_4h": true,
+   "remote_zone_min": 1268.3833333333334,
+   "ari": {
+    "n_annotations": 82094,
+    "first_s": 0.404,
+    "last_s": 90506.016,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 87,
+    "post_onset_N_0_60s": 38,
+    "post_onset_beats_60_180s": 139,
+    "post_onset_N_60_180s": 107,
+    "baseline_readable": true,
+    "baseline_beats": 1508,
+    "baseline_rhythm_labels": [
+     "(ST0+",
+     "(ST1+"
+    ]
+   },
+   "atr": {
+    "n_annotations": 77932,
+    "first_s": 1059.68,
+    "last_s": 86398.576,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 111,
+    "post_onset_N_0_60s": 37,
+    "post_onset_beats_60_180s": 141,
+    "post_onset_N_60_180s": 107,
+    "baseline_readable": true,
+    "baseline_beats": 1449,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 1508,
+    "n_atr": 1449,
+    "matched_150ms": 1445,
+    "sensitivity_ari_vs_atr": 0.9972394755003451,
+    "ppv_ari_vs_atr": 0.9582228116710876,
+    "class_agreement_N_vs_nonN": 0.8339100346020761
+   }
+  },
+  {
+   "record": "52",
+   "fs": 250.0,
+   "n_sig": 2,
+   "formats": [
+    "212"
+   ],
+   "gains": [
+    "800",
+    "800"
+   ],
+   "signal_descriptions": [
+    "ECG",
+    "ECG"
+   ],
+   "n_samples": 6766250,
+   "duration": "07:31:05",
+   "duration_s": 27065.0,
+   "base_time": "12:00:00",
+   "base_date": null,
+   "header_comments": [
+    "Produced by xform from record 52, beginning at 5:55.000",
+    "vfon: 02:32:40"
+   ],
+   "vfon": "02:32:40",
+   "vfon_s": 9160.0,
+   "expected_dat_bytes_fmt212": 20298750,
+   "onset_within_record": true,
+   "post_onset_s": 17905.0,
+   "eligible_2h20": true,
+   "eligible_2h50": false,
+   "eligible_3h": false,
+   "eligible_4h": false,
+   "remote_zone_min": 42.66666666666666,
+   "ari": {
+    "n_annotations": 47598,
+    "first_s": 0.104,
+    "last_s": 26993.68,
+    "has_rhythm_aux": true,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 134,
+    "post_onset_N_0_60s": 105,
+    "post_onset_beats_60_180s": 242,
+    "post_onset_N_60_180s": 214,
+    "baseline_readable": true,
+    "baseline_beats": 2895,
+    "baseline_rhythm_labels": [
+     "(AFIB",
+     "(N"
+    ]
+   },
+   "atr": {
+    "n_annotations": 47768,
+    "first_s": 0.096,
+    "last_s": 26666.056,
+    "has_rhythm_aux": false,
+    "first_vf_marker_s": null,
+    "post_onset_beats_0_60s": 205,
+    "post_onset_N_0_60s": 25,
+    "post_onset_beats_60_180s": 399,
+    "post_onset_N_60_180s": 39,
+    "baseline_readable": true,
+    "baseline_beats": 2858,
+    "baseline_rhythm_labels": []
+   },
+   "baseline_ari_vs_atr": {
+    "n_ari": 2895,
+    "n_atr": 2858,
+    "matched_150ms": 2841,
+    "sensitivity_ari_vs_atr": 0.9940517844646606,
+    "ppv_ari_vs_atr": 0.9813471502590674,
+    "class_agreement_N_vs_nonN": 0.9781766983456529
+   }
+  }
+ ]
+}

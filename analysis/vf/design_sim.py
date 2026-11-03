@@ -135,7 +135,7 @@ def make_patient(rng, T: int, sc: dict, vf: bool = True) -> dict:
     SQI: 1 channel, loads on the onset-locked artefact with kappa.
     Drift / artefact terms are added to v (TD-only: worst case for TD claims).
     """
-    phi, rho, c = sc.get("phi", 0.9), 0.5, 0.7
+    phi, rho, c = sc.get("phi", 0.9), sc.get("rho", 0.5), 0.7
     m = ar1(rng, T, K1, phi)
     u = ar1(rng, T, K3, phi)
     v = ar1(rng, T, 1, phi)[:, 0]
@@ -288,7 +288,11 @@ def draw_T(rng, n: int, dist: str) -> np.ndarray:
 
 def run_study(rng, sc: dict, n: int, controls: bool = True,
               stride: int = 1, guard_lo=None) -> dict:
-    Ts = draw_T(rng, n, sc.get("Tdist", "mixed"))
+    if "Tlist" in sc:                      # explicit onset minutes (verified metadata)
+        Ts = np.asarray(sc["Tlist"], int)
+        n = len(Ts)
+    else:
+        Ts = draw_T(rng, n, sc.get("Tdist", "mixed"))
     pats = [make_patient(rng, int(T), sc, vf=True) for T in Ts]
     novf = [make_patient(rng, 1440, sc, vf=False) for _ in range(3)]
     want = ("M1", "M4", "M3", "SQI", "M1Q", "M4Q") if controls else ("M1", "M4")
