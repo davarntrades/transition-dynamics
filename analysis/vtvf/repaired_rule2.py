@@ -85,7 +85,16 @@ def _bstd(v, base_w):
     return (v - m) / s
 
 
+CONVENTIONAL = {"conv_hr": (0, -1.0),      # heart rate (negative mean NN)
+                "conv_sdnn": (1, -1.0),    # HRV reduction (negative SDNN)
+                "conv_rmssd": (2, -1.0),
+                "conv_rt": (3, -1.0)}      # RTa shortening
+
+
 def _score(feat, stat, X, remote, base_w, extra=None):
+    if stat in CONVENTIONAL:                 # conventional baselines: unadjusted feature
+        col, sign = CONVENTIONAL[stat]
+        return sign * np.nan_to_num(feat["M1"][:, col])
     inst, pers = COMPOSITES2[stat]
     c = np.nanmean(np.column_stack([feat["stats"][k] for k in inst]), axis=1)
     Xu = X if extra is None else np.column_stack([X, extra])

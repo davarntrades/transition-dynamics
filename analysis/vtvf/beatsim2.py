@@ -70,7 +70,10 @@ def generate(rng, T_min: float, sc: dict) -> dict:
         ep = (np.floor(t_nom / 2.0).astype(int) % 2 == 0) if rng.random() < 0.5 else \
              (np.floor(t_nom / 2.0).astype(int) % 2 == 1)
         frac = (zone & ep).astype(float)
-    if g and ptype in ("corr", "intermittent_corr"):
+    if g and ptype == "nncorr":                       # precursor in NN-RTa coupling only
+        L1 = _chol(min(0.95, c01 + g), c12, c23)
+        innov = (u @ L0.T) * (1 - frac)[:, None] + (u @ L1.T) * frac[:, None]
+    elif g and ptype in ("corr", "intermittent_corr"):
         L1 = _chol(c01, min(0.95, c12 + g), min(0.95, c23 + g))
         innov = (u @ L0.T) * (1 - frac)[:, None] + (u @ L1.T) * frac[:, None]
     else:
