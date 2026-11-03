@@ -168,9 +168,14 @@ def make_patient(rng, T: int, sc: dict, vf: bool = True) -> dict:
         s = rng.normal(sc.get('cvx_mu', 2.5), 0.5)
         v += s * (minute / 600) ** 2
     elif d == "circadian":
-        clock_on = rng.normal(8 * 60, 120) if vf else rng.uniform(0, 1440)
-        clock = clock_on - T + minute if vf else clock_on + minute
-        v += sc.get('circ_amp', 4.0) * np.sin(2 * np.pi * (clock - 10 * 60) / 1440)
+        # clock-locked confound: a wake-up surge (awake 07:00-22:00) with VF
+        # onsets clustered in the morning (08:00 +/- 1 h). No-VF records start
+        # at a uniformly random clock time.
+        clock_on = rng.normal(8 * 60, 60) if vf else rng.uniform(0, 1440)
+        clock = (clock_on - T + minute) if vf else (clock_on + minute)
+        ph = np.mod(clock, 1440)
+        awake = 1 / (1 + np.exp(-(ph - 420) / 30)) - 1 / (1 + np.exp(-(ph - 1320) / 30))
+        v += sc.get('circ_amp', 2.0) * awake
     td = rho * m[:, :1] + math.sqrt(1 - rho ** 2) * (
         c * v[:, None] + math.sqrt(1 - c ** 2) * u)
     F1 = rolling_mean(m, W)
@@ -451,9 +456,11 @@ SCENARIOS = {
 RULES = ["primary", "pseudo_only", "detr_only", "temporal", "temporal+et", "full"]
 
 
-def exp_rules(rng, reps: int, n: int) -> dict:
+def exp_rules(rng, reps: int, n: int, only=None) -> dict:
     out = {}
     for name, sc in SCENARIOS.items():
+        if only and name not in only:
+            continue
         t0 = time.time()
         counts = {r: {} for r in RULES}
         large_excl = 0
@@ -489,6 +496,7 @@ def exp_power(rng, reps: int, ns=(8, 12, 16, 20), bs=(0.0, 0.5, 1.0, 1.5, 2.0, 3
             sds = {k: [] for k in BINS}
             means = {k: [] for k in BINS}
             excl = 0
+            excl_d = {0.10: 0, 0.15: 0, 0.20: 0}
             for st in many(rng, sc, n, reps):
                 sig = [k for k in BINS if st["bins"][k]["pass"]]
                 for k in BINS:
@@ -497,7 +505,10 @@ def exp_power(rng, reps: int, ns=(8, 12, 16, 20), bs=(0.0, 0.5, 1.0, 1.5, 2.0, 3
                     means[k].append(st["bins"][k]["mean"])
                 rule += len(sig) >= 2 and ("B15" in sig or "B30" in sig)
                 excl += all(st["bins"][k]["ub95"] < 0.10 for k in BINS)
+                for dl in excl_d:
+                    excl_d[dl] += all(st["bins"][k]["ub95"] < dl for k in BINS)
             out[f"n{n}_b{b}"] = {
+                "large_excluded_rate_by_delta": {str(k): v / reps for k, v in excl_d.items()},
                 "n": n, "b": b, "shape": shape,
                 "power_per_bin": {k: pw[k] / reps for k in BINS},
                 "rule_rate_stats_only": rule / reps,
@@ -716,6 +727,7 @@ def main():
     ap.add_argument("--only", default="")
     ap.add_argument("--seed", type=int, default=20261103)
     ap.add_argument("--procs", type=int, default=4)
+    ap.add_argument("--scenarios", default="")
     a = ap.parse_args()
     global POOL
     if a.procs > 1:
@@ -726,22 +738,33 @@ def main():
     res = {"meta": {"seed": a.seed, "synthetic_only": True,
                     "note": "Design simulation. No real data. See docs/VF_DESIGN_SIMULATION.md"}}
     todo = a.only.split(",") if a.only else ["airm", "power", "overlap", "guard", "rules"]
+    sc_only = a.scenarios.split(",") if a.scenarios else None
+    import os
+    if os.path.exists(a.out):                      # merge: never discard saved stages
+        with open(a.out) as f:
+            prev = json.load(f)
+        prev.update({k: v for k, v in res.items() if k == "meta"})
+        res = prev
+
+    def save():
+        with open(a.out + ".tmp", "w") as f:
+            json.dump(res, f, indent=1, default=float)
+        os.replace(a.out + ".tmp", a.out)
     if "airm" in todo:
-        res["airm_bias"] = exp_airm_bias(rng, 40 if q else 400)
+        res["airm_bias"] = exp_airm_bias(rng, 40 if q else 400); save()
     if "true" in todo:
         res["true_effect"] = {sh: exp_true_effect(rng, reps=1 if q else 3, n_big=30 if q else 160,
-                                                  shape=sh) for sh in ("ramp30", "step30")}
+                                                  shape=sh) for sh in ("ramp30", "step30")}; save()
     if "power" in todo:
-        res["power"] = exp_power(rng, 10 if q else 200)
-        res["power_step30"] = exp_power(rng, 10 if q else 200, ns=(12, 20), shape="step30")
+        res["power"] = exp_power(rng, 10 if q else 200); save()
+        res["power_step30"] = exp_power(rng, 10 if q else 200, ns=(12, 20), shape="step30"); save()
     if "overlap" in todo:
-        res["overlap"] = exp_overlap(rng, 5 if q else 100)
+        res["overlap"] = exp_overlap(rng, 5 if q else 100); save()
     if "guard" in todo:
-        res["guard"] = exp_guard(rng, 10 if q else 150)
+        res["guard"] = exp_guard(rng, 10 if q else 150); save()
     if "rules" in todo:
-        res["rules"] = exp_rules(rng, 4 if q else 100, 20)
-    with open(a.out, "w") as f:
-        json.dump(res, f, indent=1, default=float)
+        r = exp_rules(rng, 4 if q else 100, 20, only=sc_only)
+        res.setdefault("rules", {}).update(r); save()
     print("wrote", a.out)
 
 
