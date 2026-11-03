@@ -154,32 +154,38 @@ reads headers and annotation metadata only. Any discrepancy found there
 
 ---
 
-## 3. Sample-size verdict
+## 3. Sample-size verdict (revised: simulation, not formula)
 
-> **SDDB supports exploratory analysis and the falsification of large effects.
-> It does not support confirmatory testing of incremental predictive value at
-> the effect sizes this programme has encountered.**
+> **Under the simulated assumptions, SDDB supports a large-effect screen and
+> a binding large-effect falsification. It does not support confirmatory
+> testing of incremental predictive value at the effect sizes this programme
+> has encountered.**
 
-Arithmetic (paired per-patient contrast, two-sided, 80% power; simulated
-t-test critical values). $\sigma_\Delta$ is the between-patient SD of the
-per-patient ΔAUROC, which is unknown until the outcome-blind calibration
-(protocol §11.3):
+The v1 version of this section used an analytic paired-t approximation with
+an *assumed* between-patient SD of 0.15. That gave an MDE of about 0.12. It
+is **withdrawn** (it remains in git history). It ignored:
 
-| eligible VF patients | α | detectable standardised effect | MDE at σ_Δ = 0.10 | 0.15 | 0.20 |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| 20 | 0.05 | 0.67 | 0.067 | 0.101 | 0.134 |
-| 20 | 0.0125 (4 bins, Bonferroni) | 0.82 | 0.082 | **0.123** | 0.164 |
-| 15 | 0.0125 | 0.97 | 0.097 | 0.146 | 0.194 |
+- the ≈ 1 effective positive per patient per bin created by overlapping
+  windows;
+- leave-one-patient-out (LOPO) fitting noise;
+- effect heterogeneity;
+- the conjunction of tests in the decision rule.
 
-Events needed to detect a given ΔAUROC at σ_Δ = 0.15 and α = 0.0125:
-**0.10 → 26 · 0.05 → 101 · 0.03 → 279 · 0.02 → 628.**
+The replacement is the design simulation in
+[`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md). It is synthetic, with
+stated generative assumptions, and is recalibrated on outcome-blind real data
+before freezing:
+
+| n eligible | 80%-power MDE per bin (mean ΔAUROC, long-lead precursor) | null SD of per-patient Δ | P(large effect excluded under H0), δ = 0.15 |
+|:--:|:--:|:--:|:--:|
+| 20 | ≈ 0.23 | 0.16–0.21 | 0.66–0.81 |
+| 12 | > 0.30 | 0.16–0.20 | 0.44–0.59 |
 
 For comparison, every incremental effect this programme has measured on real
-data lies between −0.004 and +0.014 AUROC/AUPRC. **An SDDB null therefore
-cannot exclude an effect of the size the programme has historically tested
-for.** It can only exclude effects of roughly 0.10 AUROC or more. The protocol
-therefore makes "large increment excluded" its binding falsification outcome
-and caps every positive outcome at **EXPLORATORY SIGNAL**.
+data lies between −0.004 and +0.014. Power for effects of that size is ≈ α.
+**An SDDB null therefore cannot exclude effects of the size the programme has
+historically tested for**, and an SDDB EXPLORATORY ASSOCIATION is reachable
+only for very large effects.
 
 ---
 

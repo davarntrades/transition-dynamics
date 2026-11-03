@@ -158,7 +158,7 @@ $R_{\min}$ + 60 min, with $R_{\min}$ = 30 min. **This gives $T_{\min}$ =
 | Settling | 15 min | electrode settling. **Choice**, sensitivity analysis at 0 and 30 min |
 | Baseline | 30 min | the minimum that gives ≥ 600 beats for a 4×4 shrunk covariance at any heart rate ≥ 20 bpm. **Choice** |
 | Window | 5 min | first window entirely after the baseline |
-| $R_{\min}$ | 30 min | simulation shows per-patient Δ precision is limited by the few effective positives (§8.2), not by remote length beyond about 30 min. That is the shortest remote zone holding ≥ 3 window decorrelation lengths (≈ 10 min each). **Choice informed by simulation** |
+| $R_{\min}$ | 30 min | in simulation, per-patient Δ precision is limited by the ≈ 1 effective positive per bin (§8.2). The SD of $\Delta_i$ is flat for remote zones ≥ 60 min (0.19–0.25) and modestly inflated below 60 min, in B15/B30 only (0.31/0.24) ([`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §3.4). 30 min keeps short recordings at a small precision cost. **Choice informed by simulation; open decision D5** (60 min would give $T_{\min}$ = 2 h 50 and exclude records 48 and 52) |
 | 60 min | grey zone 30 + largest bin 30 | fixed by the horizons |
 
 **The v1 rule (2 h 15 min) was an unjustified sum, and it sat just below two
@@ -188,8 +188,18 @@ The 12-patient minimum was not derived from anything. It is replaced by:
 - **An outcome-blind informativeness gate** (§11.3). The design simulation is
   rerun with parameters estimated from outcome-blind data (truncated loader)
   and the realised n and $T_{\mathrm{VF}}$ distribution. If the MDE (80%
-  power) exceeds 0.20 in B15 and in B30, H-VF is UNRESOLVED-BY-DESIGN, and
+  power) exceeds **$\mathrm{MDE}_{\max}$** in B15 and in B30, H-VF is
+  UNRESOLVED-BY-DESIGN, and
   the true-onset analysis is not read.
+- **$\mathrm{MDE}_{\max}$ is open decision D2.** Under the simulated
+  assumptions the MDE at n = 20 is about **0.23** ΔAUROC per bin for a
+  sustained long-lead precursor, and above 0.30 at n = 12
+  ([`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §2). The v1 value
+  of 0.20 would therefore probably declare the study uninformative before it
+  is run. The proposal is **0.25**: the study is then explicitly a
+  *large-effect screen*. This value was chosen after seeing the
+  **design** simulation (no outcome data exist), and the reviewer should
+  treat it as a substantive choice, not a technicality.
 
 ---
 
@@ -224,8 +234,16 @@ M1 rather than removed, and the TD increment is tested beyond it.
 
 The guard $g$ protects against onset-marking error. If the true arrhythmia
 starts before the annotated onset, windows within the error contain the
-arrhythmia itself. The design simulation quantifies the trade-off between
-this contamination and losing trigger-proximal signal (§8.4).
+arrhythmia itself. Design simulation, with marking error up to 3 min
+([`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §5):
+
+- Contamination inflates the **conventional** B5 AUROC from 0.57 to 0.64
+  with no guard. It does not inflate the TD increment.
+- $g$ = 2 removes the contamination, at a cost of about 13 points of B5 power
+  for a trigger-weighted precursor.
+- A precursor confined to the last ≈ 5 min is undetectable at **any** guard
+  (power ≤ 0.08). The limit is sample size, not the guard, so a null result
+  says nothing about trigger-proximal change.
 
 **Pre-specified sensitivity analyses** (reported; non-binding unless stated):
 
@@ -408,10 +426,11 @@ Results are from the design simulation; see
 [`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §3.
 
 - **Window correlation.** Consecutive 5-min windows on a 60-s grid share 80%
-  of their data. Simulated lag-1 correlation of window features is ≈ 0.98,
-  and the correlation length is about 10 min.
+  of their data. Simulated lag-1 correlation of window features is 0.985.
+  Correlation is 0.55 at 10 min, 0.41 at 15 min and ≈ 0 at 30 min, so the
+  correlation length is about 15–20 min.
 - **Effective positives per bin.** B5 has 3 windows, B10 and B15 have 5, and
-  B30 has 15. These amount to about **1, 1, 1 and 2–3 effective independent
+  B30 has 15. These amount to about **1, 1, 1 and 1–2 effective independent
   observations**. Each patient's $\mathrm{AUROC}_i$ is therefore close to the
   percentile of one or two independent observations within that patient's
   remote distribution. That is why $\Delta_i$ is so dispersed across patients.
@@ -425,7 +444,8 @@ Results are from the design simulation; see
   variability by a factor of about 3. **Every CI in this protocol is
   patient-level**, and no window-level SE or p-value may be reported.
 - **False alarms.** Overlap makes "≥ 2 consecutive windows above threshold"
-  almost no filter: it removes only about 10% of single-window alarms. The
+  almost no filter. Even a 3-minute persistence rule removes only 17–26% of
+  single-window alarms in simulation. The
   alarm rule is therefore defined as a **persistence-in-time requirement**
   (§12). FAR is reported per monitored hour and does not depend on the
   stride.
@@ -437,7 +457,7 @@ formulas are not used anywhere for design decisions.
 
 ### 8.4 Guard-interval trade-off
 
-See §14 and the simulation document §5.
+See §5.1 and the simulation document §5.
 
 ---
 
@@ -461,10 +481,14 @@ as a strong precursor.
 
 | Confound | Pseudo-onsets | Detrending | Elapsed-time matching | SQI gate | Blinded audit |
 |---|:--:|:--:|:--:|:--:|:--:|
-| Linear drift in elapsed time | **catches** | **catches** | **catches** | only if visible in SQI | partly |
-| Accelerating (convex) drift in elapsed time | partly (offsets are earlier, where drift is slower) | partly | **catches** if shared across patients | only if visible | partly |
-| Onset-locked non-physiological change (symptom-related motion, electrode, end of tape) | **cannot** | **cannot** | **cannot** | **catches only if the artefact is visible in SQI** | partly |
-| Clock-locked (circadian) change with VF clustering in the morning | partly | **cannot** | **cannot** (clock ≠ elapsed time) | **cannot** | **cannot** |
+| Linear drift in elapsed time | partly (0.85 → 0.46) | **catches** (→ 0.01) | **catches** | only if visible in SQI | partly |
+| Accelerating (convex) drift in elapsed time | partly (0.69 → 0.49; offsets are earlier, where drift is slower) | partly (→ 0.21) | **catches** if shared across patients (all three → 0.02) | only if visible | partly |
+| Onset-locked non-physiological change (symptom-related motion, electrode, end of tape) | **cannot** (0.82–0.91 unchanged) | **cannot** | **cannot** (→ 0.71–0.76) | **catches only if visible** (κ 0.8 → 0.00; κ 0.2 → **0.61**) | partly |
+| Clock-locked change (wake-up surge) with VF clustering in the morning | **cannot** (0.22 → 0.20) | **cannot** | **cannot** (clock ≠ elapsed time) | **cannot** (full rule 0.13) | **cannot** |
+
+Figures in brackets are the simulated false-EXPLORATORY-ASSOCIATION rates,
+before → after the control, at n = 20. Under a true long-lead precursor the
+controls cost power: 0.80 → 0.70, and 1.00 → 0.54 when drift co-exists.
 
 The simulated rates behind this table are in
 [`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §4.
@@ -486,8 +510,8 @@ the headers for start times).
    - Pass: $p=(1+\#\{\text{null}\ge\text{obs}\})/(1+9999)\le0.05$.
    - If fewer than 8 subjects contribute, the pseudo-onset control is
      **non-evaluable**, and the bin cannot pass. This is conservative by
-     design: in the simulated "mixed" duration scenario only about half of
-     patients have a pseudo-onset.
+     design. About 83% of patients have a pseudo-onset in the simulated
+     "mixed" duration scenario, and fewer if recordings are short.
 2. **Detrending.** Per patient and per feature, a linear trend is fitted on
    the remote zone and removed everywhere. Pass: retained Δ ≥ 50% of the
    observed value, same sign.
@@ -567,7 +591,12 @@ VF.
    patient-cluster bootstrap (2,000 replicates) as sensitivity; exact
    one-sided sign test at p < 0.025.
 2. **Large-effect exclusion.** The one-sided 95% upper bound of mean
-   $\Delta_i$ is below $\delta_{\mathrm{large}}$ = 0.10.
+   $\Delta_i$ is below $\delta_{\mathrm{large}}$ = **0.15** (proposal;
+   decision D9). In simulation at n = 20, δ = 0.10 fires in only 38–53% of
+   null studies, so the binding falsification would usually be
+   uninformative. δ = 0.15 fires in 66–81% of null studies and in ≤ 0.5% of
+   studies whose true effect is ≥ 0.18
+   ([`VF_DESIGN_SIMULATION.md`](VF_DESIGN_SIMULATION.md) §2.4).
 3. **Outcome-blind informativeness gate.** As in §4.3, using the simulation
    recalibrated on truncated-loader data.
 4. **Reporting.**
@@ -590,8 +619,9 @@ for nominal FAR targets of 0.1, 0.5 and 1.0 per hour.
 ### 12.2 What is reported
 
 - **Realised held-out FAR**, which is the quantity reported. The nominal
-  target is not. Simulation shows that realised held-out FAR scatters widely
-  around a target calibrated on other patients.
+  target is not. In simulation, a nominal 0.5/h gave a realised mean of
+  0.61/h, a median of 0.36/h and a 10th–90th percentile range of 0–1.75/h.
+  At a nominal 0.1/h, 58% of patients had no alarm at all.
 - The per-patient FAR distribution: median, 10th–90th percentiles, and the
   fraction of patients with zero alarms.
 - The pooled FAR with a patient-bootstrap CI.
@@ -652,8 +682,9 @@ study may be described as clinically usable.**
 
 ### 13.3 Binding falsification flag
 
-**LARGE INCREMENT EXCLUDED:** the one-sided 95% upper bound is < 0.10 in all
-four bins. This falsifies a large (≥ 0.10 AUROC) incremental association in
+**LARGE INCREMENT EXCLUDED:** the one-sided 95% upper bound is
+< $\delta_{\mathrm{large}}$ (0.15, proposed) in all four bins. This
+falsifies a large (≥ $\delta_{\mathrm{large}}$ AUROC) incremental association in
 SDDB. Smaller increments remain unresolved, and that must be stated in the
 same sentence.
 
@@ -684,7 +715,7 @@ multichannel structure", with no TD reading.
 |---|---|
 | EXPLORATORY ASSOCIATION | "In a retrospective dataset of N patients who developed VF, adding TD statistics to conventional features was associated with better within-patient separation of pre-onset periods at alarm lead times of X min. Onset-locked artefact is excluded only insofar as the SQI features detect it, and circadian confounding is not excluded. This is exploratory and requires independent, event-unconditional validation." **Never** "predicts VF", "early warning", "advance warning", "forecast", or any mechanism |
 | TRIGGER-PROXIMAL ONLY | "Changes within X min of onset." Not advance warning |
-| NOT SUPPORTED + LARGE EXCLUDED | "No large incremental association. Smaller effects are not excluded" |
+| NOT SUPPORTED + LARGE EXCLUDED | "No incremental association of ≥ 0.15 AUROC. Smaller effects, including every effect size this programme has previously measured, are not excluded" |
 | NOT SUPPORTED alone | "Not supported. The data cannot resolve small effects" |
 | any verdict | Hypotension verdicts are unaffected. M2 and M_null remain live |
 
@@ -700,9 +731,27 @@ summarised there and in
 established properties of SDDB. They are recalibrated by the outcome-blind
 gate.
 
-**Conclusion.** SDDB supports exploratory analysis with a binding
-large-effect falsification. It does not support confirmatory testing of
-increments of the size this programme has historically measured.
+| Quantity (n = 20, sustained long-lead precursor unless stated) | Simulated value |
+|---|:--:|
+| Null SD of per-patient Δ | 0.16–0.21 (v1 assumed 0.15) |
+| 80%-power MDE per bin, mean ΔAUROC | **≈ 0.23** (v1 analytic: 0.12) |
+| MDE at n = 12 | > 0.30 |
+| Type-I rate of the decision rule under H0 | 0.000–0.005 (very conservative) |
+| P(rule met), trigger-weighted precursor with B5 Δ ≈ 0.22 | 0.24 |
+| P(LARGE INCREMENT EXCLUDED) under H0 at δ = 0.10 / 0.15 / 0.20 | 0.38–0.53 / 0.66–0.81 / 0.82–0.94 |
+| Power for the effect sizes this programme has measured before (≤ 0.014) | ≈ α |
+
+**Conclusion.** Under these assumptions, SDDB supports at most a
+**large-effect screen**:
+
+- an EXPLORATORY ASSOCIATION is reachable only if the true per-bin
+  increment is about 0.2 AUROC or more;
+- the binding falsification can, with δ = 0.15, exclude increments of
+  ≥ 0.15 in most null worlds.
+
+It does not support confirmatory testing of increments of the size this
+programme has historically measured. **Whether a large-effect screen is
+worth running is open decision D2.**
 
 ---
 
@@ -729,14 +778,15 @@ them, never a statement about early-warning capability.
 | # | Decision | Options | Current proposal |
 |---|---|---|---|
 | D1 | Status of Analysis B (AF-inclusive, NN-free) | co-primary with α split (0.05/8) / secondary but binding-reported | secondary, binding-reported |
-| D2 | Is the design worth executing, given the simulated MDE? | run as exploratory / defer until a larger, event-unconditional cohort is secured | the reviewer decides after reading the simulation |
+| D2 | Is the design worth executing, given a simulated MDE of ≈ 0.23 at n = 20? And $\mathrm{MDE}_{\max}$ for the informativeness gate | run as a large-effect screen ($\mathrm{MDE}_{\max}$ 0.25) / keep 0.20 (probably UNRESOLVED-BY-DESIGN) / defer until a larger, event-unconditional cohort exists | large-effect screen at 0.25; **the reviewer decides** |
 | D3 | Guard $g$ | 1 / 2 / 5 min | 2 min, with 1 and 5 as sensitivities |
 | D4 | Primary event | VF onset / first sustained VT | VF onset |
-| D5 | $R_{\min}$ and therefore $T_{\min}$ | 30 / 60 min | 30 min, with eligibility sensitivity |
+| D5 | $R_{\min}$ and therefore $T_{\min}$ | 30 min (2 h 20) / 60 min (2 h 50) | 30 min, with eligibility sensitivity. The simulated precision cost of short remote zones is modest and confined to B15/B30 |
 | D6 | Circadian confound, if headers lack clock time | accept as a declared limitation / do not run | declared limitation |
 | D7 | External FAR set | chfdb / LTSTDB / none | chfdb, conditional on the comparability check |
 | D8 | ΔG Ledoit–Wolf intensity | analytic / fixed 0.1 / fixed 0.3 | analytic primary, fixed as sensitivity |
-| D9 | δ_large | 0.10 / 0.15 | 0.10; the simulation shows how often the flag can fire under H0 |
+| D9 | δ_large | 0.10 / 0.15 / 0.20 | **0.15**. At n = 20 it fires in 66–81% of null studies, vs 38–53% for 0.10 |
+| D10 | Keep the conservative conjunctive rule (Bonferroni × sign test × two bins; simulated type I 0–0.5%) | keep / replace with a single omnibus test over bins | **keep**. Changing binding criteria after a design simulation is a move this programme avoids; the cost is a larger MDE |
 
 ## 17. Freezing conditions
 
@@ -770,6 +820,10 @@ Until then nothing is run on SDDB beyond header and metadata verification.
 | A12 | "EXPLORATORY SIGNAL"; "advance warning" wording | "EXPLORATORY ASSOCIATION"; §15 requirements table; forbidden-terms list | review M7 / issue 10 |
 | A13 | Pseudo-onset null with no availability rule | non-evaluable when < 8 subjects, which fails the bin | review moderate item |
 | A14 | Between-database demo "expected to separate" | reported whatever it shows | issue 1 |
+| A15 | δ_large = 0.10 | 0.15 proposed (D9) | simulation: 0.10 fires in < half of null studies, so the binding falsification would usually be uninformative |
+| A16 | informativeness gate MDE > 0.15 (v1) / 0.20 | $\mathrm{MDE}_{\max}$ = 0.25 proposed, explicitly a large-effect-screen framing, open (D2) | the simulated MDE is ≈ 0.23 at n = 20 |
+| A17 | covariance windows of fixed duration | fixed beat count ($N_b$ = 256) | simulation: a 10% HR rise lowers AIRM by about 9% with no structural change |
+| A18 | "≥ 2 consecutive windows" alarm | 3-minute persistence, realised FAR reported | simulation: overlap makes window-count rules nearly ineffective |
 
 ---
 
