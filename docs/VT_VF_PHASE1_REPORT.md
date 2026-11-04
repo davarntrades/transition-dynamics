@@ -148,3 +148,14 @@ They show only that it cannot yet be tested credibly for VT/VF.
 ---
 
 © 2026 Davarn Morrison · Transition Dynamics
+
+## Addendum (2026-11-04): owner decision
+
+- The owner approved three activities: artefact falsification, an
+  independently specified synthetic holdout, and continued dataset access.
+- The owner did **not** approve selecting `pshape_hp` as primary, or
+  abandoning the heart-rate-coupled hypothesis.
+- Item 4 of §4 (scope decision on F3) is superseded: H-S and H-C remain
+  separate hypotheses with separate tests.
+- See [`VT_VF_PHASE2_CHARTER.md`](VT_VF_PHASE2_CHARTER.md). The text above
+  is otherwise unchanged.
